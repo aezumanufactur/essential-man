@@ -1,0 +1,161 @@
+@import "../variables";
+@import "../tools/util/util";
+@import "../tools/mixins";
+
+.customer-testimonials__column {
+  display: flex;
+  flex-direction: column;
+}
+
+// ─── mfr-core__customer-testimonials ──────────────────────────────────────────
+
+.mfr-core__customer-testimonials {
+  .section-content {
+    &__inner {
+      &:not(:last-child),
+      &:last-child {
+        margin-bottom: rem-calc(15px);
+      }
+    }
+  }
+
+  .customer-testimonials__wrapper {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .customer-testimonials {
+    &.has-caption {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: stretch;
+      gap: rem-calc(25px);
+
+      @include breakpoint(large up) {
+        flex-direction: row;
+        justify-content: stretch;
+        align-items: flex-start;
+        gap: rem-calc(50px);
+        @include left-carousel-entry-spacing(0, 50px);
+      }
+
+      .customer-testimonials__carousel {
+        @include breakpoint(large up) {
+          flex-grow: 1;
+          justify-content: flex-end;
+          flex-wrap: unset;
+        }
+
+      }
+
+      .customer-testimonials__entry {
+        &:first-child {
+          @include breakpoint(large up) {
+            padding-left: 0;
+          }
+        }
+
+        &:last-child {
+          @include breakpoint(large up) {
+            @include right-carousel-entry-spacing(0, 50);
+          }
+        }
+      }
+    }
+
+    &__carousel {
+      &.mobile--carousel {
+        .mfr-carousel__item {
+          &:first-child {
+            @include breakpoint(medium down) {
+              padding-left: rem-calc(20px);
+            }
+
+            @include breakpoint(large up) {
+              @include left-carousel-entry-spacing(0, 50px);
+            }
+          }
+
+          &:last-child {
+            @include breakpoint(medium down) {
+              padding-right: rem-calc(20px);
+            }
+
+            @include breakpoint(large up) {
+              @include right-carousel-entry-spacing(0, 50px);
+            }
+          }
+        }
+      }
+
+      &.desktop--carousel {
+        .mfr-carousel__item {
+          &:first-child {
+            @include breakpoint(large up) {
+              @include left-carousel-entry-spacing(0, 50px);
+            }
+          }
+
+          &:last-child {
+            @include breakpoint(large up) {
+              @include right-carousel-entry-spacing(0, 50px);
+            }
+          }
+        }
+      }
+
+      &-caption {
+        width: 100%;
+        @include large;
+        font-family: $custom-font-name-1;
+        line-height: 1.333em;
+        font-weight: 400;
+        letter-spacing: rem-calc(0.11px);
+        margin: 0;
+        padding: 0 rem-calc(20px);
+        @include transition($global-transition);
+
+        @include breakpoint(large up) {
+          padding: 0;
+          flex-shrink: 0;
+          width: 21%;
+          max-width: rem-calc(288px);
+        }
+
+        @include enter-animation {
+          @include opacity(0);
+          @include transform(translateY($enter-transform-value));
+        }
+      }
+    }
+
+    .customer-testimonials__entry-v4 {
+      p {
+        margin-bottom: 0;
+      }
+    }
+
+    .mfr-carousel__item {
+      flex-shrink: 0;
+      padding: 0 rem-calc(5px);
+      min-height: 100%;
+      display: flex;
+      align-items: stretch;
+      box-sizing: content-box;
+
+      @include breakpoint(large up) {
+        padding: 0 rem-calc(6px);
+      }
+
+      > * {
+        @include transition($global-transition);
+
+        @include enter-animation {
+          @include transform(translateY($enter-transform-value));
+          @include opacity(0);
+        }
+      }
+    }
+  }
+}

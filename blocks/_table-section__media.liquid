@@ -1,0 +1,60 @@
+{%- if block.settings.image != blank -%}
+  <style>
+    @media print, screen and (min-width: 64em) {
+      #shopify-section-{{ section.id }} .mfr-core__table-section .table-section__item:first-child {
+        width: 26%;
+      }
+    }
+  </style>
+  <div class="table-section__media-inner relative flex flex-col justify-start items-center gap-[1.5625rem] h-full w-full py-[3.75rem] px-[0.9375rem] text-[#1B1A21] large:gap-[0.9375rem] large:py-[3.75rem] large:px-[3.75rem] [&_img]:absolute [&_img]:top-0 [&_img]:left-0 [&_img]:w-full [&_img]:h-full [&_img]:object-cover"
+    data-stagger-inview=".table-section__media-heading,.table-section__media-caption">
+    {% assign default_alt = "maybe an image about " | append: block.settings.heading %}
+    {% assign alt = block.settings.image.alt | default: default_alt %}
+    {% render 'component__lazyload-image',
+      image: block.settings.image,
+      width: 720,
+      alt: alt %}
+    
+      {%- if block.settings.heading != blank -%}
+        <p class="table-section__media-heading relative z-[1] text-[1.625rem] leading-[1.462em] [letter-spacing:0.8px] uppercase m-0 text-center">
+          {{ block.settings.heading }}
+        </p>
+      {%- endif -%}
+    
+      {%- if block.settings.caption != blank -%}
+        <p class="table-section__media-caption [font-size:var(--font-body-size-small-mobile)] large:[font-size:var(--font-body-size-small)] leading-[2.143em] font-medium [letter-spacing:0.43px] relative z-[1]">
+          {{ block.settings.caption }}
+        </p>
+      {%- endif -%}
+  </div>
+{%- endif -%}
+{%- schema -%}
+  {
+    "name": "Media",
+    "class": "table-section__media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Table Section Media",
+        "info": "This will only appear on contained section. Section settings > Width > Contain."
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Lorem ipsum dolor sit amet consectetur"
+      },
+      {
+        "type": "text",
+        "id": "caption",
+        "label": "Caption",
+        "default": "Lorem ipsum dolor sit amet"
+      },
+    ]
+  }
+{%- endschema -%}

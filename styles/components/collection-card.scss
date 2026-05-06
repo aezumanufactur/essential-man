@@ -1,0 +1,38 @@
+.collection-card {
+  @include hover {
+    .indicator {
+      background-color: $black;
+      border-color: transparent;
+
+      img {
+        @include filter( invert(1) );
+      }
+    }
+  }
+
+  &__title {
+    @include h6;
+  }
+
+  &__media {
+    img {
+      height: 100%;
+      width: auto;
+      display: block;
+      object-fit: cover;
+      object-position: top left;
+    }
+  }
+
+  .indicator {
+    @include transition( $global-transition );
+
+    img {
+      width: rem-calc( 9px );
+      height: auto;
+      display: block;
+      margin-left: rem-calc( 2px );
+      @include transition( $global-transition );
+    }
+  }
+}

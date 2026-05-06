@@ -1,0 +1,162 @@
+{% capture comment_form %}
+  <div class="article-comments__form mb-[2.625rem] last:mb-0 large:mb-[3.125rem] [&_form]:flex [&_form]:flex-col [&>button]:self-center"
+    data-mfr-comment-form>
+      {% form 'new_comment', article %}
+          <input type="hidden" name="comment[body]">
+
+          <div class="article-comments__form-stars flex justify-center items-center mb-[0.8125rem]">
+              <div class="article-comments__form-stars-inner inline-block relative">
+                  {% for i in (1..5) %}
+                      <label>
+                          <input type="radio" name="stars" value="{{ i }}" {% if forloop.last %}checked{% endif %} />
+                          {% for star in (1..i) %}
+                              <span class="icon">★</span>
+                          {% endfor %}
+                      </label>
+                  {% endfor %}
+              </div>
+          </div>
+          <div class="article-comments__form-input mb-[0.8125rem]">
+              <input type="text" name="comment[author]" placeholder="Your name">
+          </div>
+          <div class="article-comments__form-input mb-[0.8125rem]">
+              <input type="email" name="comment[email]" placeholder="Your email">
+          </div>
+          <div class="article-comments__form-input mb-[0.8125rem]">
+              <input type="text" name="title" placeholder="Your Comment Title">
+          </div>
+          <div class="article-comments__form-input mb-[0.8125rem]">
+              <textarea name="content" placeholder="Your Comment Description"></textarea>
+          </div>
+
+          <button class="button primary">Submit</button>
+      {% endform %}
+  </div>
+{% endcapture %}
+
+{% capture comment_list %}
+  {% if article.comments_count >= 1 %}
+    <div class="article-comments__list flex flex-col mb-[2.625rem] last:mb-0 large:mb-[3.125rem]" data-load-more="3">
+      {% for comment in article.comments %}
+        {% assign name = comment.author %}
+        {% assign body =  comment.content | strip_html | split: "|" %}
+        {% assign star_count = body[0] %}
+        {% assign title = body[1] %}
+        {% assign content = body[2] %}
+        {% assign date = comment.created_at | date: "%m/%d/%Y" %}
+        <div class="article-comments__entry w-full flex flex-col p-[0_0.3125rem_2.875rem_0.9375rem] mb-[1.875rem] last:mb-0 large:p-[0_0.9375rem_1.875rem]" data-load-more-entry>
+          <div class="article-comments__entry-header flex justify-center items-center w-full mb-[0.9375rem]">
+            <div class="article-comments__entry-avatar hidden large:flex large:items-center large:justify-center large:relative large:w-[4.0625rem] large:h-[4.0625rem] large:mr-[0.625rem] large:rounded-full">
+              {% assign first = name | split: " " | first | first %}
+              {% assign last = name | split: " " | last | first %}
+
+              {{ first }}{{ last }}
+            </div>
+            <div class="article-comments__entry-name flex flex-col text-left">
+              <span>{{ name }}</span>
+              <span>
+                  {% for star in (1..star_count) %}
+                      <span class="icon">★</span>
+                  {% endfor %}
+              </span>
+            </div>
+            <div class="article-comments__entry-date ml-auto self-start text-[0.875rem] leading-[1.125rem] tracking-[-0.02375rem] font-bold large:pt-[0.625rem]">
+              {{ date }}
+            </div>
+          </div>
+
+          <div class="article-comments__entry-body flex flex-col pr-[1.25rem] text-left large:p-0">
+            {%- if title != blank -%}
+              <div class="article-comments__entry-title text-[1.625rem] leading-[1.875rem] mb-[0.5625rem] font-bold">
+                {{ title }}
+              </div>
+            {%- endif -%}
+            {%- if content != blank -%}
+              <div class="article-comments__entry-content text-base leading-[1.25rem] tracking-[-0.0275rem]">
+                {{ content }}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endcapture %}
+
+<div class="article-comments w-full max-w-[37.5rem] mb-[2.625rem] last:mb-0 large:mb-[3.125rem]"
+  x-data='MFRCommentForm'>
+  {% if article.comments_enabled? %}
+    {{ comment_list }}
+    {{ comment_form }}
+  {%- elsif request.design_mode -%}
+    <div class="article-comments__form mb-[2.625rem] last:mb-0 large:mb-[3.125rem] [&_form]:flex [&_form]:flex-col [&>button]:self-center">
+      <form action="">
+          <input type="hidden" name="comment[body]">
+
+          <div class="article-comments__form-stars flex justify-center items-center mb-[0.8125rem]">
+              <div class="article-comments__form-stars-inner inline-block relative">
+                  {% for i in (1..5) %}
+                      <label>
+                          <input type="radio" name="stars" value="{{ i }}" {% if forloop.last %}checked{% endif %} />
+                          {% for star in (1..i) %}
+                              <span class="icon">★</span>
+                          {% endfor %}
+                      </label>
+                  {% endfor %}
+              </div>
+          </div>
+          <div class="article-comments__form-input mb-[0.8125rem]">
+              <input type="text" name="comment[author]" placeholder="Your name">
+          </div>
+          <div class="article-comments__form-input mb-[0.8125rem]">
+              <input type="email" name="comment[email]" placeholder="Your email">
+          </div>
+          <div class="article-comments__form-input mb-[0.8125rem]">
+              <input type="text" name="title" placeholder="Your Comment Title">
+          </div>
+          <div class="article-comments__form-input mb-[0.8125rem]">
+              <textarea name="content" placeholder="Your Comment Description"></textarea>
+          </div>
+
+          <button class="button primary">Submit</button>
+      </form>
+    </div>
+    <div class="article-comments__list flex flex-col mb-[2.625rem] last:mb-0 large:mb-[3.125rem]" data-load-more="3">
+      <div class="article-comments__entry w-full flex flex-col p-[0_0.3125rem_2.875rem_0.9375rem] mb-[1.875rem] last:mb-0 large:p-[0_0.9375rem_1.875rem]" data-load-more-entry>
+        <div class="article-comments__entry-header flex justify-center items-center w-full mb-[0.9375rem]">
+          <div class="article-comments__entry-avatar hidden large:flex large:items-center large:justify-center large:relative large:w-[4.0625rem] large:h-[4.0625rem] large:mr-[0.625rem] large:rounded-full">
+            JD
+          </div>
+          <div class="article-comments__entry-name flex flex-col text-left">
+            <span>John Doe</span>
+            <span>
+              {% for star in (1..5) %}
+                <span class="icon">★</span>
+              {% endfor %}
+            </span>
+          </div>
+          <div class="article-comments__entry-date ml-auto self-start text-[0.875rem] leading-[1.125rem] tracking-[-0.02375rem] font-bold large:pt-[0.625rem]">
+            1/1/2000
+          </div>
+        </div>
+
+        <div class="article-comments__entry-body flex flex-col pr-[1.25rem] text-left large:p-0">
+          <div class="article-comments__entry-title text-[1.625rem] leading-[1.875rem] mb-[0.5625rem] font-bold">
+            Lorem ipsum dolor sit amet.
+          </div>
+          <div class="article-comments__entry-content text-base leading-[1.25rem] tracking-[-0.0275rem]">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, quas dolorum placeat impedit ratione aut?
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</div>
+{% render 'script__section', file: "MFRCommentForm.js" %}
+
+{% schema %}
+  {
+    "name": "Comment Form",
+    "class": "article-comments__wrapper"
+  }
+{% endschema %}

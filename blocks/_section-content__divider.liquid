@@ -1,0 +1,53 @@
+<style>
+  #shopify-block-{{ block.id }} {
+    {%- if block.settings.max_width_mobile != blank -%}
+      --divider-max-width-mobile: {{ block.settings.max_width_mobile }}px;
+    {%- endif -%}
+    {%- if block.settings.max_width_desktop != blank -%}
+      --divider-max-width-desktop: {{ block.settings.max_width_desktop }}px;
+    {%- endif -%}
+    {%- if block.settings.margin_bottom_mobile != blank -%}
+      --divider-margin-bottom-mobile: {{ block.settings.margin_bottom_mobile }}px;
+    {%- endif -%}
+    {%- if block.settings.margin_bottom_desktop != blank -%}
+      --divider-margin-bottom-desktop: {{ block.settings.margin_bottom_desktop }}px;
+    {%- endif -%}
+  }
+</style>
+{% schema %}
+  {
+    "name": "Divider",
+    "class": "section-content__divider",
+    "settings": [
+      {
+        "type": "number",
+        "id": "max_width_mobile",
+        "label": "Max Width - Mobile",
+        "default": 112
+      },
+      {
+        "type": "number",
+        "id": "max_width_desktop",
+        "label": "Max Width - Desktop",
+        "default": 112
+      },
+      {
+        "type": "number",
+        "id": "margin_bottom_mobile",
+        "label": "Margin Bottom - Mobile",
+        "default": 30
+      },
+      {
+        "type": "number",
+        "id": "margin_bottom_desktop",
+        "label": "Margin Bottom - Desktop",
+        "default": 19
+      },
+    ],
+    "presets": [
+      {
+        "name": "Divider"
+      }
+    ]
+  }
+{% endschema %}

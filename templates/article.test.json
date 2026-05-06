@@ -1,0 +1,152 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "article-header": {
+      "type": "mfr-article__header",
+      "blocks": {
+        "section-content": {
+          "type": "_section-content",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "title-1": {
+              "type": "_section-content__title",
+              "settings": {
+                "heading": "Article Header",
+                "disable_animation": true,
+                "header_style": "h1"
+              }
+            }
+          },
+          "block_order": [
+            "title-1"
+          ]
+        },
+        "article-header-media": {
+          "type": "_article-header__media",
+          "static": true,
+          "settings": {}
+        }
+      },
+      "settings": {
+        "container_width": "full",
+        "top_spacing_mobile": 60,
+        "bottom_spacing_mobile": 60,
+        "top_spacing_desktop": 80,
+        "bottom_spacing_desktop": 80
+      }
+    },
+    "article-content": {
+      "type": "mfr-article__content",
+      "blocks": {
+        "section-content": {
+          "type": "_section-content",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "text-1": {
+              "type": "_section-content__text",
+              "settings": {
+                "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at justo vitae lorem molestie euismod.</p><p>More content follows here.</p>"
+              }
+            }
+          },
+          "block_order": [
+            "text-1"
+          ]
+        }
+      },
+      "settings": {
+        "container_width": "",
+        "top_spacing_mobile": 40,
+        "bottom_spacing_mobile": 40,
+        "top_spacing_desktop": 60,
+        "bottom_spacing_desktop": 60
+      }
+    },
+    "article-comments": {
+      "type": "mfr-article__comments",
+      "blocks": {
+        "section-content": {
+          "type": "_section-content",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "title-1": {
+              "type": "_section-content__title",
+              "settings": {
+                "heading": "Comments",
+                "disable_animation": true,
+                "header_style": "h2"
+              }
+            }
+          },
+          "block_order": [
+            "title-1"
+          ]
+        },
+        "article-comments-form": {
+          "type": "_article-comments__form",
+          "static": true,
+          "settings": {}
+        }
+      },
+      "settings": {
+        "container_width": "",
+        "top_spacing_mobile": 40,
+        "bottom_spacing_mobile": 40,
+        "top_spacing_desktop": 60,
+        "bottom_spacing_desktop": 60
+      }
+    },
+    "article-related": {
+      "type": "mfr-article__related-articles",
+      "blocks": {
+        "section-content": {
+          "type": "_section-content",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "title-1": {
+              "type": "_section-content__title",
+              "settings": {
+                "heading": "Related Articles",
+                "disable_animation": true,
+                "header_style": "h2"
+              }
+            }
+          },
+          "block_order": [
+            "title-1"
+          ]
+        },
+        "article-related-articles-carousel": {
+          "type": "_article-related-articles__carousel",
+          "static": true,
+          "settings": {}
+        }
+      },
+      "settings": {
+        "container_width": "full",
+        "top_spacing_mobile": 40,
+        "bottom_spacing_mobile": 60,
+        "top_spacing_desktop": 60,
+        "bottom_spacing_desktop": 80
+      }
+    }
+  },
+  "order": [
+    "article-header",
+    "article-content",
+    "article-comments",
+    "article-related"
+  ]
+}

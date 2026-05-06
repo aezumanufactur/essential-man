@@ -1,0 +1,55 @@
+.section-divider {
+  pointer-events: none;
+  &__top {
+    position: absolute;
+    top: rem-calc( 1px );
+    left: 0;
+    width: 100%;
+    height: rem-calc( 45px );
+    z-index: 2;
+    @include transform( translateY( -100% ) );
+
+    @include breakpoint( large up ) {
+      top: rem-calc( 20px );
+      height: rem-calc( 91px );
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+
+      svg path {
+        fill: var(--section-background);
+      }
+    }
+  }
+  &__bottom {
+    position: absolute;
+    bottom: rem-calc( 1px );
+    left: 0;
+    width: 100%;
+    height: rem-calc( 45px );
+    z-index: 2;
+    @include transform( translateY( 100% ) );
+
+    @include breakpoint( large up ) {
+      bottom: rem-calc( 20px );
+      height: rem-calc( 91px );
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+
+      svg path {
+        fill: var(--section-background);
+      }
+    }
+  }
+}

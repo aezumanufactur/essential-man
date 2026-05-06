@@ -1,0 +1,60 @@
+{%- comment -%}
+  COMPONENT: Tab
+  ----------------------------------------------------------------------------
+  USAGE:
+    {% render 'mfr-component__tab',
+      tab_id: "unique-tab-id",
+      class: "optional-wrapper-class",
+      aria_label: "Accessible label for tab group",
+      content: content
+    %}
+
+  CONTENT EXAMPLE:
+    <div class="product-ingredients__tab mfr-tab__content"
+         data-tab-title="Tab 1 Title">
+      Tab 1 content here
+    </div>
+    <div class="product-ingredients__tab mfr-tab__content"
+         data-tab-title="Tab 2 Title">
+      Tab 2 content here
+    </div>
+
+  NOTES:
+    - Each tab panel must use the `.mfr-tab__content` class
+    - Each panel must include a `data-tab-title` attribute
+    - `tab_id` is used to uniquely namespace ARIA attributes
+    - The script `MFRTab.js` is required for interactivity and keyboard support
+    - Tab labels will be derived from `data-tab-title` values automatically
+{%- endcomment -%}
+<div class="mfr-tab {{ class }}"
+  id="{{ tab_id | default: "mfr-tab-1" }}"
+  x-data='MFRTab( {
+    tabId: "{{- tab_id -}}"
+  } )'
+  data-stagger-inview=".mfr-tab__nav,.mfr-tab__content-wrapper">
+  <div class="mfr-tab__nav"
+   role="tablist" 
+   aria-label="{{ aria_label | default: "Tabs" }}">
+    <template x-for='(tab, index) in tabs'>
+      <button
+        class="mfr-tab__nav-button"
+        role="tab"
+        :data-index='index'
+        :id='`{{- tab_id -}}--${handleize(tab.navLabel)}-${index}`'
+        :aria-controls='`{{- tab_id -}}--panel--${handleize(tab.navLabel)}-${index}`'
+        :aria-selected='currentIndex === index'
+        :tabindex='currentIndex === index ? 0 : -1'
+        x-html='`<span class="mfr-tab__nav-button-label">${tab.navLabel}</span>`'
+        @click='currentIndex = index; '
+        @keydown.right.prevent='focusTab((currentIndex + 1) % tabCount())'
+        @keydown.left.prevent='focusTab((currentIndex - 1 + tabCount()) % tabCount())'
+      >
+        <span class="mfr-tab__nav-button-label">Tab</span>
+      </button>
+    </template>
+  </div>
+  <div class="mfr-tab__content-wrapper">
+    {{ content }}
+  </div>
+  {% render 'script__section', file: "MFRTab.js" %}
+</div>

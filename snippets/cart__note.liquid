@@ -1,0 +1,45 @@
+<div class="cart-form__gift-note px-5 pb-5 pt-2.5" x-data="{
+	isGiftWrapper: '', 
+	messageBox: false,
+	messageCounter: '',
+	messageLimit: 100,
+
+	init() {
+		this.isGiftWrapper = $root.querySelector('#isGift')
+		this.checkMessageBox()
+	},
+
+	checkMessageBox() {
+		if (this.isGiftWrapper.length === 0) return
+
+		if (this.isGiftWrapper.checked) {
+			this.messageBox = true
+		}
+	},
+
+	toggleMessageBox() {
+		this.messageBox = !this.messageBox
+	},
+
+	calculateMaxCharacters(el) {
+		if (el.value.length > this.messageLimit) {
+			return false
+		}
+
+		this.messageCounter = `Limit: ${this.messageLimit - el.value.length}/${this.messageLimit}`
+	}
+}">
+	<div class="cart-attribute__field">
+		<input type="hidden" name="attributes[Is this a gift?]" value="No">
+		<input class="relative m-0 h-4 w-4 appearance-none border border-current checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:block checked:after:h-3 checked:after:w-3 checked:after:-translate-x-1/2 checked:after:-translate-y-1/2 checked:after:bg-current" type="checkbox" id="isGift" name="attributes[Is this a gift?]" value="Yes" @click="toggleMessageBox()">
+		<label class="ml-[0.3125rem] inline-block -translate-y-[0.1875rem] text-[var(--font-body-size-small-mobile)] font-medium leading-normal large:text-[var(--font-body-size-small)]" for="isGift">Is this a gift?</label>
+	</div>
+
+	<div class="cart-attribute__field">
+		<label for="gift-note" class="visually-hidden">Cart Note</label>
+		<div id="gift-message" :class="messageBox ? '' : 'hide' ">
+			<textarea class="mt-2.5 min-h-20 resize-none border border-current shadow-none placeholder:opacity-60 text-[var(--font-body-size-small-mobile)] leading-normal large:text-[var(--font-body-size-small)]" id="gift-note" placeholder="Write your note" name="attributes[Gift Note]" :maxlength="messageLimit" @keyup="calculateMaxCharacters($el)">{{ cart.attributes["Gift Note"] }}</textarea>
+			<span class="text-[var(--font-body-size-xsmall)] font-medium italic opacity-40" x-text="messageCounter"></span>
+		</div>
+	</div>
+</div>

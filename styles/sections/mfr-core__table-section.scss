@@ -1,0 +1,180 @@
+@import "../variables";
+@import "../tools/util/util";
+@import "../tools/mixins";
+
+.table-section__column {
+  display: flex;
+  flex-direction: column;
+}
+
+.mfr-core__table-section {
+  .table-section {
+    width: 100%;
+    min-width: 0;
+    overflow: auto;
+
+    &__table {
+      @include enter-animation {
+        overflow: auto;
+      }
+    }
+
+    tbody,
+    tr {
+      background: unset !important;
+      border: unset !important;
+    }
+
+    tr {
+      &:not(:last-child) {
+        position: relative;
+
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          width: calc( 100% - #{ rem-calc( 2px ) } );
+          height: rem-calc( 1px );
+          background-color: rgba(133, 133, 133, 1);
+          @include transform( translateX( -50% ) );
+          @include transform-origin( left center );
+          @include transition( $global-transition );
+        }
+      }
+
+      @include enter-animation {
+        &:after {
+          @include transform( translateX( -50% ) scale( 0 ) );
+        }
+
+        .table-section__item {
+          @include opacity( 0 );
+          @include transform( translateY( calc( $enter-transform-value * -1 ) ) );
+        }
+      }
+    }
+
+    &__item {
+      background-color: var(--bg-color, transparent);
+      color: var(--text-color, $black);
+      padding: rem-calc( 13px ) rem-calc( 20px );
+      min-width: rem-calc( 90px );
+      @include transition( $global-transition );
+
+      @include breakpoint( large up ) {
+        padding: rem-calc( 25px ) rem-calc( 12px );
+        min-width: rem-calc( 162px );
+      }
+
+      &:has(img) {
+        min-width: rem-calc( 114px );
+
+        @include breakpoint( large up ) {
+          min-width: rem-calc( 180px );
+        }
+      }
+
+      &:not(:last-child) {
+        border-right: 1px solid rgba(133, 133, 133, 1);
+      }
+
+      img {
+        width: auto;
+        height: rem-calc( 26px );
+        margin: 0 auto;
+        display: block;
+        object-fit: contain;
+
+        @include breakpoint( large up ) {
+          height: rem-calc( 32px );
+        }
+      }
+
+      p {
+        display: block;
+        width: 100%;
+        text-align: center;
+        line-height: 1.125em;
+        font-weight: 400;
+        letter-spacing: rem-calc(0.11px);
+
+        @include breakpoint( large up ) {
+          @include large;
+          line-height: 1.167em;
+          font-weight: 400;
+          letter-spacing: rem-calc(-0.48px);
+        }
+      }
+
+      &:first-child {
+        width: 30%;
+        min-width: rem-calc( 133px );
+
+        @include breakpoint( large up ) {
+          width: 39%;
+          padding-left: rem-calc(50);
+        }
+
+        p {
+          @include small;
+          line-height: 1.286em;
+          font-weight: 500;
+          letter-spacing: rem-calc(0.43px);
+          text-transform: uppercase;
+          text-align: left;
+        }
+
+        img {
+          height: rem-calc( 14px );
+
+          @include breakpoint( large up ) {
+            height: rem-calc( 20px );
+          }
+        }
+      }
+    }
+
+    &__media {
+      width: 100%;
+      aspect-ratio: 495/510;
+
+      @include breakpoint( large up ) {
+        width: 37%;
+        height: 100%;
+        aspect-ratio: unset;
+      }
+    }
+  }
+
+  .section-spacer > :not(.full) {
+    .table-section {
+      margin-left: rem-calc(-20);
+      width: calc(100% + #{rem-calc(40)});
+
+      @include breakpoint( large up ) {
+        margin-left: rem-calc(-50);
+        width: calc(100% + #{rem-calc(100)});
+      }
+
+      &__item {
+        @include breakpoint( large up ) {
+          width: 18%;
+        }
+      }
+
+      &__media {
+        position: relative;
+        width: 100%;
+        padding: 0 rem-calc(20);
+        flex-shrink: 0;
+
+        @include breakpoint( large up ) {
+          width: 37%;
+          height: unset;
+          padding: 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{%- if anchor != blank -%}
+  <div class="mfr-dropdown {{ class }}"
+    x-data='MFRDropdownMenu({
+      id: "{{ id }}",
+      anchor: {{ anchor }},
+      devMode: {{ dev_mode | default: 'false' }}
+    })'
+    {% if position %}
+      x-anchor.{{- position -}}='{{ anchor }}'
+    {% else %}
+      x-anchor.no-style='{{ anchor }}'
+    {% endif %}
+    x-trap.noautofocus='open'
+    x-bind:style='{ position: "absolute", top: $anchor.y+"px", left: "0px" }'
+    x-show='open'
+    x-cloak
+    :aria-hidden='!open'
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-1"
+    x-transition:leave-start="opacity-1"
+    x-transition:leave-end="opacity-0"
+    {% unless dev_mode %}
+      @mouseenter="cancelClose()"
+      @mouseleave="closeWithDelay()"
+    {% endunless %}>
+    {{ content }}
+    {% unless request.visual_preview_mode %}
+      {% render 'script__section', file: "MFRDropdownMenu.js" %}
+    {% endunless %}
+  </div>
+{%- endif -%}

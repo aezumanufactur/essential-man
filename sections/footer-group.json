@@ -1,0 +1,72 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer Sections",
+  "sections": {
+    "footer_WFB43J": {
+      "type": "footer",
+      "blocks": {
+        "embed_NdHiwG": {
+          "type": "embed",
+          "settings": {
+            "heading": "Join our list for updates",
+            "caption": "Sign up to receive deals, news, and product updates delivered straight to your inbox.",
+            "embed_code": "<script async type=\"text/javascript\" src=\"https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=XWccMv\"></script><div class=\"klaviyo-form-S4sSSR\"></div>"
+          }
+        },
+        "menu_BepjGV": {
+          "type": "menu",
+          "settings": {
+            "heading": "About",
+            "menu": "footer",
+            "show_accessibe_trigger": true
+          }
+        },
+        "menu_xWnihg": {
+          "type": "menu",
+          "settings": {
+            "heading": "Support",
+            "menu": "policy-menu",
+            "show_accessibe_trigger": false
+          }
+        }
+      },
+      "block_order": [
+        "embed_NdHiwG",
+        "menu_BepjGV",
+        "menu_xWnihg"
+      ],
+      "settings": {
+        "color_scheme": "scheme-e7a2b49c-36ae-4b1f-b31f-f3ec31db1021",
+        "appear_on": ""
+      }
+    },
+    "footer_socket_c6MXBr": {
+      "type": "footer__socket",
+      "blocks": {
+        "social_links_aq3Nyz": {
+          "type": "social_links",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "social_links_aq3Nyz"
+      ],
+      "settings": {
+        "appear_on": ""
+      }
+    }
+  },
+  "order": [
+    "footer_WFB43J",
+    "footer_socket_c6MXBr"
+  ]
+}

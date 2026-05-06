@@ -1,0 +1,60 @@
+{%- assign variants = product.variants | size -%}
+{%- assign first_variant = product.selected_or_first_available_variant -%}
+{%- assign options_values_size = product.options_with_values | size -%}
+{%- assign selectors_label = selectors_label | default: "[option-name]" -%}
+{% if variants >= 1 %}
+  <div 
+    class="variant-selectors" 
+    x-ref="variantSelectors"
+    x-data='MFRProductVariantSelector({
+      productURL: "{{ product.url }}",
+      sectionID: "{{ section.id }}"
+    })'
+    data-replace="{{ section.id }}-{{ block.id }}-variant-selectors">
+
+    {% comment %} Use options_with_values to render options {% endcomment %}
+    {%- for option in product.options_with_values -%}
+      <fieldset class="variant-selectors__selectors-wrapper">
+        <legend class="selectors-label">
+          {{ selectors_label | replace: "[option-name]", option.name }}
+        </legend>
+        <div class="variant-selectors__selectors">
+          {%- for option_value in option.values -%}
+            {%- capture input_id -%}
+              {{ section.id }}-{{ option.position }}-{{ forloop.index0 -}}
+            {%- endcapture -%}
+  
+            <label for="{{ input_id }}">
+              {% comment %} Use product_option_value` fields to simplify option value input rendering and support combined listings {% endcomment %}
+              <input 
+                type="radio" 
+                id="{{ input_id }}" 
+                name="{{ option.name }}" 
+                value="{{ option_value.id | escape }}" 
+                {% if option_value.selected %}checked{% endif %} 
+                {% comment %} {% if option_value.variant == null %}disabled{% endif %} {% endcomment %}
+                data-variant='{{ option_value.variant | json }}'
+                class="visually-hidden"
+                @change='
+                  startLoading();
+                  getVariant()
+                    .then(html => {
+                      const productFormData = Alpine.$data($el.closest(`[x-data*="MFRProductTop"]`))
+                      replaceHTML(html);
+                      updateVariables(productFormData);
+                    })
+                    .finally( () => {
+                      endLoading();
+                    } );
+                '/>
+              <span class="variant-selectors__selector-label">
+                <span>{{ option_value -}}</span>
+              </span>
+            </label>
+          {%- endfor -%}
+        </div>
+      </fieldset>
+    {%- endfor -%}
+    {% render 'script__section', file: "MFRProductVariantSelector.js" %}
+  </div>
+{% endif %}

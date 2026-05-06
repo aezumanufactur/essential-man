@@ -1,0 +1,29 @@
+{%- if block.settings.collections != blank -%}
+  {%- for collection in block.settings.collections -%}
+    {%- for product_in_loop in collection.products -%}
+      {%- unless product_in_loop.id == product.id -%}
+        <div class="product-carousel__item carousel__item flex w-[22.5rem] box-content grow pb-[0.0625rem] large:w-auto large:min-w-[22.5rem] large:-mx-[0.03125rem]">
+          {% render 'partial__product-card',
+            product: product_in_loop %}
+        </div>
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endfor -%}
+{%- else -%}
+  {%- if request.design_mode -%}
+    
+  {%- endif -%}
+{%- endif -%}
+{%- schema -%}
+  {
+    "name": "Product Carousel",
+    "class": "product-carousel__carousel carousel__slides",
+    "settings": [
+      {
+        "type": "collection_list",
+        "id": "collections",
+        "label": "Collections"
+      }
+    ]
+  }
+{%- endschema -%}

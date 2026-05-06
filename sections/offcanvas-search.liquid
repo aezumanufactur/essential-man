@@ -1,0 +1,152 @@
+<style>
+  #offCanvasSearch {
+    --background-color: {{ section.settings.background_color }};
+  }
+</style>
+{% assign quick_words = section.blocks | where: "type", "quick_word" %}
+
+{%- capture search_content -%}
+  <div class="offcanvas-search__inner flex flex-col h-full">
+    <div class="offcanvas-search__header flex items-center p-[0.9375rem_1rem] large:p-[1.875rem_1.75rem_0.9375rem]">
+      <button class="close-button close [color:inherit] flex justify-center items-center relative inset-auto"
+        aria-label="Close contact form"
+        type="button"
+        role="button"
+        x-data
+        @click='$store["offCanvasSearch"].closeOffcanvas()'>
+        {% render 'icon__offcanvas-close' %}
+      </button>
+    </div>
+    <div class="offcanvas-search__body grow overflow-auto flex flex-col p-[0.9375rem_1rem] large:p-[0_1.5625rem]"
+      x-data='MFRSearch'
+      :class='active ? "is-active" : ""'>
+      <div class="offcanvas-search__input-wrapper">
+        <div class="offcanvas-search__input relative border-b border-[var(--color-charcoal-border)]">
+          <label class="flex w-full" for="offCanvasSearchInput">
+            <span class="visually-hidden">Search</span>
+            <input
+              class="w-full py-[0.9375rem] font-light text-2xl"
+              type="text"
+              name="searchTerm"
+              id="offCanvasSearchInput"
+              placeholder="Search"
+              x-model="query">
+            <span class="indicator absolute right-0 top-1/2 -translate-y-1/2"
+              x-show="active"
+              x-transition:enter-start="opacity-0"
+              x-transition:enter-end="opacity-100"
+              x-transition:leave-start="opacity-100"
+              x-transition:leave-end="opacity-0">
+              <svg width="40px" height="39px" viewBox="0 0 40 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g id="Web-Style-Guide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="Icons" transform="translate(-717, -291)" stroke="currentColor" stroke-width="3">
+                    <g id="Group-11" transform="translate(718, 291)">
+                      <circle id="Oval" cx="22.5" cy="16.5" r="15.75"></circle>
+                      <line x1="11" y1="27.4285714" x2="-6.10622664e-16" y2="38" id="Path-2" stroke-linecap="round"></line>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </span>
+          </label>
+
+          {% if quick_words != blank %}
+            <div class="offcanvas-search__quick-words"
+              x-collapse
+              x-show='!active'
+              >
+              {%- if section.settings.quick_words_heading != blank -%}
+                <p class="offcanvas-search__quick-words-heading">
+                  {{ section.settings.quick_words_heading }}
+                </p>
+              {%- endif -%}
+              <ul class="offcanvas-search__quick-words-list list-none flex flex-wrap gap-2 m-0">
+                {% for quick_word in quick_words %}
+                  <li>
+                    <button
+                      aria-label="{{ quick_word.settings.word }}"
+                      x-data='{
+                        word: "{{ quick_word.settings.word }}"
+                      }'
+                      @click='
+                        typeWord(word)
+                      '>
+                      <span>{{ quick_word.settings.word }}</span>
+                    </button>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="offcanvas-search__results"
+        x-collapse
+        x-show="active">
+
+      </div>
+    </div>
+  </div>
+{%- endcapture -%}
+
+{% render 'mfr-component__offcanvas',
+  id: "offCanvasSearch",
+  class: "offcanvas-search",
+  position: "right",
+  content: search_content %}
+
+{% unless request.visual_preview_mode %}
+  {% render 'script__section', file: "MFRSearch.js" %}
+{% endunless %}
+
+
+{% schema %}
+{
+  "name": "Search Panel",
+  "enabled_on": {
+    "groups": ["custom.offcanvas"]
+  },
+  "limit": 1,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Color Settings"
+    },
+    {
+      "type": "color_background",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#fff"
+    },
+    {
+      "type": "header",
+      "content": "Quick Words Settings"
+    },
+    {
+      "type": "text",
+      "id": "quick_words_heading",
+      "label": "Quick Words Heading",
+      "default": "Quick words!"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quick_word",
+      "name": "Quick Word",
+      "settings": [
+        {
+          "type": "text",
+          "id": "word",
+          "label": "Word"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Search Panel"
+    }
+  ]
+}
+{% endschema %}

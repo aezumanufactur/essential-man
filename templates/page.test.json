@@ -1,0 +1,368 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "test-placeholder": {
+      "type": "mfr-core__text-section",
+      "settings": {}
+    },
+    "mfr_core_image_video_text_section_sDRRaR": {
+      "type": "mfr-core__image-video-text-section",
+      "blocks": {
+        "section_content_N84bRX": {
+          "type": "_section-content",
+          "settings": {
+            "mobile_alignment": "",
+            "desktop_alignment": "",
+            "enable_margin_settings": true,
+            "margin_y_mobile": true,
+            "margin_bottom_mobile": 30,
+            "margin_y_desktop": false
+          },
+          "blocks": {
+            "section_content_title_DQocnW": {
+              "type": "_section-content__title",
+              "settings": {
+                "heading": "When the product is right, the routine takes care of itself.",
+                "disable_animation": false,
+                "header_style": "h2",
+                "header_tag": "h2",
+                "font_family": "",
+                "enable_margin_settings": true,
+                "margin_y_mobile": true,
+                "margin_bottom_mobile": 25,
+                "margin_y_desktop": true,
+                "margin_bottom_desktop": 30
+              },
+              "blocks": {}
+            },
+            "section_content_text_pGtylt": {
+              "type": "_section-content__text",
+              "settings": {
+                "text": "<p>Good product disappears into the day. No second guessing at the sink, no touching up at noon, no swap-out after a week. Just a routine that works, and a man with one less thing to think about.</p>",
+                "disable_animation": false,
+                "text_style": "regular",
+                "font_family": "",
+                "enable_margin_settings": true,
+                "margin_y_mobile": true,
+                "margin_bottom_mobile": 30,
+                "margin_y_desktop": true,
+                "margin_bottom_desktop": 40
+              },
+              "blocks": {}
+            },
+            "section_content_button_gYxuia": {
+              "type": "_section-content__button",
+              "settings": {
+                "button_label": "See The Standard",
+                "button_link": "#",
+                "color_theme": "underlined-cta"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "section_content_title_DQocnW",
+            "section_content_text_pGtylt",
+            "section_content_button_gYxuia"
+          ]
+        },
+        "image-video-text-carousel": {
+          "type": "_image-video-text__carousel",
+          "static": true,
+          "settings": {
+            "autoplay_timing": 0,
+            "wrap_around": false,
+            "prev_next_buttons": false,
+            "page_dots": false,
+            "border_radius": 0,
+            "width_mobile": 450,
+            "unit_mobile": "px",
+            "width_desktop": 100,
+            "unit_desktop": "%",
+            "aspect_ratio_mobile": "3/4",
+            "aspect_ratio_desktop": "690/730"
+          },
+          "blocks": {
+            "image_video_text_image_slide_t9rXPO": {
+              "type": "_image-video-text__image-slide",
+              "settings": {
+                "lazyload": true,
+                "image_fit": "cover"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_video_text_image_slide_t9rXPO"
+          ]
+        },
+        "accent-graphics": {
+          "type": "_accent-graphics",
+          "static": true,
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "section_content_N84bRX"
+      ],
+      "settings": {
+        "media_column_size": "half",
+        "text_side_desktop": "text-left",
+        "text_side_mobile": "text-top",
+        "vertical_alignment": "center",
+        "enable_sticky": false,
+        "container_width": "",
+        "mobile_alignment": "left",
+        "desktop_alignment": "left",
+        "color_scheme": "scheme-1",
+        "top_spacing_mobile": 50,
+        "bottom_spacing_mobile": 50,
+        "top_spacing_desktop": 60,
+        "bottom_spacing_desktop": 60,
+        "bg_color": "#c4bfb3"
+      }
+    },
+    "mfr_core_customer_testimonials_pQ3rN8": {
+      "type": "mfr-core__customer-testimonials",
+      "blocks": {
+        "section_content_cT5mKx": {
+          "type": "_section-content",
+          "settings": {
+            "mobile_alignment": "",
+            "desktop_alignment": "",
+            "enable_margin_settings": true,
+            "margin_y_mobile": true,
+            "margin_bottom_mobile": 80,
+            "margin_y_desktop": true,
+            "margin_bottom_desktop": 50
+          },
+          "blocks": {
+            "section_content_title_Wh7dLp": {
+              "type": "_section-content__title",
+              "settings": {
+                "heading": "From the men using it everyday.",
+                "disable_animation": false,
+                "header_style": "h1",
+                "header_tag": "h2",
+                "font_family": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "section_content_title_Wh7dLp"
+          ]
+        },
+        "customer-testimonials-carousel": {
+          "type": "_customer-testimonials__carousel",
+          "static": true,
+          "settings": {
+            "render_carousel_on": "",
+            "custom_page_dots": false,
+            "gap_mobile": 20,
+            "gap_desktop": 20
+          },
+          "blocks": {
+            "testimonial_v4_Mk2nPz": {
+              "type": "_customer-testimonials__item-v4",
+              "settings": {
+                "video": "shopify://files/videos/3195394-uhd_3840_2160_25fps.mp4",
+                "image": "shopify://shop_images/necklace-earrings-set_925x_6ff45ec3-6fe5-4cae-a534-47a0c3f24fa8.jpg",
+                "product": "silver-threader-necklace",
+                "star_rating": 5,
+                "reviewer_name": "Marcus.l",
+                "hair_type": "Fine curly hair",
+                "width_mobile": 300,
+                "width_desktop": 300
+              },
+              "blocks": {}
+            },
+            "testimonial_v4_Rb9sJw": {
+              "type": "_customer-testimonials__item-v4",
+              "settings": {
+                "video": "shopify://files/videos/3195394-uhd_3840_2160_25fps.mp4",
+                "image": "shopify://shop_images/necklace-earrings-set_925x_6ff45ec3-6fe5-4cae-a534-47a0c3f24fa8.jpg",
+                "product": "silver-threader-necklace",
+                "star_rating": 5,
+                "reviewer_name": "Christian.m",
+                "hair_type": "Medium wavy hair",
+                "width_mobile": 300,
+                "width_desktop": 300
+              },
+              "blocks": {}
+            },
+            "testimonial_v4_Xc4vHn": {
+              "type": "_customer-testimonials__item-v4",
+              "settings": {
+                "video": "shopify://files/videos/3195394-uhd_3840_2160_25fps.mp4",
+                "image": "shopify://shop_images/necklace-earrings-set_925x_6ff45ec3-6fe5-4cae-a534-47a0c3f24fa8.jpg",
+                "product": "silver-threader-necklace",
+                "star_rating": 5,
+                "reviewer_name": "Jeremiah.n",
+                "hair_type": "Thick straight hair",
+                "width_mobile": 300,
+                "width_desktop": 300
+              },
+              "blocks": {}
+            },
+            "testimonial_v4_Dg6yUq": {
+              "type": "_customer-testimonials__item-v4",
+              "settings": {
+                "video": "shopify://files/videos/3195394-uhd_3840_2160_25fps.mp4",
+                "image": "shopify://shop_images/necklace-earrings-set_925x_6ff45ec3-6fe5-4cae-a534-47a0c3f24fa8.jpg",
+                "product": "silver-threader-necklace",
+                "star_rating": 5,
+                "reviewer_name": "Neil.r",
+                "hair_type": "Medium thin hair",
+                "width_mobile": 300,
+                "width_desktop": 300
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "testimonial_v4_Mk2nPz",
+            "testimonial_v4_Rb9sJw",
+            "testimonial_v4_Xc4vHn",
+            "testimonial_v4_Dg6yUq"
+          ]
+        },
+        "accent-graphics": {
+          "type": "_accent-graphics",
+          "static": true,
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "section_content_cT5mKx"
+      ],
+      "settings": {
+        "container_width": "full",
+        "mobile_alignment": "left",
+        "desktop_alignment": "left",
+        "top_spacing_mobile": 42,
+        "bottom_spacing_mobile": 50,
+        "top_spacing_desktop": 50,
+        "bottom_spacing_desktop": 50,
+        "bg_color": "#eeece5"
+      }
+    },
+    "mfr_core_icon_text_card_grid_a8lN5w": {
+      "type": "mfr-core__icon-text-card-grid",
+      "blocks": {
+        "section_content_kNjXEd": {
+          "type": "_section-content",
+          "settings": {
+            "mobile_alignment": "",
+            "desktop_alignment": "",
+            "enable_margin_settings": true,
+            "margin_y_mobile": true,
+            "margin_bottom_mobile": 87,
+            "margin_y_desktop": true,
+            "margin_bottom_desktop": 90
+          },
+          "blocks": {
+            "section_content_title_adjbJW": {
+              "type": "_section-content__title",
+              "settings": {
+                "heading": "Formulated to earn its place in your routine.",
+                "disable_animation": false,
+                "header_style": "h1",
+                "header_tag": "h2",
+                "font_family": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "section_content_title_adjbJW"
+          ]
+        },
+        "icon_text_card_grid_cards_5bLGmf": {
+          "type": "_icon-text-card-grid__cards",
+          "settings": {
+            "columns_mobile": "2",
+            "columns_desktop": "4"
+          },
+          "blocks": {
+            "icon_text_card_grid_card_RX7yFK": {
+              "type": "_icon-text-card-grid__card",
+              "settings": {
+                "title": "Performance First",
+                "text": "Every ingredient earns its place through performance."
+              },
+              "blocks": {}
+            },
+            "icon_text_card_grid_card_1m9p1Q": {
+              "type": "_icon-text-card-grid__card",
+              "settings": {
+                "title": "Endocrine Conscious",
+                "text": "No parabens, no sulfates, no synthetic fragrance, no disruption."
+              },
+              "blocks": {}
+            },
+            "icon_text_card_grid_card_xgMpW6": {
+              "type": "_icon-text-card-grid__card",
+              "settings": {
+                "title": "No Buildup",
+                "text": "Nothing that compromises wear or works against the result."
+              },
+              "blocks": {}
+            },
+            "icon_text_card_grid_card_3xa1zu": {
+              "type": "_icon-text-card-grid__card",
+              "settings": {
+                "title": "Made in the USA",
+                "text": "Formulated in a GMP-compliant facility in America."
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "icon_text_card_grid_card_RX7yFK",
+            "icon_text_card_grid_card_1m9p1Q",
+            "icon_text_card_grid_card_xgMpW6",
+            "icon_text_card_grid_card_3xa1zu"
+          ]
+        },
+        "accent-graphics": {
+          "type": "_accent-graphics",
+          "static": true,
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "section_content_kNjXEd",
+        "icon_text_card_grid_cards_5bLGmf"
+      ],
+      "settings": {
+        "container_width": "",
+        "mobile_alignment": "left",
+        "desktop_alignment": "left",
+        "color_scheme": "scheme-e7a2b49c-36ae-4b1f-b31f-f3ec31db1021",
+        "top_spacing_mobile": 30,
+        "bottom_spacing_mobile": 30,
+        "top_spacing_desktop": 50,
+        "bottom_spacing_desktop": 50,
+        "bg_color": "#51482b"
+      }
+    }
+  },
+  "order": [
+    "test-placeholder",
+    "mfr_core_image_video_text_section_sDRRaR",
+    "mfr_core_icon_text_card_grid_a8lN5w",
+    "mfr_core_customer_testimonials_pQ3rN8"
+  ]
+}

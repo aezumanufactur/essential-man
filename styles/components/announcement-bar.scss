@@ -1,0 +1,49 @@
+.announcement-bar-marquee {
+  &__entry {
+    text-align: center;
+
+    &--hide-on-medium {
+      @include breakpoint(medium down) {
+        display: none;
+      }
+    }
+
+    &--hide-on-small {
+      @include breakpoint(small down) {
+        display: none;
+      }
+    }
+  }
+}
+
+// Announcement Bar
+.announcement-bar {
+  font-family: $header-font-family;
+  font-size: $header-font-size-mobile;
+  line-height: $header-line-height-mobile;
+  letter-spacing: $header-letter-spacing-mobile;
+  font-weight: $header-font-weight;
+  background: $announcement-bar-bg-color;
+  color: $announcement-bar-text-color;
+  @include transition($global-transition);
+
+  @include breakpoint(large up) {
+    font-size: $header-font-size-desktop;
+    line-height: $header-line-height-desktop;
+    letter-spacing: $header-letter-spacing-desktop;
+  }
+
+  .icon-divider {
+    width: 1.4rem;
+    margin: 0 0.4rem;
+  }
+}
+
+/* Project Specific */
+.announcement-bar {
+  font-size: rem-calc(14px);
+  line-height: 2em;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: unset;
+}

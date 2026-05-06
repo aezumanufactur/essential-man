@@ -1,0 +1,70 @@
+.mfr-product__top {
+  [data-oke-container] {
+    .oke-stars-background,
+    .oke-stars-foreground {
+      --oke-stars-foregroundColor: #FFB925;
+      height: rem-calc( 16px );
+
+      svg {
+        display: block;
+      }
+    }
+  }
+}
+
+.mfr-product__reviews {
+  .shopify-block {
+    width: 100%;
+    max-width: rem-calc(450);
+
+    @include breakpoint(large up) {
+      max-width: rem-calc(750);
+    }
+
+    [data-oke-widget] {
+      --oke-button-backgroundColor: #2B3990;
+      --oke-button-backgroundColorHover: #fff;
+      --oke-button-backgroundColorActive: #fff;
+      --oke-button-textColor: #fff;
+      --oke-button-textColorHover: #2B3990;
+      --oke-button-textColorActive: #2B3990;
+      --oke-button-borderColor: #2B3990;
+      --oke-button-borderColorHover: #fff;
+      --oke-button-borderColorActive: #fff;
+      --oke-border-color: #2b39901a;
+      --oke-text-primaryColor: #2B3990;
+      --oke-text-secondaryColor: #FF8300;
+      --oke-avatar-backgroundColor: #2B3990;
+      --oke-avatar-placeholderTextColor: #FFFFFF;
+      --oke-highlightColor: #2B3990;
+      --oke-shadingColor: transparent;
+      --oke-attributeBar-shadingColor: #2B3990;
+      --oke-attributeBar-borderColor: #2B3990;
+      --oke-attributeBar-backgroundColor: #2B3990;
+      --oke-attributeBar-markerColor: #fff;
+      --oke-filter-backgroundColor: #2B3990;
+      --oke-filter-backgroundColorActive: #fff;
+      --oke-filter-borderColor: #2B3990;
+      --oke-filter-borderColorActive: #2B3990;
+      --oke-filter-textColor: #fff;
+      --oke-filter-textColorActive: #2B3990;
+      --oke-filter-searchHighlightColor: #FF8300;
+      --oke-mediaGrid-chevronColor: #676986;
+      --oke-stars-foregroundColor: #FF8300;
+      --oke-stars-backgroundColor: transparent;
+      --oke-stars-borderWidth: 1px;
+
+      .oke-w-breakdownModule-distribution-bar-fill {
+        background-color: #FF8300 !important;
+      }
+
+      .oke-w-review-side {
+        border: none;
+
+        @include breakpoint(large up) {
+          padding: 0 !important;
+        }
+      }
+    }
+  }
+}

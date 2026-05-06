@@ -1,0 +1,1266 @@
+{%- comment -%}
+--------------------------------------
+assign section settings to variables
+--------------------------------------
+{%- endcomment -%}
+
+{% render 'style-tags__section', asset_file_name: "mfr-product__top.css" %}
+
+{%- liquid
+  assign section_id = section.settings.custom_id | default: section.id
+  assign custom_class = section.settings.custom_class
+  assign suffix_class = template.suffix | prepend: 'product-top__'  | default: 'product-top__default'
+  assign grid_gutter = section.settings.grid_gutter
+  assign metafields = product.metafields.mfr_fields
+  assign text = section.blocks | where: "type", "text"
+  assign buttons = section.blocks | where: "type", "button"
+
+  assign variant = product.selected_or_first_available_variant
+  assign variant_size = product.variants | size
+
+  assign product_addon = section.blocks | where: "type", "product_addon"
+  assign product_addon_size = product_addon | size
+
+  assign product_benefits = section.settings.product_benefits
+  assign product_form_id = "product-form-" | append: block.id | append: product.id
+-%}
+
+{% render 'renderer__color-scheme', name: "section", color_scheme: section.settings.color_scheme, selector: ".shopify-section", section_id: section_id %}
+
+{% capture spacer %}
+  --top-spacing-mobile: {{ section.settings.top_spacing_mobile | default: 100}}px;
+  --bottom-spacing-mobile: {{ section.settings.bottom_spacing_mobile | default: 100 }}px;
+  --top-spacing-desktop: {{ section.settings.top_spacing_desktop | default: 100 }}px;
+  --bottom-spacing-desktop: {{ section.settings.bottom_spacing_desktop | default: 100 }}px;
+{% endcapture %}
+
+{% render 'section__settings-styles' %}
+
+<section 
+  class="mfr-product__top background {{ suffix_class }} {{ custom_class }} {{ grid_gutter }}" 
+  id="{{ section_id }}"
+  data-mfr-product-top>
+  <div class="section-spacer {{ grid_gutter }}" style="{{ spacer }}">
+    <div class="relative px-5 z-[1] mx-auto w-full max-w-container-md large:px-[3.75rem]">
+      <div class="alignment-helper product-top flex flex-row flex-wrap">
+        <div
+          class="product-top__media carousel flex justify-center items-start w-full min-w-0 large:w-1/2"
+          data-mfr-sticky-container>
+          {% render 'product-top__images-carousel',
+            product: product,
+            section_id: section_id,
+            product_benefits: product_benefits %}
+        </div>
+
+        <div class="section-content overflow-hidden flex justify-center items-start transition-all large:pt-[2.875rem] large:pr-[1.25rem] large:pb-0 large:pl-[4.6875rem] w-full min-w-0 large:w-1/2"
+          x-data='MFRProductTop()'
+          :class='formLoading ? "is-loading" : ""'>
+          <script type="application/json"
+            class="variant-json-script"
+            data-selected-variable
+            data-replace="{{ section.id }}-selected-variant">
+            {{ product.selected_or_first_available_variant | json }}
+          </script>
+          <div class="inner flex justify-center items-start flex-col max-w-[46.875rem] w-full mx-auto large:max-w-none">
+            {%- for block in section.blocks -%}
+              {% case block.type %}
+                {%- when "@app" -%}
+                  {% render block %}
+              
+                {%- when "icon" -%}
+                  {% render 'renderer__block-icon', block: block %} 
+                  
+                {%- when "small_text" -%}
+                  {% if block.settings.text != blank %}
+                    <div class="product-top__detail">
+                      {{ block.settings.text }}
+                    </div>
+                  {% endif %}
+
+                {%- when "heading" -%}
+                  <div class="section-title {{ block.settings.header_style }} mb-[0.6875rem] leading-[1.056em] large:leading-[1.087em] xlarge:w-4/5"
+                    data-split-text="fadeUp">
+                    {% assign product_title = product.metafields.mfr_fields.nice_title | default: product.title %}
+                    {{ block.settings.heading | default: product_title }}
+                  </div>
+
+                {%- when "text" -%}
+                  {% assign text = block.settings.text | strip_html %}
+                  {% if text != blank %}
+                    {% render "renderer__block-text", block: block %}
+                  {% endif %}
+
+                {% when "submit_button" %}
+                  {% render 'product-top__submit', 
+                    block: block,
+                    product_form_id: product_form_id %}
+
+                {% when "subscription_option" %}
+                  {% render 'product-form__subscription-selector', block: block, product: product, product_form_id: product_form_id %}
+
+                {%- when "variant_selector" -%}
+                  {% render 'product-form__variant-selector' %}
+
+                {%- when "product_description" -%}
+                  {% assign product_description = product.metafields.mfr_fields.nice_description | metafield_tag %}
+                  {% assign product_description = product_description | default: product.description %}
+                  {% if product_description != blank %}
+                    {% render 'product-top__description', product_description: product_description %}
+                  {% endif %}
+
+                {%- when "product_rating" -%}
+                  {%- liquid
+                    assign total_reviews = block.settings.total_reviews
+                    assign rating = block.settings.ratings
+                    assign label = block.settings.label
+                  -%}
+                  {% render 'component__product-rating', rating: rating, total_reviews: total_reviews, label: label %}
+                  
+                {%- when "accordion" -%}
+                  {%- capture accordion_content -%}
+                    {{ block.settings.content }}
+                  {%- endcapture -%}
+
+                  {% render 'mfr-component__accordion',
+                    block_id: block.id,
+                    class: "product-top__accordion border border-[rgba(0,0,0,0.1)] rounded-[1.25rem] [&:not(:last-child)]:mb-3",
+                    trigger_class: "product-top__accordion-label text-[1.125rem] leading-[1.056em] font-semibold tracking-[-0.011875rem] p-[1.125rem_1.4375rem] large:p-[1.3125rem_1.4375rem]",
+                    trigger_label: block.settings.title,
+                    content_class: "product-top__accordion-content px-[1.4375rem]",
+                    content: accordion_content %}
+
+                {%- when "price" -%}
+                  <div class="product-top__price [&:not(:last-child)]:mb-[1.0625rem] large:[&:not(:last-child)]:mb-[1.4375rem]" data-inview>
+                    <div class="product-top__price-inner flex flex-col items-stretch transition-all">
+                      <div class="product-top__price-header flex items-center text-[1.3125rem] leading-[0.905em] font-medium">
+                        <template x-if='currentCompareAtPrice'>
+                          <span
+                            class="product-top__price-old-value line-through opacity-30 text-[1.25rem] leading-[1.1em] font-medium tracking-[-0.03125rem] mr-[0.3125rem] large:text-[1.75rem] large:leading-[1em] large:tracking-[-0.04375rem] large:mr-[0.75rem]"
+                            x-text='currentCompareAtPrice'></span>
+                        </template>
+                        <span
+                          class="product-top__price-value text-[1.25rem] leading-[1.1em] font-medium tracking-[-0.03125rem] mr-[0.3125rem] large:text-[1.75rem] large:leading-[1em] large:tracking-[-0.04375rem] large:mr-[0.75rem]"
+                          x-text='currentPriceValue'>
+                          {{ variant.price | money }}
+                        </span>
+                        {% if variant.compare_at_price != blank and variant.compare_at_price > 0 and variant.compare_at_price > variant.price %}
+                          <span class="product-top__price-badge text-[0.875rem] leading-[1.214em] uppercase min-h-[1.4375rem] py-[0.3125rem] px-[0.5rem] text-white bg-[#F32424] rounded-[0.375rem]">
+                            Sale
+                          </span>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+
+                {%- when "divider" -%}
+                  <span class="product-top__divider w-full h-[1.5px] bg-current block [opacity:var(--opacity)] [&:not(:last-child)]:mb-[var(--spacing-mobile)] large:[&:not(:last-child)]:mb-[var(--spacing-desktop)]"
+                    style="
+                      --opacity: {{ block.settings.opacity | divided_by: 100.00 }};
+                      --spacing-mobile: {{ block.settings.spacing_mobile }}px;
+                      --spacing-desktop: {{ block.settings.spacing_mobile }}px;
+                    "></span>
+
+                {%- when "related_products" -%}
+                  {% if block.settings.product_list != blank %}
+                    <div class="product-top__related-products [&:not(:last-child)]:mb-[1.625rem] large:[&:not(:last-child)]:mb-[2.3125rem]">
+                      {% if block.settings.label != blank %}
+                        <p class="product-top__related-products-label text-[0.875rem] leading-[1.214em] font-semibold uppercase m-0 opacity-40 [&:not(:last-child)]:mb-5">
+                          {{ block.settings.label }}
+                        </p>
+                      {% endif %}
+
+                      {% if block.settings.product_list != blank %}
+                        <ul class="product-top__related-products-inner flex flex-wrap justify-start content-start gap-2 list-none m-0 large:gap-[0.8125rem] [&:not(:last-child)]:mb-[1.625rem] large:[&:not(:last-child)]:mb-[2.3125rem]">
+                          {%- for entry in block.settings.product_list -%}
+                            {%- liquid
+                              assign fields = entry.metafields.mfr_fields
+                              assign image = fields.small_product_card_image | default: entry.media[0]
+                              assign big_text = fields.small_product_card_big_text
+                              assign regular_text = fields.small_product_card_regular_text
+                              assign small_text = fields.small_product_card_small_text
+    
+                              if entry.id == product.id
+                                assign current_product = true
+                              else
+                                assign current_product = false
+                              endif
+                              if big_text == blank and regular_text == blank and small_text == blank
+                                assign small_text = entry.title
+                              endif
+                            -%}
+
+                            <li style="--light-color: {{ fields.product_color_light | default: '#B6E7F9' }};">
+                              <a href="{%- unless current_product -%}{{ entry.url }}{%- else -%}#{%- endunless -%}"
+                                class="{%- if current_product -%}is-active no-hover{%- endif -%}"
+                                aria-label="{{ big_text }} {{ regular_text }} {{ small_text }}"
+                                title="{{ big_text }} {{ regular_text }} {{ small_text }}">
+
+                                <div class="product-top__related-products-image w-full aspect-[82/70] flex justify-center items-center rounded-[0.375rem] [&:not(:last-child)]:mb-[0.1875rem] large:[&:not(:last-child)]:mb-[0.6875rem]">
+                                  {% assign default_alt = "maybe an image about " | append: entry.title %}
+                                  {% assign alt = image.alt | default: default_alt %}
+                                  {% render 'component__lazyload-image', image: image, width: 240, alt: alt, widths: "240" %}
+                                </div>
+
+                                <div class="product-top__related-products-texts flex flex-col items-center justify-start text-center">
+                                  {% if big_text != blank %}
+                                    <p class="big-text text-[1.375rem] leading-[1.364em] font-normal m-0 opacity-60 transition-all large:text-[1.5rem] large:leading-[1.25em] [&:not(:last-child)]:large:mb-0.5">{{ big_text }}</p>
+                                  {% endif %}
+
+                                  {% if regular_text != blank %}
+                                    <p class="regular-text text-[1.125rem] leading-[1.364em] font-normal m-0 opacity-60 transition-all large:text-[1.3125rem] large:leading-[1.048em] [&:not(:last-child)]:large:mb-0.5">{{ regular_text }}</p>
+                                  {% endif %}
+
+                                  {% if small_text != blank %}
+                                    <p class="mini-text text-[0.875rem] leading-[1.214em] font-normal m-0 block opacity-40 large:text-[1rem] large:leading-[1.063em]">{{ small_text }}</p>
+                                  {% endif %}
+                                </div>
+                              </a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+
+                {%- when "product_rtbs" -%}
+                  {% if block.settings.product_rtbs != blank %}
+                    <ul class="product-top__rtbs flex flex-wrap justify-start content-start gap-[0.4375rem] list-none m-0 w-full large:gap-[0.6875rem] [&:not(:last-child)]:mb-8 large:[&:not(:last-child)]:mb-[1.5625rem]">
+                      {%- for entry in block.settings.product_rtbs -%}
+                        <li>
+                          <div class="product-top__rtb flex flex-col justify-start items-center p-[0.875rem_0.75rem_0.75rem] text-center w-full bg-[#f3f3f3] rounded-lg large:p-[1.3125rem_0.625rem]">
+                            {% if entry.icon != blank %}
+                              <div class="product-top__rtb-image w-full max-w-[2.6875rem] h-10 flex justify-center items-center [&:not(:last-child)]:mb-2 large:[&:not(:last-child)]:mb-[1.0625rem]">
+                                {% assign default_alt = "maybe an image about " | append: entry.label %}
+                                {% assign alt = entry.icon.alt | default: default_alt %}
+
+                                {% render 'component__lazyload-image', image: entry.icon, alt: alt, width: 240, widths: "240" %}
+                              </div>
+                            {% endif %}
+
+                            {% if entry.label != blank %}
+                              <p class="product-top__rtb-text text-[0.75rem] leading-[1em] font-medium tracking-[-0.008125rem] block m-0 large:text-[0.875rem] large:tracking-[-0.009375rem]">
+                                {{ entry.label }}
+                              </p>
+                            {% endif %}
+                          </div>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {% endif %}
+
+                {%- when "product_addon" -%}
+                  {% assign main_top_form_id = "product_form_" | append: product.id %}
+                  {% render 'product-top__addon', 
+                    block: product_addon, 
+                    main_form_id: main_top_form_id, 
+                    addons_title: block.settings.text, 
+                    use_variant_name: block.settings.use_variant_name %}
+
+                {%- when "product_title_excerpt" -%}
+                  <div class="product-top__title-excerpt flex [justify-content:var(--justify-content-desktop)] content-start flex-wrap [column-gap:0.625rem] [row-gap:0.875rem] w-full large:[column-gap:11.23%] large:[row-gap:1.125rem] [&:not(:last-child)]:mb-[1.875rem] large:[&:not(:last-child)]:mb-[1.1875rem]"
+                    data-stagger-inview=".product-top__title-excerpt-badge,.product-top__title-excerpt-excerpt">
+                    {%- if block.settings.title != blank -%}
+                      <p class="product-top__title-excerpt-title {{ block.settings.header_style }} min-w-[55%] leading-[1.056em] m-0 flex-[1_1_0] large:leading-[1.087em] large:max-w-[74%] xlarge:min-w-[65%] xlarge:max-w-[80%]">
+                        {%- assign title = metafields.nice_title | default: product.title -%}
+                        {{ block.settings.title 
+                          | replace: "[product-title]", title }}
+                      </p>
+                    {%- endif -%}
+
+                    {%- if block.settings.badge != blank -%}
+                      <span class="product-top__title-excerpt-badge hide-for-large text-sm leading-[1.286em] font-extrabold uppercase self-start flex-shrink-0 inline-block py-1.5 px-3 pt-1 bg-[var(--color-accent-2)] text-white rounded-[0.875rem]">
+                        {{ block.settings.badge }}
+                      </span>
+                    {%- endif -%}
+                    {%- if block.settings.excerpt != blank or block.settings.badge != blank -%}
+                      <div class="product-top__title-excerpt-inner flex justify-stretch content-start flex-wrap">
+                        {%- if block.settings.excerpt != blank -%}
+                          <p class="product-top__title-excerpt-excerpt {{ block.settings.text_style }} w-4/5 large:w-auto large:flex-[1_1_0] large:max-w-[74%] large:mr-auto xlarge:min-w-[65%]">
+                            {{ block.settings.excerpt }}
+                          </p>
+                        {%- endif -%}
+
+                        {%- if block.settings.badge != blank -%}
+                          <span class="product-top__title-excerpt-badge show-for-large text-sm leading-[1.286em] font-extrabold uppercase self-start flex-shrink-0 inline-block py-1.5 px-3 pt-1 bg-[var(--color-accent-2)] text-white rounded-[0.875rem]">
+                            {{ block.settings.badge }}
+                          </span>
+                        {%- endif -%}
+                        
+                      </div>
+                    {%- endif -%}
+                  </div>
+
+                {%- when "quantity_selector" -%}
+                  {% if product.selected_or_first_available_variant.available and block.settings.beside_add_to_cart == false %}
+                    <div class="product-top__quantity-selector flex-shrink-0 flex justify-stretch items-stretch w-1/2 [&:not(:last-child)]:mb-[0.625rem]">
+                      {%- render "component__quantity-selector-v2",
+                        name: "quantity",
+                        min: 1, 
+                        max: product.selected_or_first_available_variant.inventory_quantity,
+                        product_form_id: product_form_id -%} 
+                    </div>
+                  {% endif %}
+
+                {%- when "product_benefits" -%}
+                  {%- if block.settings.product_benefits != blank -%}
+                    <ul class="product-top__product-benefits flex flex-col justify-stretch items-stretch w-full p-0 m-0 list-none overflow-hidden large:max-w-[26.3125rem] [&:not(:last-child)]:mb-[3.125rem]"
+                      data-stagger-inview="li">
+                      {%- for product_benefit in block.settings.product_benefits -%}
+                        <li class="leading-[1.333em] font-normal tracking-[-0.03rem] w-full pb-[0.625rem] border-b border-current flex justify-start items-start gap-[1.0625rem] transition-all large:pb-[0.53125rem] [&:not(:last-child)]:mb-[0.625rem] large:[&:not(:last-child)]:mb-[0.53125rem]">
+                          {%- capture svg_code -%}
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="33" height="33">
+                              <path fill="#F2BAFE" d="M33 16.5Q33 16.905052 32.980125 17.309616Q32.960251 17.71418 32.920551 18.117283Q32.880844 18.520386 32.821411 18.921053Q32.761978 19.32172 32.682957 19.718988Q32.603935 20.116257 32.505516 20.509172Q32.407097 20.902084 32.28952 21.289698Q32.171936 21.677307 32.035477 22.058681Q31.899017 22.440056 31.744011 22.814274Q31.589005 23.188494 31.415821 23.554655Q31.242641 23.920818 31.051702 24.278044Q30.86076 24.635267 30.652521 24.982693Q30.444283 25.330116 30.219248 25.666906Q29.994213 26.003696 29.752924 26.329039Q29.511635 26.654379 29.254673 26.967489Q28.997709 27.280598 28.725693 27.580721Q28.453674 27.880844 28.167259 28.167261Q27.880844 28.453676 27.580719 28.725693Q27.280598 28.997711 26.967487 29.254673Q26.654377 29.511635 26.329037 29.752924Q26.003696 29.994211 25.666906 30.219246Q25.330116 30.444281 24.982693 30.652519Q24.635269 30.86076 24.278046 31.051701Q23.92082 31.24264 23.554657 31.415821Q23.188494 31.589005 22.814274 31.744011Q22.440056 31.899017 22.058681 32.035477Q21.677307 32.171936 21.289696 32.289516Q20.902084 32.407097 20.509171 32.505516Q20.116257 32.603935 19.718988 32.682957Q19.32172 32.761978 18.921051 32.821411Q18.520386 32.880844 18.117283 32.920551Q17.71418 32.960251 17.309616 32.980125Q16.905052 33 16.5 33Q16.094948 33 15.690383 32.980125Q15.285819 32.960251 14.882718 32.920551Q14.479616 32.880844 14.078947 32.821411Q13.678279 32.761978 13.28101 32.682957Q12.88374 32.603935 12.490827 32.505516Q12.097914 32.407097 11.710302 32.28952Q11.322691 32.171936 10.941317 32.035477Q10.559942 31.899017 10.185722 31.744011Q9.8115025 31.589005 9.4453402 31.415821Q9.0791779 31.242641 8.7219534 31.051702Q8.3647289 30.86076 8.0173044 30.652521Q7.669879 30.444283 7.3330908 30.219248Q6.9963021 29.994213 6.6709614 29.752924Q6.3456202 29.511635 6.0325108 29.254673Q5.7194014 28.997709 5.4192772 28.725693Q5.119153 28.453674 4.8327379 28.167259Q4.5463228 27.880844 4.2743063 27.580719Q4.0022898 27.280598 3.7453275 26.967487Q3.4883652 26.654377 3.2470756 26.329037Q3.0057864 26.003696 2.7807512 25.666906Q2.555716 25.330116 2.3474777 24.982693Q2.1392393 24.635269 1.9482991 24.278046Q1.7573587 23.92082 1.5841765 23.554657Q1.4109943 23.188494 1.2559875 22.814274Q1.1009808 22.440056 0.96452278 22.058681Q0.8280648 21.677307 0.71048439 21.289696Q0.59290391 20.902084 0.49448428 20.509171Q0.39606461 20.116257 0.31704283 19.718988Q0.23802106 19.32172 0.17858757 18.921051Q0.11915405 18.520386 0.079452001 18.117283Q0.039749939 17.71418 0.019874969 17.309616Q0 16.905052 0 16.5Q0 16.094948 0.019874969 15.690383Q0.039749939 15.285819 0.079452001 14.882718Q0.11915405 14.479616 0.17858756 14.078947Q0.23802106 13.678279 0.31704283 13.28101Q0.39606461 12.88374 0.49448425 12.490827Q0.59290391 12.097914 0.71048439 11.710302Q0.8280648 11.322691 0.96452278 10.941317Q1.1009808 10.559942 1.2559875 10.185722Q1.4109943 9.8115025 1.5841765 9.4453402Q1.7573587 9.0791779 1.9482991 8.7219534Q2.1392393 8.3647289 2.3474777 8.0173044Q2.555716 7.669879 2.7807512 7.3330908Q3.0057864 6.9963021 3.2470758 6.6709614Q3.4883652 6.3456202 3.7453275 6.0325108Q4.0022898 5.7194014 4.2743063 5.4192772Q4.5463228 5.119153 4.8327379 4.8327379Q5.119153 4.5463228 5.4192772 4.2743063Q5.7194014 4.0022898 6.0325108 3.7453275Q6.3456202 3.4883652 6.6709614 3.2470756Q6.9963021 3.0057864 7.3330908 2.7807512Q7.669879 2.555716 8.0173044 2.3474777Q8.3647289 2.1392393 8.7219543 1.9482991Q9.0791779 1.7573587 9.4453402 1.5841765Q9.8115025 1.4109943 10.185722 1.2559875Q10.559942 1.1009808 10.941316 0.96452278Q11.322691 0.8280648 11.710302 0.71048439Q12.097914 0.59290391 12.490827 0.49448428Q12.88374 0.39606461 13.28101 0.31704283Q13.678279 0.23802106 14.078947 0.17858757Q14.479615 0.11915405 14.882717 0.079452001Q15.285818 0.039749939 15.690382 0.019874969Q16.094948 0 16.5 0Q16.905052 0 17.309616 0.019874969Q17.71418 0.039749939 18.117283 0.079452001Q18.520386 0.11915405 18.921053 0.17858756Q19.32172 0.23802106 19.718988 0.31704283Q20.116257 0.39606461 20.509172 0.49448425Q20.902084 0.59290391 21.289698 0.71048439Q21.677307 0.8280648 22.058681 0.96452278Q22.440056 1.1009808 22.814274 1.2559875Q23.188494 1.4109943 23.554655 1.5841765Q23.920818 1.7573587 24.278044 1.9482991Q24.635267 2.1392393 24.982693 2.3474777Q25.330116 2.555716 25.666906 2.7807512Q26.003696 3.0057864 26.329039 3.2470758Q26.654379 3.4883652 26.967489 3.7453275Q27.280598 4.0022898 27.580721 4.2743063Q27.880844 4.5463228 28.167261 4.8327379Q28.453676 5.119153 28.725693 5.4192772Q28.997711 5.7194014 29.254673 6.0325108Q29.511635 6.3456202 29.752924 6.6709614Q29.994211 6.9963021 30.219246 7.3330908Q30.444281 7.669879 30.652519 8.0173044Q30.86076 8.3647289 31.051701 8.7219543Q31.24264 9.0791779 31.415821 9.4453402Q31.589005 9.8115025 31.744011 10.185722Q31.899017 10.559942 32.035477 10.941316Q32.171936 11.322691 32.289516 11.710302Q32.407097 12.097914 32.505516 12.490827Q32.603935 12.88374 32.682957 13.28101Q32.761978 13.678279 32.821411 14.078947Q32.880844 14.479615 32.920551 14.882717Q32.960251 15.285818 32.980125 15.690382Q33 16.094948 33 16.5Z"/>
+                              <path fill="none" stroke="#5E0D54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(10 12)" d="M0 4.9736843L3.8620689 9L14 0" fill-rule="evenodd"/>
+                            </svg>
+                          {%- endcapture -%}
+                          {% render 'component__svg-encoder',
+                            svg_code: svg_code,
+                            alt: "checkmark",
+                            width: 33 %}
+                          <span class="text">
+                            {{ product_benefit.label }}
+                          </span>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+
+              {%- endcase -%}
+            {%- endfor -%}
+
+            {% if buttons != blank %}
+              <div class="button-set {{ content_alignment }} flex flex-wrap gap-2">
+                {%- for block in section.blocks -%}
+                  {% case block.type %}
+                    {%- when 'button' -%}
+                      {% render 'renderer__block-button', block: block %}
+                  {%- endcase -%}
+                {%- endfor -%}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    {%- render 'component__gradient-bg-styles' -%}
+  </div>
+  {%- render 'component__accent-graphics' -%}
+  {%- render 'component__section-dividers', is_video_background: true -%}
+
+  {%- render "product-top__scripts", product: product -%} 
+  {% render 'script__section', file: "MFRProductTop.js" %}
+</section>
+
+{% schema %}
+{
+      "name": "Product: Top",
+  "class": "mfr-section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings":[
+    {
+      "type": "header",
+      "content": "Carousel Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "carousel_background",
+      "label": "Carousel Background"
+    },
+    {
+      "type": "metaobject_list",
+      "id": "product_benefits",
+      "label": "Product Benefits",
+      "metaobject_type": "product_benefits"
+    },
+    {
+      "type": "header",
+      "content": "Color Schemes Settings"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "scheme_1",
+      "label": "Color Scheme",
+      "info": "This will be the color scheme of the header initially."
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "bg_color",
+      "label": "Background Color/Gradient"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_mobile",
+      "label": "Background Image - Mobile"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image - Desktop"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "select",
+      "id": "grid_gutter",
+      "options": [
+        {
+          "value": "",
+          "label": "No Margin"
+        },
+        {
+          "value": "grid-gutter-mobile",
+          "label": "On Mobile"
+        },
+        {
+          "value": "grid-gutter-desktop",
+          "label": "On Desktop"
+        },
+        {
+          "value": "grid-gutter-mobile grid-gutter-desktop",
+          "label": "On Both"
+        },
+      ],
+      "label": "Section Margin",
+    },
+    {
+      "type": "number",
+      "id": "margin_bottom_mobile",
+      "label": "Margin Bottom - Mobile",
+      "default": 0,
+      "info": "in pixels",
+      "visible_if": "{{ section.settings.grid_gutter contains 'grid-gutter-mobile' }}"
+    },
+    {
+      "type": "number",
+      "id": "margin_bottom_desktop",
+      "label": "Margin Bottom - Desktop",
+      "default": 0,
+      "info": "in pixels",
+      "visible_if": "{{ section.settings.grid_gutter contains 'grid-gutter-desktop' }}"
+    },
+    {
+      "type": "header",
+      "content": "Alignment Settings"
+    },
+    {
+      "type": "select",
+      "id": "mobile_alignment",
+      "label": "Content Alignment - Mobile",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "desktop_alignment",
+      "label": "Content Alignment - Desktop",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Section Spacing"
+    },
+    {
+      "type": "number",
+      "id": "top_spacing_mobile",
+      "label": "Top Spacing",
+      "default": 100,
+      "info": "in pixels. This will use 100px as default value if left empty"
+    },
+    {
+      "type": "number",
+      "id": "bottom_spacing_mobile",
+      "label": "Bottom Spacing",
+      "default": 100,
+      "info": "in pixels. This will use 100px as default value if left empty"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Section Spacing"
+    },
+    {
+      "type": "number",
+      "id": "top_spacing_desktop",
+      "label": "Top Spacing",
+      "default": 100,
+      "info": "in pixels. This will use 100px as default value if left empty"
+    },
+    {
+      "type": "number",
+      "id": "bottom_spacing_desktop",
+      "label": "Bottom Spacing",
+      "default": 100,
+      "info": "in pixels. This will use 100px as default value if left empty"
+    }
+  ],
+  "blocks":[
+    {
+      "type": "@app"
+    },
+    {
+      "type": "product_title_excerpt",
+      "name": "Title/Excerpt",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Title Settings"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Lorem ipsum dolor",
+          "info": "Use [product-title] to show product nice title and title by default."
+        },
+        {
+          "type": "select",
+          "id": "header_style",
+          "options": [
+            { "value": "h1", "label": "H1"},
+            { "value": "h2", "label": "H2"},
+            { "value": "h3", "label": "H3"},
+            { "value": "h4", "label": "H4"},
+            { "value": "h5", "label": "H5"},
+            { "value": "h6", "label": "H6"}
+          ],
+          "label": "Header Style",
+          "default": "h1"
+        },
+        {
+          "type": "header",
+          "content": "Excerpt Settings"
+        },
+        {
+          "type": "text",
+          "id": "excerpt",
+          "label": "Excerpt",
+          "default": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, alias."
+        },
+        {
+          "type":"select",
+          "id":"text_style",
+          "options":[
+            { "value":"", "label":"Default" },
+            { "value":"xsmall", "label":"xSmall" },
+            { "value":"small", "label":"Small" },
+            { "value":"regular", "label":"Regular" },
+            { "value":"large", "label":"Large" },
+            { "value":"xlarge", "label":"xLarge" }
+          ],
+          "label":"Text Style",
+          "default":"regular"
+        },
+        {
+          "type": "header",
+          "content": "Badge Settings"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge"
+        }
+      ]
+    },
+    {
+      "type": "product_description",
+      "name": "Product Description",
+      "limit": 1
+    },
+    {
+      "type": "product_rating",
+      "name": "Product Rating",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "number",
+          "id": "total_reviews",
+          "label": "Total Reviews",
+          "default": 100
+        },
+        {
+          "type": "number",
+          "id": "ratings",
+          "label": "Rating",
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Reviews"
+        }
+      ]
+    },
+    {
+      "type": "product_addon",
+      "name": "Product Addon",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_variant_name",
+          "label": "Use variant name as selector",
+          "info": "Allows to override variant image and use variant name instead as a selector",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "related_products",
+      "name": "Related Products",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Lorem ipsum"
+        },
+        {
+          "type": "product_list",
+          "id": "product_list",
+          "label": "Products"
+        }
+      ]
+    },
+    {
+      "type": "product_rtbs",
+      "name": "Product RTBs",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "metaobject_list",
+          "id": "product_rtbs",
+          "label": "Product RTBs",
+          "metaobject_type": "product_rtbs"
+        }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1
+    },
+    {
+      "type": "quantity_selector",
+      "name": "Quantity Selector",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "beside_add_to_cart",
+          "label": "Beside Add To Cart",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "variant_selector",
+      "name": "Variant Selector",
+      "limit": 1
+    },
+    {
+      "type": "subscription_option",
+      "name": "Subscription Options",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Subscription Settings"
+        },
+        {
+          "type": "number",
+          "id": "index",
+          "label": "Selling Plan Index",
+          "info": "If you're not sure what to input, just put 0.",
+          "default": 0
+        },
+        {
+          "type": "select",
+          "id": "purchase_type",
+          "label": "Purchase Type",
+          "options": [
+            {
+              "value": "one-time",
+              "label": "One Time"
+            },
+            {
+              "value": "subscription",
+              "label": "Subscription"
+            }
+          ],
+          "default": "one-time"
+        },
+        {
+          "type": "header",
+          "content": "Text Settings"
+        },
+        {
+          "type": "text",
+          "id": "one_time_label",
+          "label": "One Time Label",
+          "default": "One Time Purchase"
+        },
+        {
+          "type": "text",
+          "id": "subscription_label",
+          "label": "Subscription Label",
+          "default": "Subscribe & Save"
+        },
+        {
+          "type": "text",
+          "id": "subscription_sub_label",
+          "label": "Subscription Sub Label"
+        }
+      ]
+    },
+    {
+      "type": "product_benefits",
+      "name": "Product Benefits",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "metaobject_list",
+          "id": "product_benefits",
+          "label": "Product Benefits",
+          "metaobject_type": "product_benefits"
+        }
+      ]
+    },
+    {
+      "type": "submit_button",
+      "name": "Submit Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Label Settings"
+        },
+        {
+          "type": "text",
+          "id": "unavailable_label",
+          "label": "Unavailable Label",
+          "default": "Unavailable"
+        },
+        {
+          "type": "text",
+          "id": "sold_out_label",
+          "label": "Sold Out Label",
+          "default": "Sold Out"
+        },
+        {
+          "type": "text",
+          "id": "add_to_cart_label",
+          "label": "Add To Cart Label",
+          "default": "Add To Cart"
+        },
+        {
+          "type": "header",
+          "content": "Other Settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_price",
+          "label": "Show Price?",
+          "default": true
+        },
+        {
+          "type": "textarea",
+          "id": "bottom_caption",
+          "label": "Bottom Caption"
+        }
+      ]
+    },
+    {
+      "type": "accordion",
+      "name": "Accordion",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum nulla sit hic soluta in eos rem laudantium, non velit optio?</p>"
+        }
+      ]
+    },
+    {
+      "type":"divider",
+      "name":"Divider",
+      "settings": [
+        {
+          "type": "range",
+          "id": "opacity",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Opacity",
+          "default": 10
+        },
+        {
+          "type": "number",
+          "id": "spacing_mobile",
+          "label": "Spacing - Mobile",
+          "default": 19
+        },
+        {
+          "type": "number",
+          "id": "spacing_desktop",
+          "label": "Spacing - Desktop",
+          "default": 14
+        },
+      ]
+    },
+    {
+      "type": "icon", 
+      "name": "Icon",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "file_lottie_url",
+          "label": "File Lottie URL"
+        },
+        {
+          "type": "number",
+          "id": "icon_width",
+          "label": "Image width",
+          "default": 150,
+          "info": "in pixels."
+        }
+      ]
+    },
+    {
+      "type": "small_text",
+      "name": "Accent Text",
+      "limit": 1,
+      "settings":[
+        {
+          "type": "text",
+          "id": "text",
+          "default": "Accent Text",
+          "label": "Text"
+        },
+        {
+          "type": "color",
+          "id": "small_text_color",
+          "label": "Color"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "Heading H1",
+          "label": "Heading H1"
+        },
+        {
+          "type": "checkbox",
+          "id": "disable_animation",
+          "label": "Disable Animation",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "header_style",
+          "options": [
+            { "value": "h1", "label": "H1"},
+            { "value": "h2", "label": "H2"},
+            { "value": "h3", "label": "H3"},
+            { "value": "h4", "label": "H4"},
+            { "value": "h5", "label": "H5"},
+            { "value": "h6", "label": "H6"}
+          ],
+          "label": "Header Style",
+          "default": "h1"
+        },
+        {
+          "type": "header",
+          "content": "Accent Settings"
+        },
+        {
+          "type": "select",
+          "id": "make_xl",
+          "options": [
+            { "value": "", "label": "Normal" },
+            { "value": "xl-title", "label": "Oversize" }
+          ],
+          "label": "H1 Size",
+          "default": "",
+          "info": "H1s can be set to oversize if they need to be extra big"
+        },
+        {
+          "type": "color",
+          "id": "highlight_color",
+          "label": "Highlight Color",
+          "info": "Use [highlight][/highlight] to highlight text"
+        },
+        {
+          "type": "color",
+          "id": "underline_color",
+          "label": "Underline Color",
+          "info": "Use [underline][/underline] to underline text"
+        },
+        {
+          "type": "header",
+          "content": "Width Settings"
+        },
+        {
+          "type": "range",
+          "id": "max_width",
+          "min": 0,
+          "max": 70,
+          "step": 1,
+          "unit": "rem",
+          "label": "Max Width",
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel metus auctor.</p>",
+          "label": "Text"
+        },
+        {
+          "type":"select",
+          "id":"text_style",
+          "options":[
+            { "value":"", "label":"Default" },
+            { "value":"xsmall", "label":"xSmall" },
+            { "value":"small", "label":"Small" },
+            { "value":"regular", "label":"Regular" },
+            { "value":"large", "label":"Large" },
+            { "value":"xlarge", "label":"xLarge" }
+          ],
+          "label":"Text Style",
+          "default":"regular"
+        },
+        {
+          "type": "select",
+          "id": "font_family",
+          "options": [
+            { "value": "", "label": "Use system settings" },
+            { "value": "custom-font-name-1", "label": "Custom Font Name 1" },
+            { "value": "custom-font-name-2", "label": "Custom Font Name 2" },
+            { "value": "custom-font-name-3", "label": "Custom Font Name 3" },
+            { "value": "custom-font-name-4", "label": "Custom Font Name 4" }
+          ],
+          "label": "Font Family",
+          "default": "",
+          "info": "Custom font names can be via Theme Settings > Custom Fonts"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Text Color",
+          "info": "Leave it blank to use system settings."
+        },
+        {
+          "type": "color",
+          "id": "bold_color",
+          "label": "Bold Color",
+          "info": "Adding bold color will make the bolded text colored instead of being bold."
+        },
+        {
+          "type": "color",
+          "id": "underline_color",
+          "label": "Underline Color",
+          "info": "Use [underline][/underline] to underline text(s)"
+        },
+        {
+          "type": "header",
+          "content": "Width Settings"
+        },
+        {
+          "type": "range",
+          "id": "max_width",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "unit": "rem",
+          "label": "Max Width",
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "Button label",
+          "label": "Button",
+          "info": "Leave the label blank to hide the button."
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "select",
+          "id": "color_theme",
+          "label": "Color Theme",
+          "options": [
+            { "value": "primary", "label": "Primary" },
+            { "value": "secondary", "label": "Secondary" },
+            { "value": "tertiary", "label": "Tertiary" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "accent_graphic", 
+      "name": "Accent Graphic",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "html",
+          "id": "svg_code",
+          "label": "Graphic SVG Code",
+          "info": "Paste SVG code for vector graphic"
+        },
+        {
+          "type": "header",
+          "content": "Visibility"
+        },
+        {
+          "type": "select",
+          "id": "visibility",
+          "options": [
+            { "value": "always", "label": "Always" },
+            { "value": "desktop_only", "label": "Desktop Only" },
+            { "value": "mobile_only", "label": "Mobile Only" }
+          ],
+          "label": "Show on..",
+          "default": "always"
+        },
+        {
+          "type": "header",
+          "content": "Value Type"
+        },
+        {
+          "type": "select",
+          "id": "value_type",
+          "options": [
+            { "value": "px", "label": "Pixels" },
+            { "value": "%", "label": "Percentage" }
+          ],
+          "label": "Position Value Type",
+          "default": "%",
+          "info": "Pixel values are multiplied by 5"
+        },
+        {
+          "type":"header",
+          "content":"Position"
+        },
+        {
+          "type": "select",
+          "id": "x_setting",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "label": "X Position",
+          "default": "left"
+        },
+        {
+          "type": "select",
+          "id": "y_setting",
+          "options": [
+            { "value": "top", "label": "Top" },
+            { "value": "bottom", "label": "Bottom" }
+          ],
+          "label": "Y Position",
+          "default": "top"
+        },
+        { 
+          "type":"header",
+          "content":"Large Screen Settings"
+        },
+        {
+          "type": "range",
+          "id": "width_large",
+          "min": 10,
+          "max": 400,
+          "step": 10,
+          "unit": "px",
+          "label": "Graphic Width",
+          "default": 150
+        },
+        {
+          "type": "range",
+          "id": "position_x_large",
+          "min": -100,
+          "max": 100,
+          "step": 2,
+          "label": "X Position",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "position_y_large",
+          "min": -100,
+          "max": 100,
+          "step": 2,
+          "label": "Y Position",
+          "default": 10
+        },
+        {
+          "type": "header",
+          "content": "Small Screen Settings"
+        },
+        {
+          "type": "range",
+          "id": "width_small",
+          "min": 10,
+          "max": 400,
+          "step": 10,
+          "unit": "px",
+          "label": "Graphic Width",
+          "default": 150
+        },
+        {
+          "type": "range",
+          "id": "position_x_small",
+          "min": -100,
+          "max": 100,
+          "step": 2,
+          "label": "X Position",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "position_y_small",
+          "min": -100,
+          "max": 100,
+          "step": 2,
+          "label": "Y Position",
+          "default": 10
+        },
+        {
+          "type": "header",
+          "content": "Animation Settings"
+        },
+        {
+          "type": "select",
+          "id": "animation",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "rotating", "label": "Rotate" },
+            { "value": "floating", "label": "Float" },
+            { "value": "spark", "label": "Spark" }
+          ],
+          "label": "Animation",
+          "default": "none"
+        },
+        {
+          "type": "header",
+          "content": "Appearance Settings"
+        },
+        {
+          "type": "range",
+          "id": "rotate",
+          "min": 0,
+          "max": 360,
+          "step": 36,
+          "unit": "%",
+          "label": "Rotate",
+          "default": 0
+        },
+        {
+          "type": "checkbox",
+          "id": "flip",
+          "label": "Flip Graphics?",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name":"Product Top",
+      "category": "Product Sections",
+      "blocks":[
+        {
+          "type":"heading"
+        },
+        {
+          "type":"text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

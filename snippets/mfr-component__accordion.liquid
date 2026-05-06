@@ -1,0 +1,81 @@
+{%- comment -%}
+  COMPONENT: Accordion
+  ----------------------------------------------------------------------------
+  USAGE:
+    {% render 'mfr-component__accordion',
+      trigger_label: "Accordion Title",
+      initially_open: true,
+      class: "optional-wrapper-class",
+      trigger_class: ".optional-trigger-class",
+      content_class: ".optional-content-class",
+      content: content,
+      accordion_parent: "optional-parent-class",
+      avoid_multi_opened_accordion: false
+    %}
+
+  CONTENT EXAMPLE:
+    <div class="prose">
+      <p>This is the content inside the accordion. It can include any valid HTML.</p>
+    </div>
+
+  NOTES:
+    - 'trigger_label' sets the accordion header text.
+    - 'initially_open' (boolean) controls whether the accordion is open by default.
+    - 'content' is required and defines the body content of the accordion.
+    - Add `class`, `trigger_class`, or `content_class` for optional styling hooks.
+{%- endcomment -%}
+{%- assign block_id = block_id | replace: "-", " " | replace: "_", " " | camelcase -%}
+{%- if content != blank -%}
+  <div
+    class="mfr-accordion {{ class }} flex flex-col items-stretch justify-start w-full"
+    :class='isOpen ? "is-active" : ""'
+    x-data='{
+      isOpen: {%- if initially_open -%}true{%- else -%}false{%- endif -%},
+      parent: {% if accordion_parent != blank %}$el.closest("{{ accordion_parent }}"){% else %}null{% endif %},
+      allowMultiOopenedAccordion: {{ allow_multiple_open_accordion | default: false }},
+      closeAccordion() {
+        this.isOpen = false
+      },
+      $accordion: $el
+    }'
+    data-inview>
+    <button
+      class="mfr-accordion__trigger {{ trigger_class }} flex items-center justify-between py-[0.875rem] gap-[0.3125rem] select-none w-full"
+      @click='
+        if(parent && !allowMultiOopenedAccordion) {
+          parent.querySelectorAll( ".mfr-accordion" ).forEach( (e) => {
+            const alpineData = Alpine.$data(e);
+            if($accordion != e) alpineData.closeAccordion();
+          } );
+        }
+        isOpen = !isOpen
+      '
+      :aria-expanded="isOpen"
+    >
+      {%- if trigger_label_html != blank -%}
+        {{ trigger_label_html }}
+        <span class="mfr-accordion__indicator custom relative w-[0.75rem] aspect-square rounded-full flex-shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14">
+            <path fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-miterlimit="10" transform="translate(0.5 0.5)" d="M12 6L4.5474735e-13 6M6 0L6 12" fill-rule="evenodd"/>
+          </svg>
+        </span>
+      {%- else -%}
+        <span class="mfr-accordion__trigger-label">
+          {{ trigger_label }}
+        </span>
+
+        <span class="mfr-accordion__indicator relative w-[0.75rem] aspect-square rounded-full flex-shrink-0"></span>
+      {%- endif -%}
+    </button>
+
+    <div
+      class="mfr-accordion__content {{ content_class }} overflow-hidden"
+      x-show="isOpen"
+      x-collapse
+      x-cloak>
+      <div class="mfr-accordion__content-inner pb-[0.875rem]">
+        {{ content }}
+      </div>
+    </div>
+  </div>
+{%- endif -%}

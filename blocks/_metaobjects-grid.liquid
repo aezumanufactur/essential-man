@@ -1,0 +1,137 @@
+<style>
+  #shopify-block-{{ block.id }} {
+    --grid-gap-mobile: {{ block.settings.gap_mobile }};
+    --grid-gap-tablet: {{ block.settings.gap_tablet }};
+    --grid-gap-desktop: {{ block.settings.gap_desktop }};
+    --grid-row-mobile: {{ block.settings.rows_mobile }};
+    --grid-row-tablet: {{ block.settings.rows_tablet }};
+    --grid-row-desktop: {{ block.settings.rows_desktop }};
+    --grid-row-gap-mobile: {{ block.settings.gap_mobile | split: " " | last }};
+    --grid-row-gap-tablet: {{ block.settings.gap_tablet | split: " " | last }};
+    --grid-row-gap-desktop: {{ block.settings.gap_desktop | split: " " | last }};
+  }
+</style>
+<div class="metaobjects-grid__inner"
+  x-data='MFRMetaobjectsFetcher({
+    postPerPage: {{ block.settings.post_per_page | default: 1 }},
+    metaobjectHandle: "{{ block.settings.metaobject_handle }}",
+    api_key: "{{- block.settings.public_api_key -}}",
+    sortKey: "published_date",
+    sortType: "date"
+  })'>
+  <template x-if='noResult'>
+    <div class="metaobjects-grid__grid--no-result h3">
+      <p>No matches yet—try a different keyword</p>
+    </div>
+  </template>
+  <template x-if='!shownMetaobjects.length && !noResult'>
+    <div class="metaobjects-grid__grid metaobjects-grid__grid--empty flex [justify-content:stretch] [align-content:stretch] flex-wrap gap-[var(--grid-gap-mobile)] medium:gap-[var(--grid-gap-tablet)] large:gap-[var(--grid-gap-desktop)]">
+      <template x-for='i in {{ block.settings.rows_desktop }}'>
+        <div class="metaobjects-grid__item w-full shrink-0">
+          <!-- Placeholder Card -->
+          {% render 'partial__alpine-metaobject-card', placeholder: true %}
+        </div>
+      </template>
+    </div>
+  </template>
+  <template x-if='shownMetaobjects.length && !noResult'>
+    <div class="metaobjects-grid__grid flex [justify-content:stretch] [align-content:stretch] flex-wrap gap-[var(--grid-gap-mobile)] medium:gap-[var(--grid-gap-tablet)] large:gap-[var(--grid-gap-desktop)]"
+      x-data='{
+        metaobjectImages: {
+          {%- for item in metaobjects[block.settings.metaobject_handle].values -%}
+            "{{ item.system.handle }}": `{%- render "component__lazyload-image", image: item.image, width: 720, alt: item.image.alt -%}`,
+          {%- endfor -%}
+        },
+        metaobjectLogos: {
+          {%- for item in metaobjects[block.settings.metaobject_handle].values -%}
+            "{{ item.system.handle }}": `{%- render "component__lazyload-image", image: item.main_image, width: 420, alt: item.main_image.alt -%}`,
+          {%- endfor -%}
+        } //this is a temporary fix while still checking why file_reference fields doesnt return reference.
+      }'>
+      
+      <template x-for='metaobject in shownMetaobjects'>
+        <div class="metaobjects-grid__item w-full shrink-0">
+          {% render 'partial__alpine-metaobject-card' %}
+        </div>
+      </template>
+
+      <template x-if='hasNext'>
+        <div class="metaobjects-grid__loadmore-wrapper w-full">
+          <button class="button underlined-cta metaobjects-grid__loadmore"
+            @click='
+              page++
+              fetchMetaobjects();
+            '>
+            <span class="text">Load More</span>
+          </button>
+        </div>
+      </template>
+    </div>
+  </template>
+</div>
+{% render 'script__section', file: "MFRMetaobjectsFetcher.js" %}
+{% schema %}
+  {
+    "name": "Metaobjects Grid",
+    "class": "metaobjects-grid",
+    "settings": [
+      {
+        "type": "text",
+        "id": "metaobject_handle",
+        "label": "Metaobject Handle"
+      },
+      {
+        "type": "text",
+        "id": "public_api_key",
+        "label": "Public API Key",
+        "info": "For better security, make sure that the API key can only do unauthenticated_read_metaobjects"
+      },
+      {
+        "type": "header",
+        "content": "Grid Settings"
+      },
+      {
+        "type": "number",
+        "id": "post_per_page",
+        "label": "Post Per Page",
+        "default": 6
+      },
+      {
+        "type": "number",
+        "id": "rows_mobile",
+        "label": "Rows - Mobile",
+        "default": 1
+      },
+      {
+        "type": "number",
+        "id": "rows_tablet",
+        "label": "Rows - Tablet",
+        "default": 2
+      },
+      {
+        "type": "number",
+        "id": "rows_desktop",
+        "label": "Rows - Desktop",
+        "default": 3
+      },
+      {
+        "type": "text",
+        "id": "gap_mobile",
+        "label": "Gap - Mobile",
+        "default": "20px"
+      },
+      {
+        "type": "text",
+        "id": "gap_tablet",
+        "label": "Gap - Tablet",
+        "default": "40px 20px"
+      },
+      {
+        "type": "text",
+        "id": "gap_desktop",
+        "label": "Gap - Desktop",
+        "default": "93px 48px"
+      }
+    ]
+  }
+{% endschema %}

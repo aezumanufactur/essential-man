@@ -1,0 +1,34 @@
+.header__logo {
+  lottie-player {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    
+    svg {
+      width: auto !important;
+      max-width: 100%;
+    }
+  }
+}
+
+.footer__divider,
+.section-divider__top,
+.section-divider__bottom {
+  lottie-player {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+}
+
+.section-divider__top,
+.section-divider__bottom {
+  lottie-player {
+    display: block;
+
+    svg path {
+      fill: var(--section-background);
+    }
+  }
+}

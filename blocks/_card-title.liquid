@@ -1,0 +1,39 @@
+<div class="mfr-card__title-inner {{ block.settings.title_style }}">
+  <p>
+    {{ block.settings.title }}
+  </p>
+</div>
+{% schema %}
+  {
+    "name": "Title",
+    "class": "mfr-card__title",
+    "settings": [
+      {
+        "type": "inline_richtext",
+        "id": "title",
+        "default": "Title Text",
+        "label": "Title Text"
+      },
+      {
+        "type": "select",
+        "id": "title_style",
+        "options": [
+          { "value": "h1 xl-title", "label": "H1 - Oversize"},
+          { "value": "h1", "label": "H1"},
+          { "value": "h2", "label": "H2"},
+          { "value": "h3", "label": "H3"},
+          { "value": "h4", "label": "H4"},
+          { "value": "h5", "label": "H5"},
+          { "value": "h6", "label": "H6"}
+        ],
+        "label": "Title Style",
+        "default": "h3"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Title"
+      }
+    ]
+  }
+{% endschema %}

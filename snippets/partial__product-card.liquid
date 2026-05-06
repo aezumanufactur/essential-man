@@ -1,0 +1,37 @@
+{%- liquid 
+  assign product_options = product.options.first 
+  assign product_variants = product.variants
+  assign product_variants_size = product_variants | size
+
+  assign metafields = product.metafields.mfr_fields
+  assign media = product.featured_image
+  assign default_alt = product.title | append: "Featured Image"
+  assign image_alt = media.alt | default: default_alt
+-%}
+
+<div class="product-card relative w-full min-h-full flex flex-col justify-start items-stretch overflow-hidden" x-data>
+  <div class="product-card__media w-full aspect-[190/200] flex justify-center items-center overflow-hidden [background-color:var(--light-color)] large:aspect-[385/350]">
+    <a href="{{ product.url }}" class="block w-full h-full" aria-label="{{ product.title }}">
+      {% render 'component__lazyload-image', image: media, widths: "480,600,720,900", alt: image_alt, sizes: "calc(50vw * 0.84), (min-width: 1023) 900px" %}
+      <div class="product-card__badges absolute top-[0.625rem] left-[0.625rem] flex flex-wrap gap-[0.3125rem] max-w-full">
+        {% render 'component__product-badges', product: product %}
+      </div>
+    </a>
+  </div>
+
+  <div class="product-card__info flex flex-col items-stretch justify-start grow text-left p-4 large:p-[1.25rem_1.5rem]">
+    <a href="{{ product.url }}" aria-label="{{ product.title }}">
+      {% render 'component__product-rating', rating: 5, total_reviews: 50 %}
+
+      <p class="product-card__info-title">{{ product.title }}</p>
+
+      {%- if product_variants_size > 1 -%}
+        <p class="product-card__info-caption">{{ product_variants_size }} {{ product_options }}</p>
+      {%- endif -%}
+
+      <p class="product-card__info-description">{{ product.content | strip_html | truncatewords: 10 }}</p>
+    </a>
+
+    {% render 'component__add-to-cart-button', product: product, show_price: true %}
+  </div>
+</div>

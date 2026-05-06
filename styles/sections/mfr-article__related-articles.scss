@@ -1,0 +1,45 @@
+.article-related-articles__column {
+  display: flex;
+  flex-direction: column;
+}
+
+@import "../variables";
+@import "../tools/util/util";
+@import "../tools/mixins";
+
+.mfr-article__related-articles {
+  .section-content {
+    margin-bottom: rem-calc(30px);
+  }
+
+  .related-articles {
+    width: 100%;
+
+    &__item {
+      flex-shrink: 0;
+      padding: 0 rem-calc(8px);
+
+      @include breakpoint(large up) {
+        padding: 0 rem-calc(15px);
+
+        &:first-child {
+          @include left-carousel-entry-spacing;
+        }
+
+        &:last-child {
+          @include right-carousel-entry-spacing;
+        }
+      }
+
+      .blog-card {
+        width: rem-calc(350px);
+        @include transition($global-transition);
+
+        @include enter-animation {
+          @include opacity(0);
+          @include transform(translateY($enter-transform-value));
+        }
+      }
+    }
+  }
+}

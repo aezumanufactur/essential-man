@@ -1,0 +1,18 @@
+{%- if block.blocks.size > 0 -%}
+  {%- content_for "blocks" -%}
+{%- endif -%}
+{% schema %}
+  {
+    "name": "Row",
+    "class": "table-section__row",
+    "tag": "tr",
+    "blocks": [
+      { "type": "_table__item" }
+    ],
+    "presets": [
+      {
+        "name": "Row"
+      }
+    ]
+  }
+{% endschema %}

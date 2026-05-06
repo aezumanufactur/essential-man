@@ -1,0 +1,29 @@
+<a href="{{ url }}"
+  class="search__item-card flex justify-start items-center flex-col gap-[0.9375rem] text-center large:flex-row large:text-left large:gap-x-[1.875rem] large:gap-y-[0.9375rem] [&.is-page]:text-left [&.is-page]:items-stretch {% if is_page %}is-page{% endif %}"
+  aria-label="{{ title }}"
+  title="{{ title }}">
+
+  {% if show_image != blank %}
+    <div class="search__item-image relative w-[15rem] aspect-square flex-shrink-0 [&_img]:absolute [&_img]:top-0 [&_img]:left-0 [&_img]:w-full [&_img]:h-full [&_img]:object-cover">
+      {% render 'component__lazyload-image', image: image %}
+    </div>
+  {% endif %}
+
+  <div class="search__item-info flex items-start flex-col w-[calc(100%_-_15rem)]">
+    <p class="search__item-title xlarge mb-[0.625rem]">
+     {% if is_page %}Page:{% endif %} {{ title }}
+    </p>
+
+    {% if description != blank %}
+      <div class="search__item-description mb-[0.625rem]">
+        {{ description }}
+      </div>
+    {% endif %}
+
+    {% if price != blank %}
+      <span class="search__item-price small opacity-[0.8]">
+        {{ price | money_with_currency }}
+      </span>
+    {% endif %}
+  </div>
+</a>

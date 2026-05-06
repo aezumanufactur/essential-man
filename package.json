@@ -1,0 +1,63 @@
+{
+  "name": "manufactur-theme-v3",
+  "version": "3.0.0",
+  "description": "A starter Shopify theme by Manufactur.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "screenshot": "node tailwind-migration/tools/screenshot.js",
+    "styles:sections": "gulp sections",
+    "styles:theme": "gulp sass",
+    "styles:quickload": "gulp quickload",
+    "styles:gsap": "gulp gsap",
+    "styles:js": "gulp js",
+    "styles:components": "gulp components",
+    "styles": "run-s styles:**",
+    "watch:shopify": "shopify theme serve",
+    "watch:gulp": "gulp",
+    "watch:tw": "tailwindcss -i tailwind.input.css -o assets/mfr-styles.css --watch",
+    "watch": "run-p watch:**",
+    "dev:shopify-3.0": "shopify theme dev --store manufactur-boilerplate.myshopify.com",
+    "dev:gulp": "gulp",
+    "dev:tw": "tailwindcss -i tailwind.input.css -o assets/mfr-styles.css --watch",
+    "dev": "run-p dev:**",
+    "build": "npm run styles && tailwindcss -i tailwind.input.css -o assets/mfr-styles.css",
+    "switch": "shopify switch --store=manufactur-boilerplate.myshopify.com",
+    "pull": "shopify theme pull -d --nodelete"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manufactur-co/manufactur-theme-v3.git"
+  },
+  "keywords": [
+    "shopify",
+    "liquid"
+  ],
+  "author": "Manufactur",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manufactur-co/manufactur-theme-v3/issues"
+  },
+  "homepage": "https://github.com/manufactur-co/manufactur-theme-v3#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.4",
+    "chokidar": "^3.6.0",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-foreach": "^0.1.0",
+    "gulp-header": "^2.0.9",
+    "gulp-minify": "^3.0.0",
+    "gulp-order": "^1.2.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.0.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-terser": "^2.1.0",
+    "npm-run-all": "^4.1.5",
+    "playwright": "^1.44.0",
+    "sass": "^1.38.1",
+    "tailwindcss": "^4.2.4"
+  },
+  "dependencies": {
+    "shopify": "^0.1.0"
+  }
+}

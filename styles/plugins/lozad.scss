@@ -1,0 +1,19 @@
+img.lozad:not([src*=".png"]):not([src*=".svg"]) {
+  &:not([data-loaded="true"]) {
+    @include filter(blur(rem-calc(5px)));
+  }
+}
+
+picture.lozad {
+  &:not([data-loaded="true"]) img {
+    visibility: hidden;
+  }
+
+  img {
+    aspect-ratio: var(--aspect-ratio-mobile);
+
+    @include breakpoint(large up) {
+      aspect-ratio: var(--aspect-ratio-desktop);
+    }
+  }
+}

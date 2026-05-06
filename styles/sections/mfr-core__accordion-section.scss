@@ -1,0 +1,12 @@
+@import "../variables";
+@import "../tools/util/util";
+@import "../tools/mixins";
+
+.accordion-section__column {
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion-section__section:has(.product-faqs:empty) {
+  display: none;
+}

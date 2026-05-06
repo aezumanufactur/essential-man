@@ -1,0 +1,32 @@
+<div id="panel-wrapper" class="flex flex-col h-full" style="background: {{ section.settings.panel_bg_color }};">
+  <button class="close flex items-center gap-2 mb-4" aria-label="Close menu" type="button" data-close>
+    <div class="icon w-4 h-4">{%- render 'icon__arrows', position: 'left' -%}</div>
+    Close
+  </button>
+
+  <div class="inner flex-1 overflow-auto">
+    <div class="panel__form">{% render 'partial__account-login' %}</div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Login Panel",
+    "class": "off-canvas__wrapper",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Sign In"
+      },
+      {
+        "type": "color_background",
+        "id": "panel_bg_color",
+        "label": "Background",
+        "default": "#000"
+      }
+    ]
+  }
+
+{% endschema %}

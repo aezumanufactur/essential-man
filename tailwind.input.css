@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+/* ─── Custom breakpoints matching theme SCSS ─────────────────────────────── */
+@theme {
+  /* Remove Tailwind defaults */
+  --breakpoint-sm: initial;
+  --breakpoint-md: initial;
+  --breakpoint-lg: initial;
+  --breakpoint-xl: initial;
+  --breakpoint-2xl: initial;
+
+  /* Theme breakpoints */
+  --breakpoint-medium: 640px;
+  --breakpoint-large: 1024px;
+  --breakpoint-xlarge: 1200px;
+  --breakpoint-xxlarge: 1440px;
+
+  /* Container max-width tokens — use max-w-container-* utility classes */
+  --max-width-container-sm: 80rem;   /* 1280px */
+  --max-width-container-md: 90rem;   /* 1440px — default (matches grid-container) */
+  --max-width-container-lg: 100rem;  /* 1600px */
+  --max-width-container-xl: 120rem;  /* 1920px */
+}
+
+/* ─── Source paths ───────────────────────────────────────────────────────── */
+@source "./sections/**/*.liquid";
+@source "./snippets/**/*.liquid";
+@source "./layout/**/*.liquid";
+@source "./templates/**/*.liquid";
+@source "./blocks/**/*.liquid";

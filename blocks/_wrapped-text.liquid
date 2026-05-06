@@ -1,0 +1,22 @@
+<div class="wrapped-text__content [&>*]:text-[1.125rem] [&>*]:leading-[1.333em] [&>*]:tracking-[-0.0125rem] [&>*]:m-0 [&>*:not(:last-child)]:mb-[1em] large:[&>*]:text-[1.3125rem] large:[&>*]:tracking-[-0.014375rem] [&_strong]:[color:var(--section-heading)]">
+  {{- block.settings.text -}}
+</div>
+{% schema %}
+  {
+    "name": "Wrapped Text",
+    "class": "wrapped-text",
+    "settings": [
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam error iure, hic expedita voluptates distinctio illum sapiente quo inventore consequuntur?</p>"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Wrapped Text"
+      }
+    ]
+  }
+{% endschema %}

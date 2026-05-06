@@ -1,0 +1,28 @@
+.section-content {
+  &__inner {
+    .shopify-block {
+      position: relative;
+      z-index: 2;
+    }
+  }
+
+  > .shopify-block {
+    &:not(:last-child) {
+      margin-bottom: rem-calc( 15px );
+
+      @include breakpoint( large up ) {
+        margin-bottom: rem-calc( 30px );
+      }
+    }
+  }
+}
+
+.boxed-content {
+  > .shopify-block:not(:last-child) {
+    margin-bottom: rem-calc(15);
+
+    @include breakpoint(large up) {
+      margin-bottom: rem-calc(30);
+    }
+  }
+}

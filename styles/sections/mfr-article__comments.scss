@@ -1,0 +1,148 @@
+.article-comments__column {
+  display: flex;
+  flex-direction: column;
+}
+
+@import "../variables";
+@import "../tools/util/util";
+@import "../tools/mixins";
+
+.mfr-article__comments {
+  .section-content {
+    .section-title {
+      margin-bottom: rem-calc(20px);
+    }
+  }
+
+  .article-comments {
+    &__wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__list {
+      .load-more__btn-wrap {
+        display: flex;
+        justify-content: center;
+      }
+    }
+
+    &__entry {
+      border-bottom: $global-border-width solid $black;
+
+      &-avatar {
+        @include large;
+        color: $white;
+        background-color: $black;
+      }
+
+      &-name {
+        @include small;
+
+        > span {
+          &:first-child {
+            margin-bottom: rem-calc(5px);
+          }
+
+          &:last-child {
+            display: flex;
+            justify-content: flex-start;
+
+            span {
+              margin: 0 rem-calc(0.5px);
+
+              &:first-child {
+                margin-left: 0;
+              }
+
+              &:last-child {
+                margin-right: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &__form {
+      &-input {
+        input,
+        textarea {
+          @include form-inputs;
+        }
+
+        textarea {
+          min-height: rem-calc(150px);
+        }
+      }
+
+      &-stars {
+        label {
+          position: absolute;
+          top: 0;
+          left: 0;
+          font-size: rem-calc(50px);
+          line-height: rem-calc(50px);
+          cursor: pointer;
+
+          &:last-child {
+            position: relative;
+          }
+
+          &:nth-child(1) {
+            z-index: 5;
+          }
+
+          &:nth-child(2) {
+            z-index: 4;
+          }
+
+          &:nth-child(3) {
+            z-index: 3;
+          }
+
+          &:nth-child(4) {
+            z-index: 2;
+          }
+
+          &:nth-child(5) {
+            z-index: 1;
+          }
+
+          input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+          }
+
+          .icon {
+            float: left;
+            color: transparent;
+            @include transition($global-transition);
+          }
+
+          &:last-child .icon {
+            color: rgba(#000, 0.4);
+          }
+
+          input:focus:not(:checked) ~ .icon:last-child {
+            color: rgba(#000, 0.4);
+            text-shadow: 0 0 rem-calc(5px) $color-accent-2;
+          }
+
+          input:checked ~ .icon {
+            color: $color-body-text;
+          }
+
+          @include hover {
+            input ~ .icon {
+              color: $color-body-text;
+            }
+          }
+        }
+      }
+    }
+  }
+}

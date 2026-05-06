@@ -1,0 +1,189 @@
+<style>
+  #shopify-block-{{ block.id }} {
+    /* Mobile Variables */
+    --slides-vertical-alignment-mobile: {{ block.settings.vertical_alignment_mobile }};
+    --slides-text-alignment-mobile: {{ block.settings.text_alignment_mobile }};
+    --slides-height-mobile: {{ block.settings.height_mobile }}vh;
+    {% if block.settings.text_alignment_mobile == "left" %}
+      --slides-horizontal-alignment-mobile: flex-start;
+    {% elsif block.settings.text_alignment_mobile == "center" %}
+      --slides-horizontal-alignment-mobile: center;
+    {% endif %}
+
+    /* Desktop Variables */
+    --slides-horizontal-alignment-desktop: {{ block.settings.horizontal_alignment_desktop }};
+    --slides-vertical-alignment-desktop: {{ block.settings.vertical_alignment_desktop }};
+    --slides-text-alignment-desktop: {{ block.settings.text_alignment_desktop }};
+    --slides-height-desktop: {{ block.settings.height_desktop }}vh;
+    --slides-max-height-desktop: {{ block.settings.max_height_desktop }}px;
+  }
+</style>
+{%- capture slides_content -%}
+  {%- content_for "blocks" -%}
+{%- endcapture -%}
+{%- capture settings -%}
+  {
+    prevNextButtons: true,
+    contain: true,
+    cellAlign: "center",
+    pageDots: true,
+    wrapAround: false,
+    groupCells: true,
+    adaptiveHeight: true
+  }
+{%- endcapture -%}
+{%- capture class -%}
+  hero-section__carousel-inner carousel__slides 
+{%- endcapture -%}
+{% render 'mfr-component__carousel',
+  settings: settings,
+  class: class,
+  content: slides_content
+%}
+{% schema %}
+  {
+    "name": "Slides",
+    "class": "hero-section__carousel section-content",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Mobile Settings"
+      },
+      {
+        "type": "select",
+        "id": "vertical_alignment_mobile",
+        "label": "Vertical Alignment",
+        "options": [
+          {
+            "value": "flex-start",
+            "label": "Top"
+          },
+          {
+            "value": "center",
+            "label": "Middle"
+          },
+          {
+            "value": "flex-end",
+            "label": "Bottom"
+          }
+        ],
+        "default": "flex-start"
+      },
+      {
+        "type": "select",
+        "id": "text_alignment_mobile",
+        "label": "Text Alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "default": "left"
+      },
+      {
+        "type": "number",
+        "id": "height_mobile",
+        "label": "Height",
+        "default": 100,
+        "info": "in vh (Viewport Height)"
+      },
+      {
+        "type": "header",
+        "content": "Desktop Settings"
+      },
+      {
+        "type": "select",
+        "id": "horizontal_alignment_desktop",
+        "label": "Horizontal Alignment",
+        "options": [
+          {
+            "value": "flex-start",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "flex-right",
+            "label": "Right"
+          }
+        ],
+        "default": "flex-start"
+      },
+      {
+        "type": "select",
+        "id": "vertical_alignment_desktop",
+        "label": "Vertical Alignment",
+        "options": [
+          {
+            "value": "flex-start",
+            "label": "Top"
+          },
+          {
+            "value": "center",
+            "label": "Middle"
+          },
+          {
+            "value": "flex-end",
+            "label": "Bottom"
+          }
+        ],
+        "default": "flex-start"
+      },
+      {
+        "type": "select",
+        "id": "text_alignment_desktop",
+        "label": "Text Alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "default": "left"
+      },
+      {
+        "type": "number",
+        "id": "height_desktop",
+        "label": "Height",
+        "default": 100,
+        "info": "in vh (Viewport Height)"
+      },
+      {
+        "type": "number",
+        "id": "max_height_desktop",
+        "label": "Max Height",
+        "default": 1800,
+        "info": "in pixels"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "_hero-section__slide"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Slides",
+        "blocks": [
+          { 
+            "type": "_hero-section__slide",
+            "blocks": [
+              { "type": "_section-content__title" }
+            ] 
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,42 @@
+.mfr-accordion {
+  border-bottom: solid rem-calc( 1px ) rgba(#8B93A7,0.4);
+  @include transition( $global-transition );
+
+  &__trigger {
+    &[aria-expanded=true] {
+      .mfr-accordion__indicator {
+        @include transform( rotate( 135deg ) );
+      }
+    }
+  }
+
+  &__content {
+    @include transition( height 0.4s $smooth_ease );
+
+    &.transition-hide {
+      height: 0;
+      padding: 0;
+    }
+  }
+
+  &__indicator {
+    @include transition( transform 0.4s $smooth_ease );
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: auto;
+      border: solid rem-calc( 1px ) $black;
+      @include border-radius( 10px );
+      @include transform( translate( -50%, -50% ) );
+    }
+
+    &:after {
+      @include transform( translate( -50%, -50% ) rotate(90deg) );
+    }
+  }
+}

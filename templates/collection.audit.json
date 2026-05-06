@@ -1,0 +1,62 @@
+{
+  "sections": {
+    "mfr-collection-carousel": {
+      "type": "mfr-collection__carousel",
+      "blocks": {
+        "mfr-collection-carousel-section-content": {
+          "type": "_section-content",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "mfr-collection-carousel-section-content"
+      ],
+      "settings": {}
+    },
+    "mfr-collection-highlights": {
+      "type": "mfr-collection__highlights",
+      "blocks": {
+        "mfr-collection-highlights-section-content": {
+          "type": "_section-content",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "mfr-collection-highlights-section-content"
+      ],
+      "settings": {}
+    },
+    "mfr-collection-list": {
+      "type": "mfr-collection__list",
+      "blocks": {
+        "mfr-collection-list-section-content": {
+          "type": "_section-content",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "mfr-collection-list-section-content"
+      ],
+      "settings": {}
+    },
+    "mfr-collection-product-grid": {
+      "type": "mfr-collection__product-grid",
+      "blocks": {
+        "mfr-collection-product-grid-section-content": {
+          "type": "_section-content",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "mfr-collection-product-grid-section-content"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "mfr-collection-carousel",
+    "mfr-collection-highlights",
+    "mfr-collection-list",
+    "mfr-collection-product-grid"
+  ]
+}

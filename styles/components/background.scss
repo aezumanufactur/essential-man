@@ -1,0 +1,70 @@
+/* BACKGROUND IMAGE */
+.background__image {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  //z-index: -1;
+
+  .video-player {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  img, svg {
+    position: absolute !important;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  picture {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  img {
+    object-fit: cover;
+    object-position: center;
+  }
+  &.has-mobile-image {
+    .main-image {
+      display: block;
+    }      
+    .mobile-image {
+      display: none;
+    }    
+    @include breakpoint(medium down) {
+      .main-image {
+        display: none;
+      }        
+      .mobile-image {
+        display: block;
+      }
+    }
+  }
+
+  .mfr-components__video {
+    align-items: center;
+    justify-content: center;
+
+    .mfr-components__video-inner {
+      width: 100%;
+      height: 100%;
+
+      video {
+        height: 101%;
+      }
+    }
+  }
+}

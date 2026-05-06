@@ -1,0 +1,4 @@
+{{ 'header.css' | asset_url | stylesheet_tag: preload: true }}
+{{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
+{{ 'footer.css' | asset_url | stylesheet_tag: preload: false }}
+{{ 'mfr-styles.css' | asset_url | stylesheet_tag: preload: false }}

@@ -1,0 +1,38 @@
+{% comment %} 
+  Get product data anywhere in product template via $store.pdp.product/Alpine.store('pdp').product
+{% endcomment %}
+
+<script>
+  document.addEventListener('alpine:init', () => {
+    Alpine.store('pdp', {
+      product: {},
+      stickyATC: false,
+      runningTotal: 0,
+      currentPrice: 0,
+      addonCounter: 0,
+      addOnsArray: [],
+      addOnsTotalPrice: 0,
+      dataReset: false,
+
+      init() {
+        this.product = {{ product | json }}
+        
+        this.currentPrice = this.product.variants[0].price
+        this.runningTotal = this.product.variants[0].price
+      },
+
+      addToCartAddons(data) {
+        if (this.addOnsArray.length <= 0) return
+
+        Alpine.store('cart').addMultipleToCart([...this.addOnsArray])
+
+        // After adding add-ons to cart, clear the add-ons array, items counter,
+        // set running total to selected product price and reset data selection states
+        this.addOnsArray = []
+        this.addonCounter = 0
+        this.runningTotal = this.currentPrice
+        this.dataReset = true
+      }
+    })
+  })
+</script>

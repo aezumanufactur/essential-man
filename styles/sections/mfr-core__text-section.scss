@@ -1,0 +1,40 @@
+@import "../variables";
+@import "../tools/util/util";
+@import "../tools/mixins";
+
+.text-section__column {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapped-text {
+  width: 100%;
+  text-align: left;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: rem-calc(20);
+  max-width: rem-calc(450);
+  padding: rem-calc(28) rem-calc(23);
+
+  @include breakpoint(large up) {
+    max-width: rem-calc(697);
+    padding: rem-calc(57) rem-calc(45);
+  }
+
+  &__content {
+    > * {
+      font-size: 1.125rem;
+      line-height: 1.333em;
+      letter-spacing: rem-calc(-0.2);
+      margin: 0;
+
+      @include breakpoint(large up) {
+        font-size: 1.3125rem;
+        letter-spacing: rem-calc(-0.23);
+      }
+
+      &:not(:last-child) { margin-bottom: 1em; }
+    }
+
+    strong { color: var(--section-heading); }
+  }
+}

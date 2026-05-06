@@ -1,0 +1,62 @@
+{
+  "sections": {
+    "mfr-article-comments": {
+      "type": "mfr-article__comments",
+      "blocks": {
+        "mfr-article-comments-section-content": {
+          "type": "_section-content",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "mfr-article-comments-section-content"
+      ],
+      "settings": {}
+    },
+    "mfr-article-content": {
+      "type": "mfr-article__content",
+      "blocks": {
+        "mfr-article-content-section-content": {
+          "type": "_section-content",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "mfr-article-content-section-content"
+      ],
+      "settings": {}
+    },
+    "mfr-article-header": {
+      "type": "mfr-article__header",
+      "blocks": {
+        "mfr-article-header-section-content": {
+          "type": "_section-content",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "mfr-article-header-section-content"
+      ],
+      "settings": {}
+    },
+    "mfr-article-related-articles": {
+      "type": "mfr-article__related-articles",
+      "blocks": {
+        "mfr-article-related-articles-section-content": {
+          "type": "_section-content",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "mfr-article-related-articles-section-content"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "mfr-article-comments",
+    "mfr-article-content",
+    "mfr-article-header",
+    "mfr-article-related-articles"
+  ]
+}

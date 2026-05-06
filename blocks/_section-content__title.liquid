@@ -1,0 +1,444 @@
+{% comment %} {% assign disable_animation = true %} {% endcomment %}
+{% comment %}
+    Attributes
+
+    - block_id
+    - text
+    - header_style
+    - bold_color
+    - underline_color
+    - max_width
+{% endcomment %}
+
+{% assign block_id = block.id %}
+{% assign text = block.settings.heading %}
+{% assign header_style = block.settings.header_style %}
+{% assign highlight_color = block.settings.highlight_color %}
+{% assign underline_color = block.settings.underline_color %}
+{% assign disable_animation = block.settings.disable_animation %}
+{% assign custom_font = block.settings.font_family %}
+{% assign max_width_mobile = block.settings.max_width_mobile %}
+{% assign max_width_desktop = block.settings.max_width_desktop %}
+
+{% if underline_color != "" and underline_color != "rgba(0,0,0,0)" %}
+  {% assign has_underline_class = "has-underline" %}
+{% else %}
+  {% assign has_underline_class = "" %}
+{% endif %}
+
+<style>
+  #shopify-block-{{ block.id }} {
+    --highlight-color: {{ highlight_color }};
+    {% if max_width_mobile != blank and max_width_mobile != 0 %}
+      --max-width-mobile: {{ max_width_mobile }}px;
+    {% endif %}
+    {% if max_width_desktop != blank and max_width_desktop != 0 %}
+      --max-width-desktop: {{ max_width_desktop }}px;
+    {% endif %}
+    {% if highlight_color != "" and highlight_color != "rgba(0,0,0,0)" %}
+      --underline-color: {{ underline_color }};
+    {% endif %}
+  }
+</style>
+{%- render "settings__block-layout-controls" -%}
+
+<{{ block.settings.header_tag }}
+  id="block--{{ block_id }}"
+  class="section-title {% unless request.visual_preview_mode %}{{ header_style }}{% else %}h2{% endunless %} {{ has_underline_class }} {{ custom_font }} relative inline-block mt-0 w-full max-w-[var(--max-width-mobile)] large:max-w-[var(--max-width-desktop)]"
+  data-inview>
+  <div class="section-title__inner" 
+    {% unless disable_animation %}
+      data-split-text="fadeUp"
+    {% endunless %}>
+    {% render 'shortcode-renderer',
+      text: text %}
+  </div>
+</{{ block.settings.header_tag }}>
+
+{% schema %}
+  {
+    "name": "Section Title",
+    "class": "section-title__wrapper",
+    "settings": [
+      {
+        "type": "inline_richtext",
+        "id": "heading",
+        "default": "Heading Text",
+        "label": "Heading Text"
+      },
+      {
+        "type": "checkbox",
+        "id": "disable_animation",
+        "label": "Disable Animation",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "header_style",
+        "options": [
+          { "value": "h1 xl-title", "label": "H1 - Oversize"},
+          { "value": "h1", "label": "H1"},
+          { "value": "h2", "label": "H2"},
+          { "value": "h3", "label": "H3"},
+          { "value": "h4", "label": "H4"},
+          { "value": "h5", "label": "H5"},
+          { "value": "h6", "label": "H6"}
+        ],
+        "label": "Heading Style",
+        "default": "h1"
+      },
+      {
+        "type": "select",
+        "id": "header_tag",
+        "options": [
+          { "value": "h2", "label": "<h2></h2> (Default)"},
+          { "value": "h3", "label": "<h3></h3>"},
+          { "value": "h4", "label": "<h4></h4>"},
+          { "value": "h5", "label": "<h5></h5>"},
+          { "value": "h6", "label": "<h6></h6>"}
+        ],
+        "label": "Heading Tag",
+        "default": "h2",
+        "info": "This is for accessibility and SEO purposes. If you are not sure what to choose, select <h2></h2> (Default)."
+      },
+      {
+        "type": "select",
+        "id": "font_family",
+        "label": "Custom Font Family",
+        "options": [
+          {
+            "value": "",
+            "label": "Use Theme Settings"
+          },
+          {
+            "value": "custom-font-name-1",
+            "label": "Custom Font 1"
+          },
+          {
+            "value": "custom-font-name-2",
+            "label": "Custom Font 2"
+          },
+          {
+            "value": "custom-font-name-3",
+            "label": "Custom Font 3"
+          },
+          {
+            "value": "custom-font-name-4",
+            "label": "Custom Font 4"
+          }
+        ],
+        "default": ""
+      },
+      {
+        "type": "header",
+        "content": "Color Settings"
+      },
+      {
+        "type": "color",
+        "id": "highlight_color",
+        "label": "Highlight Color",
+        "info": "This will change the color of all bolded text."
+      },
+      {
+        "type": "color",
+        "id": "underline_color",
+        "label": "Underline Color",
+        "info": "This will add underline (with the set color) to all bolded text."
+      },
+
+      {
+        "type": "header",
+        "content": "Width Settings"
+      },
+      {
+        "type": "number",
+        "id": "max_width_mobile",
+        "label": "Max Width - Mobile",
+        "default": 0,
+        "info": "in pixels"
+      },
+      {
+        "type": "number",
+        "id": "max_width_desktop",
+        "label": "Max Width - Desktop",
+        "default": 0,
+        "info": "in pixels"
+      },
+      {
+        "type": "header",
+        "content": "Block Layout Controls"
+      },
+      {
+        "type": "paragraph",
+        "content": "Width Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_width_settings",
+        "label": "Enable Width Settings",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "width_mobile",
+        "label": "Width - Mobile",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_width_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "width_mobile_value",
+        "label": "Width Value - Mobile",
+        "default": 0,
+        "visible_if": "{{ block.settings.width_mobile and block.settings.width_mobile_unit != 'custom' }}"
+      },
+      {
+        "type": "text",
+        "id": "width_mobile_custom",
+        "label": "Width Custom - Mobile",
+        "info": "Use this for custom values or calculations like calc(100% / 3).",
+        "visible_if": "{{ block.settings.width_mobile and block.settings.width_mobile_unit == 'custom' }}"
+      },
+      {
+        "type": "select",
+        "id": "width_mobile_unit",
+        "label": "Width Unit - Mobile",
+        "options": [
+          { "value": "px", "label": "Pixels (px)" },
+          { "value": "%", "label": "Percent (%)" },
+          { "value": "vw", "label": "Viewport Width (vw)" },
+          { "value": "custom", "label": "Custom" }
+        ],
+        "default": "px",
+        "visible_if": "{{ block.settings.width_mobile }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "width_desktop",
+        "label": "Width - Desktop",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_width_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "width_desktop_value",
+        "label": "Width Value - Desktop",
+        "default": 0,
+        "visible_if": "{{ block.settings.width_desktop and block.settings.width_desktop_unit != 'custom' }}"
+      },
+      {
+        "type": "text",
+        "id": "width_desktop_custom",
+        "label": "Width Custom - Desktop",
+        "info": "Use this for custom values or calculations like calc(100% / 3).",
+        "visible_if": "{{ block.settings.width_desktop and block.settings.width_desktop_unit == 'custom' }}"
+      },
+      {
+        "type": "select",
+        "id": "width_desktop_unit",
+        "label": "Width Unit - Desktop",
+        "options": [
+          { "value": "px", "label": "Pixels (px)" },
+          { "value": "%", "label": "Percent (%)" },
+          { "value": "vw", "label": "Viewport Width (vw)" },
+          { "value": "custom", "label": "Custom" }
+        ],
+        "default": "px",
+        "visible_if": "{{ block.settings.width_desktop }}"
+      },
+      {
+        "type": "paragraph",
+        "content": "Padding Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_padding_settings",
+        "label": "Enable Padding Settings",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "padding_x_mobile",
+        "label": "Padding X - Mobile",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_padding_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "padding_left_mobile",
+        "label": "Padding Left - Mobile",
+        "default": 0,
+        "visible_if": "{{ block.settings.padding_x_mobile }}"
+      },
+      {
+        "type": "number",
+        "id": "padding_right_mobile",
+        "label": "Padding Right - Mobile",
+        "default": 0,
+        "visible_if": "{{ block.settings.padding_x_mobile }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "padding_y_mobile",
+        "label": "Padding Y - Mobile",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_padding_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "padding_top_mobile",
+        "label": "Padding Top - Mobile",
+        "default": 0,
+        "visible_if": "{{ block.settings.padding_y_mobile }}"
+      },
+      {
+        "type": "number",
+        "id": "padding_bottom_mobile",
+        "label": "Padding Bottom - Mobile",
+        "default": 0,
+        "visible_if": "{{ block.settings.padding_y_mobile }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "padding_x_desktop",
+        "label": "Padding X - Desktop",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_padding_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "padding_left_desktop",
+        "label": "Padding Left - Desktop",
+        "default": 0,
+        "visible_if": "{{ block.settings.padding_x_desktop }}"
+      },
+      {
+        "type": "number",
+        "id": "padding_right_desktop",
+        "label": "Padding Right - Desktop",
+        "default": 0,
+        "visible_if": "{{ block.settings.padding_x_desktop }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "padding_y_desktop",
+        "label": "Padding Y - Desktop",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_padding_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "padding_top_desktop",
+        "label": "Padding Top - Desktop",
+        "default": 0,
+        "visible_if": "{{ block.settings.padding_y_desktop }}"
+      },
+      {
+        "type": "number",
+        "id": "padding_bottom_desktop",
+        "label": "Padding Bottom - Desktop",
+        "default": 0,
+        "visible_if": "{{ block.settings.padding_y_desktop }}"
+      },
+      {
+        "type": "paragraph",
+        "content": "Margin Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_margin_settings",
+        "label": "Enable Margin Settings",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "margin_x_mobile",
+        "label": "Margin X - Mobile",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_margin_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "margin_left_mobile",
+        "label": "Margin Left - Mobile",
+        "default": 0,
+        "visible_if": "{{ block.settings.margin_x_mobile }}"
+      },
+      {
+        "type": "number",
+        "id": "margin_right_mobile",
+        "label": "Margin Right - Mobile",
+        "default": 0,
+        "visible_if": "{{ block.settings.margin_x_mobile }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "margin_y_mobile",
+        "label": "Margin Y - Mobile",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_margin_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "margin_top_mobile",
+        "label": "Margin Top - Mobile",
+        "default": 0,
+        "visible_if": "{{ block.settings.margin_y_mobile }}"
+      },
+      {
+        "type": "number",
+        "id": "margin_bottom_mobile",
+        "label": "Margin Bottom - Mobile",
+        "default": 0,
+        "visible_if": "{{ block.settings.margin_y_mobile }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "margin_x_desktop",
+        "label": "Margin X - Desktop",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_margin_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "margin_left_desktop",
+        "label": "Margin Left - Desktop",
+        "default": 0,
+        "visible_if": "{{ block.settings.margin_x_desktop }}"
+      },
+      {
+        "type": "number",
+        "id": "margin_right_desktop",
+        "label": "Margin Right - Desktop",
+        "default": 0,
+        "visible_if": "{{ block.settings.margin_x_desktop }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "margin_y_desktop",
+        "label": "Margin Y - Desktop",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_margin_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "margin_top_desktop",
+        "label": "Margin Top - Desktop",
+        "default": 0,
+        "visible_if": "{{ block.settings.margin_y_desktop }}"
+      },
+      {
+        "type": "number",
+        "id": "margin_bottom_desktop",
+        "label": "Margin Bottom - Desktop",
+        "default": 0,
+        "visible_if": "{{ block.settings.margin_y_desktop }}"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Section Title",
+      }
+    ]
+  }
+{% endschema %}

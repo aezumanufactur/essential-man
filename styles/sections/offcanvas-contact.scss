@@ -1,0 +1,99 @@
+@import "../variables";
+@import "../tools/util/util";
+@import "../tools/mixins";
+
+.offcanvas-contact {
+  width: 100%;
+  max-width: rem-calc(450);
+
+  @include breakpoint(large up) {
+    max-width: rem-calc(420);
+  }
+
+  .close-button {
+    @include transition($global-transition);
+
+    @include hover {
+      @include transform(scale(1.05));
+    }
+  }
+
+  &__form {
+    .form-email,
+    .form-field,
+    .form-dropdown,
+    .form-button {
+      &:not(:last-child) {
+        margin-bottom: rem-calc(15);
+      }
+
+      label {
+        @include small;
+        line-height: 1em;
+        font-weight: 500;
+        margin-bottom: rem-calc(10);
+      }
+
+      input,
+      select,
+      textarea {
+        @include border-radius(rem-calc(15));
+      }
+    }
+
+    .form-inner {
+      &:not(:last-child) {
+        margin-bottom: rem-calc(10);
+      }
+
+      &.two-column {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: rem-calc(6);
+
+        @include breakpoint(large up) {
+          gap: rem-calc(8);
+        }
+
+        > .form-inner {
+          width: calc((100% - #{rem-calc(6)}) / 2);
+
+          @include breakpoint(large up) {
+            width: calc((100% - #{rem-calc(8)}) / 2);
+          }
+        }
+      }
+    }
+
+    .form-dropdown {
+      .form__select {
+        svg {
+          position: absolute;
+          width: rem-calc(13);
+          height: auto;
+          top: 50%;
+          right: rem-calc(26);
+          @include transform(translateY(-50%));
+        }
+
+        select:not(:valid) {
+          color: rgba(#000000, 0.50);
+        }
+      }
+    }
+
+    .form-field {
+      textarea {
+        resize: none;
+        min-height: rem-calc(140);
+      }
+    }
+
+    .button {
+      font-weight: 700;
+      text-transform: uppercase;
+      min-height: rem-calc(65);
+      @include border-radius(rem-calc(15));
+    }
+  }
+}

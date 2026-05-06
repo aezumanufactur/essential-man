@@ -1,0 +1,1 @@
+{"version":3,"sources":["mfr-core__accordion-section.scss"],"names":[],"mappings":"AAIA,qDACE,QAAA","file":"mfr-core__accordion-section.css","sourcesContent":["@import \"../variables\";\n@import \"../tools/util/util\";\n@import \"../tools/mixins\";\n\n.accordion-section__section:has(.product-faqs:empty) {\n  display: none;\n}\n"]}

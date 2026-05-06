@@ -1,0 +1,132 @@
+{% render 'renderer__color-scheme', name: "section", color_scheme: block.settings.color_scheme_progress_bar, selector: ".quantity-progress-bar" %}
+
+{% if block.settings.quantity != 0 and block.settings.quantity != blank %}
+	<div class="quantity-progress-bar w-full bg-white px-[1.875rem] py-[0.46875rem] text-white [&:not(:last-child)]:mb-[1.8125rem]" x-data="{
+		includeSubscription: true,
+		productIds: [],
+    collectionHandle: '{{ block.settings.collection.handle }}',
+		requiredTotal: window.quantityProgressBar.requiredTotal,
+		runningTotal: 0,
+    items: $store.cart.cartData.items,
+		state: {
+			success: false,
+			percentage: 0,
+			remaining: window.quantityProgressBar.requiredTotal
+		},
+
+		init() {
+			this.$watch('$store.cart.cartData.items', async data => {
+        this.items = $store.cart.cartData.items;
+				if (data !== null && data !== undefined) {
+					await this.trackQuantityProgress()
+					this.trackQuantityProgressSuccess()
+					this.trackQuantityProgressPercentage()
+					this.trackQuantityProgressRemaining()
+				}
+			})
+			this.$watch('productIds', async data => {
+        this.items = $store.cart.cartData.items;
+				if (data !== null && data !== undefined) {
+					await this.trackQuantityProgressSuccess()
+					this.trackQuantityProgressPercentage()
+					this.trackQuantityProgressRemaining()
+				}
+			})
+		},
+
+		async trackQuantityProgress(items) {
+			let count = 0
+
+      await this.populateProductId();
+
+			this.items.forEach((item, index) => {
+				if (this.includeSubscription) {
+					if (this.productIds.includes(item.product_id)) {
+						count += item.quantity
+					}
+				} else {
+					if (typeof item.selling_plan_allocation === 'undefined' && this.productIds.includes(item.product_id)) {
+						count += item.quantity					
+					}
+				}
+			})
+
+			this.runningTotal = count
+		},
+
+		trackQuantityProgressSuccess() {
+			this.runningTotal >= this.requiredTotal ? this.state.success = true : this.state.success = false
+		},
+
+		trackQuantityProgressPercentage() {
+			this.state.percentage = `${(this.runningTotal / this.requiredTotal) * 100}%`
+		},
+
+		trackQuantityProgressRemaining() {
+			this.state.remaining = this.requiredTotal - this.runningTotal
+		},
+
+    async fetchAllProducts(collectionHandle) {
+      const allIds = [];
+      let page = 1;
+      let hasMore = true;
+
+      while (hasMore) {
+        const res = await fetch(`/collections/${collectionHandle}/products.json?page=${page}`);
+        const data = await res.json();
+
+        if (data.products && data.products.length > 0) {
+          const ids = data.products.map(product => product.id);
+          allIds.push(...ids);
+          page++;
+
+          if (data.products.length < 30) {
+            hasMore = false;
+          }
+        } else {
+          hasMore = false;
+        }
+      }
+
+      return allIds;
+    },
+
+    async populateProductId() {
+      if(this.productIds.length <= 0) {
+        this.productIds = await this.fetchAllProducts(this.collectionHandle)
+        return;
+      }
+      return;
+    }
+	}">
+		<div class="quantity-progress-bar__label mb-3 text-center text-base font-normal leading-[1.286em] text-[var(--section-text)] [&_p]:m-0 [&_p]:text-inherit [&_p]:font-inherit [&_p]:leading-inherit [&_p]:tracking-inherit [&_p]:opacity-100 [&_strong]:font-normal" style="--progress-bar-track-color: {{ block.settings.track_color }}; --progress-bar-track-bg-color: {{ block.settings.track_bg_color | color_modify: "alpha", 0.12 }};">
+			<div class="quantity-progress-bar__label-success" x-show="state.success">
+				{{ block.settings.success_message }}
+			</div>
+
+			<div class="quantity-progress-bar__label-fail" x-show="!state.success">
+				{%- capture quantity_element -%}
+					<span class="quantity-progress-bar__quantity" x-text="state.remaining"></span>
+				{%- endcapture -%}
+
+				{{ block.settings.condition_label | replace: "[quantity]", quantity_element }}
+			</div>
+		</div>
+
+		<div class="quantity-progress-bar__progress progress-bar relative w-full overflow-hidden rounded-[0.4375rem]" style="--progress-bar-track-color: {{ block.settings.track_color }}; --progress-bar-track-bg-color: {{ block.settings.track_bg_color | color_modify: "alpha", 0.12 }};">
+			<div class="progress-bar__track h-1 w-full rounded-[inherit] bg-[var(--progress-bar-track-bg-color)]"></div>
+			<div class="progress-bar__value absolute left-0 top-0 h-full w-0 rounded-[inherit] bg-[var(--progress-bar-track-color)] transition-all" :class="state.success ? 'completed' : ''" :style="{ width: state.percentage}"></div>
+		</div>
+
+		<script>
+			window.quantityProgressBar = window.cartCondition || {}
+			window.quantityProgressBar.productIds = [
+				{%- for condition_product in block.settings.collection.products -%}
+					{{- condition_product.id -}}{% unless forloop.last %},{% endunless %}
+				{%- endfor -%}
+			]
+			
+			window.quantityProgressBar.requiredTotal = {{- block.settings.quantity -}};
+		</script>
+	</div>
+{% endif %}

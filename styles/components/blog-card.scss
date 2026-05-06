@@ -1,0 +1,74 @@
+.blog-card {
+  @include hover {
+    .blog-card__media img {
+      @include transform(scale(1.05));
+    }
+  }
+
+  &__tags {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: rem-calc(10px) rem-calc(9px);
+    list-style: none;
+    gap: rem-calc(5px);
+
+    @include breakpoint(large up) {
+      padding: rem-calc(15px) rem-calc(12px);
+    }
+
+    li {
+      flex-shrink: 0;
+
+      span {
+        @include xsmall;
+        line-height: 2.25em;
+        font-weight: 700;
+        letter-spacing: rem-calc(0.23px);
+        text-transform: uppercase;
+        padding: rem-calc(3px) rem-calc(12px);
+        background-color: $white;
+        color: $font-body-color;
+        @include border-radius(rem-calc(11px));
+      }
+    }
+  }
+
+  &__media {
+    background-color: $brand-color;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      @include transition($global-transition);
+    }
+  }
+
+  &__title {
+    @include large;
+    line-height: 1.091em;
+    font-weight: 500;
+    margin: 0;
+
+    &:not(:last-child) {
+      margin-bottom: rem-calc(10px);
+    }
+  }
+
+  &__reading-time {
+    @include small;
+    font-weight: 500;
+    @include opacity(0.6);
+  }
+}

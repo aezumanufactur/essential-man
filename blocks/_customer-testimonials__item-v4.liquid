@@ -1,0 +1,144 @@
+{%- assign media_video = block.settings.video -%}
+{%- assign media_image = block.settings.image -%}
+{%- assign product = block.settings.product -%}
+{%- assign reviewer_name = block.settings.reviewer_name -%}
+{%- assign hair_type = block.settings.hair_type -%}
+{%- assign star_rating = block.settings.star_rating | times: 1 -%}
+{%- if star_rating > 5 -%}{%- assign star_rating = 5 -%}{%- endif -%}
+{%- if star_rating < 1 -%}{%- assign star_rating = 1 -%}{%- endif -%}
+
+<style>
+  #shopify-block-{{ block.id }} {
+    --width-mobile: {{ block.settings.width_mobile }}px;
+    --width-desktop: {{ block.settings.width_desktop }}px;
+  }
+</style>
+
+<div class="customer-testimonials__entry-v4-inner flex flex-col [width:var(--width-mobile)] large:[width:var(--width-desktop)]">
+  <div class="customer-testimonials__entry-v4-card flex flex-col overflow-hidden border border-solid border-[color:var(--section-heading)] bg-white mb-[18px]">
+    <div class="customer-testimonials__entry-v4-media relative aspect-[300/525] [&_.mfr-video-with-controls]:w-full [&_.mfr-video-with-controls]:h-full [&_video]:w-full [&_video]:h-full [&_video]:object-cover [&_img]:w-full [&_img]:h-full [&_img]:object-cover">
+      {%- if media_video != blank -%}
+        {%- render 'component__video-with-controls',
+          block_id: block.id,
+          video: media_video,
+          poster_size: block.settings.width_desktop,
+          autoplay: false,
+          loop: false,
+          controls: false,
+          muted: false,
+          poster: media_image,
+          show_play_button: true,
+          show_speaker_button: true,
+          without_wrapper: false -%}
+      {%- else -%}
+        {%- render 'component__lazyload-image',
+          image: media_image,
+          width: 600,
+          alt: reviewer_name,
+          placeholder_size: "tall" -%}
+      {%- endif -%}
+
+      <div class="customer-testimonials__entry-v4-gradient absolute top-0 left-0 w-full h-[79px] bg-gradient-to-b from-black/30 to-transparent pointer-events-none"></div>
+    </div>
+
+    <div class="customer-testimonials__entry-v4-footer bg-[#d5d1c8] flex items-center justify-between gap-[12px] px-[12px] py-[9px]">
+      <div class="customer-testimonials__entry-v4-info flex flex-col gap-[4px]">
+        {%- if product != blank -%}
+          <p class="customer-testimonials__entry-v4-title [font-family:var(--font-heading-h5)] text-[15px] large:text-[16px] font-[500] uppercase leading-none [color:var(--section-heading)]">{{ product.title }}</p>
+        {%- endif -%}
+        <div class="customer-testimonials__entry-v4-stars w-[68px]">
+          {%- render 'icon__stars', count: star_rating -%}
+        </div>
+      </div>
+
+      {%- if product != blank -%}
+        <a href="{{ product.url }}" class="customer-testimonials__entry-v4-button button secondary shrink-0 w-[72px] max-h-[34px]">Shop</a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if reviewer_name != blank or hair_type != blank -%}
+    <p class="customer-testimonials__entry-v4-attribution [font-family:var(--font-heading-h6)] text-[13px] font-[700] leading-[1.4] uppercase [color:var(--section-heading)]">
+      {{- reviewer_name -}}{%- if reviewer_name != blank and hair_type != blank %} – {% endif %}{{- hair_type -}}
+    </p>
+  {%- endif -%}
+</div>
+
+
+{% schema %}
+{
+  "name": "Testimonial - Type 4",
+  "class": "customer-testimonials__entry customer-testimonials__entry-v4 mfr-carousel__item",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media Settings"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video (Shopify-hosted)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image / Video Poster"
+    },
+    {
+      "type": "header",
+      "content": "Product Settings"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "number",
+      "id": "star_rating",
+      "label": "Star Rating",
+      "default": 5,
+      "info": "Choose from 1–5"
+    },
+    {
+      "type": "header",
+      "content": "Reviewer Settings"
+    },
+    {
+      "type": "text",
+      "id": "reviewer_name",
+      "label": "Reviewer Name",
+      "default": "Marcus.l"
+    },
+    {
+      "type": "text",
+      "id": "hair_type",
+      "label": "Hair Type",
+      "default": "Fine curly hair"
+    },
+    {
+      "type": "header",
+      "content": "Sizing Settings"
+    },
+    {
+      "type": "number",
+      "id": "width_mobile",
+      "label": "Width - Mobile",
+      "default": 300,
+      "info": "in pixels"
+    },
+    {
+      "type": "number",
+      "id": "width_desktop",
+      "label": "Width - Desktop",
+      "default": 300,
+      "info": "in pixels"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonial - Type 4"
+    }
+  ]
+}
+{% endschema %}

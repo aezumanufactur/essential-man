@@ -1,0 +1,149 @@
+<!doctype html>
+  <!--
+  ========================================================================================================
+  =============================== Site by MANUFACTUR.co ==================================================
+  ========================================================================================================
+  -->
+  <html class="no-js {% if settings.enable_entrance_animations %}with-enter-animations{% endif %} {% if request.design_mode %}design-mode{% endif %}" lang="{{ request.locale.iso_code }}" id="pageHTML" data-toggler=".is-fixed">
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta name="theme-color" content="{{ settings.brand_color }}">
+      <link rel="canonical" href="{{ canonical_url }}">
+      <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+      
+      {% render 'preload__fonts' %}
+
+      <style media="screen">
+        {%- render 'quickload-css' -%}
+      </style>
+  
+      {%- render 'css-variables' -%}
+      {%- render "style-tags" -%}
+  
+      {%- if settings.favicon != blank -%}
+        <link rel="icon" type="image/png" href="{{ settings.favicon | img_url: '32x32' }}">
+        <link rel="apple-touch-icon" href="{{ settings.favicon | img_url: '32x32' }}">
+      {%- endif -%}
+  
+      {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
+        <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+      {%- endunless -%}
+  
+      <title>{{ page_title }}</title>
+  
+      {% if page_description %}
+        <meta name="description" content="{{ page_description | escape }}">
+      {% endif %}
+  
+      {% render 'meta-tags' %}
+  
+      {{ content_for_header }}
+  
+      {%- liquid 
+        assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
+        assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
+        assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+      %}
+  
+      {% style %}
+        {{ settings.type_body_font | font_face: font_display: 'swap' }}
+        {{ body_font_bold | font_face: font_display: 'swap' }}
+        {{ body_font_italic | font_face: font_display: 'swap' }}
+        {{ body_font_bold_italic | font_face: font_display: 'swap' }}
+        {{ settings.type_header_font | font_face: font_display: 'swap' }}
+      {% endstyle %}
+      
+      {%- render 'scripts__initializers' -%}
+      {%- render 'scripts__deferred-tags', position: "header" -%}
+  
+      <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+
+      {% render 'schema__all' %}
+
+      {% unless request.design_mode %}
+        {{ settings.external_scripts_header }}
+      {% endunless %}
+    </head>
+  
+    {% if settings.top_offset_element == "main" %}
+      {% assign top_offset_class = "top-offset-to-main" %}
+    {% elsif settings.top_offset_element == "first_section" %}
+      {% assign top_offset_class = "top-offset-to-first-section" %}
+    {% endif %}
+    {% assign top_offset = "--top-offset: " | append: settings.top_offset | append: "px;" %}
+    {% assign top_offset_mobile = "--top-offset-mobile: " | append: settings.top_offset_mobile | append: "px;" %}
+  
+    {% assign header_style = "" %}
+  
+    {% if page.metafields.mfr_fields.header_style %}
+      {% assign header_style = "dark-theme-header" %}
+    {% endif %}
+  
+    <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }} {{ top_offset_class }} {{ header_style }}" style="{{ top_offset }} {{ top_offset_mobile }}" x-data>      
+      <a class="skip-to-content-link button visually-hidden" href="#MainContent">
+        {{ "accessibility.skip_to_text" | t }}
+      </a>
+  
+      {% sections 'offcanvas-group' %}
+  
+      <ul hidden>
+        <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
+      </ul>
+  
+      <style>
+        .off-canvas:not(.is-loaded) { display: none; }
+      </style>
+  
+      <header class="header" id="header" data-inview>
+        {% sections 'header-group' %}
+      </header>
+
+      <main 
+        id="MainContent" 
+        class="content-for-layout focus-none" 
+        role="main" 
+        tabindex="-1">
+        {%- render 'component__seo-page-title' -%}
+        {{ content_for_layout }}
+      </main>
+
+      <footer class="footer" id="footer">
+        {% sections 'footer-group' %}
+      </footer>
+
+      {% sections 'modals-group' %}
+      
+      <script>
+        window.currencyVariables = {
+          "iso_code": "{{ cart.currency.iso_code }}",
+          "name": "{{ cart.currency.name }}",
+          "symbol": "{{ cart.currency.symbol }}"
+        }
+
+        window.routes = {
+          cart_add_url: '{{ routes.cart_add_url }}',
+          cart_change_url: '{{ routes.cart_change_url }}',
+          cart_update_url: '{{ routes.cart_update_url }}'
+        };
+  
+        window.cartStrings = {
+          error: `{{ 'sections.cart.cart_error' | t }}`,
+          quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t }}`
+        }
+  
+        window.variantStrings = {
+          addToCart: `{{ 'products.product.add_to_cart' | t }}`,
+          soldOut: `{{ 'products.product.sold_out' | t }}`,
+          unavailable: `{{ 'products.product.unavailable' | t }}`,
+        }
+      </script>
+
+      {% render 'scripts__deferred-tags', position: "footer" %}
+  
+      {% unless request.design_mode %}
+        {{ settings.external_scripts }}
+      {% endunless %}
+    </body>
+  </html>

@@ -1,0 +1,25 @@
+.product-reviews__column {
+  display: flex;
+  flex-direction: column;
+}
+
+@import "../variables";
+@import "../tools/util/util";
+@import "../tools/mixins";
+
+.mfr-product__reviews {
+
+  .section-content {
+    margin-bottom: rem-calc(30);
+
+    @include breakpoint(large up) {
+      margin-bottom: rem-calc(20);
+    }
+
+    .section-title {
+      &.h2 {
+        font-weight: 300;
+      }
+    }
+  }
+}

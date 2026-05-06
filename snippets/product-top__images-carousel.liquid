@@ -1,0 +1,76 @@
+<div class="product-top__media-carousel-inner relative w-full"
+  data-mfr-sticky
+  style="
+    --carousel-background: url('{{ section.settings.carousel_background | image_url: width: 2520 }}');
+  ">
+  {%- capture slides -%}
+    {% for image in carousel_images %}
+      {% if image.settings.image != blank %}
+        <div class="product-top__media-item mf-carousel__item w-full h-full flex flex-col justify-center items-center flex-shrink-0">
+          <div class="product-top__media-item-image relative w-full h-full grow">
+            {% render 'component__lazyload-image',
+              image: image.settings.image,
+              width: 900,
+              widths: "420,480,600,720,900",
+              alt: image.settings.image.alt %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+    {% for media in product.media %}
+      <div class="product-top__media-item mfr-carousel__item {{ media.media_type }} w-full h-full flex flex-col justify-center items-center flex-shrink-0">
+        {% if media.media_type == "image" %}
+          <div class="product-top__media-item-image relative w-full h-full grow">
+            {%- assign default_alt = "maybe an image about the product: " | append: product.title -%}
+            {%- assign alt = media.alt | default: default_alt -%}
+            {% if forloop.first and carousel_images == blank %}
+              {% assign image_width = media.width | times: 1.00 %}
+              {% assign image_height = media.height | times: 1.00 %}
+              {% assign aspect_ratio = image_width | divided_by: image_height %}
+              {% assign height = 900 | divided_by: aspect_ratio | round: 2 %}
+              {{ media 
+                | image_url: width: 900
+                | image_tag: width: 900,
+                  width: 900,
+                  height: height,
+                  widths: "420,480,600,720,900",
+                  alt: alt }}
+            {% else %}
+              {% render 'component__lazyload-image',
+                image: media,
+                width: 900,
+                widths: "420,480,600,720,900",
+                alt: alt %}
+            {% endif %}
+          </div>
+        {% elsif media.media_type == "video" %}
+          {% assign video_ref = "video" | append: "-" | append: entry.id | replace: "_", "-" | replace: "-", "" %}
+          {% render 'component__video',
+            video: media,
+            poster_size: 420,
+            autoplay: false,
+            loop: true,
+            controls: true,
+            playsinline: true,
+            muted: false,
+            video_ref: video_ref %}
+        {% elsif media.media_type == "external_video" %}
+          {% if media.host == 'youtube' %}
+            {{ media | external_video_url: color: 'white' | external_video_tag }}
+          {% elsif media.host == 'vimeo' %}
+            {{ media | external_video_url: loop: '1', muted: '1' | external_video_tag }}
+          {% endif %}
+        {% endif %}
+      </div>
+    {% endfor %}
+  {%- endcapture -%}
+  {% render 'mfr-component__carousel',
+    settings: '{
+      contain: false,
+      wrapAround: false,
+      customPageDots: true,
+      pageDots: false
+    }',
+    class: "product-top__media-carousel carousel__slides",
+    content: slides %}
+</div>

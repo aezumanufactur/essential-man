@@ -1,0 +1,75 @@
+{%- assign article = block.settings.article -%}
+<div class="featured-article flex flex-col items-center large:flex-row">
+  {% if article != blank %}
+    {%- assign image = article.image -%}
+    {% assign title = article.title %}
+    {% assign caption = article.excerpt %}
+    {% assign url = article.url %}
+  {% else %}
+    {% assign image = false %}
+    {% assign title = "Featured Blog Article Title Lorem Ipsum" %}
+    {% assign caption = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in" %}
+    {% assign url = "#" %}
+  {% endif %}
+
+  <div class="featured-article__image-wrapper relative w-full max-w-[28.125rem] mb-5 large:m-[0_0_2.1875rem_0] large:w-1/2 large:max-w-none large:px-[2.1875rem]">
+    <div class="featured-article__image relative w-full pb-[1.375rem] large:pb-0">
+      <div class="featured-article__image-inner relative z-[1] overflow-hidden w-full aspect-[540/480] rounded-[1.875rem] [&_img]:w-full [&_img]:h-full [&_img]:block [&_img]:object-cover">
+        {% assign default_alt = "maybe an image about " | append: article.title %}
+        {% assign alt = image.alt | default: default_alt %}
+        {% render 'component__lazyload-image',
+          image: image,
+          alt: image.alt,
+          width: 720,
+          alt: alt %}
+
+        {% if article.tags != blank %}
+          <ul>
+            {% for tag in article.tags %}
+              <li>
+                <span>{{ tag }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="featured-article__info relative w-full max-w-[28.125rem] mb-[2.1875rem] text-center large:m-0 large:w-1/2 large:max-w-none large:px-[2.1875rem] large:text-left">
+    <div class="featured-article__info-inner">
+      <{{ block.settings.header_tag }} class="h3">{{ title }}</{{ block.settings.header_tag }}>
+      <p class="large">{{ caption }}</p>
+      <a href="{{ url }}" class="button primary" aria-label="Read Article">
+        <span class="text">Read Article</span>
+      </a>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Featured Article",
+    "class": "featured-article__wrapper",
+    "settings": [
+      {
+        "type": "article",
+        "id": "article",
+        "label": "Article"
+      },
+      {
+        "type": "select",
+        "id": "header_tag",
+        "options": [
+          { "value": "h2", "label": "<h2></h2> (Default)"},
+          { "value": "h3", "label": "<h3></h3>"},
+          { "value": "h4", "label": "<h4></h4>"},
+          { "value": "h5", "label": "<h5></h5>"},
+          { "value": "h6", "label": "<h6></h6>"}
+        ],
+        "label": "Heading Tag",
+        "default": "h3",
+        "info": "This is for accessibility and SEO purposes. If you are not sure what to choose, select <h2></h2> (Default)."
+      },
+    ]
+  }
+{% endschema %}

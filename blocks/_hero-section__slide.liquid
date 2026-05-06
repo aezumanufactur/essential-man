@@ -1,0 +1,64 @@
+<div class="hero-section__slide-background absolute top-0 left-0 w-full h-full z-[0] bg-cover bg-center [background-image:var(--temp-bg-mobile)] large:[background-image:var(--temp-bg-desktop)] [transition:all_0.8s_cubic-bezier(0.5,0,0,1)]"
+  data-image-parallax
+  style="
+    --temp-bg-mobile: url({{ block.settings.image_mobile | image_url: width: 15 }});
+    --temp-bg-desktop: url({{ block.settings.image_mobile | image_url: width: 15 }});
+  ">
+  {% render 'component__responsive-image-v2',
+    image_mobile: block.settings.image_mobile,
+    image_desktop: block.settings.image_desktop,
+    lazyload: block.settings.lazyload_image %}
+</div>
+<div class="hero-section__slide-inner relative flex [justify-content:var(--slides-horizontal-alignment-mobile)] items-start flex-wrap z-[1] gap-x-[0.3125rem] [align-content:var(--slides-vertical-alignment-mobile)] [text-align:var(--slides-text-alignment-mobile)] min-h-full large:gap-x-[0.5rem] large:[justify-content:var(--slides-horizontal-alignment-desktop)] large:[align-content:var(--slides-vertical-alignment-desktop)] large:[text-align:var(--slides-text-alignment-desktop)] [.text-center_&]:justify-center [&_.star-rating-text:not(:last-child)]:mb-[1.4375rem]">
+  {% content_for "blocks" %}
+</div>
+
+{% schema %}
+  {
+    "name": "Slide",
+    "class": "hero-section__slide carousel__item",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Image - Mobile"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_desktop",
+        "label": "Image - Desktop"
+      },
+      {
+        "type": "checkbox",
+        "id": "lazyload_image",
+        "label": "Lazyload Image?",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "_star-rating-text"
+      },
+      {
+        "type": "_section-content__small-text"
+      },
+      {
+        "type": "_section-content__title"
+      },
+      {
+        "type": "_section-content__text"
+      },
+      { 
+        "type": "_section-content__button" 
+      }
+    ],
+    "presets": [
+      {
+        "name": "Slide",
+        "blocks": [
+          { "type": "_section-content__title" }
+        ]
+      }
+    ]
+  }
+{% endschema %}

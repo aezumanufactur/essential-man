@@ -1,0 +1,66 @@
+.variant-selectors {
+  &-s {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: rem-calc( 3px );
+  }
+
+  &__selectors {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: rem-calc( 8px );
+    flex-wrap: wrap;
+
+    @include breakpoint( large up ) {
+      gap: rem-calc( 10px );
+    }
+
+    &-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      gap: rem-calc( 7px );
+
+      @include breakpoint( large up ) {
+        gap: rem-calc( 8px );
+      }
+    }
+    
+    label {
+      flex-shrink: 0;
+
+      input[type="radio"]:checked ~ .variant-selectors__selector-label {
+        background-color: $font-body-color;
+        color: $white;
+      }
+    }
+  }
+
+  &__selector-label {
+    @include large;
+    line-height: 1.333em;
+    font-weight: 400;
+    letter-spacing: rem-calc( -0.09px );
+    width: 100%;
+    height: auto;
+    padding: rem-calc( 8px ) rem-calc( 20px );
+    background-color: rgba(#2B3990,0.08);
+    color: $font-body-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include border-radius( rem-calc( 15px ) );
+    @include transition( $global-transition );
+
+    @include breakpoint( large up ) {
+      font-size: rem-calc( 20px );
+      line-height: 1.25em;
+      letter-spacing: rem-calc( -0.1px );
+      padding: rem-calc( 12px ) rem-calc( 24px );
+    }
+  }
+}

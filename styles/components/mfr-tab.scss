@@ -1,0 +1,79 @@
+.mfr-tab {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+
+  &__nav {
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    flex-wrap: wrap;
+    min-height: rem-calc(70px);
+
+    @include breakpoint( large up ) {
+      min-height: rem-calc(53px);
+    }
+
+    &-button {
+      width: calc( 100% / 4 );
+      flex-shrink: 0;
+      padding: rem-calc(5px) rem-calc(10px);
+      min-height: rem-calc(70px);
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: solid rem-calc(1px) hsl(from currentColor h s l / 0.5);
+      font-size: rem-calc(11px);
+      line-height: 1.2em;
+      font-weight: 500;
+      letter-spacing: rem-calc(0.31px);
+      text-transform: uppercase;
+      color: hsl(from currentColor h s l / 0.8);
+      @include border-radius(0);
+      @include transition( $global-transition );
+
+      @include breakpoint( large up ) {
+        min-height: rem-calc(53px);
+        padding: rem-calc(10px) rem-calc(20px);
+      }
+      &:focus-visible {
+        @include focused-styling;
+      }
+      &:not(:last-child) {
+        border-right: none;
+      }
+
+      &[aria-selected="true"] {
+        background-color: $color-accent;
+
+        .mfr-tab__nav-button-label {
+          color: $white;
+        }
+      }
+
+      &-nav {
+        color: currentColor;
+        @include transition( $global-transition );
+      }
+    }
+  }
+
+  &__content { 
+    min-width: 100%;
+    @include transition( $global-transition );
+
+    &-wrapper { position: relative; }
+
+    &-wrapper:not(.is-rendered) & {
+      display: none;
+    }
+
+    &.absolute {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+}

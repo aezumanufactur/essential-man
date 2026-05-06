@@ -1,0 +1,231 @@
+{% assign filters = block.settings.filters | newline_to_br | strip_newlines | split: '<br />' %}
+{%- assign collection_images = block.settings.collection_images -%}
+{% assign collection_images_size = 0 %}
+{%- for collection_image in collection_images -%}
+  {% assign collection_images_size = collection_images_size | plus: 1 %}
+{%- endfor -%}
+{%- assign post_per_page = block.settings.post_per_page | minus: collection_images_size -%}
+<div class="product-grid__wrapper w-full"
+  x-data='{
+    currentFilter: "",
+    currentPage: 1,
+    page: "{{ request.path }}",
+    $section: $el.closest( ".mfr-collection__product-grid" ),
+    filterType: "{{ block.settings.filter_type }}",
+    getUrl() {
+      if( this.filterType == "tags" )
+        return `${this.page}/${this.currentFilter}?section_id={{ section.id }}&page=${this.currentPage}&${window.location.search.replace( "?", "" )}`;
+      else
+        return `?filter.p.product_type=${this.currentFilter}`;
+    },
+    async fetchGrid(append = false) {
+      const $currentGrid = this.$section.querySelector( ".product-grid__inner" );
+      $currentGrid.classList.add( "loading" );
+
+      const { data: htmlString } = await axios(`${this.getUrl()}` );
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = htmlString;
+
+      const fetchedGrid = tempDiv.querySelector( ".product-grid__inner" );
+      
+      if( !fetchedGrid ) {
+        $currentGrid.innerHTML = `<p class="no result">No Products Found</p>`;
+      }
+      else if( append ) {
+        const items = fetchedGrid.querySelectorAll( ".product-grid__item, .product-grid__load-more-wrapper");
+        $currentGrid.querySelector( ".product-grid__load-more-wrapper" ).remove();
+        items.forEach( e => {
+          $currentGrid.appendChild(e);
+        } );
+      }
+      else {
+        $currentGrid.innerHTML = fetchedGrid.innerHTML;
+      }
+
+      initInview($currentGrid.querySelectorAll("[data-inview]"))
+      Alpine.initTree($currentGrid);
+      if( ScrollTrigger && ScrollTrigger.refresh ) ScrollTrigger.refresh();
+
+      $currentGrid.classList.remove( "loading" );
+    }
+  }'
+  x-init='
+    $watch( "currentFilter", () => {
+      clearTimeout(this.fetchTimeout);
+      this.fetchTimeout = setTimeout( async () => {
+        currentPage = 1;
+        fetchGrid();
+      }, 1000 );
+    } );
+  '>
+  {%- if filters != blank -%}
+    <div class="product-grid__filters w-full flex flex-col justify-start items-start gap-[0.5rem] [&:not(:last-child)]:mb-5 large:[&:not(:last-child)]:mb-[1.875rem]">
+      {%- if block.settings.filters_heading != blank -%}
+        <span class="accent-label [font-size:var(--font-body-size-regular-mobile)] large:[font-size:var(--font-body-size-regular)] font-semibold">
+          {{ block.settings.filters_heading }}
+        </span>
+      {%- endif -%}
+      <ul class="product-grid__filters-list flex justify-start items-center gap-[0.625rem] overflow-auto pb-[0.9375rem] w-full list-none large:overflow-hidden large:flex-wrap"
+        data-stagger-inview="li">
+        {%- for filter in filters -%}
+          <li>
+            <button
+              class="[font-size:var(--font-body-size-regular-mobile)] large:[font-size:var(--font-body-size-regular)] leading-[1.438em] font-semibold tracking-[-0.016875rem] py-3 px-[1.375rem] [&.is-active]:bg-[currentColor] [&.is-active_span]:[color:white]"
+              x-data='{
+                filter: "{{- filter -}}",
+                fetchTimeout: null
+              }'
+              :class='currentFilter == filter ? "is-active": ""'
+              @click='
+                currentFilter = currentFilter == filter ? "" : filter;
+              '>
+              <span>{{ filter }}</span>
+            </button>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  {%- endif -%}
+
+  {% if block.settings.collection != blank %}
+    {% assign products = block.settings.collection.products %}
+    {% assign source = "block" %}
+  {% else %}
+    {% assign products = collection.products %}
+    {% assign source = "collection" %}
+    {% unless products != blank %}
+      {% assign has_no_products = true %}
+    {% endunless %}
+  {% endif %}
+  {% unless has_no_products %}
+    {% if source == "collection" %}
+      {% paginate collection.products by post_per_page %}
+        <div class="product-grid__inner flex [justify-content:inherit] items-stretch [align-content:flex-start] flex-wrap gap-5 w-full transition-all large:gap-x-[1.125rem] large:gap-y-[1rem] [&.loading]:pointer-events-none [&.loading]:opacity-50">
+          {% for product in collection.products %}
+            <div class="product-grid__item w-full shrink-0 medium:max-w-[calc((100%_-_1.25rem)_/_2)] large:max-w-[calc((100%_-_2.25rem)_/_3)]"
+              data-inview>
+              {% render 'partial__product-card',
+                product: product %}
+            </div>
+            {%- assign item_index = forloop.index -%}
+            {% for collection_image in collection_images %}
+              {% if collection_image.index == item_index%}
+                <div class="product-grid__item w-full shrink-0 medium:max-w-[calc((100%_-_1.25rem)_/_2)] large:max-w-[calc((100%_-_2.25rem)_/_3)]"
+                  data-inview>
+                  <div class="product-grid__image w-full aspect-[420/650] relative overflow-hidden rounded-[var(--global-border-radius)] [&_img]:w-full [&_img]:h-full [&_img]:object-cover">
+                    {% render 'component__lazyload-image',
+                      image: collection_image.image,
+                      width: 720,
+                      widths: "420,480,600,720",
+                      alt: collection_image.title %}
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+          {% if paginate.next != blank %}
+            <div class="product-grid__load-more-wrapper w-full shrink-0 flex justify-center mt-[2.3125rem] large:mt-[2.125rem]">
+              <button class="button secondary product-grid__load-more min-w-full large:min-w-[15.375rem]"
+                @click='
+                  currentPage = currentPage + 1;
+                  fetchGrid(true);
+                '>
+                <span class="label">
+                  Load More
+                </span>
+              </button>
+            </div>
+          {% endif %}
+        </div>
+      {% endpaginate %}
+    {% else %}
+      <div class="product-grid__inner flex [justify-content:inherit] items-stretch [align-content:flex-start] flex-wrap gap-5 w-full transition-all large:gap-x-[1.125rem] large:gap-y-[1rem] [&.loading]:pointer-events-none [&.loading]:opacity-50">
+        {% for product in products %}
+          <div class="product-grid__item w-full shrink-0 medium:max-w-[calc((100%_-_1.25rem)_/_2)] large:max-w-[calc((100%_-_2.25rem)_/_3)]"
+            data-inview>
+            {% render 'partial__product-card',
+              product: product %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% elsif request.design_mode %}
+    <div class="product-grid__inner flex [justify-content:inherit] items-stretch [align-content:flex-start] flex-wrap gap-5 w-full transition-all large:gap-x-[1.125rem] large:gap-y-[1rem] [&.loading]:pointer-events-none [&.loading]:opacity-50">
+      {% for i in (1..6) %}
+        <div class="product-grid__item w-full shrink-0 medium:max-w-[calc((100%_-_1.25rem)_/_2)] large:max-w-[calc((100%_-_2.25rem)_/_3)]"
+          data-inview>
+          {% render 'partial__product-card',
+            product: product %}
+        </div>
+      {% endfor %}
+    </div>
+  {% endunless %}
+</div>
+
+{% schema %}
+  {
+    "name": "Product Grid",
+    "class": "product-grid",
+    "settings": [
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "Collection"
+      },
+      {
+        "type": "header",
+        "content": "Filter Settings"
+      },
+      {
+        "type": "number",
+        "id": "post_per_page",
+        "label": "Post Per Page",
+        "default": 6,
+        "info": "This will only work with collection templates. It wont work if collection input setting above have value."
+      },
+      {
+        "type": "text",
+        "id": "filters_heading",
+        "label": "Tag Filters Heading",
+        "default": "Quick Options"
+      },
+      {
+        "type": "textarea",
+        "id": "filters",
+        "label": "Filters",
+        "info": "Separated by new line. This will only work with collection templates. It wont work if collection input setting above have value."
+      },
+      {
+        "type": "select",
+        "id": "filter_type",
+        "label": "Filter Type",
+        "options": [
+          {
+            "value": "tags",
+            "label": "Tags"
+          },
+          {
+            "value": "type",
+            "label": "Product Type"
+          }
+        ],
+        "default": "tags"
+      },
+      {
+        "type": "header",
+        "content": "Collection Images"
+      },
+      {
+        "type": "metaobject_list",
+        "id": "collection_images",
+        "label": "Collection Images",
+        "metaobject_type": "collection_images"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Product Grid"
+      }
+    ]
+  }
+{% endschema %}

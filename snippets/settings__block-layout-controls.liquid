@@ -1,0 +1,149 @@
+{%- if block.settings.enable_width_settings
+  or block.settings.enable_padding_settings
+  or block.settings.enable_margin_settings -%}
+  <style>
+    {%- if block.settings.enable_width_settings -%}
+      @media (max-width: 1023px) {
+        #shopify-block-{{ block.id }} {
+          {%- if block.settings.width_mobile -%}
+            {%- if block.settings.width_mobile_unit == "custom" -%}
+              {%- if block.settings.width_mobile_custom != blank -%}
+                width: {{ block.settings.width_mobile_custom }};
+              {%- endif -%}
+            {%- elsif block.settings.width_mobile_value != blank and block.settings.width_mobile_value != 0 -%}
+              width: {{ block.settings.width_mobile_value }}{{ block.settings.width_mobile_unit }};
+            {%- endif -%}
+          {%- endif -%}
+        }
+      }
+      @media (min-width: 1024px) {
+        #shopify-block-{{ block.id }} {
+          {%- if block.settings.width_desktop -%}
+            {%- if block.settings.width_desktop_unit == "custom" -%}
+              {%- if block.settings.width_desktop_custom != blank -%}
+                width: {{ block.settings.width_desktop_custom }};
+              {%- endif -%}
+            {%- elsif block.settings.width_desktop_value != blank and block.settings.width_desktop_value != 0 -%}
+              width: {{ block.settings.width_desktop_value }}{{ block.settings.width_desktop_unit }};
+            {%- endif -%}
+          {%- endif -%}
+        }
+      }
+    {%- endif -%}
+
+    {%- if block.settings.enable_padding_settings -%}
+      @media (max-width: 1023px) {
+        #shopify-block-{{ block.id }} {
+          {%- if block.settings.padding_x_mobile -%}
+            {%- if block.settings.padding_left_mobile != blank and block.settings.padding_left_mobile != 0 -%}
+              padding-left: {{ block.settings.padding_left_mobile }}px;
+            {%- endif -%}
+            {%- if block.settings.padding_right_mobile != blank and block.settings.padding_right_mobile != 0 -%}
+              padding-right: {{ block.settings.padding_right_mobile }}px;
+            {%- endif -%}
+          {%- endif -%}
+          {%- if block.settings.padding_y_mobile -%}
+            {%- if block.settings.padding_top_mobile != blank and block.settings.padding_top_mobile != 0 -%}
+              padding-top: {{ block.settings.padding_top_mobile }}px;
+            {%- endif -%}
+            {%- if block.settings.padding_bottom_mobile != blank and block.settings.padding_bottom_mobile != 0 -%}
+              padding-bottom: {{ block.settings.padding_bottom_mobile }}px;
+            {%- endif -%}
+          {%- endif -%}
+        }
+      }
+      @media (min-width: 1024px) {
+        #shopify-block-{{ block.id }} {
+          {%- if block.settings.padding_x_desktop -%}
+            {%- if block.settings.padding_left_desktop != blank and block.settings.padding_left_desktop != 0 -%}
+              padding-left: {{ block.settings.padding_left_desktop }}px;
+            {%- endif -%}
+            {%- if block.settings.padding_right_desktop != blank and block.settings.padding_right_desktop != 0 -%}
+              padding-right: {{ block.settings.padding_right_desktop }}px;
+            {%- endif -%}
+          {%- endif -%}
+          {%- if block.settings.padding_y_desktop -%}
+            {%- if block.settings.padding_top_desktop != blank and block.settings.padding_top_desktop != 0 -%}
+              padding-top: {{ block.settings.padding_top_desktop }}px;
+            {%- endif -%}
+            {%- if block.settings.padding_bottom_desktop != blank and block.settings.padding_bottom_desktop != 0 -%}
+              padding-bottom: {{ block.settings.padding_bottom_desktop }}px;
+            {%- endif -%}
+          {%- endif -%}
+        }
+      }
+    {%- endif -%}
+
+    {%- if block.settings.enable_margin_settings -%}
+      @media (max-width: 1023px) {
+        #shopify-block-{{ block.id }} {
+          {%- if block.settings.margin_x_mobile -%}
+            {%- if block.settings.margin_left_mobile != blank and block.settings.margin_left_mobile != 0 -%}
+              margin-left: {{ block.settings.margin_left_mobile }}px;
+            {%- endif -%}
+            {%- if block.settings.margin_right_mobile != blank and block.settings.margin_right_mobile != 0 -%}
+              margin-right: {{ block.settings.margin_right_mobile }}px;
+            {%- endif -%}
+          {%- endif -%}
+          {%- if block.settings.margin_y_mobile -%}
+            {%- if block.settings.margin_top_mobile != blank and block.settings.margin_top_mobile != 0 -%}
+              margin-top: {{ block.settings.margin_top_mobile }}px;
+            {%- endif -%}
+            {%- if block.settings.margin_bottom_mobile != blank and block.settings.margin_bottom_mobile != 0 -%}
+              margin-bottom: {{ block.settings.margin_bottom_mobile }}px;
+            {%- endif -%}
+          {%- endif -%}
+        }
+      }
+      @media (min-width: 1024px) {
+        #shopify-block-{{ block.id }} {
+          {%- if block.settings.margin_x_desktop -%}
+            {%- if block.settings.margin_left_desktop != blank and block.settings.margin_left_desktop != 0 -%}
+              margin-left: {{ block.settings.margin_left_desktop }}px;
+            {%- endif -%}
+            {%- if block.settings.margin_right_desktop != blank and block.settings.margin_right_desktop != 0 -%}
+              margin-right: {{ block.settings.margin_right_desktop }}px;
+            {%- endif -%}
+          {%- endif -%}
+          {%- if block.settings.margin_y_desktop -%}
+            {%- if block.settings.margin_top_desktop != blank and block.settings.margin_top_desktop != 0 -%}
+              margin-top: {{ block.settings.margin_top_desktop }}px;
+            {%- endif -%}
+            {%- if block.settings.margin_bottom_desktop != blank and block.settings.margin_bottom_desktop != 0 -%}
+              margin-bottom: {{ block.settings.margin_bottom_desktop }}px;
+            {%- endif -%}
+          {%- endif -%}
+        }
+      }
+    {%- endif -%}
+
+    {%- if block.settings.enable_width_settings -%}
+      @media (max-width: 1023px) {
+        #shopify-block-{{ block.id }} {
+          {%- if block.settings.max_width_mobile -%}
+            {%- if block.settings.max_width_mobile_unit == "custom" -%}
+              {%- if block.settings.max_width_mobile_custom != blank -%}
+                max-width: {{ block.settings.max_width_mobile_custom }};
+              {%- endif -%}
+            {%- elsif block.settings.max_width_mobile_value != blank and block.settings.max_width_mobile_value != 0 -%}
+              max-width: {{ block.settings.max_width_mobile_value }}{{ block.settings.max_width_mobile_unit }};
+            {%- endif -%}
+          {%- endif -%}
+        }
+      }
+      @media (min-width: 1024px) {
+        #shopify-block-{{ block.id }} {
+          {%- if block.settings.max_width_desktop -%}
+            {%- if block.settings.max_width_desktop_unit == "custom" -%}
+              {%- if block.settings.max_width_desktop_custom != blank -%}
+                max-width: {{ block.settings.max_width_desktop_custom }};
+              {%- endif -%}
+            {%- elsif block.settings.max_width_desktop_value != blank and block.settings.max_width_desktop_value != 0 -%}
+              max-width: {{ block.settings.max_width_desktop_value }}{{ block.settings.max_width_desktop_unit }};
+            {%- endif -%}
+          {%- endif -%}
+        }
+      }
+    {%- endif -%}
+  </style>
+{%- endif -%}

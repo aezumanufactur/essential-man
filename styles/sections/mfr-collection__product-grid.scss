@@ -1,0 +1,84 @@
+.collection-product-grid__column {
+  display: flex;
+  flex-direction: column;
+}
+
+@import "../variables";
+@import "../tools/util/util";
+@import "../tools/mixins";
+@import "../site-specifics";
+
+.mfr-collection__product-grid {
+  .section-content {
+    .small-title {
+      &__wrapper {
+        &:not(:last-child) {
+          margin-bottom: rem-calc(10px);
+
+          @include breakpoint(large up) {
+            margin-bottom: rem-calc(18.5px);
+          }
+        }
+      }
+    }
+
+    .section-title {
+      &__wrapper {
+        &:not(:last-child) {
+          margin-bottom: rem-calc(22px);
+
+          @include breakpoint(large up) {
+            margin-bottom: rem-calc(32px);
+          }
+        }
+      }
+    }
+  }
+
+  .product-grid {
+    &__filters {
+      &-list {
+        li {
+          flex-shrink: 0;
+          @include transition($global-transition);
+
+          @include enter-animation {
+            @include opacity(0);
+            @include transform(translateY($enter-transform-value));
+          }
+
+          button {
+            @include transition($global-transition);
+
+            @include hover {
+              @include transform(scale(0.95));
+            }
+
+            span {
+              @include transition($global-transition);
+            }
+          }
+        }
+      }
+    }
+
+    &__item {
+      @include enter-animation {
+        .product-card {
+          @include transform(translateY($enter-transform-value));
+          @include opacity(0);
+        }
+      }
+
+      .product-card {
+        max-width: unset;
+        width: 100%;
+      }
+    }
+
+    &__image {
+      @include opacity(0.9999999);
+    }
+  }
+
+}

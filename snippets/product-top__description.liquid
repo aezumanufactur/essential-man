@@ -1,0 +1,138 @@
+<div class="product-top__description [&:not(:last-child)]:mb-[1.59375rem] large:[&:not(:last-child)]:mb-[1.75rem]"
+  data-inview
+  x-data='{
+    wordLimit: 29,
+    fullText: `{{ product_description | escape }}`,
+    truncated: "",
+    hasMore: false,
+    expanded: false,
+    getTruncatedHtml(wordLimit) {
+      let div = document.createElement("div");
+      div.innerHTML = this.fullText;
+
+      let wordCount = 0;
+      let wasTruncated = false;
+
+      const countWords = (text) => {
+        const matches = text.match(/\S+/g);
+        return matches ? matches.length : 0;
+      };
+
+      const sliceByWordCount = (text, limit) => {
+        if (limit <= 0) {
+          return "";
+        }
+
+        const pattern = /\s*\S+/g;
+        let match;
+        let wordsSeen = 0;
+        let lastIndex = 0;
+
+        while ((match = pattern.exec(text)) !== null) {
+          wordsSeen += 1;
+          lastIndex = pattern.lastIndex;
+
+          if (wordsSeen === limit) {
+            break;
+          }
+        }
+
+        if (wordsSeen < limit) {
+          return text;
+        }
+
+        return text.slice(0, lastIndex).replace(/\s+$/, "");
+      };
+
+      function pruneSiblings(node) {
+        let sibling = node.nextSibling;
+
+        while (sibling) {
+          const next = sibling.nextSibling;
+          sibling.parentNode.removeChild(sibling);
+          sibling = next;
+        }
+      }
+
+      function processNode(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const wordsInNode = countWords(node.nodeValue);
+          
+          if (!wordsInNode) {
+            return true;
+          }
+
+          if (wordCount + wordsInNode > wordLimit) {
+            const allowed = Math.max(wordLimit - wordCount, 0);
+            const keep = sliceByWordCount(node.nodeValue, allowed);
+            const base = keep || "";
+
+            node.nodeValue = base ? `${base}...` : "...";
+            pruneSiblings(node);
+            wasTruncated = true;
+            wordCount = wordLimit;
+
+            return false;
+          }
+
+          wordCount += wordsInNode;
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          for (let child of [...node.childNodes]) {
+            if (!processNode(child)) {
+              pruneSiblings(child);
+              return false;
+            }
+          }
+        }
+        return true;
+      }
+
+      processNode(div);
+
+      return {
+        html: div.innerHTML,
+        text: div.textContent,
+        wasTruncated
+      };
+    },
+    stripHtmlTags(str) {
+      let doc = new DOMParser().parseFromString(str, "text/html");
+      return doc.body.textContent || "";
+    }
+  }'
+  x-init='
+    const result = getTruncatedHtml(wordLimit);
+    truncated = result.html;
+    hasMore = result.wasTruncated;
+    expanded = !hasMore;
+
+    $watch("expanded", () => {
+      $nextTick( () => {
+        if(ScrollTrigger.refresh) ScrollTrigger.refresh();
+      } );
+    } );
+  '>
+  <div class="truncated" x-html="truncated" x-show="hasMore && !expanded"></div>
+  <div class="continuation" x-show='expanded' x-cloak>
+    <div x-html='fullText'></div>
+  </div>
+  <template x-if="hasMore">
+    <div>
+      <button
+        @click="expanded = true"
+        class="read-more"
+        x-show="!expanded"
+      >
+        Read More
+      </button>
+      <button
+        @click="expanded = false"
+        class="read-more"
+        x-show='expanded'
+        x-cloak
+      >
+        Read Less
+      </button>
+    </div>
+  </template>
+</div>

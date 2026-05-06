@@ -1,0 +1,214 @@
+<style>
+  #shopify-block-{{ block.id }} .mfr-carousel__item {
+    padding-left: {{ block.settings.gap_mobile | divided_by: 2.00 }}px;
+    padding-right: {{ block.settings.gap_mobile | divided_by: 2.00 }}px;
+  }
+  @media (min-width: 1024px) {
+    #shopify-block-{{ block.id }} .mfr-carousel__item {
+      padding-left: {{ block.settings.gap_desktop | divided_by: 2.00 }}px;
+      padding-right: {{ block.settings.gap_desktop | divided_by: 2.00 }}px;
+    }
+  }
+</style>
+
+{%- capture slides_content -%}
+  {%- if block.settings.collection != blank -%}
+    {% for product in block.settings.collection.products %}
+      <div class="product-carousel__item mfr-carousel__item flex w-[22.5rem] box-content grow pb-[0.0625rem] large:w-auto large:min-w-[22.5rem] large:-mx-[0.03125rem]"
+        data-index="{{ forloop.index0 }}">
+        <div class="product-carousel__item-inner w-full">
+          {% render 'partial__product-card',
+            product: product,
+            show_lifestage: block.settings.show_lifestage,
+            sub_text: block.settings.sub_text %}
+        </div>
+      </div>
+    {% endfor %}
+  {%- elsif request.design_mode -%}
+    {% for i in (1..5) %}
+      <div class="product-carousel__item mfr-carousel__item flex w-[22.5rem] box-content grow pb-[0.0625rem] large:w-auto large:min-w-[22.5rem] large:-mx-[0.03125rem]">
+        <div class="product-carousel__item-inner w-full">
+          {% render 'partial__product-card',
+            product: product %}
+        </div>
+      </div>
+    {% endfor %}
+  {%- endif -%}
+{%- endcapture -%}
+
+{% if block.settings.title != blank %}
+  <p class="product-carousel__heading m-0 [&:not(:last-child)]:mb-[2.8125rem] large:[&:not(:last-child)]:mb-[3.75rem]">
+    <span class="product-carousel__heading-inner accent-label">
+      {{ block.settings.title }}
+    </span>
+  </p>
+{% endif %}
+
+{%- if block.settings.mobile_carousel_navigation -%}
+  <div class="product-carousel__carousel-nav flex justify-center items-start text-center gap-[3.87%] px-5 mb-[1.5625rem] large:hidden"
+    x-data='{
+      activeIndex: 0
+    }'
+    x-init='
+      $nextTick(() => {
+        const $carousel = Alpine.$data($el.closest( ".product-carousel" ).querySelector( ".product-carousel__carousel" ));
+        $carousel.onChange( (index) => {
+          activeIndex = index;
+        } );
+      } );
+    '>
+    {% for product in block.settings.collection.products %}
+      {%- assign metafields = product.metafields.mfr_fields -%}
+      <button
+        aria-label="{{ metafields.lifestage }} {{ metafields.age }}"
+        title="{{ metafields.lifestage }} {{ metafields.age }}"
+        :class='activeIndex == {{ forloop.index0 }} ? "is-active" : ""'
+        @click='
+          const $carousel = $el.closest( ".product-carousel" ).querySelector( ".product-carousel__carousel" );
+          const $carouselData = Alpine.$data($carousel);
+          const scrollToEl = () => window.scrollTo({ 
+            top: $carousel.querySelector( `.product-carousel__item[data-index="{{ forloop.index0 }}"]`)?.getBoundingClientRect().top + window.scrollY - 65, 
+            behavior: "smooth"
+          });
+          if( $carousel.classList.contains( "flickity-enabled" ) ) {
+            $carouselData.selectCell( {{ forloop.index0 }} );
+          }
+          else {
+            scrollToEl();
+          }
+        '>
+        {%- if metafields.lifestage != blank -%}
+          <span class="lifestage">{{ metafields.lifestage }}</span>
+        {%- endif -%}
+        {%- if metafields.age != blank -%}
+          <span class="age">{{ metafields.age }}</span>
+        {%- endif -%}
+      </button>
+    {% endfor %}
+  </div>
+{%- endif -%}
+
+{%- capture settings -%}
+  {
+    prevNextButtons: false,
+    contain: true,
+    cellAlign: "center",
+    pageDots: false,
+    wrapAround: false,
+    groupCells: false,
+    customPageDots: false,
+    customPrevNextButtons: false,
+    renderCarouselOn: "{{ block.settings.render_carousel_on }}",
+    mobileSettings: {
+      prevNextButtons: false,
+      pageDots: false,
+      customPrevNextButtons: false,
+      contain: true
+    }
+  }
+{%- endcapture -%}
+
+{%- capture class -%}
+  product-carousel__carousel 
+  {% if block.settings.render_carousel_on == "mobile" -%}mobile--carousel{%- endif -%}
+  {% if block.settings.render_carousel_on == "desktop" -%}desktop--carousel{%- endif -%}
+  {% if block.settings.render_carousel_on == "none" -%}none--carousel{%- endif -%}
+  {% if block.settings.collection.products.size >= 4 %}
+    four-above
+  {% endif %}
+{%- endcapture -%}
+
+{% render 'mfr-component__carousel',
+  settings: settings,
+  class: class,
+  content: slides_content
+%}
+
+{%- content_for "blocks" -%}
+
+{%- schema -%}
+  {
+    "name": "Product Carousel",
+    "class": "product-carousel",
+    "settings": [
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "Collection"
+      },
+      {
+        "type": "select",
+        "id": "render_carousel_on",
+        "label": "Render Carousel On:",
+        "options": [
+          {
+            "value": "",
+            "label": "Both"
+          },
+          {
+            "value": "mobile",
+            "label": "Mobile Only"
+          },
+          {
+            "value": "desktop",
+            "label": "Desktop Only"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ],
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Lorem, ipsum."
+      },
+      {
+        "type": "checkbox",
+        "id": "mobile_carousel_navigation",
+        "label": "Mobile Carousel Navigation",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Product Card Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_lifestage",
+        "label": "Show Lifestage",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "sub_text",
+        "label": "Sub Text",
+        "default": "Subscribe & Save 10%"
+      },
+      {
+        "type": "header",
+        "content": "Gap Settings"
+      },
+      {
+        "type": "number",
+        "id": "gap_mobile",
+        "label": "Item Gap - Mobile",
+        "default": 15,
+        "info": "in pixels. Applied as left/right padding per item."
+      },
+      {
+        "type": "number",
+        "id": "gap_desktop",
+        "label": "Item Gap - Desktop",
+        "default": 30,
+        "info": "in pixels. Applied as left/right padding per item."
+      }
+    ],
+    "blocks": [
+      { "type": "_section-content__button" }
+    ]
+  }
+{%- endschema -%}

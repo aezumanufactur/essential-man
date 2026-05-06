@@ -1,0 +1,68 @@
+<style>
+  #offCanvasProductForm {
+    --background-color: {{ section.settings.background_color }};
+  }
+</style>
+
+{%- capture product_form_content -%}
+  <div class="offcanvas-product-form__inner flex flex-col h-full">
+    <div class="offcanvas-product-form__header flex items-center p-[0.9375rem_1rem] large:p-[1.875rem_1.75rem_0.9375rem]">
+      <button class="close-button close [color:inherit] flex justify-center items-center relative inset-auto"
+        aria-label="Close contact form"
+        type="button"
+        role="button"
+        x-data
+        @click='$store["offCanvasProductForm"].closeOffcanvas()'>
+        {% render 'icon__offcanvas-close' %}
+      </button>
+    </div>
+
+    <div class="offcanvas-product-form__body grow overflow-auto flex flex-col p-[0.9375rem_1rem] large:p-[1.875rem_1.5625rem]"
+      x-data="MFROffcanvasProductForm()">
+      <div class="offcanvas-product-form__loading flex items-center justify-center">Loading...</div>
+      <p class="offcanvas-product-form__title" x-text="productTitle"></p>
+      <div class="offcanvas-product-form__type" x-html="productType"></div>
+      <div class="offcanvas-product-form__form-inner"></div>
+    </div>
+  </div>
+{%- endcapture -%}
+
+{% render 'mfr-component__offcanvas',
+  id: "offCanvasProductForm",
+  class: "offcanvas-product-form",
+  position: "right",
+  content: product_form_content %}
+
+{% unless request.visual_preview_mode %}
+  {% render 'script__section', file: "MFROffcanvasProductForm.js" %}
+{% endunless %}
+
+
+{% schema %}
+{
+  "name": "Product Form Panel",
+  "enabled_on": {
+    "groups": ["custom.offcanvas"]
+  },
+  "limit": 1,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Color Settings"
+    },
+    {
+      "type": "color_background",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#fff"
+    }
+  ],
+  "blocks": [
+  ],
+  "presets": [
+    {
+      "name": "Product Form Panel"
+    }
+  ]
+}
+{% endschema %}

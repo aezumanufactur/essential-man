@@ -1,0 +1,79 @@
+{% render 'renderer__color-scheme', name: "section", color_scheme: block.settings.color_scheme_upsell, selector: ".product-upsell" %}
+
+{% if block.settings.products %}
+	{%- liquid
+		assign upsell_products = ""
+
+		for product in block.settings.products
+			if product.available
+				assign upsell_products = upsell_products | append: product.first_available_variant.id
+			endif
+			
+			unless forloop.last
+				assign upsell_products = upsell_products | append: ","
+			endunless
+		endfor
+	-%}
+
+	<div class="product-upsell mb-0 flex flex-col items-start justify-center bg-[var(--section-background)] p-4 text-left [font-family:var(--font-body)]" x-show="!upsellsIncludedInCart" x-data="{
+		upsellsIncludedInCart: false,
+		upsellProducts: [{{ upsell_products }}],
+
+		init() {
+			this.$watch('$store.cart.cartData.items', data => {
+				if (data !== null && data !== undefined) {
+					const checksCartItems = this.upsellProducts.every(id => data.some(item => item.id === id))
+					this.upsellsIncludedInCart = checksCartItems
+				}
+			})
+		},
+
+		upsellIncludedInCart(id) {
+			if (!Array.isArray($store.cart.cartData.items)) return false
+			return $store.cart.cartData.items.some(item => item.id === id)
+		},
+	}">
+		{% if block.settings.title != blank %}
+			<div class="product-upsell__title mb-[0.9375rem] w-full max-w-[15.625rem] text-[var(--font-body-size-xsmall)] font-bold leading-normal text-[var(--section-heading)]">
+				{{ block.settings.title }}
+			</div>
+		{% endif %}
+
+		<div class="product-upsell__inner flex w-full flex-col items-stretch justify-center">
+			{%- for product in block.settings.products -%}
+				{% if product.available %}
+					{% assign variant = product.selected_or_first_available_variant %}
+
+					<template x-if="!$data.upsellIncludedInCart({{ variant.id }})">
+						<div class="product-upsell__product mb-2.5 flex flex-row items-center justify-between rounded-[0.9375rem] bg-[#E9F4FC] py-2 pl-2 pr-4 text-[var(--section-text)] last-of-type:mb-0 [&:nth-child(3)~.product-upsell__product]:hidden">
+							<div class="product-upsell__product-left mr-2 flex flex-row items-center justify-start">
+								<div class="product-upsell__product-image mr-2.5 block h-[3.75rem] w-[3.75rem] shrink-0 overflow-hidden rounded-[0.625rem] [&_img]:h-full [&_img]:w-full [&_img]:object-cover">
+									{% assign image = product.media[0] %}
+									{% if image != blank %}
+										{% assign height = 100 | divided_by: image.aspect_ratio %}
+										{{ image | image_url: width: 100 | image_tag: width: 100, alt: product.title, height: height }}
+									{% endif %}
+								</div>
+
+								<div class="product-upsell__product-title mr-5 max-w-[12.5rem] shrink text-left text-[var(--font-body-size-small-mobile)] font-medium leading-none large:text-[var(--font-body-size-small)]">
+									{{ product.title }} - {{ product.first_available_variant.title }}
+								</div>
+							</div>
+
+							<div class="product-upsell__product-right flex flex-row items-center justify-start">
+								<form class="mt-auto" data-productid="{{ product.id }}" id="upsell-form-{{ forloop.index }}" @submit.prevent.debounce.300ms="$store.cart.addToCart({{- variant.id -}})">
+									{% render 'product-form__hidden-input', product: product %}
+									<input type="hidden" name="id" data-productid="{{ product.id }}" value="{{ variant.id }}">
+								</form>
+
+								<button type="submit" class="product-upsell__product-button min-h-fit min-w-fit whitespace-nowrap rounded-full bg-[var(--section-secondary-button-bg)] px-3 py-[0.4375rem] text-center text-[var(--font-body-size-small-mobile)] font-medium transition-transform hover:scale-110 hover:border hover:border-[var(--section-secondary-button-border-hover)] hover:bg-[var(--section-secondary-button-bg-hover)] hover:text-[var(--section-secondary-button-text-hover)] large:text-[var(--font-body-size-small)]" form="upsell-form-{{ forloop.index }}">
+									<span>Add - {{ variant.price | money }}</span>
+								</button>
+							</div>
+						</div>
+					</template>
+				{%- endif -%}
+			{% endfor %}
+		</div>
+	</div>
+{% endif %}

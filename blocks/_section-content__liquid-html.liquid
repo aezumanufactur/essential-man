@@ -1,0 +1,21 @@
+{%- if block.settings.content != blank -%}
+  {{ block.settings.id }}
+{%- endif -%}
+{%- schema -%}
+  {
+    "name": "Liquid/HTML",
+    "class": "section-content__liquid-html",
+    "settings": [
+      {
+        "type": "liquid",
+        "id": "content",
+        "label": "Content"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Liquid/HTML"
+      }
+    ]
+  }
+{%- endschema -%}

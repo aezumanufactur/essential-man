@@ -1,0 +1,44 @@
+@import "../variables";
+@import "../tools/util/util";
+@import "../tools/mixins";
+
+.scrolling-bar__column {
+  display: flex;
+  flex-direction: column;
+}
+
+.scrolling-bar {
+  width: 100%;
+}
+
+.scrolling-bar__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  padding: 0 var(--spacing-mobile);
+  flex-shrink: 0;
+
+  @include breakpoint(large up) {
+    padding: 0 var(--spacing-desktop);
+  }
+}
+
+.scrolling-bar__icon-text-item {
+  gap: rem-calc(5);
+
+  img {
+    width: var(--width-mobile);
+    height: var(--height-mobile);
+    object-fit: contain;
+    @include breakpoint(large up) {
+      width: var(--width-desktop);
+      height: var(--height-desktop);
+    }
+  }
+
+  &.preview img {
+    width: rem-calc(30);
+    height: rem-calc(30);
+  }
+}

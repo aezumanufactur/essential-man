@@ -1,0 +1,25 @@
+{%- if block.blocks.size > 0 -%}
+  <table class="table-section__table w-full [background:unset] [border:unset] large:table-fixed large:mx-auto large:max-w-[90rem] xxlarge:max-w-[100rem]"
+    data-stagger-inview="tr"
+    data-inview>
+    {%- content_for "blocks" -%}
+  </table>
+{%- endif -%}
+{% schema %}
+  {
+    "name": "Table",
+    "class": "table-section",
+    "tag": "div",
+    "settings": [
+    
+    ],
+    "blocks": [
+      { "type": "_table__row" }
+    ],
+    "presets": [
+      {
+        "name": "Table"
+      }
+    ]
+  }
+{% endschema %}

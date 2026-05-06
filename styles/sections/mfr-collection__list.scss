@@ -1,0 +1,45 @@
+.collection-list__column {
+  display: flex;
+  flex-direction: column;
+}
+
+@import "../variables";
+@import "../tools/util/util";
+@import "../tools/mixins";
+
+.mfr-collection__list {
+  .section-content {
+    margin-bottom: rem-calc(20px);
+  }
+}
+
+.section-collection {
+  .card {
+    @include hover() {
+      .card-image {
+        img {
+          @include transform(scale(1.1));
+        }
+      }
+    }
+  }
+
+  .card-image {
+    img {
+      @include transition($global-transition);
+    }
+  }
+
+  .card-content {
+    h3 {
+      @include h5;
+      text-transform: capitalize;
+      margin: 0 0 rem-calc(10px);
+    }
+
+    .button {
+      min-height: auto;
+      padding: rem-calc(15px) rem-calc(30px);
+    }
+  }
+}

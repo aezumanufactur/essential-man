@@ -1,0 +1,53 @@
+.footer__embed-code {
+  .klaviyo-form {
+    input {
+      @include placeholder {
+        color: $white !important;
+      }
+    }
+
+    [role="option"] {
+      color: $white !important;
+    }
+
+    [type="button"][role="combobox"] svg {
+      fill: $white !important;
+    }
+
+    [data-testid="form-row"] {
+      @include breakpoint( medium down ) {
+        align-items: center !important;
+        justify-content: center;
+      }
+
+      > div {
+        position: unset !important;
+        margin: 0 !important;
+
+        > [type="button"] {
+          position: absolute;
+          bottom: rem-calc( 7px );
+          right: rem-calc( 7px );
+          width: rem-calc( 99px );
+        }
+      }
+    }
+
+    .klaviyo-spinner:after {
+      left: unset !important;
+      right: rem-calc( 30px ) !important;
+      margin-left: 0 !important;
+      border-top-color: currentColor !important;
+      border-left-color: currentColor !important;
+    }
+
+    label {
+      line-height: 2.45em !important;
+      font-weight: 400 !important;
+      letter-spacing: rem-calc( -0.79px ) !important;
+      padding-bottom: rem-calc( 3px ) !important;
+      color: white !important;
+      @include opacity(0.7);
+    }
+  }
+}

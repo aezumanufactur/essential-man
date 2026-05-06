@@ -1,0 +1,63 @@
+{% assign link = block.settings.button_link %}
+{% assign color_theme = block.settings.color_theme %}
+{% assign label = block.settings.button_label %}
+
+<div class="mfr-card__button-inner">
+  <a href="{{ link | default: '#' }}"
+    class="button section-button {{ color_theme | default: '' }}"
+    {% if link == blank %} 
+      aria-disabled="true"
+    {% endif %}
+    {{ block.shopify_attributes }}>
+    <span class="text">{{ label | escape }}</span>
+  </a>
+</div>
+{% schema %}
+  {
+    "name": "Button",
+    "class": "mfr-card__button",
+    "settings": [
+      {
+        "type":"text",
+        "id":"button_label",
+        "default":"Button label",
+        "label":"Button Label",
+        "info":"Leave the label blank to hide the button."
+      },
+      {
+        "type":"url",
+        "id":"button_link",
+        "label":"Button Link"
+      },
+      {
+        "type": "select",
+        "id": "color_theme",
+        "label": "Color Theme",
+        "options": [
+          {
+            "value": "primary",
+            "label": "Primary"
+          },
+          {
+            "value": "secondary",
+            "label": "Secondary"
+          },
+          {
+            "value": "tertiary",
+            "label": "Tertiary"
+          },
+          {
+            "value": "underlined-cta",
+            "label": "Underline"
+          }
+        ],
+        "default": "underlined-cta"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Button"
+      }
+    ]
+  }
+{% endschema %}

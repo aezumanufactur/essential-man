@@ -1,0 +1,107 @@
+# Agent Preferences (Draft)
+
+This file captures observed conventions from a sampled theme codebase. It is **drafted from sampling** (not every file). Please correct anything that is off.
+
+## General
+- Indentation: 2 spaces.
+- Keep existing style in the file you are editing (don’t reformat unrelated lines).
+- Prefer blank lines between logical blocks.
+- For `schema` arrays in sections/blocks, put each object on its own lines, never `},{`. Preferred:
+  ```
+  {
+  },
+  {
+  }
+  ```
+ - When asked to create a new **section**, follow the “Section Creation” workflow below.
+
+## Section Creation
+- Inputs: a `filename` and a human-readable `section name`.
+- Create `sections/<filename>.liquid` by copying `sections/custom-section-template--with-theme-blocks.bak`.
+- In that file, replace:
+  - `mfr-core__custom-section` with the provided `filename`.
+  - `Custom Section` with the provided `section name`.
+- Create `styles/sections/<filename>.scss` with:
+  - Imports:
+    - `@import "../variables";`
+    - `@import "../tools/util/util";`
+    - `@import "../tools/mixins";`
+    - `@import "../site-specifics";`
+  - Sub-filename rule: use the portion after `__` (e.g., `mfr-core__accordion-section` → `accordion-section`).
+  - Structure:
+    ```
+    .<filename> {
+      .<sub-filename> {
+      }
+    }
+    ```
+  - Indentation: 2 spaces.
+
+## Naming Conventions (Sections)
+- Core sections: `mfr-core__<section-name>` (core, reusable; frequently added).
+- Project-specific sections: `mfr-<project-initials>__<section-name>` (e.g., Project Name → `mfr-pn__...`).
+- Template-specific sections: `mfr-<template>__<section-name>` for templates like product, search, metaobjects, blogs, collection, article, etc.
+- Part-specific template sections (exclusive to section groups): header, footer, offcanvas, modals.
+  - Section groups currently: `header`, `footer`, `offcanvas`, `modals`.
+
+## Block Creation (Theme Blocks)
+- Inputs: `block name` and target section (e.g., `mfr-core__accordion-section`).
+- Create a new theme block file under `blocks/` as directed.
+- Block naming convention: `_<section-name>__<block-name>` (e.g., `_footer__menu`).
+- The block **must include schema** with: `name`, `class`, `settings`, `blocks`, and `presets`.
+  - If no initial `settings` are provided, leave `settings: []`.
+  - If no initial `blocks` are provided, leave `blocks: []`.
+- Class naming: use a handleized version of the block name (e.g., “Image Text” → `image-text`).
+- Markup should include an inner element using the `__inner` convention:
+  - Outer class: `image-text`
+  - Inner class: `image-text__inner`
+- Settings are grouped under `header` inputs (e.g., "Max Width Settings"), and all related settings follow until the next `header` input.
+- Optional settings group: **Block Layout Controls** (add only when requested).
+  - When asked to add it to a block: insert `{%- render "settings__block-layout-controls" -%}` in the block markup and append the schema settings at the bottom of the block settings.
+  - Implemented via snippet `snippets/settings__block-layout-controls.liquid`.
+  - Settings include:
+    - `paragraph` labels for Width, Padding, Margin.
+    - First-level checkboxes: enable Width/Padding/Margin.
+    - Width controls (mobile/desktop): width + max-width with unit select (px, %, vw, custom) and custom text input for calc values.
+    - Padding controls (mobile/desktop): X/Y checkboxes and left/right/top/bottom number inputs (px only).
+    - Margin controls (mobile/desktop): X/Y checkboxes and left/right/top/bottom number inputs (px only).
+
+## Liquid / HTML
+- For top-level Liquid tags (first-level `if`, `for`, `schema`, etc.), use trim markers `{%- ... -%}` to avoid whitespace when blocks render empty. This enables safe `:empty` styling.
+- Liquid tags often use trim markers: `{%- ... -%}` and `{{- ... -}}`.
+- HTML attributes frequently broken onto multiple lines when long; keep alignment similar to nearby markup.
+- Alpine attributes usually use single quotes for JS payloads: `x-data='{ ... }'`, `x-on:click='...'`.
+- For Alpine events, use `@` shorthand (e.g. `@click`).
+- Liquid filter chains are often line-broken and aligned under the variable.
+- BEM-style class names are common.
+- Line length: keep it readable. Break lines when needed.
+- For Liquid `{%- render ... -%}` calls, always put each parameter on its own line for readability, e.g.:
+  ```
+  {%- render "component__lazyload-image",
+    image: block.settings.image,
+    width: 240,
+    alt: alt -%}
+  ```
+
+## SCSS
+- 2-space indentation; nested selectors are common.
+- Uses `@import` (not `@use`).
+- Mixins/utilities such as `@include breakpoint(...)` and `rem-calc(...)` are common.
+- For pixel values, use `rem-calc(...)` (e.g. `rem-calc(15)` for `15px`).
+- No spaces inside `rem-calc(...)` (use `rem-calc(15)`, not `rem-calc( 15 )`).
+- Section headers use block comments with divider lines.
+
+## JavaScript
+- 2-space indentation, semicolons, trailing commas in objects/arrays.
+- Double quotes for strings.
+- Alpine components typically follow:
+  - `window._mfrAlpineRegistered` guard.
+  - `document.addEventListener("alpine:init", () => { Alpine.data("Name", () => ({ ... })) })`.
+- Global Alpine stores live in `scripts/theme/*` and use `Alpine.store("name", { ... })`.
+- New Alpine components usually live in `scripts/components/` with file and `x-data` name `MFR` + PascalCase (e.g., `MFRDropdownMenu`), and should be created by copying `scripts/components/alpine-script-boilerplate.js` and replacing `MFRComponentName`.
+- To load a component in a section/block/snippet, use `{% render 'script__section', file: "MFRComponentName.js" %}` (file name matches the component file).
+
+## Alpine Usage in Liquid
+- `x-data` may be empty for simple scopes: `x-data`.
+- Inline Alpine objects are used in attributes with single quotes.
+- Store access via `$store.<name>` and `Alpine.store("name")` in scripts.

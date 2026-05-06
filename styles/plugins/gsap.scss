@@ -1,0 +1,97 @@
+.smooth-content {
+  will-change: transform;
+}
+
+[data-section-curve-top],
+[data-section-curve-bottom] {
+  will-change: border-radius, scale, transform;
+}
+
+[data-split-text="fadeUp"] .split-text {
+  // @include animateFadeUpSharp;
+  //@include transition-duration( .2s !important );
+  // overflow: hidden; //disabled since it causes bottom spacing into the .section-title
+  // padding-bottom: 0.17em;
+  overflow-y: clip;
+  overflow-x: visible;
+  padding-top: 0.04em;
+  
+  .h4 & {
+    padding-bottom: rem-calc( 2px );
+  }
+  
+  > * {
+    display: block;
+    @include transition( $global-transition );
+  }
+
+  @include enter-animation {
+    > * {
+      @include transform( translateY( calc(100% + 0.04em) ) );
+
+      @supports (font: -apple-system-body) {
+        @include transform( translateY( calc(100% + 0.07em) ) );
+      }
+    }
+  }
+
+  .h1.xl-title & {
+    padding-bottom: 0.04em;
+
+    @include enter-animation {
+      > * {
+        @include transform( translateY( calc(100% + 0.08em) ) );
+      }
+    }
+  }
+}
+
+[data-split-text="colorAnimation"] .split-text {
+  > * {
+    display: block;
+    @include transition( $global-transition );
+  }
+
+  @include enter-animation {
+    > * {
+      @include opacity( 0.15 );
+    }
+  }
+}
+
+[data-split-text] {
+  @include breakpoint( large up ) {
+    visibility: hidden;
+  
+    &.split-text--rendered {
+      visibility: visible;
+    }
+
+    .design-mode & { visibility: visible; }
+  }
+}
+
+.section-content {
+  .section-text,
+  .section-title {
+    &.has-underline {
+      .split-text__inner {
+        position: relative;
+      }
+
+      .highlighted,
+      b,
+      strong {
+        &:has(.split-text__inner) .split-text__inner:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 0.025em;
+          background-color: var(--underline-color);
+        }
+      }
+    }
+  }
+}

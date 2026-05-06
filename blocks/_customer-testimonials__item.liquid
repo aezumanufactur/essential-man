@@ -1,0 +1,80 @@
+{%- assign entry = block -%}
+<div class="customer-testimonials__entry-inner customer-testimonials__entry-v1-inner w-[21.25rem] p-[1.125rem] flex flex-col items-start justify-start min-h-full [background-color:var(--color-accent-4)] [color:var(--color-white)] overflow-hidden rounded-[1.875rem] [transition:all_0.4s_cubic-bezier(0.5,0,0,1)] large:w-[23.75rem] large:py-[2rem] large:px-[1.125rem]">
+  <div class="customer-testimonials__entry-v1-image relative w-full max-w-[8rem] aspect-square [contain:paint] rounded-[1.25rem] large:max-w-[10rem] [&:not(:last-child)]:mx-auto [&:not(:last-child)]:mb-[1.625rem] large:[&:not(:last-child)]:mb-[1.3125rem] [&_img]:absolute [&_img]:top-0 [&_img]:left-0 [&_img]:w-full [&_img]:h-full [&_img]:block [&_img]:object-cover">
+    {% assign default_alt = "maybe an image of " | append: entry.settings.name %}
+    {% assign alt = entry.settings.alt | default: default_alt %}
+    {% render 'component__lazyload-image',
+      image: entry.settings.image,
+      width: 240,
+      alt: alt %}
+  </div>
+  {% if entry.settings.testimony != blank %}
+    <p class="customer-testimonials__entry-v1-testimony [font-size:var(--font-body-size-large-mobile)] large:[font-size:var(--font-body-size-large)] mt-0 mx-0 mb-[1.875rem]">
+      {{ entry.settings.testimony }}
+    </p>
+  {% endif %}
+  <div class="customer-testimonials__entry-v1-footer flex [justify-content:stretch] items-center gap-[0.625rem] w-full max-w-[12.5rem] m-auto large:gap-[1rem]">
+    <div class="customer-testimonials__entry-v1-footer-icon w-full max-w-[3.3125rem] shrink-0 large:max-w-[3.6875rem] [&_img]:w-full [&_img]:h-auto [&_img]:block [&_img]:object-contain">
+      {% assign default_alt = "maybe an icon about this testimony" %}
+      {% assign alt = entry.settings.alt | default: default_alt %}
+      {% render 'component__lazyload-image',
+        image: entry.settings.icon,
+        width: 144,
+        alt: alt %}
+    </div>
+    <div class="customer-testimonials__entry-v1-footer-texts flex flex-col justify-center items-start grow [&_p]:[font-size:var(--font-body-size-large-mobile)] large:[&_p]:[font-size:var(--font-body-size-large)] [&_p]:font-normal [&_p]:m-0 [&_span]:[font-size:var(--font-body-size-small-mobile)] large:[&_span]:[font-size:var(--font-body-size-small)] [&_span]:uppercase">
+      {% if entry.settings.name != blank %}
+        <p>{{ entry.settings.name }}</p>
+      {% endif %}
+      {% if entry.settings.subtitle != blank %}
+        <span>{{ entry.settings.subtitle }}</span>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Testimonial - Type 1",
+    "class": "customer-testimonials__entry customer-testimonials__entry-v1 mfr-carousel__item",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "richtext",
+        "id": "testimony",
+        "label": "Testimonial",
+        "default": "<p>“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at justo vitae lorem molestie euismod.“</p>"
+      },
+      {
+        "type": "header",
+        "content": "Author Settings"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon",
+        "label": "Icon"
+      },
+      {
+        "type": "text",
+        "id": "name",
+        "label": "Name",
+        "default": "John Doe"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Sub Title",
+        "default": "A Person"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Testimonial - Type 1"
+      }
+    ]
+  }
+{% endschema %}

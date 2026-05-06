@@ -1,0 +1,152 @@
+<style>
+  #shopify-block-{{ block.id }} .mfr-carousel__item {
+    padding-left: {{ block.settings.gap_mobile | divided_by: 2.00 }}px;
+    padding-right: {{ block.settings.gap_mobile | divided_by: 2.00 }}px;
+  }
+  @media (min-width: 1024px) {
+    #shopify-block-{{ block.id }} .mfr-carousel__item {
+      padding-left: {{ block.settings.gap_desktop | divided_by: 2.00 }}px;
+      padding-right: {{ block.settings.gap_desktop | divided_by: 2.00 }}px;
+    }
+  }
+</style>
+<div class="customer-testimonials {% if block.settings.carousel_caption != blank %}has-caption{% endif %} w-full [justify-content:inherit]">
+  {%- if block.blocks.size > 0 -%}
+    {%- capture slides_content -%}
+      {%- content_for "blocks" -%}
+    {%- endcapture -%}
+
+    {%- if block.settings.carousel_caption != blank -%}
+      <p class="customer-testimonials__carousel-caption"
+        data-inview>
+        {% render 'shortcode-renderer', text: block.settings.carousel_caption %}
+      </p>
+    {%- endif -%}
+    {%- capture settings -%}
+      {
+        contain: true,
+        wrapAround: false,
+        groupCells: true,
+        cellAlign: "left",
+        pageDots: false,
+        prevNextButtons: false,
+        renderCarouselOn: "{{ block.settings.render_carousel_on }}",
+        customPageDots: {{ block.settings.custom_page_dots }},
+        mobileSettings: {
+          cellAlign: "center",
+          wrapAround: false,
+        }
+      }
+    {%- endcapture -%}
+    {%- capture class -%}
+      customer-testimonials__carousel
+      {% if block.settings.render_carousel_on == "mobile" -%}mobile--carousel{%- endif -%}
+      {% if block.settings.render_carousel_on == "desktop" -%}desktop--carousel{%- endif -%}
+      {% if block.settings.render_carousel_on == "none" -%}none--carousel{%- endif -%}
+    {%- endcapture -%}
+    {% render 'mfr-component__carousel',
+      settings: settings,
+      class: class,
+      content: slides_content
+    %}
+  {%- elsif request.design_mode -%}
+    <div class="customer-testimonials__carousel mfr-carousel">
+      {% for i in (1..6) %}
+        <div class="customer-testimonials__entry customer-testimonials__entry-v1 mfr-carousel__item">
+          <div class="customer-testimonials__entry-v1-inner">
+            <div class="customer-testimonials__entry-v1-image">
+              {% render 'component__lazyload-image',
+                image: false,
+                width: 240,
+                alt: alt %}
+            </div>
+            <p class="customer-testimonials__entry-v1-testimony">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque cumque, vero dolor eos nisi adipisci voluptatem labore quam facilis tenetur.
+            </p>
+            <div class="customer-testimonials__entry-v1-footer">
+              <div class="customer-testimonials__entry-v1-footer-icon">
+                {% render 'component__lazyload-image',
+                  image: false,
+                  width: 144,
+                  alt: alt %}
+              </div>
+              <div class="customer-testimonials__entry-v1-footer-texts">
+                <p>Lorem ipsum</p>
+                <span>Dolor sit</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {%- endif -%}
+</div>
+
+{%- schema -%}
+  {
+    "name": "Testimonials Carousel",
+    "class": "customer-testimonials__wrapper",
+    "settings": [
+      {
+        "type": "select",
+        "id": "render_carousel_on",
+        "label": "Render Carousel On:",
+        "options": [
+          {
+            "value": "",
+            "label": "Both"
+          },
+          {
+            "value": "mobile",
+            "label": "Mobile Only"
+          },
+          {
+            "value": "desktop",
+            "label": "Desktop Only"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ],
+        "default": ""
+      },
+      {
+        "type": "checkbox",
+        "id": "custom_page_dots",
+        "label": "Custom Page Dots",
+        "default": false
+      },
+      {
+        "type": "textarea",
+        "id": "carousel_caption",
+        "label": "Carousel Caption"
+      },
+      {
+        "type": "header",
+        "content": "Gap Settings"
+      },
+      {
+        "type": "number",
+        "id": "gap_mobile",
+        "label": "Item Gap - Mobile",
+        "default": 15,
+        "info": "in pixels. Applied as left/right padding per item."
+      },
+      {
+        "type": "number",
+        "id": "gap_desktop",
+        "label": "Item Gap - Desktop",
+        "default": 30,
+        "info": "in pixels. Applied as left/right padding per item."
+      }
+    ],
+    "blocks": [
+      { "type": "_customer-testimonials__item" },
+      { "type": "_customer-testimonials__item-v2" },
+      { "type": "_customer-testimonials__item-v3" },
+      { "type": "_customer-testimonials__item-v4" },
+      { "type": "_card" }
+    ]
+  }
+{%- endschema -%}

@@ -1,0 +1,47 @@
+{
+  "consoleMessages": [
+    {
+      "type": "warning",
+      "text": "Klaviyo tracking is disabled. To enable, set the cookie \"__kla_off\" to false. {is_robot: true, __kla_off: }"
+    },
+    {
+      "type": "warning",
+      "text": "The resource http://127.0.0.1:9292/cdn/shop/t/36/assets/mfr-collection__list.css?v=106459229555084750951777281173 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally."
+    },
+    {
+      "type": "error",
+      "text": "[HotReload] Connection closed by the server, attempting to reconnect..."
+    },
+    {
+      "type": "warning",
+      "text": "Klaviyo tracking is disabled. To enable, set the cookie \"__kla_off\" to false. {is_robot: true, __kla_off: }"
+    }
+  ],
+  "networkErrors": [
+    {
+      "url": "http://127.0.0.1:9292/web-pixels@1b8942c4w45c4d9d5pb7622108m7815b9e1/custom/web-pixel-shopify-custom-pixel@0450/sandbox/modern/blogs/news/nemo-enim-ipsam-voluptatem-quia-voluptas-sit?view=test",
+      "failure": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:9292/api/collect",
+      "failure": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:9292/.well-known/shopify/monorail/unstable/produce_batch",
+      "failure": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:9292/",
+      "failure": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:9292/api/collect",
+      "failure": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:9292/web-pixels@1b8942c4w45c4d9d5pb7622108m7815b9e1/custom/web-pixel-shopify-custom-pixel@0450/sandbox/modern/blogs/news/nemo-enim-ipsam-voluptatem-quia-voluptas-sit?view=test",
+      "failure": "net::ERR_ABORTED"
+    }
+  ],
+  "pageErrors": []
+}

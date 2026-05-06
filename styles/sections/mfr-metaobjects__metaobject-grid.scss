@@ -1,0 +1,117 @@
+@import "../variables";
+@import "../tools/util/util";
+@import "../tools/mixins";
+
+.metaobjects-grid__item {
+  max-width: calc( (100% - (var(--grid-row-gap-mobile) * (var(--grid-row-mobile) - 1)) ) / var(--grid-row-mobile) );
+
+  @include breakpoint(medium up) {
+    max-width: calc( (100% - (var(--grid-row-gap-tablet) * (var(--grid-row-tablet) - 1)) ) / var(--grid-row-tablet) );
+  }
+
+  @include breakpoint(large up) {
+    max-width: calc( (100% - (var(--grid-row-gap-desktop) * (var(--grid-row-desktop) - 1)) ) / var(--grid-row-desktop) );
+  }
+}
+
+.metaobject-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  background: $white;
+  overflow: hidden;
+  color: $black !important;
+  text-align: left;
+  @include border-radius(rem-calc(6));
+
+  &__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 351/213;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $white;
+  }
+
+  &__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+
+    img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: $black;
+      @include opacity(0.4);
+    }
+  }
+
+  &__date {
+    position: absolute;
+    top: rem-calc(14);
+    left: rem-calc(17);
+    @include small;
+    line-height: 1.6em;
+    margin: 0;
+    z-index: 1;
+  }
+
+  &__content {
+    flex-grow: 1;
+    padding: rem-calc(14) rem-calc(17);
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+    gap: rem-calc(15);
+  }
+
+  &__title {
+    font-size: rem-calc(18);
+    line-height: 1.2em;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  &__caption {
+    @include small;
+    line-height: 1.35em;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  &__logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: rem-calc(157.13);
+    max-height: 100%;
+    @include transform(translate(-50%, -50%));
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,57 @@
+.collection-highlights__column {
+  display: flex;
+  flex-direction: column;
+}
+
+@import "../variables";
+@import "../tools/util/util";
+@import "../tools/mixins";
+
+.collection-highlight__section:has(.collection-highlight:empty) {
+  display: none;
+}
+
+.mfr-collection__highlights {
+  .section-spacer > :not(.full) {
+    .collection-highlight__carousel {
+      @include breakpoint(medium down) {
+        margin-left: rem-calc(-25px);
+        margin-right: rem-calc(-25px);
+      }
+
+      @include breakpoint(large up) {
+        margin-left: rem-calc(-11px);
+        margin-right: rem-calc(-11px);
+      }
+    }
+  }
+
+  .section-content {
+    &:not(:last-child) {
+      margin-bottom: rem-calc(45px);
+
+      @include breakpoint(large up) {
+        margin-bottom: rem-calc(80px);
+      }
+    }
+  }
+}
+
+.collection-highlight {
+  &__entry {
+    @include enter-animation {
+      .collection-highlight__entry-inner {
+        @include transform(translateY($enter-transform-value));
+        @include opacity(0);
+      }
+    }
+  }
+
+  &__entry-inner {
+    @include transition($global-transition);
+  }
+
+  &__entry-caption {
+    @include small;
+  }
+}

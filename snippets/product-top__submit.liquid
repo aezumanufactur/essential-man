@@ -1,0 +1,100 @@
+{% assign quantity_selector = section.blocks | where: "type", "quantity_selector" | first %}
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign default_product_form_id = "product-form-" | append: product.id -%}
+{%- assign product_form_id = product_form_id | default: default_product_form_id -%}
+{%- assign button_theme = block.settings.color_theme | default: "primary" -%}
+
+{% if product.available %}
+  {%- assign open_off_canvas = '
+      x-data
+      x-on:click="
+        $store[`offCanvasCart`].openOffcanvas()
+        $store[`offCanvasProductForm`].closeOffcanvas()
+      "
+    ' -%}
+{% else %}
+  {%- assign open_off_canvas = '' -%}
+{% endif %}
+
+<div class="product-top__actions flex flex-wrap justify-stretch items-stretch gap-[0.5rem] [column-gap:0.8125rem] w-full large:gap-[0.75rem] large:[column-gap:1.125rem]"
+  data-replace="{{ section.id }}-{{ block.id }}-actions">
+
+  {% comment %} Quantity Selector {% endcomment %}
+  {% if quantity_selector != blank and current_variant.available and quantity_selector.settings.beside_add_to_cart %}
+    <div class="product-top__quantity-selector w-[30%] flex-shrink-0 flex justify-stretch items-stretch large:w-[32%]">
+      {%- render "component__quantity-selector-v2",
+        name: "quantity",
+        min: 1, 
+        max: current_variant.inventory_quantity -%} 
+    </div>
+  {% endif %}
+
+  {% comment %} Add To Cart {% endcomment %}
+   {%- liquid
+      assign check_against_inventory = true
+      if current_variant.inventory_management != 'shopify' or current_variant.inventory_policy == 'continue'
+        assign check_against_inventory = false
+      endif
+      if current_variant.quantity_rule.min > current_variant.inventory_quantity and check_against_inventory
+        assign quantity_rule_soldout = true
+      endif
+    -%}
+  {%- form 'product',
+    product,
+    id: product_form_id,
+    class: 'form',
+    novalidate: 'novalidate',
+    data-type: 'add-to-cart-form',
+    x-data: 'MFRProductForm()'
+  -%}
+    {% render 'product-form__hidden-input', product: product %} 
+
+    <div class="product-top__submit flex flex-col items-stretch justify-start gap-[0.5625rem] grow w-full large:gap-[0.3125rem]">
+      <button class="button add-to-cart {{ button_theme }}" 
+        type="submit"
+        data-inview
+        {% if current_variant.available == false
+          or quantity_rule_soldout
+          or current_variant == null
+        %}
+          disabled
+        {% endif %}
+        {{ open_off_canvas }}>
+        {%- if current_variant == null -%}
+          {{ block.settings.unavailable_label | default: "Unavailable" }}
+        {%- elsif current_variant.available == false or quantity_rule_soldout -%}
+          {{ block.settings.sold_out_label | default: "Sold Out" }}
+        {%- else -%}
+          <span class="product-top__submit-inner">
+            {{ block.settings.add_to_cart_label | default: "Add To Cart" }}
+            {% if block.settings.show_price %}
+              <span class="separator">&mdash;</span>
+              <span class="price">
+                <template x-if='currentCompareAtPrice'>
+                  <span class="compare-at-price"
+                    x-text='currentCompareAtPrice'></span>
+                </template>
+                <span class="original-price"
+                  x-text='currentPriceValue'>
+                  {{- current_variant.price | money_without_trailing_zeros -}}
+                </span>
+              </span>
+            {% endif %}
+          </span>
+        {%- endif -%}
+      </button>
+  
+      {% if block.settings.bottom_caption != blank %}
+        <span class="product-top__submit-caption text-[0.75rem] leading-[1.5em] font-normal tracking-[0.0075rem] m-0 mt-[-0.25rem] opacity-60">
+          {{ block.settings.bottom_caption }}
+        </span>
+      {% endif %}
+    </div>
+  {% endform %}
+
+  {% render 'script__section', file: "MFRProductForm.js" %}
+</div>
+
+{% comment %} <template x-if="!$store.pdp.stickyATC && $store.pdp.addOnsArray.length > 0">
+  <span class="addons-indicator" x-text="`(+${$store.pdp.addOnsArray.length} addons)`"></span>
+</template> {% endcomment %}

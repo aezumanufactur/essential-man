@@ -1,0 +1,95 @@
+{%- assign text_alignment = section.settings.text_alignment -%}
+{%- assign container_width = section.settings.container_width -%}
+{%- assign max_width = section.settings.max_width -%}
+{%- assign color_theme = section.settings.color_theme -%}
+
+{%- if max_width != 0 and container_width == "" -%}
+  {%- capture max_width_style -%}
+    style="max-width: {{ max_width }}rem;"
+  {%- endcapture -%}
+{%- endif -%}
+
+<div class="image-banner{% if block.settings.enable_overlay %} has-overlay{% endif %} absolute top-0 left-0 w-full h-full [&_img]:w-full [&_img]:h-full [&_img]:block [&_img]:object-cover"
+  data-image-parallax>
+  {%- if block.settings.enable_overlay -%}
+    <div class="image-banner__overlay absolute top-0 left-0 w-full h-full z-[1] [background:var(--overlay-mobile)] large:[background:var(--overlay-desktop)]"
+      style="--overlay-mobile: {{ block.settings.overlay_mobile }}; --overlay-desktop: {{ block.settings.overlay_desktop }};"></div>
+  {%- endif -%}
+  {%- if block.settings.mobile_image != blank or block.settings.desktop_image != blank -%}
+    {%- render 'component__responsive-image-v2',
+      image_mobile: block.settings.mobile_image,
+      image_desktop: block.settings.desktop_image,
+      lazyload: block.settings.lazyload -%}
+  {%- else -%}
+    {%- capture svg_code -%}{{- 'lifestyle-2' | placeholder_svg_tag -}}{%- endcapture -%}
+    {%- render 'component__svg-encoder', svg_code: svg_code, alt: "placeholder image" -%}
+  {%- endif -%}
+</div>
+<div class="{{ container_width }} relative z-[2] px-5{% if container_width != 'full' %} mx-auto large:max-w-[90rem] xxlarge:max-w-[100rem] large:px-[3.75rem]{% endif %}" {{ max_width_style }}>
+  <div class="alignment-helper {{ color_theme }} {{ text_alignment }} flex flex-row flex-wrap [justify-content:var(--justify-content-mobile)] [text-align:var(--text-align-mobile)] large:[justify-content:var(--justify-content-desktop)] large:[text-align:var(--text-align-desktop)]">
+    <div class="section-content w-full min-w-0 relative z-[2] flex [align-items:inherit] [justify-content:inherit] flex-wrap gap-x-[1.875rem] mb-[5rem] last:mb-0 large:mb-[5.625rem] large:gap-x-[3.75rem] [&>.shopify-block:not(:last-child)]:mb-[0.9375rem] large:[&>.shopify-block:not(:last-child)]:mb-[1.875rem] empty:hidden pt-[var(--top-spacing-mobile)] pb-[var(--bottom-spacing-mobile)] large:pt-[var(--top-spacing-desktop)] large:pb-[var(--bottom-spacing-desktop)]"
+      data-stagger-inview=".section-icon__wrapper, .section-content__small-text, .section-content__text, .section-content__button">
+      {%- content_for "block", type: "_section-content", id: "section-content" -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Image Slide",
+    "class": "image-video-banner__image-slide mfr-carousel__item relative w-full",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "mobile_image",
+        "label": "Image for Mobile"
+      },
+      {
+        "type": "image_picker",
+        "id": "desktop_image",
+        "label": "Image for Desktop"
+      },
+      {
+        "type": "header",
+        "content": "Overlay Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "lazyload",
+        "label": "Lazyload?",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_overlay",
+        "label": "Enable Overlay",
+        "default": false
+      },
+      {
+        "type": "color_background",
+        "id": "overlay_mobile",
+        "label": "Overlay - Mobile"
+      },
+      {
+        "type": "color_background",
+        "id": "overlay_desktop",
+        "label": "Overlay - Desktop"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image Slide",
+        "blocks": [
+          {
+            "type": "_section-content",
+            "id": "section-content",
+            "static": true,
+            "blocks": [
+              { "type": "_section-content__title" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

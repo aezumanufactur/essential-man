@@ -1,0 +1,46 @@
+{%- if placeholder -%}
+  <div class="metaobject-card">
+    <div class="metaobject-card__media placeholder is-shimmer">
+      <div class="metaobject-card__date is-shimmer w-24 h-4"></div>
+      <div class="metaobject-card__image is-shimmer w-full h-full"></div>
+    </div>
+    <div class="metaobject-card__content">
+      <div class="metaobject-card__title is-shimmer w-full h-[1.375rem]"></div>
+      <div class="metaobject-card__caption is-shimmer w-full h-[5.125rem]"></div>
+    </div>
+  </div>
+{%- else -%}
+  <a href="#"
+    class="metaobject-card"
+    :href='metaobject.fields.external_url'
+    aria-label='`${date} ${title} ${caption}`'
+    title='`${date} ${title} ${caption}`'
+    x-data='{
+      date: new Date("2025-01-10").toLocaleDateString(),
+      title: metaobject.fields.title,
+      caption: metaobject.fields.caption
+    }'
+    x-init='
+      console.log(metaobject)
+    '>
+    <div class="metaobject-card__media">
+      <template x-if='metaobjectImages[metaobject.handle]'>
+        <div class="metaobject-card__image" x-html='metaobjectImages[metaobject.handle]'></div>
+      </template>
+      <template x-if='date'>
+        <span class="metaobject-card__date" x-text='date'></span>
+      </template>
+      <template x-if='metaobjectLogos[metaobject.handle]'>
+        <div class="metaobject-card__logo" x-html='metaobjectLogos[metaobject.handle]'></div>
+      </template>
+    </div>
+    <div class="metaobject-card__content">
+      <template x-if='title'>
+        <p class="metaobject-card__title" x-text='title'></p>
+      </template>
+      <template x-if='caption'>
+        <p class="metaobject-card__caption" x-text='caption'></p>
+      </template>
+    </div>
+  </a>
+{%- endif -%}

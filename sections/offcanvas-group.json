@@ -1,0 +1,206 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "custom.offcanvas",
+  "name": "Offcanvas Sections",
+  "sections": {
+    "offcanvas_menu_QmtAiq": {
+      "type": "offcanvas-menu",
+      "blocks": {
+        "menu_6QJKPJ": {
+          "type": "menu",
+          "settings": {
+            "menu": ""
+          }
+        },
+        "image_link_AmMkk7": {
+          "type": "image_link",
+          "settings": {
+            "menu_label": "Shop",
+            "url": "shopify://collections/expandable-hoses",
+            "label": "Standard Expandable",
+            "caption": "Lightweight, efficient, and versatile.",
+            "bg_color": "#c6f695"
+          }
+        },
+        "image_link_hndAYn": {
+          "type": "image_link",
+          "settings": {
+            "menu_label": "Shop",
+            "url": "shopify://collections/proseries-hoses",
+            "label": "Pro Series Expandable",
+            "caption": "Powerful performance made easy.",
+            "bg_color": "#ffbc88"
+          }
+        },
+        "image_link_6H7iHf": {
+          "type": "image_link",
+          "settings": {
+            "menu_label": "Shop",
+            "url": "shopify://collections/flatjacket-hoses",
+            "label": "FLATJACKET™",
+            "caption": "Compact and super light.",
+            "bg_color": "#b6e7f9"
+          }
+        },
+        "image_link_djYXqz": {
+          "type": "image_link",
+          "settings": {
+            "menu_label": "Shop",
+            "url": "shopify://collections/nozzles",
+            "label": "Nozzles & Accessories",
+            "caption": "Precision tools for every task.",
+            "bg_color": "#ffd793"
+          }
+        }
+      },
+      "block_order": [
+        "menu_6QJKPJ",
+        "image_link_AmMkk7",
+        "image_link_hndAYn",
+        "image_link_6H7iHf",
+        "image_link_djYXqz"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1"
+      }
+    },
+    "offcanvas_contact_9wGjjV": {
+      "type": "offcanvas-contact",
+      "blocks": {
+        "email_enVTf7": {
+          "type": "email",
+          "settings": {
+            "separate_name": true,
+            "name_placeholder": "Name",
+            "email_placeholder": "Email address"
+          }
+        },
+        "dropdown_jjA7cc": {
+          "type": "dropdown",
+          "settings": {
+            "required": true,
+            "label": "Reason For Inquiry",
+            "options": "Option 1\nOption 2\nOption 2"
+          }
+        },
+        "field_X9CiWe": {
+          "type": "field",
+          "settings": {
+            "required": false,
+            "type": "input",
+            "label": "Subject",
+            "placeholder": "Type your subject"
+          }
+        },
+        "field_4NmHLA": {
+          "type": "field",
+          "settings": {
+            "required": false,
+            "type": "textarea",
+            "label": "Message",
+            "placeholder": "Type your inquiry here"
+          }
+        },
+        "button_JThkmQ": {
+          "type": "button",
+          "settings": {
+            "label": "Submit",
+            "color_theme": "tertiary"
+          }
+        }
+      },
+      "block_order": [
+        "email_enVTf7",
+        "dropdown_jjA7cc",
+        "field_X9CiWe",
+        "field_4NmHLA",
+        "button_JThkmQ"
+      ],
+      "settings": {
+        "title": "Contact",
+        "embed_code": "",
+        "success_message": "<h4>Thanks for reaching out!</h4><p>We will get back to you shortly.</p>",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "offcanvas_cart_GhbKBA": {
+      "type": "offcanvas-cart",
+      "blocks": {
+        "price_progress_bar_EepTtF": {
+          "type": "price_progress_bar",
+          "settings": {
+            "collection": "bracelets",
+            "price": "120",
+            "condition_label": "<p>Spend <strong>$[price]</strong> to get free shipping!</p>",
+            "success_message": "<p>You have free shipping!</p>",
+            "track_color": "#141723",
+            "track_bg_color": "#a0a1a6",
+            "color_scheme_progress_bar": "scheme_1"
+          }
+        },
+        "quantity_progress_bar_hTeCGw": {
+          "type": "quantity_progress_bar",
+          "disabled": true,
+          "settings": {
+            "collection": "bracelets",
+            "quantity": 3,
+            "condition_label": "<p>Add <strong>[quantity] </strong>more for 20% off</p>",
+            "success_message": "<p>You have 20% off!</p>",
+            "track_color": "#141723",
+            "track_bg_color": "#a0a1a6",
+            "color_scheme_progress_bar": "scheme_1"
+          }
+        },
+        "product_upsell_4GVm84": {
+          "type": "product_upsell",
+          "settings": {
+            "color_scheme_upsell": "scheme-1",
+            "title": "You might also like:",
+            "quantity": 0,
+            "products": [
+              "leather-anchor",
+              "chain-bracelet"
+            ]
+          }
+        },
+        "cart_surcharge_KHWaJr": {
+          "type": "cart_surcharge",
+          "disabled": true,
+          "settings": {
+            "title": "Surcharge of",
+            "type_indicator": "mws_fee_generated"
+          }
+        }
+      },
+      "block_order": [
+        "price_progress_bar_EepTtF",
+        "quantity_progress_bar_hTeCGw",
+        "product_upsell_4GVm84",
+        "cart_surcharge_KHWaJr"
+      ],
+      "settings": {
+        "cart_title": "Cart",
+        "checkout_message": "",
+        "general_message": "",
+        "button_label": "Checkout",
+        "color_theme": "primary",
+        "cart_exclusion_strings": "'mws_fee_generated'",
+        "color_scheme": "scheme-1",
+        "color_scheme_checkout": "scheme-e7a2b49c-36ae-4b1f-b31f-f3ec31db1021"
+      }
+    }
+  },
+  "order": [
+    "offcanvas_menu_QmtAiq",
+    "offcanvas_contact_9wGjjV",
+    "offcanvas_cart_GhbKBA"
+  ]
+}

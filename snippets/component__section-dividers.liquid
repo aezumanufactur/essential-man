@@ -1,0 +1,141 @@
+{%- assign top_divider = section.settings.section_divider_top -%}
+{%- assign bottom_divider = section.settings.section_divider_bottom -%}
+<style>
+  #shopify-section-{{ section.id }} {
+    {%- if top_divider == "line" -%}
+      border-top: solid 2px black;
+    {%- endif -%}
+
+    {%- if bottom_divider == "line" -%}
+      border-bottom: solid 2px black;
+    {%- endif -%}
+
+    {%- if top_divider == "rounded" -%}
+      margin-top: -30px;
+      z-index: 2;
+    {%- endif -%}
+
+    {%- if bottom_divider == "rounded" -%}
+      margin-bottom: -30px;
+      z-index: 2;
+    {%- endif -%}
+
+    {%- if top_divider == "wave" or bottom_divider == "wave" -%}
+      z-index: 2;
+    {%- endif -%}
+  }
+
+  #shopify-section-{{ section.id }} .section-spacer {
+    {%- if top_divider == "rounded" -%}
+      border-top-left-radius: 30px;
+      border-top-right-radius: 30px;
+      opacity: 0.9999999;
+    {%- endif -%}
+
+    {%- if bottom_divider == "rounded" -%}
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+      opacity: 0.9999999;
+    {%- endif -%}
+  }
+
+  {%- if top_divider == "rounded" or bottom_divider == "rounded" -%}
+    {%- if section.settings.grid_gutter contains "grid-gutter-mobile" -%}
+      @media (max-width: 1023px) {
+        #shopify-section-{{ section.id }} section {
+          background: var(--color-main-background);
+          border-top-left-radius: 30px;
+          border-top-right-radius: 30px;
+          opacity: 0.9999999;
+        }
+      }
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if top_divider == "rounded" or bottom_divider == "rounded" -%}
+    {%- if section.settings.grid_gutter contains "grid-gutter-desktop" -%}
+      @media (min-width: 1024px) {
+        #shopify-section-{{ section.id }} section {
+          background: var(--color-main-background);
+          border-top-left-radius: 30px;
+          border-top-right-radius: 30px;
+          opacity: 0.9999999;
+        }
+      }
+    {%- endif -%}
+  {%- endif -%}
+</style>
+{%- if top_divider == "scale" -%}
+  <style>
+    #shopify-section-{{ section.id }} {
+      padding-left: 60px;
+      padding-right: 60px;
+      margin-top: -30px;
+      z-index: 2;
+      background: linear-gradient(180deg, transparent 0, #fff 30px);
+    }
+
+    #shopify-section-{{ section.id }} section {
+      border-top-left-radius: 30px;
+      border-top-right-radius: 30px;
+      overflow: hidden;
+    }
+  </style>
+  <div class="section-scale-helper"
+    x-data="MFRSectionScale"></div>
+  {% render 'script__section', file: "MFRSectionScale.js" %}
+{%- endif -%}
+{%- if top_divider == "wave" or bottom_divider == "wave" -%}
+  <div class="section-divider">
+    {%- capture top_divider_svg -%}
+      {%- assign color = section.settings.section_divider_top_color | default: section.settiongs.bg_color | default: section.settings.color_scheme.settings.background -%}
+      <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 195">
+        <g id="Layer_1-2" data-name="Layer 1">
+          <g id="Asset-Guide">
+            <path class="cls-1" fill-rule="evenodd" fill="{{ color | default: "#f3e1f8" }}" d="M3000,144.4v50.6H0c.07-33.74.07-50.6,0-50.6,127.85,0,307.17-36.33,407.64-56.92.79-.16,1.58-.32,2.36-.48,100.68-20.64,223.68-47.29,369-79.95,94.19-14.31,184.79-6.85,271.79,22.38,130.13,43.72,173.86,79.95,390.4,108.18,274.28,35.75,495.06-26.11,780.81-65.15,2.86-.35,5.7-.69,8.54-1.02,64.59-7.55,134.44-13.74,201.55-14.74,95.38-1.42,108.3,4.9,171.75,15.8,99.11,17.02,205.56,65,396.16,71.9Z"/>
+            <path class="cls-1" fill-rule="evenodd" fill="{{ color | default: "#f3e1f8" }}" d="M0,195v-50.6c.07,0,.07,16.86,0,50.6Z"/>
+          </g>
+        </g>
+      </svg>
+    {%- endcapture -%}
+    {%- capture bottom_divider_svg -%}
+      {%- assign color = section.settings.section_divider_bottom_color | default: section.settiongs.bg_color | default: section.settings.color_scheme.settings.background -%}
+      <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 195">
+        <g id="Layer_1-2" data-name="Layer 1">
+          <g id="Asset-Guide">
+            <path class="cls-1" fill-rule="evenodd" fill="{{ color | default: "#f3e1f8" }}" d="M3000,144.4v50.6H0c.07-33.74.07-50.6,0-50.6,127.85,0,307.17-36.33,407.64-56.92.79-.16,1.58-.32,2.36-.48,100.68-20.64,223.68-47.29,369-79.95,94.19-14.31,184.79-6.85,271.79,22.38,130.13,43.72,173.86,79.95,390.4,108.18,274.28,35.75,495.06-26.11,780.81-65.15,2.86-.35,5.7-.69,8.54-1.02,64.59-7.55,134.44-13.74,201.55-14.74,95.38-1.42,108.3,4.9,171.75,15.8,99.11,17.02,205.56,65,396.16,71.9Z"/>
+            <path class="cls-1" fill-rule="evenodd" fill="{{ color | default: "#f3e1f8" }}" d="M0,195v-50.6c.07,0,.07,16.86,0,50.6Z"/>
+          </g>
+        </g>
+      </svg>
+    {%- endcapture -%}
+    {%- capture css_url_top -%}
+      {% render 'component__svg-encoder',
+        svg_code: top_divider_svg,
+        for_css: true %}
+    {%- endcapture -%}
+    {%- capture css_url_bottom -%}
+      {% render 'component__svg-encoder',
+        svg_code: bottom_divider_svg,
+        for_css: true %}
+    {%- endcapture -%}
+    {%- if top_divider == "wave" -%}
+      <div class="section-divider__top section-divider__wave">
+        <style>
+          #shopify-section-{{ section.id }} .section-divider__top.section-divider__wave {
+            --divider-image: {{- css_url_top -}};
+          }
+        </style>
+      </div>
+    {%- endif -%}
+    {%- if bottom_divider == "wave" -%}
+      <div class="section-divider__bottom section-divider__wave">
+        <style>
+          #shopify-section-{{ section.id }} .section-divider__bottom.section-divider__wave {
+            --divider-image: {{- css_url_bottom -}};
+          }
+        </style>
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}

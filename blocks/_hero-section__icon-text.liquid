@@ -1,0 +1,41 @@
+{% if block.settings.icon != blank %}
+  <div class="hero-section__icon-text-icon scrolling-icon-text__icon-text-icon w-[2.125rem] shrink-0 large:w-auto large:h-full [&_img]:w-full [&_img]:h-auto [&_img]:block large:[&_img]:w-auto large:[&_img]:h-full">
+    {% assign default_alt = "maybe an image about " | append: block.settings.text %}
+    {% assign alt = block.settings.image | default: default_alt %}
+    {% render 'component__lazyload-image',
+      image: block.settings.icon,
+      width: 144,
+      alt: alt %}
+  </div>
+{% endif %}
+
+{% if block.settings.text != blank %}
+  <p class="hero-section__icon-text-text scrolling-icon-text__icon-text-text [font-size:var(--font-body-size-small-mobile)] large:[font-size:var(--font-body-size-small)] leading-[1.167em] font-medium [letter-spacing:-0.01188rem] text-center [color:var(--color-black)] large:text-left large:[color:currentColor] [&:not(:last-child)]:mb-[0.8125rem] [&_img]:w-full [&_img]:h-auto [&_img]:block">
+    {{ block.settings.text }}
+  </p>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Icon Text",
+    "class": "hero-section__icon-text scrolling-icon-text__icon-text",
+    "settings": [
+      {
+        "type":"image_picker",
+        "id":"icon",
+        "label":"Icon"
+      },
+      {
+        "type":"text",
+        "id":"text",
+        "default":"Text",
+        "label":"Text"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Icon Text"
+      }
+    ]
+  }
+{% endschema %}

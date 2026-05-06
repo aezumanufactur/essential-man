@@ -1,0 +1,60 @@
+<style>
+  #shopify-block-{{ block.id }} {
+    {%- if block.settings.text_color != blank -%}
+      --text-color: {{ block.settings.text_color }};
+    {%- endif -%}
+    {% if block.settings.bg_color != blank %}
+      --bg-color: {{ block.settings.bg_color }};
+    {% endif %}
+  }
+</style>
+{%- if block.settings.image != blank -%}
+  {% assign default_alt = "maybe an image about " | append: block.settings.text %}
+  {% assign alt = block.settings.image.alt | default: default_alt %}
+  {% render 'component__lazyload-image',
+    image: block.settings.image,
+    width: 240,
+    alt: alt %}
+{%- elsif block.settings.text != blank -%}
+  <p>{{ block.settings.text }}</p>
+{%- endif -%}
+{% schema %}
+  {
+    "name": "Item",
+    "class": "table-section__item",
+    "tag": "td",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "text",
+        "label": "Text",
+        "default": "lorem"
+      },
+      {
+        "type": "header",
+        "content": "Color Settings"
+      },
+      {
+        "type": "color_background",
+        "id": "text_color",
+        "label": "Text Color",
+        "default": "#1B1A21"
+      },
+      {
+        "type": "color_background",
+        "id": "bg_color",
+        "label": "Background Color"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Item"
+      }
+    ]
+  }
+{% endschema %}

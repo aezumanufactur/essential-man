@@ -1,0 +1,116 @@
+<style>
+  #shopify-block-{{ block.id }} {
+    --width-mobile: {{ block.settings.width_mobile | default: 436 }}px;
+    --width-desktop: {{ block.settings.width_desktop | default: 436 }}px;
+    --padding-mobile: {{ block.settings.padding_mobile }}px;
+    --padding-desktop: {{ block.settings.padding_desktop }}px;
+    --border-radius-mobile: {{ block.settings.border_radius_mobile }}px;
+    --border-radius-desktop: {{ block.settings.border_radius_desktop }}px;
+    --background-color: {{ block.settings.background_color }};
+  }
+</style>
+<div class="mfr-card__inner">
+  {%- content_for "blocks" -%}
+</div>
+{% schema %}
+  {
+    "name": "Card",
+    "class": "mfr-card mfr-carousel__item",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Background Settings"
+      },
+      {
+        "type": "color_background",
+        "id": "background_color",
+        "label": "Background Color",
+        "default": "#CCD9F2"
+      },
+      {
+        "type": "header",
+        "content": "Width Settings"
+      },
+      {
+        "type": "number",
+        "id": "width_mobile",
+        "label": "Width - Mobile",
+        "default": 436
+      },
+      {
+        "type": "number",
+        "id": "width_desktop",
+        "label": "Width - Desktop",
+        "default": 436
+      },
+      {
+        "type": "header",
+        "content": "Padding Settings"
+      },
+      {
+        "type": "number",
+        "id": "padding_mobile",
+        "label": "Padding - Mobile",
+        "default": 5
+      },
+      {
+        "type": "number",
+        "id": "padding_desktop",
+        "label": "Padding - Desktop",
+        "default": 5
+      },
+      {
+        "type": "header",
+        "content": "Padding Settings"
+      },
+      {
+        "type": "number",
+        "id": "border_radius_mobile",
+        "label": "Border Radius - Mobile",
+        "default": 30
+      },
+      {
+        "type": "number",
+        "id": "border_radius_desktop",
+        "label": "Border Radius - Desktop",
+        "default": 30
+      },
+    ],
+    "blocks": [
+      {
+        "type": "_card-image"
+      },
+      {
+        "type": "_card-video"
+      },
+      {
+        "type": "_card-title"
+      },
+      {
+        "type": "_card-text"
+      },
+      {
+        "type": "_card-button"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Card",
+        "blocks": [
+          {
+            "type": "_card-image"
+          },
+          {
+            "type": "_card-title"
+          },
+          {
+            "type": "_card-text"
+          },
+          {
+            "type": "_card-button"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

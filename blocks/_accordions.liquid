@@ -1,0 +1,61 @@
+<style>
+  #shopify-block-{{ block.id }} {
+    {%- if block.settings.bg_color != blank -%}
+      --content-background-color: {{ block.settings.bg_color }};
+      --content-padding-mobile: 40px 25px 60px;
+      --content-padding-desktop: 30px 80px 80px;
+      --content-border-radius-mobile: 30px;
+      --content-border-radius-desktop: 40px;
+    {%- endif -%}
+    --content-text-color: {{ block.settings.text_color }};
+    text-align: left;
+  }
+</style>
+{%- if block.settings.accordions != blank -%}
+  
+{%- elsif block.blocks.size > 0 -%}
+  {%- content_for "blocks" -%}
+{%- else -%}
+  {%- if request.design_mode -%}
+    {%- for i in (1..3) -%}
+      <div class="accordion__wrapper">
+        {% render 'mfr-component__accordion',
+          block_id: i,
+          initially_open: true,
+          trigger_label: "Lorem ipsum dolor sit?",
+          content: "<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime assumenda itaque commodi repellat veniam ex voluptate nemo necessitatibus mollitia molestias!</p>" %}
+      </div>
+    {%- endfor -%}
+  {%- endif -%}
+{%- endif -%}
+{% schema %}
+  {
+    "name": "Accordions",
+    "class": "accordions",
+    "settings": [
+      {
+        "type": "color_background",
+        "id": "bg_color",
+        "label": "Background Color"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color"
+      },
+    ],
+    "blocks": [
+      { "type": "_accordion" }
+    ],
+    "presets": [
+      {
+        "name": "Accordions",
+        "blocks": [
+          { "type": "_accordion" },
+          { "type": "_accordion" },
+          { "type": "_accordion" }
+        ]
+      }
+    ]
+  }
+{% endschema %}

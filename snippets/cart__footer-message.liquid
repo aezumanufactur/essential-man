@@ -1,0 +1,11 @@
+<div class="cart-form__footer-message mb-4">
+	<div class="cart-form__footer-message-inner rounded-[0.625rem] bg-[var(--color-off-white)] px-4 py-[1.125rem] [font-family:var(--custom-font-name-2)] text-[var(--font-body-size-xsmall)] font-bold uppercase leading-[1.636em] transition-all [&_a]:border-b [&_a]:border-current [&_p]:mb-2 [&_p]:w-full [&_p]:text-inherit [&_p]:font-inherit [&_p]:uppercase [&_p]:leading-inherit [&_p:last-child]:mb-0 [&_ul]:grid [&_ul]:list-none [&_ul]:grid-cols-[auto_auto] [&_ul]:gap-2.5 [&_ul]:p-0 [&_li]:relative [&_li]:flex [&_li]:items-center [&_li]:tracking-[0.03125rem] [&_li:last-child]:mb-0 [&_li:before]:mr-[0.5625rem] [&_li:before]:h-2.5 [&_li:before]:w-2.5 [&_li:before]:shrink-0 [&_li:before]:rounded-full [&_li:before]:border-2 [&_li:before]:border-[#A90300] [&_li:before]:content-['']">
+		{% if gen_msg != blank %}
+			<div>{{ gen_msg }}</div>
+		{% endif %}
+		
+		{% if sub_msg != blank %}
+			<div>{{ sub_msg }}</div>
+		{% endif %}
+	</div>
+</div>
