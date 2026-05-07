@@ -279,18 +279,6 @@
     @include user-select(none);
     @include transition($global-transition);
 
-    &.standard {
-      @include breakpoint(large up) {
-        display: none;
-      }
-    }
-    &.mobile {
-      display: block;
-    }
-
-    &.both {
-      display: block;
-    }
 
     span.indicator {
       @include border-radius(1rem);
@@ -395,5 +383,19 @@
         color: $header-text-color-sticky;
       }
     }
+  }
+}
+
+.header__left-inner {
+  &.standard .mobile-menu-trigger {
+    @include breakpoint(large up) {
+      display: none;
+    }
+  }
+  &.hamburger .mobile-menu-trigger {
+    display: block;
+  }
+  &.both .mobile-menu-trigger {
+    display: block;
   }
 }

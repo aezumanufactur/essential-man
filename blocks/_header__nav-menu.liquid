@@ -1,0 +1,53 @@
+{%- if block.settings.menu != blank -%}
+
+  <nav class="header__menu header-menu">
+    <ul class="header-menu__items">
+      {%- for link in block.settings.menu.links -%}
+        <li class="header-menu__item">
+          <a class="header-menu__title"
+            href="{{ link.url }}"
+            aria-label="{{ link.title }}"
+            title="{{ link.title }}"
+            @click='$nextTick( () => $el.blur() )'>
+            <span>{{ link.title }}</span>
+            {%- if link.links != blank -%}
+              {%- render 'icon__chevrons', position: 'down' -%}
+            {%- endif -%}
+          </a>
+          {%- if link.links != blank -%}
+            <div class="header-menu__submenu header-submenu">
+              <ul class="header-submenu__items">
+                {%- for child_link in link.links -%}
+                  <li>
+                    <a href="{{ child_link.url }}" title="{{ child_link.title }}">
+                      <span>{{ child_link.title }}</span>
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </nav>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Nav Menu",
+  "class": "header__nav-menu-block",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Nav Menu"
+    }
+  ]
+}
+{% endschema %}

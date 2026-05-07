@@ -1,0 +1,53 @@
+<div class="header__left-inner {{ block.settings.menu_display }}">
+  <button aria-label="Mobile Menu Trigger"
+    class="mobile-menu-trigger"
+    type="button"
+    x-data
+    x-on:click='$store["offCanvasMenu"].toggleOffcanvas()'
+    :aria-expanded='$store["offCanvasMenu"].open'>
+    <span class="indicator"></span>
+    <span class="indicator"></span>
+    <span class="indicator"></span>
+    <div class="menu-text visually-hidden">Menu</div>
+    <span class="close-indicator">
+      <span class="close-indicator__icon">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="19" height="15">
+          <path fill="none" stroke="white" stroke-width="1.5" stroke-linecap="square" stroke-miterlimit="10" transform="translate(2.10156 6.5498)" d="M0 0.5L15 0.5" fill-rule="evenodd"/>
+          <path fill="none" stroke="white" stroke-width="1.5" stroke-miterlimit="10" transform="translate(1.10156 0.549805)" d="M7 13L0 6.5L7 0" fill-rule="evenodd"/>
+        </svg>
+      </span>
+      <span class="close-indicator__text">Close</span>
+    </span>
+  </button>
+
+  {%- content_for "blocks" -%}
+</div>
+
+{% schema %}
+{
+  "name": "Left Column",
+  "class": "header__left",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Menu Settings"
+    },
+    {
+      "type": "select",
+      "id": "menu_display",
+      "label": "Desktop Menu Display",
+      "options": [
+        { "value": "standard", "label": "Standard" },
+        { "value": "hamburger", "label": "Hamburger" },
+        { "value": "both", "label": "Both" }
+      ],
+      "default": "standard"
+    }
+  ],
+  "blocks": [
+    { "type": "_header__nav-menu" },
+    { "type": "_header__button" }
+  ],
+  "presets": []
+}
+{% endschema %}

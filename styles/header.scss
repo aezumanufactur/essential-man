@@ -46,9 +46,6 @@ $header-text-color-hover: $brand-color;
   letter-spacing: $header-letter-spacing-mobile;
   text-transform: $header-font-case;
   font-size: $header-font-size-mobile;
-  padding: rem-calc( 3px ) rem-calc( 11px ) rem-calc( 7px ) rem-calc( 11px );
-  border: solid rem-calc( 1.5px ) transparent;
-  @include border-radius( rem-calc( 15px ) );
 
   @include breakpoint( large up ) {
     font-size: $header-font-size-desktop;
@@ -180,6 +177,26 @@ header.header {
     &__left {
       @include breakpoint( large up ) {
         padding: 0 0 0 0;
+      }
+      &-inner {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        &.standard .header-menu {
+          @include breakpoint( large up ) {
+            display: flex;
+          }
+        }
+        &.both .header-menu {
+          @include breakpoint( large up ) {
+            display: flex;
+          }
+        }
+        &.hamburger .header__button-block {
+          @include breakpoint( large up ) {
+            display: none;
+          }
+        }
       }
     }
 
@@ -316,7 +333,7 @@ header.header {
           height: 100%;
 
           @include breakpoint( large up ) {
-            gap: rem-calc( 18px );
+            gap: rem-calc( 53px );
           }
 
           &.full {
@@ -326,6 +343,29 @@ header.header {
               padding-inline: var(--grid-container-padding-desktop);
             }
           }
+        }
+
+        .header__left {
+          display: inline-flex;
+          align-items: stretch;
+          justify-content: flex-start;
+          grid-area: left;
+        }
+
+        .header__center {
+          display: inline-flex;
+          align-items: flex-start;
+          grid-area: center;
+        }
+
+        .header__right {
+          display: inline-flex;
+          align-items: stretch;
+          justify-content: flex-end;
+          white-space: nowrap;
+          margin-left: rem-calc(28);
+          gap: rem-calc(25);
+          grid-area: right;
         }
         
         &.logo-left {
@@ -620,22 +660,6 @@ header.header {
   justify-content: flex-start;
   display: none;
 
-  &.standard.left {
-    @include breakpoint( large up ) {
-        display: flex;
-    }
-  }
-  &.mobile.left {
-    @include breakpoint( large up ) {
-        display: flex;
-    }
-  }
-  &.both {
-
-    @include breakpoint( large up ) {
-      display: flex;
-    }
-  }
 
 
   &.right {
@@ -650,7 +674,7 @@ header.header {
     @include clear-list;
     display: flex;
     height: 100%;
-    gap: rem-calc( 9px );
+    gap: rem-calc( 26px );
   }
 
   &__title {

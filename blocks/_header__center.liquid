@@ -1,0 +1,89 @@
+{%- if block.settings.logo != blank or block.settings.logo_sticky != blank -%}
+  <style>
+    #shopify-block-{{ block.id }} .header-logo {
+      width: 100%;
+      max-width: {{ block.settings.logo_width_mobile }}px;
+    }
+    @media (min-width: 1024px) {
+      #shopify-block-{{ block.id }} .header-logo {
+        max-width: {{ block.settings.logo_width_desktop }}px;
+      }
+    }
+  </style>
+{%- endif -%}
+
+<a href="/" itemprop="url"
+  class="header__logo header-logo{%- if block.settings.logo_sticky != blank %} has-sticky-logo{%- endif %}">
+  {%- if block.settings.logo != blank -%}
+    {%- assign image_width = block.settings.logo.width | times: 1.00 -%}
+    {%- assign image_height = block.settings.logo.height | times: 1.00 -%}
+    {%- assign aspect_ratio = image_width | divided_by: image_height -%}
+    {%- assign logo_height = 420 | divided_by: aspect_ratio | round: 2 -%}
+    {{ block.settings.logo
+        | image_url: width: 420
+        | image_tag: width: 420,
+          height: logo_height,
+          widths: "300,360,420",
+          alt: shop.name,
+          class: "header-logo__default" }}
+  {%- endif -%}
+  {%- if block.settings.logo_sticky != blank -%}
+    {%- assign sticky_width = block.settings.logo_sticky.width | times: 1.00 -%}
+    {%- assign sticky_height = block.settings.logo_sticky.height | times: 1.00 -%}
+    {%- assign sticky_ratio = sticky_width | divided_by: sticky_height -%}
+    {%- assign sticky_img_height = 420 | divided_by: sticky_ratio | round: 2 -%}
+    {{ block.settings.logo_sticky
+        | image_url: width: 420
+        | image_tag: width: 420,
+          height: sticky_img_height,
+          widths: "300,360,420",
+          alt: shop.name,
+          class: "header-logo__sticky" }}
+  {%- endif -%}
+</a>
+
+{% schema %}
+{
+  "name": "Center Column",
+  "class": "header__center",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_sticky",
+      "label": "Logo - Sticky",
+      "info": "This logo will appear when the header becomes sticky."
+    },
+    {
+      "type": "range",
+      "id": "logo_width_mobile",
+      "label": "Logo Width - Mobile",
+      "min": 70,
+      "max": 350,
+      "step": 5,
+      "unit": "px",
+      "default": 220
+    },
+    {
+      "type": "range",
+      "id": "logo_width_desktop",
+      "label": "Logo Width - Desktop",
+      "min": 70,
+      "max": 350,
+      "step": 5,
+      "unit": "px",
+      "default": 250
+    }
+  ],
+  "blocks": [],
+  "presets": []
+}
+{% endschema %}

@@ -1,0 +1,42 @@
+{%- if block.settings.label != blank -%}
+  <a href="{{ block.settings.url | default: '#' }}"
+    class="header__button header-button header-button--{{ block.settings.style }} show-for-large"
+    title="{{ block.settings.label }}">
+    <span>{{ block.settings.label }}</span>
+  </a>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Button",
+  "class": "header__button-block",
+  "settings": [
+    {
+      "type": "url",
+      "id": "url",
+      "label": "URL"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "options": [
+        { "value": "filled", "label": "Filled" },
+        { "value": "outlined", "label": "Outlined" }
+      ],
+      "default": "filled"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Button"
+    }
+  ]
+}
+{% endschema %}

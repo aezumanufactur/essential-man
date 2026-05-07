@@ -32,16 +32,61 @@
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "header-left": {
+          "type": "_header__left",
+          "static": true,
+          "settings": {
+            "menu_display": "standard"
+          },
+          "blocks": {
+            "header_nav_menu_td9yMn": {
+              "type": "_header__nav-menu",
+              "name": "Nav Menu",
+              "settings": {
+                "menu": "main-menu"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "header_nav_menu_td9yMn"
+          ]
+        },
+        "header-center": {
+          "type": "_header__center",
+          "static": true,
+          "settings": {
+            "logo": "shopify://shop_images/essential-man-logo.svg",
+            "logo_sticky": "shopify://shop_images/essential-man-logo--black.svg",
+            "logo_width_mobile": 220,
+            "logo_width_desktop": 250
+          },
+          "blocks": {}
+        },
+        "header-right": {
+          "type": "_header__right",
+          "static": true,
+          "settings": {
+            "show_cart_cta": true,
+            "show_cart_icon": true,
+            "show_search_bar": true,
+            "show_account_cta": false,
+            "account_label": "Account",
+            "show_contact_cta": false,
+            "contact_label": "Contact Us"
+          },
+          "blocks": {}
+        }
+      },
       "settings": {
-        "logo": "shopify://shop_images/essential-man-logo.svg",
-        "logo_sticky": "shopify://shop_images/essential-man-logo--black.svg",
-        "logo_width_mobile": 220,
-        "logo_width_desktop": 250,
         "layout_mobile": "logo-center",
         "layout_desktop": "logo-left-contained",
         "grid_container_width": "full",
         "color_scheme": "scheme-e7a2b49c-36ae-4b1f-b31f-f3ec31db1022",
         "color_scheme_sticky": "scheme-1",
+        "bg_color_override": "",
+        "bg_color_sticky_override": "",
         "offset_mobile": 0,
         "offset_desktop": 0,
         "offset_sticky_mobile": 0,
@@ -50,19 +95,12 @@
         "border_radius_desktop": 0,
         "sticky_border_radius_mobile": 0,
         "sticky_border_radius_desktop": 0,
-        "show_border_bottom": true,
-        "border_bottom_color": "#ffffff",
-        "border_bottom_opacity": 20,
-        "menu_display": "standard",
-        "menu": "main-menu",
-        "right_menu": "",
-        "show_cart_cta": true,
-        "show_cart_icon": true,
-        "show_search_bar": true,
-        "show_account_cta": false,
-        "account_label": "Account",
-        "show_contact_cta": false,
-        "contact_label": "Contact Us",
+        "show_border_bottom_mobile": false,
+        "border_bottom_color_mobile": "#ffffff",
+        "border_bottom_opacity_mobile": 20,
+        "show_border_bottom_desktop": false,
+        "border_bottom_color_desktop": "#ffffff",
+        "border_bottom_opacity_desktop": 20,
         "appear_on": ""
       }
     }

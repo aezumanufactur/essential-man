@@ -12,196 +12,13 @@
   </style>
 {%- endif -%}
 
-{% if section.settings.logo_position == 'center' %}
-  {% assign is_logo_centered = "header--logo-centered" %}
-{% endif %}
+{%- assign appear_on = section.settings.appear_on | newline_to_br | strip_newlines | split: '<br />' -%}
+{%- assign layout_mobile = section.settings.layout_mobile -%}
+{%- assign layout_desktop = section.settings.layout_desktop -%}
 
-{% if section.settings.menu_display == 'hamburger' %}
-  {% assign menu_display = "mobile" %}
-{% elsif section.settings.menu_display == "standard" %}
-  {% assign menu_display = "standard" %}
-{% else %}
-  {% assign menu_display = "both" %}
-{% endif %}
-
-{% assign appear_on = section.settings.appear_on | newline_to_br | strip_newlines | split: '<br />' %}
-{% assign layout_mobile = section.settings.layout_mobile %}
-{% assign layout_desktop = section.settings.layout_desktop %}
-{% assign mega_menus = section.blocks | where: "type", "mega_menu" %}
-{% assign mega_menu_image_links = section.blocks | where: "type", "mega_menu_image_link" %}
-
-{% if request.design_mode %}
-  {% assign design_mode_class = "design-mode" %}
-{% endif %}
-
-{% capture header_logo %}
-  {% render "component__header-logo" %}
-{% endcapture %}
-
-{% capture header_search %}
-  <div class="header__search show-for-large">
-    {% render 'header__search', searches: section.settings.searches, searches_heading: section.settings.searches_heading, icon_as_svg: true %}
-  </div>
-{% endcapture %}
-
-{% capture header_contact %}
-  <a href="#offCanvasContact" class="header__contact show-for-large"
-    aria-label="{{ section.settings.contact_label }}"
-    title="{{ section.settings.contact_label }}">
-    {% if section.settings.contact_icon != blank %}
-      {{ section.settings.contact_icon 
-        | image_url: width: 46
-        | image_tag: width: 46,
-          widths: "46",
-          alt: "account icon" }}
-      <span class="visually-hidden">{{ section.settings.contact_label }}</span>
-    {% else %}
-      <span>{{ section.settings.contact_label }}</span>
-    {% endif %}
-  </a>
-{% endcapture %}
-
-{% capture header__menu %}
-  {%- if section.settings.menu != blank -%}      
-    <nav class="header__menu header-menu left {{ menu_display }}">
-
-      <ul class="header-menu__items">
-        {%- for link in section.settings.menu.links -%}
-          {% assign assigned_mega_menus = mega_menus | map: "settings" | where: "trigger_label", link.title %}
-          
-          <li class="header-menu__item {% if assigned_mega_menus != blank %}mega-menu__trigger{% endif %}">
-            <a class="header-menu__title mega-menu__trigger-anchor" href="{{ link.url }}"
-              aria-label="{{ link.title }}"
-              title="{{ link.title }}"
-              {% if assigned_mega_menus != blank %}aria-expanded="false"{% endif %}
-              @click='
-                $nextTick( () => $el.blur() );
-              '>
-              <span>{{ link.title }}</span>
-              {%- if link.links != blank or assigned_mega_menus != blank -%}
-                {%- render 'icon__chevrons', position: 'down' -%}
-              {%- endif -%}
-            </a>
-            {%- if assigned_mega_menus != blank -%}
-              {% for mega_menu in assigned_mega_menus %}
-                {% assign assigned_mega_menu_image_links = mega_menu_image_links 
-                    | map: "settings" 
-                    | where: "mega_menu_handle", mega_menu.handle %}
-                {% render 'header__mega-menu',
-                  mega_menu: mega_menu, 
-                  image_links: assigned_mega_menu_image_links %}
-              {% endfor %}
-            {%- elsif link.links != blank -%}
-              <div class="header-menu__submenu header-submenu">
-                <ul class="header-submenu__items">
-                  {%- for child_link in link.links -%}
-                    <li>
-                      <a href="{{ child_link.url }}" title="{{ child_link.title }}">
-                        <span>{{ child_link.title }}</span>
-                      </a>
-                    </li>
-                  {%- endfor -%}
-                </ul>
-
-              </div>
-            {%- endif -%}
-          </li>
-        {%- endfor -%}
-      </ul>
-
-    </nav>  <!-- .header__menu -->
-  {%- endif -%}
-{% endcapture %}
-
-{% capture header__right-menu %}
-  {%- if section.settings.right_menu != blank -%}      
-    <nav class="header__menu header-menu right">
-      <ul class="header-menu__items">
-        {%- for link in section.settings.right_menu.links -%}
-          {% assign assigned_mega_menus = mega_menus | map: "settings" | where: "trigger_label", link.title %}
-          <li class="header-menu__item {% if assigned_mega_menus != blank %}mega-menu__trigger{% endif %}">
-            <a class="header-menu__title mega-menu__trigger-anchor" href="{{ link.url }}"
-              aria-label="{{ link.title }}"
-              title="{{ link.title }}"
-              {% if assigned_mega_menus != blank %}aria-expanded="false"{% endif %}
-              @click='
-                $nextTick( () => $el.blur() );
-              '>
-              <span>{{ link.title }}</span>
-              {%- if link.links != blank or assigned_mega_menus != blank -%}
-                {%- render 'icon__chevrons', position: 'down' -%}
-              {%- endif -%}
-            </a>
-            {%- if assigned_mega_menus != blank -%}
-              {% for mega_menu in assigned_mega_menus %}
-                {% assign assigned_mega_menu_image_links = mega_menu_image_links 
-                    | map: "settings" 
-                    | where: "mega_menu_handle", mega_menu.handle %}
-                {% render 'header__mega-menu',
-                  mega_menu: mega_menu, 
-                  image_links: assigned_mega_menu_image_links %}
-              {% endfor %}
-            {%- elsif link.links != blank -%}
-              <div class="header-menu__submenu header-submenu">
-                <ul class="header-submenu__items">
-                  {%- for child_link in link.links -%}
-                    <li>
-                      <a href="{{ child_link.url }}" title="{{ child_link.title }}">
-                        <span>{{ child_link.title }}</span>
-                      </a>
-                    </li>
-                  {%- endfor -%}
-                </ul>
-
-              </div>
-            {%- endif -%}
-          </li>
-        {%- endfor -%}
-      </ul>
-
-    </nav>  <!-- .header__menu -->
-  {%- endif -%}
-{% endcapture %}
-
-{% capture cart_icon %}
-  <div class="header__cart {% if section.settings.show_cart_icon != blank %}has-icon{% endif %} cart" 
-    role="button"
-    x-data
-    x-on:click='$store["offCanvasCart"].openOffcanvas()'
-    :aria-expanded='$store["offCanvasCart"].open'>
-    <noscript>
-    <a href="/cart" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; text-indent: -9999999rem; z-index: 2;">Cart</a>
-    </noscript>
-    <div class="header__cart-inner">
-      <div class="cart__icon">
-        {% if section.settings.show_cart_icon %}
-          {% render 'icon__cart' %}
-        {% else %}
-          Cart
-        {% endif %}
-      </div>
-      <div class="cart__number">
-        <span class="cart__count">
-          <span x-text="$store.cart.cartCounter">0</span>
-        </span>
-      </div>
-    </div>
-  </div>
-{% endcapture %}
-
-{% capture account_icon %}
-  <a href="/account" class="header__account {% if section.settings.account_icon != blank %}has-icon{% endif %} cart" role="button">
-    {% if section.settings.account_icon != blank %}
-      {{ section.settings.account_icon 
-        | image_url: width: 46
-        | image_tag: width: 46,
-          widths: "46",
-          alt: "account icon" }}
-    {% else %}
-      <span>{{ section.settings.account_label }}</span>
-    {% endif %}
-  </a>
-{% endcapture %}
+{%- if request.design_mode -%}
+  {%- assign design_mode_class = "design-mode" -%}
+{%- endif -%}
 
 {% capture header_inline_styling %}
   --header-offset-mobile: {{ section.settings.offset_mobile }}px;
@@ -228,7 +45,7 @@
   {%- assign border_bottom_desktop_classes = "large:border-b-0" -%}
 {%- endif -%}
 {% if appear_on == blank or appear_on contains template %}
-  <div class="header__wrapper {{ header_wrapper_class }}  {{ design_mode_class }} {{ is_logo_centered }} flex justify-center items-center flex-col transition-all"
+  <div class="header__wrapper {{ design_mode_class }} flex justify-center items-center flex-col transition-all"
     style="{{ header_inline_styling }}">
     <div class="header__inner w-full relative {{ border_bottom_mobile_classes }} {{ border_bottom_desktop_classes }}">
       <div class="header__wrapper-inner {{ layout_mobile }}--mobile {{ layout_desktop }}--desktop">
@@ -238,62 +55,9 @@
           {%- assign grid_container_class = "grid-container" -%}
         {%- endif -%}
         <div class="{{ grid_container_class }} h-full">
-        <div class="header__left inline-flex items-stretch justify-start [grid-area:left]">
-
-          <button aria-label="Mobile Menu Trigger" 
-            class="mobile-menu-trigger {{ menu_display }}" 
-            type="button"
-            x-data
-            x-on:click='$store["offCanvasMenu"].toggleOffcanvas()'
-            :aria-expanded='$store["offCanvasMenu"].open'>
-            <span class="indicator"></span>
-            <span class="indicator"></span>
-            <span class="indicator"></span>
-            <div class="menu-text visually-hidden">Menu</div>
-
-            <span class="close-indicator">
-              <span class="close-indicator__icon">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="19" height="15">
-                  <path fill="none" stroke="white" stroke-width="1.5" stroke-linecap="square" stroke-miterlimit="10" transform="translate(2.10156 6.5498)" d="M0 0.5L15 0.5" fill-rule="evenodd"/>
-                  <path fill="none" stroke="white" stroke-width="1.5" stroke-miterlimit="10" transform="translate(1.10156 0.549805)" d="M7 13L0 6.5L7 0" fill-rule="evenodd"/>
-                </svg>
-              </span>
-              <span class="close-indicator__text">
-                Close
-              </span>
-            </span>
-          </button>
-
-          {{ header__menu }}
-          
-        </div> <!-- .header__left -->
-        
-        <div class="header__center inline-flex items-start [grid-area:center]">
-          {{ header_logo }}
-        </div>
-
-        <div class="header__right inline-flex items-stretch justify-end whitespace-nowrap ml-[1.75rem] gap-[1.5625rem] [grid-area:right]">
-
-          {{ header__right-menu }}
-
-          {% if section.settings.show_search_bar != blank %}
-            {{ header_search }}
-          {% endif %}
-
-          {% if section.settings.show_contact_cta != blank %}
-            {{ header_contact }}
-          {% endif %}
-
-          {% if section.settings.show_account_cta != blank %}
-            {{ account_icon }}
-          {% endif %}
-
-          {% if section.settings.show_cart_cta != blank %}
-            {{ cart_icon }}
-          {% endif %}
-
-          
-        </div> <!-- .header__right -->
+          {%- content_for "block", type: "_header__left", id: "header-left" -%}
+          {%- content_for "block", type: "_header__center", id: "header-center" -%}
+          {%- content_for "block", type: "_header__right", id: "header-right" -%}
         </div> <!-- .grid-container -->
       </div>
     </div>
@@ -314,41 +78,6 @@
       "groups": ["header"]
     },
     "settings": [
-      {
-        "type": "header",
-        "content": "Logo"
-      },
-      {
-        "type": "image_picker",
-        "id": "logo",
-        "label": "Logo"
-      },
-      {
-        "type": "image_picker",
-        "id": "logo_sticky",
-        "label": "Logo - Sticky",
-        "info": "This logo will appear when the header becomes sticky."
-      },
-      {
-        "type": "range",
-        "id": "logo_width_mobile",
-        "label": "Logo Width - Mobile",
-        "min": 70,
-        "max": 350,
-        "step": 5,
-        "unit": "px",
-        "default": 220
-      },
-      {
-        "type": "range",
-        "id": "logo_width_desktop",
-        "label": "Logo Width - Desktop",
-        "min": 70,
-        "max": 350,
-        "step": 5,
-        "unit": "px",
-        "default": 250
-      },
       {
         "type": "header",
         "content": "Layout Settings"
@@ -599,109 +328,6 @@
       },
       {
         "type": "header",
-        "content": "Menu Settings"
-      },
-      {
-        "type": "select",
-        "id": "menu_display",
-        "label": "Desktop Menu display",
-        "options": [
-          {
-            "value": "standard",
-            "label": "Standard"
-          },
-          {
-            "value": "hamburger",
-            "label": "Hamburger"
-          },
-          {
-            "value": "both",
-            "label": "Both"
-          }
-        ],
-        "default": "standard"
-      },
-      {
-        "type": "link_list",
-        "id": "menu",
-        "label": "Left Menu"
-      },
-      {
-        "type": "link_list",
-        "id": "right_menu",
-        "label": "Right Menu"
-      },
-
-      {
-        "type": "header",
-        "content": "Cart Settings"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_cart_cta",
-        "label": "Show Cart CTA",
-        "default": false
-      },
-      {
-        "type": "checkbox",
-        "id": "show_cart_icon",
-        "label": "Show Cart Icon",
-        "default": false
-      },
-      {
-        "type": "header",
-        "content": "Search Settings"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_search_bar",
-        "label": "Show Search Bar",
-        "default": true
-      },
-      {
-        "type": "header",
-        "content": "Account Settings"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_account_cta",
-        "label": "Show Account CTA",
-        "default": false
-      },
-      {
-        "type": "image_picker",
-        "id": "account_icon",
-        "label": "Account Icon"
-      },
-      {
-        "type": "text",
-        "id": "account_label",
-        "label": "Account Label",
-        "default": "Account"
-      },
-      {
-        "type": "header",
-        "content": "Contact Settings"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_contact_cta",
-        "label": "Show Contact CTA",
-        "default": false
-      },
-      {
-        "type": "image_picker",
-        "id": "contact_icon",
-        "label": "Contact Icon"
-      },
-      {
-        "type": "text",
-        "id": "contact_label",
-        "label": "Contact Label",
-        "default": "Contact Us"
-      },
-      {
-        "type": "header",
         "content": "Visibility Settings"
       },
       {
@@ -712,67 +338,27 @@
       }
     ],
     "blocks": [
-      {
-        "type": "mega_menu",
-        "name": "Mega Menu",
-        "settings": [
-          {
-            "type": "text",
-            "id": "trigger_label",
-            "label": "Trigger Label",
-            "default": "Shop"
-          },
-          {
-            "type": "text",
-            "id": "handle",
-            "label": "Mega Menu Handle",
-            "default": "mega-menu-1",
-            "info": "Unique identifier. Use this to assign megamenu child blocks to this mega menu."
-          }
-        ]
-      },
-      {
-        "type": "mega_menu_image_link",
-        "name": "Mega Menu: Image Link",
-        "settings": [
-          {
-            "type": "text",
-            "id": "mega_menu_handle",
-            "label": "Mega Menu Handle",
-            "default": "mega-menu-1"
-          },
-          {
-            "type": "header",
-            "content": "Block Settings"
-          },
-          {
-            "type": "url",
-            "id": "url",
-            "label": "URL"
-          },
-          {
-            "type": "text",
-            "id": "label",
-            "label": "Label",
-            "default": "Lorem ipsum"
-          },
-          {
-            "type": "image_picker",
-            "id": "image",
-            "label": "Image"
-          },
-          {
-            "type": "color",
-            "id": "bg_color",
-            "label": "Background Color",
-            "default": "#fff"
-          }
-        ]
-      }
     ],
     "presets": [
       {
-        "name": "Header"
+        "name": "Header",
+        "blocks": [
+          {
+            "type": "_header__left",
+            "id": "header-left",
+            "static": true
+          },
+          {
+            "type": "_header__center",
+            "id": "header-center",
+            "static": true
+          },
+          {
+            "type": "_header__right",
+            "id": "header-right",
+            "static": true
+          }
+        ]
       }
     ]
   }

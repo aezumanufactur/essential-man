@@ -1,0 +1,150 @@
+{%- content_for "blocks" -%}
+
+{%- if block.settings.show_search_bar -%}
+  <div class="header__search show-for-large">
+    {%- render 'header__search' -%}
+  </div>
+{%- endif -%}
+
+{%- if block.settings.show_contact_cta -%}
+  <a href="#offCanvasContact"
+    class="header__contact show-for-large"
+    aria-label="{{ block.settings.contact_label }}"
+    title="{{ block.settings.contact_label }}">
+    {%- if block.settings.contact_icon != blank -%}
+      {{ block.settings.contact_icon
+        | image_url: width: 46
+        | image_tag: width: 46, widths: "46", alt: "contact icon" }}
+      <span class="visually-hidden">{{ block.settings.contact_label }}</span>
+    {%- else -%}
+      <span>{{ block.settings.contact_label }}</span>
+    {%- endif -%}
+  </a>
+{%- endif -%}
+
+{%- if block.settings.show_account_cta -%}
+  <a href="/account"
+    class="header__account {% if block.settings.account_icon != blank %}has-icon{% endif %}"
+    role="button">
+    {%- if block.settings.account_icon != blank -%}
+      {{ block.settings.account_icon
+        | image_url: width: 46
+        | image_tag: width: 46, widths: "46", alt: "account icon" }}
+    {%- else -%}
+      <span>{{ block.settings.account_label }}</span>
+    {%- endif -%}
+  </a>
+{%- endif -%}
+
+{%- if block.settings.show_cart_cta -%}
+  <div class="header__cart {% if block.settings.show_cart_icon %}has-icon{% endif %} cart"
+    role="button"
+    x-data
+    x-on:click='$store["offCanvasCart"].openOffcanvas()'
+    :aria-expanded='$store["offCanvasCart"].open'>
+    <noscript>
+      <a href="/cart" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; text-indent: -9999999rem; z-index: 2;">Cart</a>
+    </noscript>
+    <div class="header__cart-inner">
+      <div class="cart__icon">
+        {%- if block.settings.show_cart_icon -%}
+          {%- render 'icon__cart' -%}
+        {%- else -%}
+          Cart
+        {%- endif -%}
+      </div>
+      <div class="cart__number">
+        <span class="cart__count">
+          <span x-text="$store.cart.cartCounter">0</span>
+        </span>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Right Column",
+  "class": "header__right",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Cart Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_cta",
+      "label": "Show Cart",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_icon",
+      "label": "Show Cart Icon",
+      "default": false,
+      "visible_if": "{{ block.settings.show_cart_cta == true }}"
+    },
+    {
+      "type": "header",
+      "content": "Search Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search_bar",
+      "label": "Show Search Bar",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Account Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account_cta",
+      "label": "Show Account",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "account_icon",
+      "label": "Account Icon",
+      "visible_if": "{{ block.settings.show_account_cta == true }}"
+    },
+    {
+      "type": "text",
+      "id": "account_label",
+      "label": "Account Label",
+      "default": "Account",
+      "visible_if": "{{ block.settings.show_account_cta == true }}"
+    },
+    {
+      "type": "header",
+      "content": "Contact Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_contact_cta",
+      "label": "Show Contact",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "contact_icon",
+      "label": "Contact Icon",
+      "visible_if": "{{ block.settings.show_contact_cta == true }}"
+    },
+    {
+      "type": "text",
+      "id": "contact_label",
+      "label": "Contact Label",
+      "default": "Contact Us",
+      "visible_if": "{{ block.settings.show_contact_cta == true }}"
+    }
+  ],
+  "blocks": [
+    { "type": "_header__nav-menu" },
+    { "type": "_header__button" }
+  ],
+  "presets": []
+}
+{% endschema %}
