@@ -13,7 +13,12 @@
       --footer-overlay-desktop: url('{{ 'footer__overlay-desktop.png' | asset_img_url: 'master' }}');
     }
   </style>
-  <div class="grid-container w-full flex flex-row flex-wrap" data-inview>
+  {%- if section.settings.grid_container_width == "full" -%}
+    {%- assign grid_container_class = "grid-container full" -%}
+  {%- else -%}
+    {%- assign grid_container_class = "grid-container" -%}
+  {%- endif -%}
+  <div class="{{ grid_container_class }} w-full flex flex-row flex-wrap" data-inview>
     <div class="footer__contents flex flex-col justify-stretch transition-all large:flex-row large:justify-between large:flex-wrap w-full min-w-0">
       {% if embed != blank %}
         <div class="footer__embed flex flex-col pb-[2.0625rem] border-b border-[rgba(139,147,167,0.4)] w-full [&:not(:last-child)]:mb-[0.25rem] large:flex-shrink-0 large:items-start large:justify-between large:flex-row large:pb-[3.125rem] large:[&:not(:last-child)]:mb-[1.3125rem]"
@@ -178,6 +183,20 @@
     },
     {
       "type": "header",
+      "content": "Container Settings"
+    },
+    {
+      "type": "select",
+      "id": "grid_container_width",
+      "label": "Grid Container Width",
+      "options": [
+        { "value": "contain", "label": "Contain" },
+        { "value": "full", "label": "Full" }
+      ],
+      "default": "contain"
+    },
+    {
+      "type": "header",
       "content": "Visibility Settings"
     },
     {
@@ -187,7 +206,7 @@
       "info": "Separated by newline. Insert template.suffix. Example: product or product.bundles"
     }
   ],
-  
+
   "blocks": [
     {
       "type": "embed",

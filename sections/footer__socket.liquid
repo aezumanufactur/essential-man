@@ -5,7 +5,12 @@
 {% assign appear_on = section.settings.appear_on | newline_to_br | strip_newlines | split: '<br />' %}
 
 {% if appear_on == blank or appear_on contains template %}
-  <div class="grid-container w-full flex flex-row flex-wrap">
+  {%- if section.settings.grid_container_width == "full" -%}
+    {%- assign grid_container_class = "grid-container full" -%}
+  {%- else -%}
+    {%- assign grid_container_class = "grid-container" -%}
+  {%- endif -%}
+  <div class="{{ grid_container_class }} w-full flex flex-row flex-wrap">
     <div class="footer__socket-left w-full min-w-0 large:w-1/2 large:items-start">
       {% if social_links != blank %}
         {% render 'footer__social-links' %}
@@ -40,6 +45,20 @@
     },
     {
       "type": "header",
+      "content": "Container Settings"
+    },
+    {
+      "type": "select",
+      "id": "grid_container_width",
+      "label": "Grid Container Width",
+      "options": [
+        { "value": "contain", "label": "Contain" },
+        { "value": "full", "label": "Full" }
+      ],
+      "default": "contain"
+    },
+    {
+      "type": "header",
       "content": "Visibility Settings"
     },
     {
@@ -49,7 +68,7 @@
       "info": "Separated by newline. Insert template.suffix. Example: product or product.bundles"
     }
   ],
-  
+
   "blocks": [
     {
       "type": "social_links",

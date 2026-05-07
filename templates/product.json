@@ -78,32 +78,6 @@
             "bottom_caption": "Sit amet consectetur adipisicing elit. Dolorum nulla sit hic soluta in eos rem"
           }
         },
-        "product_benefits_NCjz7z": {
-          "type": "product_benefits",
-          "settings": {
-            "product_benefits": [
-              "biodegradable-chemical-free",
-              "super-soft-for-all-day-comfort",
-              "sustainably-sourced"
-            ]
-          }
-        },
-        "accordion_9ENQEq": {
-          "type": "accordion",
-          "source": "{{ product.metafields.custom.materials.value }}",
-          "settings": {
-            "title": "{{ product.metafields.custom.materials.value.title.value }}",
-            "content": "<p>{{ product.metafields.custom.materials.value.description | metafield_tag }}</p>"
-          }
-        },
-        "accordion_KbMc67": {
-          "type": "accordion",
-          "source": "{{ product.metafields.custom.care.value }}",
-          "settings": {
-            "title": "{{ product.metafields.custom.care.value.title.value }}",
-            "content": "<p>{{ product.metafields.custom.care.value.description | metafield_tag }}</p>"
-          }
-        },
         "product_addon_fxnMbX": {
           "type": "product_addon",
           "settings": {
@@ -122,9 +96,6 @@
         "quantity_selector_9LPxAW",
         "divider_qxGNB6",
         "submit_button_Qxgiyj",
-        "product_benefits_NCjz7z",
-        "accordion_9ENQEq",
-        "accordion_KbMc67",
         "product_addon_fxnMbX"
       ],
       "settings": {
@@ -248,26 +219,10 @@
                 "max_width_desktop": 0
               },
               "blocks": {}
-            },
-            "section_content_text_QJCaLF": {
-              "type": "_section-content__text",
-              "settings": {
-                "text": "<p></p>{{ closest.product.metafields.mfr_fields.product_benefits_list | metafield_tag: field: 'label' }}",
-                "disable_animation": false,
-                "text_style": "regular",
-                "font_family": "",
-                "color": "",
-                "highlight_color": "",
-                "underline_color": "",
-                "max_width_mobile": 0,
-                "max_width_desktop": 0
-              },
-              "blocks": {}
             }
           },
           "block_order": [
-            "section_content_title_P9HCEH",
-            "section_content_text_QJCaLF"
+            "section_content_title_P9HCEH"
           ]
         },
         "accent-graphics": {

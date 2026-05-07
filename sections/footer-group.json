@@ -46,6 +46,7 @@
       ],
       "settings": {
         "color_scheme": "scheme-e7a2b49c-36ae-4b1f-b31f-f3ec31db1021",
+        "grid_container_width": "full",
         "appear_on": ""
       }
     },
@@ -61,6 +62,7 @@
         "social_links_aq3Nyz"
       ],
       "settings": {
+        "grid_container_width": "full",
         "appear_on": ""
       }
     }

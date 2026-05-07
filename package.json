@@ -16,12 +16,12 @@
     "watch:gulp": "gulp",
     "watch:tw": "tailwindcss -i tailwind.input.css -o assets/mfr-styles.css --watch",
     "watch": "run-p watch:**",
-    "dev:shopify-3.0": "shopify theme dev --store manufactur-boilerplate.myshopify.com",
+    "dev:shopify-3.0": "shopify theme dev --store shop-essential-man.myshopify.com",
     "dev:gulp": "gulp",
     "dev:tw": "tailwindcss -i tailwind.input.css -o assets/mfr-styles.css --watch",
     "dev": "run-p dev:**",
     "build": "npm run styles && tailwindcss -i tailwind.input.css -o assets/mfr-styles.css",
-    "switch": "shopify switch --store=manufactur-boilerplate.myshopify.com",
+    "switch": "shopify switch --store=shop-essential-man.myshopify.com",
     "pull": "shopify theme pull -d --nodelete"
   },
   "repository": {

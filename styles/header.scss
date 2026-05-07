@@ -312,6 +312,14 @@ header.header {
           @include breakpoint( large up ) {
             gap: rem-calc( 18px );
           }
+
+          &.full {
+            padding-inline: var(--grid-container-padding-mobile);
+
+            @include breakpoint( large up ) {
+              padding-inline: var(--grid-container-padding-desktop);
+            }
+          }
         }
         
         &.logo-left {

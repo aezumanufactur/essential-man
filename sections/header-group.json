@@ -89,6 +89,7 @@
         "logo_lottie_url": "",
         "layout_mobile": "logo-center",
         "layout_desktop": "logo-center",
+        "grid_container_width": "full",
         "color_scheme": "scheme-1",
         "color_scheme_sticky": "scheme-1",
         "offset_mobile": 0,

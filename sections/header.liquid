@@ -207,7 +207,12 @@
     style="{{ header_inline_styling }}">
     <div class="header__inner w-full relative">
       <div class="header__wrapper-inner {{ layout_mobile }}--mobile {{ layout_desktop }}--desktop">
-        <div class="grid-container h-full">
+        {%- if section.settings.grid_container_width == "full" -%}
+          {%- assign grid_container_class = "grid-container full" -%}
+        {%- else -%}
+          {%- assign grid_container_class = "grid-container" -%}
+        {%- endif -%}
+        <div class="{{ grid_container_class }} h-full">
         <div class="header__left inline-flex items-stretch justify-start [grid-area:left]">
 
           <button aria-label="Mobile Menu Trigger" 
@@ -363,6 +368,20 @@
           }
         ],
         "default": "logo-left"
+      },
+      {
+        "type": "header",
+        "content": "Container Settings"
+      },
+      {
+        "type": "select",
+        "id": "grid_container_width",
+        "label": "Grid Container Width",
+        "options": [
+          { "value": "contain", "label": "Contain" },
+          { "value": "full", "label": "Full" }
+        ],
+        "default": "contain"
       },
       {
         "type": "header",

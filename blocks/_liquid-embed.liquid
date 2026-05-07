@@ -1,0 +1,94 @@
+{%- if block.settings.embed_code != blank -%}
+  <div class="liquid-embed">
+    <div class="liquid-embed__inner">
+      {{ block.settings.embed_code }}
+    </div>
+  </div>
+{%- endif -%}
+
+<style>
+  {%- if block.settings.max_width_mobile != 0 -%}
+    @media (max-width: 1023px) {
+      #shopify-block-{{ block.id }} .liquid-embed__inner {
+        max-width: {{ block.settings.max_width_mobile }}px;
+      }
+    }
+  {%- endif -%}
+  {%- if block.settings.height_mobile != 0 -%}
+    @media (max-width: 1023px) {
+      #shopify-block-{{ block.id }} .liquid-embed__inner {
+        height: {{ block.settings.height_mobile }}px;
+      }
+    }
+  {%- endif -%}
+  {%- if block.settings.max_width_desktop != 0 -%}
+    @media (min-width: 1024px) {
+      #shopify-block-{{ block.id }} .liquid-embed__inner {
+        max-width: {{ block.settings.max_width_desktop }}px;
+      }
+    }
+  {%- endif -%}
+  {%- if block.settings.height_desktop != 0 -%}
+    @media (min-width: 1024px) {
+      #shopify-block-{{ block.id }} .liquid-embed__inner {
+        height: {{ block.settings.height_desktop }}px;
+      }
+    }
+  {%- endif -%}
+</style>
+
+{%- schema -%}
+{
+  "name": "Liquid Embed",
+  "class": "liquid-embed",
+  "settings": [
+    {
+      "type": "liquid",
+      "id": "embed_code",
+      "label": "Embed Code"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "number",
+      "id": "max_width_mobile",
+      "label": "Max Width - Mobile",
+      "default": 480,
+      "info": "in pixels. Leave at 0 for no max width."
+    },
+    {
+      "type": "number",
+      "id": "height_mobile",
+      "label": "Height - Mobile",
+      "default": 270,
+      "info": "in pixels. Leave at 0 for auto height."
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "number",
+      "id": "max_width_desktop",
+      "label": "Max Width - Desktop",
+      "default": 720,
+      "info": "in pixels. Leave at 0 for no max width."
+    },
+    {
+      "type": "number",
+      "id": "height_desktop",
+      "label": "Height - Desktop",
+      "default": 405,
+      "info": "in pixels. Leave at 0 for auto height."
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Liquid Embed"
+    }
+  ]
+}
+{%- endschema -%}
