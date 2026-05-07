@@ -32,65 +32,15 @@
     },
     "header": {
       "type": "header",
-      "blocks": {
-        "mega_menu_UTUrFe": {
-          "type": "mega_menu",
-          "settings": {
-            "trigger_label": "Shop",
-            "handle": "shop-mega-menu"
-          }
-        },
-        "mega_menu_image_link_CzNrRt": {
-          "type": "mega_menu_image_link",
-          "settings": {
-            "mega_menu_handle": "shop-mega-menu",
-            "url": "",
-            "label": "Mega Menu Block",
-            "bg_color": "#2b399014"
-          }
-        },
-        "mega_menu_image_link_U6Lm9A": {
-          "type": "mega_menu_image_link",
-          "settings": {
-            "mega_menu_handle": "shop-mega-menu",
-            "url": "",
-            "label": "Mega Menu Block",
-            "bg_color": "#2b399014"
-          }
-        },
-        "mega_menu_image_link_gLWc8M": {
-          "type": "mega_menu_image_link",
-          "settings": {
-            "mega_menu_handle": "shop-mega-menu",
-            "url": "",
-            "label": "Mega Menu Block",
-            "bg_color": "#2b399014"
-          }
-        },
-        "mega_menu_image_link_yTDY8M": {
-          "type": "mega_menu_image_link",
-          "settings": {
-            "mega_menu_handle": "shop-mega-menu",
-            "url": "",
-            "label": "Mega Menu Block",
-            "bg_color": "#2b399014"
-          }
-        }
-      },
-      "block_order": [
-        "mega_menu_UTUrFe",
-        "mega_menu_image_link_CzNrRt",
-        "mega_menu_image_link_U6Lm9A",
-        "mega_menu_image_link_gLWc8M",
-        "mega_menu_image_link_yTDY8M"
-      ],
       "settings": {
-        "logo": "shopify://shop_images/manufactur-black.svg",
-        "logo_lottie_url": "",
+        "logo": "shopify://shop_images/essential-man-logo.svg",
+        "logo_sticky": "shopify://shop_images/essential-man-logo--black.svg",
+        "logo_width_mobile": 220,
+        "logo_width_desktop": 250,
         "layout_mobile": "logo-center",
-        "layout_desktop": "logo-center",
+        "layout_desktop": "logo-left-contained",
         "grid_container_width": "full",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-e7a2b49c-36ae-4b1f-b31f-f3ec31db1022",
         "color_scheme_sticky": "scheme-1",
         "offset_mobile": 0,
         "offset_desktop": 0,
@@ -100,8 +50,11 @@
         "border_radius_desktop": 0,
         "sticky_border_radius_mobile": 0,
         "sticky_border_radius_desktop": 0,
+        "show_border_bottom": true,
+        "border_bottom_color": "#ffffff",
+        "border_bottom_opacity": 20,
         "menu_display": "standard",
-        "menu": "header-left-menu",
+        "menu": "main-menu",
         "right_menu": "",
         "show_cart_cta": true,
         "show_cart_icon": true,

@@ -161,6 +161,11 @@ header.header {
     .header__inner {
       @include shadow( 0 rem-calc( 1px ) rem-calc( 4px ) 0 rgba(0,0,0,0.2) );
     }
+
+    .header__logo.has-sticky-logo {
+      .header-logo__default { display: none; }
+      .header-logo__sticky { display: block; }
+    }
   }
 
   .header {
@@ -296,7 +301,8 @@ header.header {
         height: $header-height-mobile;
         padding: 0;
         @include border-radius( var(--header-border-radius-mobile) );
-        @include transition( $header-animation );
+        $inner-transition: .4s height $smooth_ease, .4s border-radius $smooth_ease;
+        @include transition( $inner-transition );
 
         @include breakpoint( large up ) {
           height: $header-height;
@@ -325,56 +331,56 @@ header.header {
         &.logo-left {
           &--mobile {
             @include breakpoint( medium down ) {
-              @include logo-left;
+              .grid-container { @include logo-left; }
             }
           }
           &--desktop {
             @include breakpoint( large up ) {
-              @include logo-left;
+              .grid-container { @include logo-left; }
             }
           }
         }
-    
+
         &.logo-left-contained {
           &--mobile {
             @include breakpoint( medium down ) {
-              @include logo-left-contained;
+              .grid-container { @include logo-left-contained; }
             }
           }
           &--desktop {
             @include breakpoint( large up ) {
-              @include logo-left-contained;
+              .grid-container { @include logo-left-contained; }
             }
           }
         }
         &.logo-left-contained-right {
           &--mobile {
             @include breakpoint( medium down ) {
-              @include logo-left-contained-right;
+              .grid-container { @include logo-left-contained-right; }
             }
           }
           &--desktop {
             @include breakpoint( large up ) {
-              @include logo-left-contained-right;
+              .grid-container { @include logo-left-contained-right; }
             }
           }
         }
         &.logo-center {
           &--mobile {
             @include breakpoint( medium down ) {
-              @include logo-center;
+              .grid-container { @include logo-center; }
             }
           }
           &--desktop {
             @include breakpoint( large up ) {
-              @include logo-center;
+              .grid-container { @include logo-center; }
             }
           }
 
           &-contained-left {
             &--mobile {
               @include breakpoint( medium down ) {
-                @include logo-center-contained-left;
+                .grid-container { @include logo-center-contained-left; }
               }
             }
           }
@@ -382,7 +388,7 @@ header.header {
           &-contained-right {
             &--mobile {
               @include breakpoint( medium down ) {
-                @include logo-center-contained-right;
+                .grid-container { @include logo-center-contained-right; }
               }
             }
           }
@@ -407,9 +413,8 @@ header.header {
         object-fit: contain;
       }
   
-      &-icon {
-        max-width: rem-calc( 36px );
-        margin-right: rem-calc( 15px );
+      .header-logo__sticky {
+        display: none;
       }
 
     }

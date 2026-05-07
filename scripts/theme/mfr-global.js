@@ -117,17 +117,6 @@ function loadInitialScripts() {
       wrapper.classList.toggle("header__wrapper--sticky", isActive)
     }
 
-    // Toggle first <img> inside .header__logo
-    const firstImg = header.querySelector(".header__logo img:first-child")
-    if (firstImg) {
-      firstImg.classList.toggle("is-active", !isActive)
-    }
-
-    // Toggle last <img> inside .header__logo
-    const lastImg = header.querySelector(".header__logo img:last-child")
-    if (lastImg) {
-      lastImg.classList.toggle("is-active", isActive)
-    }
   })
 }
 onReady(() => loadInitialScripts())

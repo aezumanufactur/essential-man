@@ -1,6 +1,17 @@
 {% render 'renderer__color-scheme', name: "header", color_scheme: section.settings.color_scheme, selector: "header.header .header__wrapper" %}
 {% render 'renderer__color-scheme', name: "header", color_scheme: section.settings.color_scheme_sticky, selector: "header.header.header--sticky .header__wrapper" %}
 
+{%- if section.settings.bg_color_override != blank -%}
+  <style>
+    header.header .header__wrapper { --header-background: {{ section.settings.bg_color_override }}; }
+  </style>
+{%- endif -%}
+{%- if section.settings.bg_color_sticky_override != blank -%}
+  <style>
+    header.header.header--sticky .header__wrapper { --header-background: {{ section.settings.bg_color_sticky_override }}; }
+  </style>
+{%- endif -%}
+
 {% if section.settings.logo_position == 'center' %}
   {% assign is_logo_centered = "header--logo-centered" %}
 {% endif %}
@@ -201,11 +212,25 @@
   --header-border-radius-desktop: {{ section.settings.border_radius_desktop }}px;
   --header-border-radius-sticky-mobile: {{ section.settings.sticky_border_radius_mobile }}px;
   --header-border-radius-sticky-desktop: {{ section.settings.sticky_border_radius_desktop }}px;
+  {%- assign border_bottom_alpha_mobile = section.settings.border_bottom_opacity_mobile | divided_by: 100.0 -%}
+  {%- assign border_bottom_alpha_desktop = section.settings.border_bottom_opacity_desktop | divided_by: 100.0 -%}
+  --header-border-bottom-color-mobile: {{ section.settings.border_bottom_color_mobile | color_modify: 'alpha', border_bottom_alpha_mobile }};
+  --header-border-bottom-color-desktop: {{ section.settings.border_bottom_color_desktop | color_modify: 'alpha', border_bottom_alpha_desktop }};
 {% endcapture %}
+{%- assign border_bottom_mobile_classes = "" -%}
+{%- assign border_bottom_desktop_classes = "" -%}
+{%- if section.settings.show_border_bottom_mobile -%}
+  {%- assign border_bottom_mobile_classes = "border-b [border-color:var(--header-border-bottom-color-mobile)]" -%}
+{%- endif -%}
+{%- if section.settings.show_border_bottom_desktop -%}
+  {%- assign border_bottom_desktop_classes = "large:border-b large:[border-color:var(--header-border-bottom-color-desktop)]" -%}
+{%- elsif section.settings.show_border_bottom_mobile -%}
+  {%- assign border_bottom_desktop_classes = "large:border-b-0" -%}
+{%- endif -%}
 {% if appear_on == blank or appear_on contains template %}
   <div class="header__wrapper {{ header_wrapper_class }}  {{ design_mode_class }} {{ is_logo_centered }} flex justify-center items-center flex-col transition-all"
     style="{{ header_inline_styling }}">
-    <div class="header__inner w-full relative">
+    <div class="header__inner w-full relative {{ border_bottom_mobile_classes }} {{ border_bottom_desktop_classes }}">
       <div class="header__wrapper-inner {{ layout_mobile }}--mobile {{ layout_desktop }}--desktop">
         {%- if section.settings.grid_container_width == "full" -%}
           {%- assign grid_container_class = "grid-container full" -%}
@@ -300,14 +325,29 @@
       },
       {
         "type": "image_picker",
-        "id": "logo_icon",
-        "label": "Logo Icon",
-        "info": "This will appear beside the logo and will only appear on desktop."
+        "id": "logo_sticky",
+        "label": "Logo - Sticky",
+        "info": "This logo will appear when the header becomes sticky."
       },
       {
-        "type": "text",
-        "id": "logo_lottie_url",
-        "label": "Logo Lottie Url"
+        "type": "range",
+        "id": "logo_width_mobile",
+        "label": "Logo Width - Mobile",
+        "min": 70,
+        "max": 350,
+        "step": 5,
+        "unit": "px",
+        "default": 220
+      },
+      {
+        "type": "range",
+        "id": "logo_width_desktop",
+        "label": "Logo Width - Desktop",
+        "min": 70,
+        "max": 350,
+        "step": 5,
+        "unit": "px",
+        "default": 250
       },
       {
         "type": "header",
@@ -402,6 +442,18 @@
         "info": "This will be the color scheme of the header when sticky."
       },
       {
+        "type": "color_background",
+        "id": "bg_color_override",
+        "label": "Background Color Override",
+        "info": "Overrides the background from the color scheme above."
+      },
+      {
+        "type": "color_background",
+        "id": "bg_color_sticky_override",
+        "label": "Background Color Override (When Sticky)",
+        "info": "Overrides the background from the sticky color scheme above."
+      },
+      {
         "type": "header",
         "content": "Layout Settings"
       },
@@ -488,6 +540,62 @@
         "unit": "px",
         "label": "Sticky Border Radius - Desktop",
         "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Border Bottom - Mobile"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_border_bottom_mobile",
+        "label": "Show Border Bottom - Mobile",
+        "default": false
+      },
+      {
+        "type": "color",
+        "id": "border_bottom_color_mobile",
+        "label": "Border Bottom Color - Mobile",
+        "default": "#ffffff",
+        "visible_if": "{{ section.settings.show_border_bottom_mobile == true }}"
+      },
+      {
+        "type": "range",
+        "id": "border_bottom_opacity_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "%",
+        "label": "Border Bottom Opacity - Mobile",
+        "default": 20,
+        "visible_if": "{{ section.settings.show_border_bottom_mobile == true }}"
+      },
+      {
+        "type": "header",
+        "content": "Border Bottom - Desktop"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_border_bottom_desktop",
+        "label": "Show Border Bottom - Desktop",
+        "default": false
+      },
+      {
+        "type": "color",
+        "id": "border_bottom_color_desktop",
+        "label": "Border Bottom Color - Desktop",
+        "default": "#ffffff",
+        "visible_if": "{{ section.settings.show_border_bottom_desktop == true }}"
+      },
+      {
+        "type": "range",
+        "id": "border_bottom_opacity_desktop",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "%",
+        "label": "Border Bottom Opacity - Desktop",
+        "default": 20,
+        "visible_if": "{{ section.settings.show_border_bottom_desktop == true }}"
       },
       {
         "type": "header",
