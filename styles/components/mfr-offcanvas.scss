@@ -40,7 +40,7 @@
     height: 100%;
     background: $color-overlay;
     z-index: 998;
-    @include opacity(0.44);
+    @include opacity(0.7);
     @include transition( $global-transition );
 
     &--showing {

@@ -9,7 +9,13 @@
     image_desktop: block.settings.image_desktop,
     lazyload: block.settings.lazyload_image %}
 </div>
-<div class="hero-section__slide-inner relative flex [justify-content:var(--slides-horizontal-alignment-mobile)] items-start flex-wrap z-[1] gap-x-[0.3125rem] [align-content:var(--slides-vertical-alignment-mobile)] [text-align:var(--slides-text-alignment-mobile)] min-h-full large:gap-x-[0.5rem] large:[justify-content:var(--slides-horizontal-alignment-desktop)] large:[align-content:var(--slides-vertical-alignment-desktop)] large:[text-align:var(--slides-text-alignment-desktop)] [.text-center_&]:justify-center [&_.star-rating-text:not(:last-child)]:mb-[1.4375rem]">
+
+{%- if block.settings.overlay_gradient != blank -%}
+  <div class="hero-section__slide-overlay absolute top-0 left-0 w-full h-full z-[1] pointer-events-none"
+    style="background: {{ block.settings.overlay_gradient }};"></div>
+{%- endif -%}
+
+<div class="hero-section__slide-inner relative flex [justify-content:var(--slides-horizontal-alignment-mobile)] items-start flex-wrap z-[2] gap-x-[0.3125rem] [align-content:var(--slides-vertical-alignment-mobile)] [text-align:var(--slides-text-alignment-mobile)] min-h-full large:gap-x-[0.5rem] large:[justify-content:var(--slides-horizontal-alignment-desktop)] large:[align-content:var(--slides-vertical-alignment-desktop)] large:[text-align:var(--slides-text-alignment-desktop)] [.text-center_&]:justify-center [&_.star-rating-text:not(:last-child)]:mb-[1.4375rem]">
   {% content_for "blocks" %}
 </div>
 
@@ -33,11 +39,23 @@
         "id": "lazyload_image",
         "label": "Lazyload Image?",
         "default": true
+      },
+      {
+        "type": "header",
+        "content": "Overlay"
+      },
+      {
+        "type": "color_background",
+        "id": "overlay_gradient",
+        "label": "Overlay Gradient"
       }
     ],
     "blocks": [
       {
         "type": "_star-rating-text"
+      },
+      {
+        "type": "_section-content"
       },
       {
         "type": "_section-content__small-text"
@@ -48,8 +66,26 @@
       {
         "type": "_section-content__text"
       },
-      { 
-        "type": "_section-content__button" 
+      {
+        "type": "_section-content__button"
+      },
+      {
+        "type": "_section-content__button-set"
+      },
+      {
+        "type": "_section-content__icon"
+      },
+      {
+        "type": "_section-content__spacer"
+      },
+      {
+        "type": "_section-content__divider"
+      },
+      {
+        "type": "_section-content__liquid-html"
+      },
+      {
+        "type": "_section-content__icon-text-wrapper"
       }
     ],
     "presets": [

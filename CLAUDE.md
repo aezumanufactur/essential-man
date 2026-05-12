@@ -16,6 +16,7 @@
 @.claude/instructions/liquid-html.md
 @.claude/instructions/styles.md
 @.claude/instructions/scripts.md
+@.claude/instructions/figma-comp-rules.md
 @.claude/instructions/settings-groups/section-settings.md
 @.claude/instructions/settings-groups/block-settings.md
 
@@ -26,6 +27,7 @@
 | liquid-html.md | Liquid/HTML patterns, render calls, Alpine in Liquid |
 | styles.md | Tailwind-first, breakpoints, SCSS exceptions, build |
 | scripts.md | JS conventions, Alpine components, build pipeline |
+| figma-comp-rules.md | Rules for translating Figma comps — images, typography, widths, heights |
 | settings-groups/section-settings.md | Reusable section schema groups (spacing, alignment, bg, etc.) |
 | settings-groups/block-settings.md | Reusable block schema groups (aspect ratio, layout controls) |
 

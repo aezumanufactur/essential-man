@@ -1,2 +1,2 @@
-.accordion-section__section:has(.product-faqs:empty){display:none}
+.accordion-section__column{display:flex;flex-direction:column}.accordion-section__section:has(.product-faqs:empty){display:none}
 /*# sourceMappingURL=mfr-core__accordion-section.css.map */

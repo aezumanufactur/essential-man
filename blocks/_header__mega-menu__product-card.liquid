@@ -1,0 +1,82 @@
+{%- if block.settings.badge_color != blank and block.settings.badge_text != blank -%}
+  <style>
+    #shopify-block-{{ block.id }} .mega-menu-card__badge {
+      background: {{ block.settings.badge_color }};
+    }
+  </style>
+{%- endif -%}
+
+<a class="mega-menu-card group flex flex-col border border-[color:var(--mega-menu-text)] rounded-[10px] overflow-hidden w-[271px] shrink-0 no-underline text-inherit min-h-full"
+  href="{{ block.settings.url }}"
+  {{ block.shopify_attributes }}>
+  <div class="mega-menu-card__image-wrap aspect-[271/266] w-full overflow-hidden border-b border-[color:var(--mega-menu-text)]">
+    {%- if block.settings.image != blank -%}
+      {%- render "component__lazyload-image",
+        image: block.settings.image,
+        width: 542,
+        class: "w-full min-h-full block object-cover transition-transform duration-300 ease-in-out group-hover:scale-[1.07]" -%}
+    {%- else -%}
+      <div class="w-full h-full bg-[color:var(--mega-menu-text)] opacity-10"></div>
+    {%- endif -%}
+  </div>
+  <div class="mega-menu-card__info flex flex-col justify-center p-3 grow">
+    {%- if block.settings.badge_text != blank -%}
+      <span class="mega-menu-card__badge inline-flex items-center self-start overflow-hidden px-[8px] rounded-[5px] [font-family:var(--font-body)] text-[12px] font-[700] leading-[1.4] uppercase text-[var(--essential-white,#eeece5)]">
+        {{ block.settings.badge_text }}
+      </span>
+    {%- endif -%}
+    <div class="mega-menu-card__title [font-family:var(--font-heading-h4)] font-[500] text-[20px] uppercase leading-[1.1] text-[color:var(--mega-menu-text)] w-[70%]{% if block.settings.badge_text != blank %} mt-[14px]{% endif %}">
+      {{ block.settings.title }}
+    </div>
+  </div>
+</a>
+
+{% schema %}
+{
+  "name": "Product Card",
+  "class": "header__mega-menu-product-card-block",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Card Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Product Name"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Link URL"
+    },
+    {
+      "type": "header",
+      "content": "Badge Settings"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "info": "Leave blank to hide badge."
+    },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Badge Color",
+      "default": "#647949"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Card"
+    }
+  ]
+}
+{% endschema %}

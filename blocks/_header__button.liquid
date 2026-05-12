@@ -1,6 +1,6 @@
 {%- if block.settings.label != blank -%}
   <a href="{{ block.settings.url | default: '#' }}"
-    class="header__button header-button header-button--{{ block.settings.style }} show-for-large"
+    class="header__button header-button button {{ block.settings.color_theme }} "
     title="{{ block.settings.label }}">
     <span>{{ block.settings.label }}</span>
   </a>
@@ -24,14 +24,27 @@
     },
     {
       "type": "select",
-      "id": "style",
-      "label": "Style",
+      "id": "color_theme",
+      "label": "Color Theme",
       "options": [
-        { "value": "filled", "label": "Filled" },
-        { "value": "outlined", "label": "Outlined" }
-      ],
-      "default": "filled"
-    }
+        {
+          "value": "primary",
+          "label": "Primary"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        },
+        {
+          "value": "tertiary",
+          "label": "Tertiary"
+        },
+        {
+          "value": "underlined-cta",
+          "label": "Underline"
+        }
+      ]
+    },
   ],
   "presets": [
     {

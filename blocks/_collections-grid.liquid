@@ -23,7 +23,7 @@
     <a {% if collection.all_products_count > 0 %}href="{{ collection.url }}"{% endif %} class="card" aria-label="{{- card_aria_label -}}">
       <div class="card-inner overflow-hidden [border:var(--global-border-width)_solid_currentColor] rounded-[var(--global-border-radius)]">
         <div class="card-image overflow-hidden h-[12.5rem] [border-bottom:var(--global-border-width)_solid_currentColor] medium:h-[14.375rem] large:h-[20.625rem]">
-          {% render 'component__lazyload-image', image: collection.featured_image, width: 420, widths: "360,420", class: "image-cover", alt: collection.title %}
+          {% render 'component__lazyload-image', image: collection.featured_image, width: 420, widths: "360,420", class: "object-cover object-center w-full h-full", alt: collection.title %}
         </div>
         <div class="card-content p-[1.25rem] overflow-hidden medium:py-[1.25rem] medium:px-[1.5625rem]">
           <h3>{{- collection.title -}}</h3>

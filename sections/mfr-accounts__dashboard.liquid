@@ -21,7 +21,7 @@ assign section settings to variables
 
 <section class="mfr-accounts__dashboard {{ custom_class }}" id="{{ section_id }}">
   <div class="section-spacer background relative z-[3] pt-[var(--top-spacing-mobile)] pb-[var(--bottom-spacing-mobile)] large:pt-[var(--top-spacing-desktop)] large:pb-[var(--bottom-spacing-desktop)]" style="{{ spacer }}">
-    <div class="grid-container relative z-[1]">
+    <div class="grid-container mx-auto max-w-[var(--grid-container-max-width)] px-[var(--grid-container-padding-mobile)] large:px-[var(--grid-container-padding-desktop)] relative z-[1]">
       <div class="alignment-helper flex flex-row flex-wrap justify-center">
         <div class="section-content w-full min-w-0 mb-[1.5625rem] text-center medium:w-2/3 large:mb-[2.1875rem]">
           <h2 class="section-title mb-[0.9375rem] text-[2.75rem] leading-[2.75rem] medium:mb-[1.5625rem] medium:text-[inherit] medium:leading-[inherit]">{{ title | default: 'Hi' }}, {{ customer.first_name }}</h2>
@@ -199,7 +199,7 @@ assign section settings to variables
                               <div class="order-product [&:not(:last-child)]:mb-[1.5625rem]" x-data>
                                 <div class="order-inner flex items-center justify-start">
                                   <div class="order-image h-[6.25rem] w-[6.25rem] overflow-hidden rounded-xl border border-black/30">
-                                    <img src="{{ lineItem.image | img_url: " 200x220" }}" alt="{{ lineItem.title }}" class="image-cover block h-full w-full object-cover">
+                                    <img src="{{ lineItem.image | img_url: " 200x220" }}" alt="{{ lineItem.title }}" class="block h-full w-full object-cover object-center">
                                   </div>
                                   
                                   <div class="order-details w-[calc(100%_-_6.25rem)] pl-5">

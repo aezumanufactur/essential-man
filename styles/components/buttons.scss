@@ -153,10 +153,6 @@ button {
     display: none;
   }
 
-  @include hover {
-    @include transform(scale(.97));
-  }
-
   .price {
     &.old {
       margin-left: rem-calc(20px);
@@ -204,6 +200,10 @@ button {
 }
 
 /* BUTTON SET */
+.button-set__wrapper {
+  width: 100%;
+}
+
 .button-set {
   display: flex;
   z-index: 2;

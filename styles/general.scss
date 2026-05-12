@@ -129,10 +129,6 @@ section {
 
 main a:not(.button):not(.accordion-title):not(.no-hover) {
 	@include transition($global-transition);
-
-	@include hover {
-		@include scale(0.97);
-	}
 }
 
 picture {
@@ -163,11 +159,6 @@ style { display: none; }
   [contenteditable]:not([contenteditable="false"]) {
     display: none !important;
   }
-}
-
-a,button {
-  min-height: rem-calc( 24px );
-  min-width: rem-calc( 24px );
 }
 
 .sr-only {

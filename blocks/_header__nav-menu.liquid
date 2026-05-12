@@ -3,7 +3,9 @@
   <nav class="header__menu header-menu">
     <ul class="header-menu__items">
       {%- for link in block.settings.menu.links -%}
-        <li class="header-menu__item">
+        <li class="header-menu__item"
+          @mouseenter="(function(){ var t = document.querySelector('[data-trigger=\'{{ link.title | downcase | escape }}\']'); if(t) Alpine.$data(t).open(); })()"
+          @mouseleave="(function(){ var t = document.querySelector('[data-trigger=\'{{ link.title | downcase | escape }}\']'); if(t) Alpine.$data(t).scheduleClose(); })()">
           <a class="header-menu__title"
             href="{{ link.url }}"
             aria-label="{{ link.title }}"

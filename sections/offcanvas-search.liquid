@@ -33,8 +33,10 @@
               x-model="query">
             <span class="indicator absolute right-0 top-1/2 -translate-y-1/2"
               x-show="active"
+              x-transition:enter="transition-all duration-[400ms] ease-[cubic-bezier(0.5,0,0,1)]"
               x-transition:enter-start="opacity-0"
               x-transition:enter-end="opacity-100"
+              x-transition:leave="transition-all duration-[400ms] ease-[cubic-bezier(0.5,0,0,1)]"
               x-transition:leave-start="opacity-100"
               x-transition:leave-end="opacity-0">
               <svg width="40px" height="39px" viewBox="0 0 40 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

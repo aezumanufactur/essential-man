@@ -1,0 +1,64 @@
+{%- render 'renderer__color-scheme',
+  name: "mega-menu",
+  color_scheme: block.settings.color_scheme,
+  selector: "#shopify-block-{{ block.id }} .header__mega-menu" -%}
+
+<div class="header__mega-menu absolute top-full left-0 w-screen border-b border-[var(--carbon,#1e1b22)] z-50 bg-[var(--mega-menu-background,var(--header-background))] text-[color:var(--mega-menu-text)]"
+  x-data="MFRMegaMenu"
+  data-trigger="{{ block.settings.trigger_label | downcase | escape }}"
+  x-show="isOpen"
+  x-transition:enter="transition-all duration-[400ms] ease-[cubic-bezier(0.5,0,0,1)]"
+  x-transition:enter-start="opacity-0"
+  x-transition:enter-end="opacity-100"
+  x-transition:leave="transition-all duration-[400ms] ease-[cubic-bezier(0.5,0,0,1)]"
+  x-transition:leave-start="opacity-100"
+  x-transition:leave-end="opacity-0"
+  @mouseenter="cancelClose()"
+  @mouseleave="scheduleClose()"
+  x-cloak
+  {{ block.shopify_attributes }}>
+  <div class="header__mega-menu__inner max-w-[calc(100%_-_38px)] px-7 py-6">
+    <div class="header__mega-menu__cards flex gap-[30px] items-stretch">
+      {%- content_for "blocks" -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Mega Menu",
+  "class": "header__mega-menu-block",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Trigger Settings"
+    },
+    {
+      "type": "text",
+      "id": "trigger_label",
+      "label": "Nav Item Label",
+      "info": "Enter the exact nav link title that should trigger this mega menu (e.g. Shop). Case-insensitive."
+    },
+    {
+      "type": "header",
+      "content": "Color Settings"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme_1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_header__mega-menu__product-card"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mega Menu"
+    }
+  ]
+}
+{% endschema %}

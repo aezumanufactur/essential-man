@@ -1,14 +1,14 @@
 {%- content_for "blocks" -%}
 
 {%- if block.settings.show_search_bar -%}
-  <div class="header__search show-for-large">
+  <div class="header__search max-large:hidden">
     {%- render 'header__search' -%}
   </div>
 {%- endif -%}
 
 {%- if block.settings.show_contact_cta -%}
   <a href="#offCanvasContact"
-    class="header__contact show-for-large"
+    class="header__contact max-large:hidden"
     aria-label="{{ block.settings.contact_label }}"
     title="{{ block.settings.contact_label }}">
     {%- if block.settings.contact_icon != blank -%}
@@ -24,7 +24,7 @@
 
 {%- if block.settings.show_account_cta -%}
   <a href="/account"
-    class="header__account {% if block.settings.account_icon != blank %}has-icon{% endif %}"
+    class="header__account max-large:hidden {% if block.settings.account_icon != blank %}has-icon{% endif %}"
     role="button">
     {%- if block.settings.account_icon != blank -%}
       {{ block.settings.account_icon
@@ -37,7 +37,7 @@
 {%- endif -%}
 
 {%- if block.settings.show_cart_cta -%}
-  <div class="header__cart {% if block.settings.show_cart_icon %}has-icon{% endif %} cart"
+  <div class="header__cart {% if block.settings.show_cart_icon %}has-icon cursor-pointer relative flex items-center h-full py-[5px]{% else %}group cursor-pointer flex items-center h-full py-[6px] ml-[10px] min-w-[73px] large:min-w-[98px]{% endif %} cart"
     role="button"
     x-data
     x-on:click='$store["offCanvasCart"].openOffcanvas()'
@@ -45,16 +45,16 @@
     <noscript>
       <a href="/cart" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; text-indent: -9999999rem; z-index: 2;">Cart</a>
     </noscript>
-    <div class="header__cart-inner">
-      <div class="cart__icon">
+    <div class="header__cart-inner {% if block.settings.show_cart_icon %}relative flex items-center justify-center{% else %}flex items-center justify-center [border-radius:var(--button-border-radius)] p-[6px] border-[1.5px] border-transparent w-full transition group-hover:border-current{% endif %}">
+      <div class="cart__icon {% if block.settings.show_cart_icon %}h-full block [color:var(--header-text)]{% else %}[font-size:var(--header-font-size-mobile)] [text-transform:var(--header-font-case)] leading-normal tracking-[-0.36px] large:[font-size:var(--header-font-size)] large:[line-height:var(--header-line-height)] large:[letter-spacing:var(--header-letter-spacing)]{% endif %}">
         {%- if block.settings.show_cart_icon -%}
           {%- render 'icon__cart' -%}
         {%- else -%}
           Cart
         {%- endif -%}
       </div>
-      <div class="cart__number">
-        <span class="cart__count">
+      <div class="cart__number {% unless block.settings.show_cart_icon %}[font-size:var(--header-font-size-mobile)] leading-[24px] tracking-[-0.84px] ml-[6px] group-hover:ml-0 large:[font-size:var(--header-font-size)] large:leading-[38px]{% endunless %}">
+        <span class="cart__count {% if block.settings.show_cart_icon %}absolute top-[-10px] right-[-10px] w-[18px] h-[18px] [color:var(--color-white)] [background:var(--header-icons)] flex items-center justify-center z-[1] font-[500] text-[12px] leading-[12px] tracking-[0.29px] uppercase rounded-full{% else %}block{% endif %}">
           <span x-text="$store.cart.cartCounter">0</span>
         </span>
       </div>

@@ -1,6 +1,6 @@
 ---
 name: Block Settings Groups
-description: Optional reusable schema settings groups for blocks — Aspect Ratio and Block Layout Controls
+description: Optional reusable schema settings groups for blocks — Aspect Ratio, Block Layout Controls, Font Settings
 type: project
 ---
 
@@ -184,3 +184,157 @@ Controls include:
 - Width (mobile/desktop): value + unit (px, %, vw, custom calc)
 - Padding (mobile/desktop): X/Y axes, individual sides
 - Margin (mobile/desktop): X/Y axes, individual sides
+
+---
+
+## Font Settings
+
+Per-block font overrides gated behind an "Override Font Styles" checkbox. Mobile styles apply at `max-width: 1023px`, desktop at `min-width: 1024px`.
+
+**In block markup**, render the CSS snippet:
+
+```liquid
+{%- render "settings__font-settings" -%}
+```
+
+For **font family**, add `{{ block.settings.font_family }}` as a class on the target element — this matches the existing SCSS class pattern (`.custom-font-name-1`, etc.):
+
+```liquid
+<div class="my-block__text {{ block.settings.font_family }}">
+```
+
+**Schema JSON** to copy into block `"settings"`:
+
+```json
+{
+  "type": "header",
+  "content": "Font Settings"
+},
+{
+  "type": "checkbox",
+  "id": "enable_font_settings",
+  "label": "Override Font Styles",
+  "default": false
+},
+{
+  "type": "select",
+  "id": "font_family",
+  "label": "Font Family",
+  "options": [
+    { "value": "", "label": "Use Theme Settings" },
+    { "value": "custom-font-name-1", "label": "Custom Font 1" },
+    { "value": "custom-font-name-2", "label": "Custom Font 2" },
+    { "value": "custom-font-name-3", "label": "Custom Font 3" },
+    { "value": "custom-font-name-4", "label": "Custom Font 4" }
+  ],
+  "default": "",
+  "visible_if": "{{ block.settings.enable_font_settings }}"
+},
+{
+  "type": "select",
+  "id": "font_case",
+  "label": "Font Case",
+  "options": [
+    { "value": "", "label": "Default" },
+    { "value": "capitalize", "label": "Capitalize" },
+    { "value": "uppercase", "label": "Uppercase" },
+    { "value": "lowercase", "label": "Lowercase" }
+  ],
+  "default": "",
+  "visible_if": "{{ block.settings.enable_font_settings }}"
+},
+{
+  "type": "header",
+  "content": "Mobile Font Settings"
+},
+{
+  "type": "number",
+  "id": "font_size_mobile",
+  "label": "Font Size - Mobile",
+  "default": 0,
+  "info": "in px. Leave at 0 to inherit.",
+  "visible_if": "{{ block.settings.enable_font_settings }}"
+},
+{
+  "type": "number",
+  "id": "line_height_mobile",
+  "label": "Line Height - Mobile",
+  "default": 0,
+  "info": "in px. Leave at 0 to inherit.",
+  "visible_if": "{{ block.settings.enable_font_settings }}"
+},
+{
+  "type": "number",
+  "id": "letter_spacing_mobile",
+  "label": "Letter Spacing - Mobile",
+  "default": 0,
+  "info": "in px. Leave at 0 to inherit.",
+  "visible_if": "{{ block.settings.enable_font_settings }}"
+},
+{
+  "type": "select",
+  "id": "font_weight_mobile",
+  "label": "Font Weight - Mobile",
+  "options": [
+    { "value": "", "label": "Default" },
+    { "value": "100", "label": "100 - Thin" },
+    { "value": "200", "label": "200 - Extra Light" },
+    { "value": "300", "label": "300 - Light" },
+    { "value": "400", "label": "400 - Regular" },
+    { "value": "500", "label": "500 - Medium" },
+    { "value": "600", "label": "600 - Semi Bold" },
+    { "value": "700", "label": "700 - Bold" },
+    { "value": "800", "label": "800 - Extra Bold" },
+    { "value": "900", "label": "900 - Black" }
+  ],
+  "default": "",
+  "visible_if": "{{ block.settings.enable_font_settings }}"
+},
+{
+  "type": "header",
+  "content": "Desktop Font Settings"
+},
+{
+  "type": "number",
+  "id": "font_size_desktop",
+  "label": "Font Size - Desktop",
+  "default": 0,
+  "info": "in px. Leave at 0 to inherit.",
+  "visible_if": "{{ block.settings.enable_font_settings }}"
+},
+{
+  "type": "number",
+  "id": "line_height_desktop",
+  "label": "Line Height - Desktop",
+  "default": 0,
+  "info": "in px. Leave at 0 to inherit.",
+  "visible_if": "{{ block.settings.enable_font_settings }}"
+},
+{
+  "type": "number",
+  "id": "letter_spacing_desktop",
+  "label": "Letter Spacing - Desktop",
+  "default": 0,
+  "info": "in px. Leave at 0 to inherit.",
+  "visible_if": "{{ block.settings.enable_font_settings }}"
+},
+{
+  "type": "select",
+  "id": "font_weight_desktop",
+  "label": "Font Weight - Desktop",
+  "options": [
+    { "value": "", "label": "Default" },
+    { "value": "100", "label": "100 - Thin" },
+    { "value": "200", "label": "200 - Extra Light" },
+    { "value": "300", "label": "300 - Light" },
+    { "value": "400", "label": "400 - Regular" },
+    { "value": "500", "label": "500 - Medium" },
+    { "value": "600", "label": "600 - Semi Bold" },
+    { "value": "700", "label": "700 - Bold" },
+    { "value": "800", "label": "800 - Extra Bold" },
+    { "value": "900", "label": "900 - Black" }
+  ],
+  "default": "",
+  "visible_if": "{{ block.settings.enable_font_settings }}"
+}
+```

@@ -15,8 +15,10 @@
     x-show='open'
     x-cloak
     :aria-hidden='!open'
+    x-transition:enter="transition-all duration-[400ms] ease-[cubic-bezier(0.5,0,0,1)]"
     x-transition:enter-start="opacity-0"
     x-transition:enter-end="opacity-1"
+    x-transition:leave="transition-all duration-[400ms] ease-[cubic-bezier(0.5,0,0,1)]"
     x-transition:leave-start="opacity-1"
     x-transition:leave-end="opacity-0"
     {% unless dev_mode %}

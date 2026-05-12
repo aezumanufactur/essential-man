@@ -20,7 +20,7 @@ assign section settings to variables
 
 <section class="mfr-accounts__addresses {{ custom_class }} [&_.form-field]:relative [&_.form-field]:mb-[0.9375rem] [&_.form-field_label]:mb-[0.3125rem] [&_.form-field_label]:block [&_.form-field_label]:text-left [&_.form-field_label]:text-sm [&_.form-field_label]:font-semibold [&_.form-field_input:not([type=submit])]:rounded-xl [&_.form-field_select]:rounded-xl [&_.form-checkbox]:flex [&_.form-checkbox]:items-center [&_.form-checkbox]:justify-start [&_.form-checkbox_label]:mb-0 [&_.form-checkbox_input]:h-5 [&_.form-checkbox_input]:min-h-5 [&_.form-checkbox_input]:w-5 [&_.form-errors]:font-bold [&_.form-errors]:italic [&_.form-errors]:text-red-600" id="{{ section_id }}" data-customer-addresses>
   <div class="section-spacer background relative z-[3] pt-[var(--top-spacing-mobile)] pb-[var(--bottom-spacing-mobile)] large:pt-[var(--top-spacing-desktop)] large:pb-[var(--bottom-spacing-desktop)]" style="{{ spacer }}">
-    <div class="grid-container relative z-[1]" x-data='{
+    <div class="grid-container mx-auto max-w-[var(--grid-container-max-width)] px-[var(--grid-container-padding-mobile)] large:px-[var(--grid-container-padding-desktop)] relative z-[1]" x-data='{
       showNewdAddressForm: false, 
       isEditdAddressShown: false,
 

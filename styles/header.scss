@@ -165,6 +165,14 @@ header.header {
     }
   }
 
+  .header__wrapper--mega-open {
+    .header__logo.has-mega-menu-logo {
+      .header-logo__default { display: none; }
+      .header-logo__sticky { display: none; }
+      .header-logo__mega-menu { display: block; }
+    }
+  }
+
   .header {
     &__inner {
       @include border-radius( rem-calc($header-border-radius-desktop) );
@@ -453,7 +461,8 @@ header.header {
         object-fit: contain;
       }
   
-      .header-logo__sticky {
+      .header-logo__sticky,
+      .header-logo__mega-menu {
         display: none;
       }
 
@@ -497,138 +506,13 @@ header.header {
     }
   
     &__cart {
-      &.has-icon {
-        cursor: pointer;
-        position: relative;
-        padding: rem-calc( 5px ) 0;
-        height: 100%;
-        display: flex;
-        justify-content: stretch;
-        align-items: center;
-  
-        .header__cart {
-          &-inner {
-            position: relative;
-            padding: 0;
-          }
-        }
-  
-        &.cart {
-          .header__cart-inner {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-          .cart {
-            &__icon {
-              height: 100%;
-              display: block;
-              color: $header-text-color;
-              @include breakpoint( medium down ) {
-                max-height: rem-calc( 24px );
-              }
-            }
-            &__count {
-              position: absolute;
-              top: rem-calc( -10px );
-              right: rem-calc( -10px );
-              width: rem-calc( 20px );
-              height: rem-calc( 20px );
-              color: currentColor;
-              background: #E2E6FF;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              z-index: 1;
-              font-weight: 400;
-              font-size: rem-calc( 15px );
-              line-height: 1.8em;
-              font-weight: 700;
-              letter-spacing: rem-calc( 0.29px );
-              @include transition( $header-animation );
-              @include border-radius( 50% );
-  
-              .header__wrapper--sticky & {
-                border-color: transparent;
-              }
-            }
-          }
-      
-          svg,
-          img {
-            pointer-events: none;
-            height: 100%;
-            width: unset;
-            display: block;
-            object-fit: contain;
-          }
-        }
-      }
-      &:not( .has-icon ) {
-        padding: rem-calc( 6px ) 0;
-        margin: 0 0 0 rem-calc( 10px );
-        height: 100%;
-        min-width: rem-calc( 73px );
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: stretch;
-  
-        @include breakpoint( large up ) {
-          min-width: rem-calc( 98px );
-        }
-  
-        .header__cart-inner {
-          @include border-radius( $button-border-radius );
-          @include transition($header-animation);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          padding: rem-calc( 6px );
-          border: rem-calc(1.5px) solid transparent;
-          color: inherit;
-          height: rem-calc( 36px );
-          width: 100%;
-  
-          .header__wrapper--sticky & {
-          }
-        }
-  
-        .cart {
-          &__number {
-            font-size: $header-font-size-mobile;
-            line-height: rem-calc( 24px );
-            letter-spacing: rem-calc( -0.84px );
-            margin: 0 0 0 rem-calc( 6px );
-  
-            @include breakpoint( large up ) {
-              font-size: $header-font-size-desktop;
-              line-height: rem-calc( 38px );
-            }
-          }
-          &__icon {
-            font-size: $header-font-size-mobile;
-            text-transform: $header-font-case;
-            line-height: normal;
-            letter-spacing: rem-calc( -0.36px );
-            @include breakpoint( large up ) {
-              font-size: $header-font-size-desktop;
-              line-height: $header-line-height-desktop;
-              letter-spacing: $header-letter-spacing-desktop;
-            }
-          }
-          &__count {
-            display: block;
-          }
-        }
-  
-        @include hover {
-          .cart__number {
-            margin: 0;
-          }
-          .header__cart-inner {
-            border: rem-calc(1.5px) solid currentColor;
-          }
+      &.has-icon.cart {
+        svg,
+        img {
+          pointer-events: none;
+          height: 100%;
+          width: unset;
+          object-fit: contain;
         }
       }
     }
@@ -647,6 +531,17 @@ header.header {
         svg,
         img {
           @include transform( scale( 0.90 ) );
+        }
+      }
+    }
+
+    &__button {
+      &-block {
+        display: flex;
+        align-items: center;
+
+        @include breakpoint(medium down) {
+          display: none;
         }
       }
     }
@@ -969,3 +864,9 @@ header.header {
     }
   }
 }
+
+
+// Mega Menu schema class injection points
+.header__mega-menu-block {}
+
+.header__mega-menu-product-card-block {}

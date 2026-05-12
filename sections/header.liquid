@@ -1,3 +1,5 @@
+{%- render "script__section", file: "MFRMegaMenu.js" -%}
+
 {% render 'renderer__color-scheme', name: "header", color_scheme: section.settings.color_scheme, selector: "header.header .header__wrapper" %}
 {% render 'renderer__color-scheme', name: "header", color_scheme: section.settings.color_scheme_sticky, selector: "header.header.header--sticky .header__wrapper" %}
 
@@ -11,6 +13,17 @@
     header.header.header--sticky .header__wrapper { --header-background: {{ section.settings.bg_color_sticky_override }}; }
   </style>
 {%- endif -%}
+
+{%- if section.settings.mega_menu_header_color_change -%}
+  {%- render 'renderer__color-scheme',
+    name: "header",
+    color_scheme: section.settings.mega_menu_header_color_scheme,
+    selector: "header.header .header__wrapper--mega-open" -%}
+{%- endif -%}
+<style>
+  .header__wrapper--mega-open { background: var(--active-mega-menu-bg, var(--header-background)) !important; }
+  .header__wrapper--mega-open .header__inner { border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: var(--header-text); }
+</style>
 
 {%- assign appear_on = section.settings.appear_on | newline_to_br | strip_newlines | split: '<br />' -%}
 {%- assign layout_mobile = section.settings.layout_mobile -%}
@@ -45,14 +58,18 @@
   {%- assign border_bottom_desktop_classes = "large:border-b-0" -%}
 {%- endif -%}
 {% if appear_on == blank or appear_on contains template %}
-  <div class="header__wrapper {{ design_mode_class }} flex justify-center items-center flex-col transition-all"
+  <div class="header__wrapper {{ design_mode_class }} flex justify-center items-center flex-col transition-all duration-200 relative"
+    x-data="{ megaMenuOpen: false }"
+    @mega-menu-opened="megaMenuOpen = true; $el.style.setProperty('--active-mega-menu-bg', $event.detail.background)"
+    @mega-menu-closed="megaMenuOpen = false; $el.style.removeProperty('--active-mega-menu-bg')"
+    :class="{ 'header__wrapper--mega-open': megaMenuOpen }"
     style="{{ header_inline_styling }}">
     <div class="header__inner w-full relative {{ border_bottom_mobile_classes }} {{ border_bottom_desktop_classes }}">
       <div class="header__wrapper-inner {{ layout_mobile }}--mobile {{ layout_desktop }}--desktop">
         {%- if section.settings.grid_container_width == "full" -%}
-          {%- assign grid_container_class = "grid-container full" -%}
+          {%- assign grid_container_class = "grid-container full max-w-none px-0" -%}
         {%- else -%}
-          {%- assign grid_container_class = "grid-container" -%}
+          {%- assign grid_container_class = "grid-container mx-auto max-w-[var(--grid-container-max-width)] px-[var(--grid-container-padding-mobile)] large:px-[var(--grid-container-padding-desktop)]" -%}
         {%- endif -%}
         <div class="{{ grid_container_class }} h-full">
           {%- content_for "block", type: "_header__left", id: "header-left" -%}
@@ -61,6 +78,7 @@
         </div> <!-- .grid-container -->
       </div>
     </div>
+    {%- content_for "blocks" -%}
   </div> <!-- .header__wrapper -->
 {% else %}
   <style>
@@ -328,6 +346,30 @@
       },
       {
         "type": "header",
+        "content": "Mega Menu Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "mega_menu_header_color_change",
+        "label": "Change header colors when mega menu opens",
+        "default": false
+      },
+      {
+        "type": "color_scheme",
+        "id": "mega_menu_header_color_scheme",
+        "label": "Header Color Scheme — Mega Menu Open",
+        "default": "scheme_1",
+        "visible_if": "{{ section.settings.mega_menu_header_color_change == true }}"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_mega_menu",
+        "label": "Logo - Mega Menu Open",
+        "info": "This logo will appear when a mega menu is open.",
+        "visible_if": "{{ section.settings.mega_menu_header_color_change == true }}"
+      },
+      {
+        "type": "header",
         "content": "Visibility Settings"
       },
       {
@@ -338,6 +380,9 @@
       }
     ],
     "blocks": [
+      {
+        "type": "_header__mega-menu"
+      }
     ],
     "presets": [
       {

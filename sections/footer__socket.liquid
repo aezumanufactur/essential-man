@@ -6,9 +6,9 @@
 
 {% if appear_on == blank or appear_on contains template %}
   {%- if section.settings.grid_container_width == "full" -%}
-    {%- assign grid_container_class = "grid-container full" -%}
+    {%- assign grid_container_class = "grid-container full max-w-none px-0" -%}
   {%- else -%}
-    {%- assign grid_container_class = "grid-container" -%}
+    {%- assign grid_container_class = "grid-container mx-auto max-w-[var(--grid-container-max-width)] px-[var(--grid-container-padding-mobile)] large:px-[var(--grid-container-padding-desktop)]" -%}
   {%- endif -%}
   <div class="{{ grid_container_class }} w-full flex flex-row flex-wrap">
     <div class="footer__socket-left w-full min-w-0 large:w-1/2 large:items-start">

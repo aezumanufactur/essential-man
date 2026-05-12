@@ -4,22 +4,22 @@
   {%- assign tag_handle = tag | handleize -%}
 
   {%- if tag_handle contains 'best-seller' -%}
-    <div class="product-badge best-seller">
+    <div class="product-badge best-seller relative flex items-center justify-center text-center z-10 w-[4.0625rem] h-[4.0625rem] m-0 p-[0.625rem] bg-[var(--brand-color)] rounded-full text-white uppercase text-[0.75rem] leading-[0.875rem] font-bold tracking-[0.0125rem]">
       <span>Best Seller</span>
     </div>
 
   {%- elsif tag_handle contains 'new' -%}
-    <div class="product-badge new">
+    <div class="product-badge new relative flex items-center justify-center text-center z-10 w-[4.0625rem] h-[4.0625rem] m-0 p-[0.625rem] bg-[var(--brand-color)] rounded-full text-white uppercase text-[0.75rem] leading-[0.875rem] font-bold tracking-[0.0125rem]">
       <span>New</span>
     </div>
 
   {%- elsif tag_handle contains 'coming-soon' -%}
-    <div class="product-badge coming-soon">
+    <div class="product-badge coming-soon relative flex items-center justify-center text-center z-10 w-[4.0625rem] h-[4.0625rem] m-0 p-[0.625rem] bg-[var(--brand-color)] rounded-full text-white uppercase text-[0.75rem] leading-[0.875rem] font-bold tracking-[0.0125rem]">
       <span>Coming Soon</span>
     </div>
- 
+
   {%- elsif tag_handle contains 'sale' -%}
-    <div class="product-badge on-sale">
+    <div class="product-badge on-sale relative flex items-center justify-center text-center z-10 w-[4.0625rem] h-[4.0625rem] m-0 p-[0.625rem] bg-[var(--brand-color)] rounded-full text-white uppercase text-[0.75rem] leading-[0.875rem] font-bold tracking-[0.0125rem]">
       <span>Sale</span>
     </div>
   {%- endif -%}

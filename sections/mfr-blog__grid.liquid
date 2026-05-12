@@ -32,7 +32,7 @@ assign section settings to variables
 
 <section class="mfr-blog__grid {{ custom_class }} {{ grid_gutter }}" id="{{ section_id }}">
   <div class="section-spacer background {{ grid_gutter }} relative z-[3] pt-[var(--top-spacing-mobile)] pb-[var(--bottom-spacing-mobile)] large:pt-[var(--top-spacing-desktop)] large:pb-[var(--bottom-spacing-desktop)]" style="{{ spacer }}">
-    <div class="grid-container{% if container_width == 'full' %} full{% endif %} w-full relative z-[1]" {{ max_width_style }}>
+    <div class="grid-container{% if container_width == 'full' %} full max-w-none px-0{% else %} mx-auto max-w-[var(--grid-container-max-width)] px-[var(--grid-container-padding-mobile)] large:px-[var(--grid-container-padding-desktop)]{% endif %} w-full relative z-[1]" {{ max_width_style }}>
       <div class="alignment-helper {{ color_theme }} flex flex-row flex-wrap [justify-content:var(--justify-content-mobile)] [text-align:var(--text-align-mobile)] large:[justify-content:var(--justify-content-desktop)] large:[text-align:var(--text-align-desktop)]">
         <div class="section-content w-full min-w-0 relative z-[2] flex [align-items:inherit] [justify-content:inherit] flex-wrap gap-x-[1.875rem] mb-[5rem] last:mb-0 large:mb-[5.625rem] large:gap-x-[3.75rem] [&>.shopify-block:not(:last-child)]:mb-[0.9375rem] large:[&>.shopify-block:not(:last-child)]:mb-[1.875rem] empty:hidden"
           data-stagger-inview=".section-icon__wrapper, .section-content__small-text, .section-content__text, .section-content__button">

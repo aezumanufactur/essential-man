@@ -13,7 +13,7 @@
 {%- endif -%}
 
 <a href="/" itemprop="url"
-  class="header__logo header-logo{%- if block.settings.logo_sticky != blank %} has-sticky-logo{%- endif %}">
+  class="header__logo header-logo{%- if block.settings.logo_sticky != blank %} has-sticky-logo{%- endif %}{%- if section.settings.logo_mega_menu != blank %} has-mega-menu-logo{%- endif %}">
   {%- if block.settings.logo != blank -%}
     {%- assign image_width = block.settings.logo.width | times: 1.00 -%}
     {%- assign image_height = block.settings.logo.height | times: 1.00 -%}
@@ -39,6 +39,19 @@
           widths: "300,360,420",
           alt: shop.name,
           class: "header-logo__sticky" }}
+  {%- endif -%}
+  {%- if section.settings.logo_mega_menu != blank -%}
+    {%- assign mega_width = section.settings.logo_mega_menu.width | times: 1.00 -%}
+    {%- assign mega_height = section.settings.logo_mega_menu.height | times: 1.00 -%}
+    {%- assign mega_ratio = mega_width | divided_by: mega_height -%}
+    {%- assign mega_img_height = 420 | divided_by: mega_ratio | round: 2 -%}
+    {{ section.settings.logo_mega_menu
+        | image_url: width: 420
+        | image_tag: width: 420,
+          height: mega_img_height,
+          widths: "300,360,420",
+          alt: shop.name,
+          class: "header-logo__mega-menu" }}
   {%- endif -%}
 </a>
 
