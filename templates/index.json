@@ -648,53 +648,54 @@
         "custom_id": ""
       }
     },
-    "mfr_core_text_icon_card_grid_kLm9pQ": {
+    "mfr_core_text_icon_card_grid_Xp7vKa": {
       "type": "mfr-core__text-icon-card-grid",
       "blocks": {
-        "card_1_kLm9pQ": {
+        "card_1_Xp7vKa": {
           "type": "_mfr-core__text-icon-card-grid__card",
           "settings": {
-            "title": "Performance First",
-            "description": "Every ingredient earns its place through performance."
+            "title": "No-Rinse Formula",
+            "description": "Cleans without stripping. Balances without drying. Works in 60 seconds."
           }
         },
-        "card_2_kLm9pQ": {
+        "card_2_Xp7vKa": {
           "type": "_mfr-core__text-icon-card-grid__card",
           "settings": {
-            "title": "Endocrine Conscious",
-            "description": "No parabens, no sulfates, no synthetic fragrance, no disruption."
+            "title": "All-Day Hold",
+            "description": "Sets clean, holds strong, and brushes out at the end of the day."
           }
         },
-        "card_3_kLm9pQ": {
+        "card_3_Xp7vKa": {
           "type": "_mfr-core__text-icon-card-grid__card",
           "settings": {
-            "title": "No Buildup",
-            "description": "Works all day. Washes out clean."
+            "title": "Dermatologist Tested",
+            "description": "Formulated for daily use. Safe for sensitive skin and all hair types."
           }
         },
-        "card_4_kLm9pQ": {
+        "card_4_Xp7vKa": {
           "type": "_mfr-core__text-icon-card-grid__card",
           "settings": {
-            "title": "Made in the USA",
-            "description": "Made in America. Where the standards are held."
+            "title": "Made In USA",
+            "description": "Crafted in small batches at our facility in Los Angeles, California."
           }
         }
       },
       "block_order": [
-        "card_1_kLm9pQ",
-        "card_2_kLm9pQ",
-        "card_3_kLm9pQ",
-        "card_4_kLm9pQ"
+        "card_1_Xp7vKa",
+        "card_2_Xp7vKa",
+        "card_3_Xp7vKa",
+        "card_4_Xp7vKa"
       ],
       "settings": {
         "heading": "Formulated to earn its place in your routine.",
-        "grid_gutter": "",
+        "description": "Good product disappears into the day. No second guessing at the sink, no touching up at noon, no swap-out after a week. Just a routine that works, and a man with one less thing to think about.",
+        "grid_gutter": "grid-gutter-mobile grid-gutter-desktop",
         "color_scheme": "scheme_1",
         "top_spacing_mobile": 30,
         "bottom_spacing_mobile": 30,
         "top_spacing_desktop": 50,
         "bottom_spacing_desktop": 50,
-        "bg_color": "#51482b",
+        "bg_color": "",
         "section_divider_top": "",
         "section_divider_bottom": "",
         "custom_class": "",
@@ -705,6 +706,6 @@
   "order": [
     "mfr_core_hero_banner_jRfmBn",
     "mfr_core_image_video_text_K9xPmQ",
-    "mfr_core_text_icon_card_grid_kLm9pQ"
+    "mfr_core_text_icon_card_grid_Xp7vKa"
   ]
 }

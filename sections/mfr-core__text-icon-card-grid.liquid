@@ -22,11 +22,19 @@ assign section settings to variables
   <div class="section-spacer background {{ grid_gutter }}" style="{{ spacer }}">
     <div class="text-icon-card-grid__inner px-[20px] large:px-[30px] flex flex-col gap-[87px] large:gap-[90px]">
 
-      {%- if section.settings.heading != blank -%}
-        <h2 class="text-icon-card-grid__heading [font-family:var(--font-heading-h1)] text-[60px] large:text-[90px] font-[400] leading-none tracking-[-0.6px] large:tracking-[-0.9px] uppercase [color:var(--section-heading)]">
-          {{ section.settings.heading }}
-        </h2>
-      {%- endif -%}
+      <div class="text-icon-card-grid__header flex flex-col gap-[20px] large:gap-[30px]">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="text-icon-card-grid__heading [font-family:var(--font-heading-h1)] text-[60px] large:text-[90px] font-[400] leading-none tracking-[-0.6px] large:tracking-[-0.9px] uppercase [color:var(--section-heading)]">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.description != blank -%}
+          <p class="text-icon-card-grid__description [font-family:var(--custom-font-name-2)] text-[14px] font-[700] leading-[1.4] uppercase [color:var(--section-heading)]">
+            {{ section.settings.description }}
+          </p>
+        {%- endif -%}
+      </div>
 
       <div class="text-icon-card-grid__grid border border-[color:var(--section-heading)] grid grid-cols-2 large:grid-cols-4">
         {%- content_for "blocks" -%}
@@ -61,6 +69,12 @@ assign section settings to variables
       "id": "heading",
       "label": "Heading",
       "default": "Formulated to earn its place in your routine."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Good product disappears into the day. No second guessing at the sink, no touching up at noon, no swap-out after a week. Just a routine that works, and a man with one less thing to think about."
     },
     {
       "type": "header",
