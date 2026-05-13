@@ -70,7 +70,7 @@
 
   <div class="product-card__footer flex items-center gap-[0] w-full">
     <div class="product-card__description flex-1 min-w-0 [font-family:var(--font-body)] text-[14px] font-[700] leading-[1.4] large:leading-[1.5] uppercase [color:var(--carbon,#1e1b22)]">
-      <p>{{ product.description | strip_html | truncatewords: 15 }}</p>
+      <p>{{ override_description | default: product.description | strip_html | truncatewords: 15 }}</p>
     </div>
     <div class="product-card__cta shrink-0 w-[124px]">
       {%- render 'component__add-to-cart-button',

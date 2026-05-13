@@ -21,7 +21,8 @@
 {%- if block.settings.product != blank -%}
   {%- render "partial__product-card",
     product: block.settings.product,
-    override_image: block.settings.image -%}
+    override_image: block.settings.image,
+    override_description: block.settings.description -%}
 {%- else -%}
   <div class="product-card w-full min-h-full flex flex-col border-t border-[var(--carbon,#1e1b22)] large:border bg-[var(--essential-white,#eeece5)] overflow-hidden p-[20px] gap-[22px]">
     <div class="product-card__image-wrap w-full overflow-hidden bg-[rgba(0,0,0,0.05)]"></div>
@@ -52,6 +53,12 @@
       "id": "image",
       "label": "Custom Image",
       "info": "Override the product image. Leave blank to use the product's featured image."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Custom Description",
+      "info": "Override the product description. Leave blank to use the product's description."
     },
     {
       "type": "header",
