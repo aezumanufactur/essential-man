@@ -1,0 +1,2 @@
+.mfr-product__grid .product-grid__item{max-height:90vh;overflow:hidden}@media print,screen and (min-width:64em){.mfr-product__grid .product-grid__item{flex:1 0 0;min-width:0}}.mfr-product__grid .product-card__cta button,.mfr-product__grid .product-card__cta form{width:100%}
+/*# sourceMappingURL=mfr-product__grid.css.map */

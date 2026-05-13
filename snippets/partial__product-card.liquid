@@ -55,14 +55,14 @@
 
   <div class="product-card__divider border-t border-[var(--carbon,#1e1b22)] w-full opacity-30"></div>
 
-  <div class="product-card__footer flex items-center gap-[0] w-full">
+  <div class="product-card__footer flex items-center gap-[10px] w-full">
     <div class="product-card__description flex-1 min-w-0 [font-family:var(--font-body)] text-[14px] font-[700] leading-[1.4] large:leading-[1.5] uppercase [color:var(--carbon,#1e1b22)]">
       <p>{{ override_description | default: product.description | strip_html | truncatewords: 15 }}</p>
     </div>
-    <div class="product-card__cta shrink-0 w-[88px] large:w-[150px]">
+    <div class="product-card__cta shrink-0 w-[140px] large:w-[190px]">
       {%- render 'component__add-to-cart-button',
         product: product,
-        button_class: "primary w-full [font-family:var(--button-font-family)] [font-size:var(--button-font-size-mobile)] [line-height:var(--button-line-height-mobile)] [font-weight:var(--button-font-weight)] [letter-spacing:var(--button-letter-spacing-mobile)] [text-transform:var(--button-font-case)]",
+        button_class: "primary w-full [font-family:var(--button-font-family)] [font-size:var(--button-font-size-mobile)] [line-height:var(--button-line-height-mobile)] [font-weight:var(--button-font-weight)] [letter-spacing:var(--button-letter-spacing-mobile)] [text-transform:var(--button-font-case)] !min-h-[56px]",
         form_class: "" -%}
     </div>
   </div>
