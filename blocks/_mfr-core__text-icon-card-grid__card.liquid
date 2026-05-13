@@ -1,0 +1,111 @@
+{%- assign ar_mobile = block.settings.aspect_ratio_mobile_custom | default: block.settings.aspect_ratio_mobile -%}
+{%- assign ar_desktop = block.settings.aspect_ratio_desktop_custom | default: block.settings.aspect_ratio_desktop -%}
+
+<div class="text-icon-card-grid__card__inner aspect-[{{ ar_mobile }}] large:aspect-[{{ ar_desktop }}] flex flex-col justify-between">
+
+  {%- if block.settings.title != blank -%}
+    <p class="text-icon-card-grid__card__title [font-family:var(--font-heading-h4)] text-[20px] large:text-[26px] font-[500] leading-[1.1] uppercase [color:var(--section-heading)]">
+      {{ block.settings.title }}
+    </p>
+  {%- endif -%}
+
+  <div class="text-icon-card-grid__card__footer flex flex-col gap-[8px]">
+    {%- if block.settings.icon != blank -%}
+      <div class="text-icon-card-grid__card__icon-wrap size-[60px] large:size-[75px]">
+        {%- render 'component__lazyload-image',
+          image: block.settings.icon,
+          width: 150,
+          class: "w-full h-auto block" -%}
+      </div>
+    {%- endif -%}
+
+    {%- if block.settings.description != blank -%}
+      <p class="text-icon-card-grid__card__description [font-family:var(--custom-font-name-2)] text-[12px] large:text-[14px] font-[700] leading-[1.4] large:leading-[20px] uppercase opacity-70 [color:var(--section-heading)]">
+        {{ block.settings.description }}
+      </p>
+    {%- endif -%}
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Card",
+  "class": "text-icon-card-grid__card",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Card Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Icon"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Aspect Ratio Settings"
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio_mobile",
+      "label": "Aspect Ratio - Mobile",
+      "options": [
+        { "value": "9/16", "label": "9:16 (Portrait)" },
+        { "value": "3/4", "label": "3:4" },
+        { "value": "2/3", "label": "2:3" },
+        { "value": "1/1", "label": "1:1 (Square)" },
+        { "value": "4/3", "label": "4:3" },
+        { "value": "16/9", "label": "16:9 (Landscape)" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "3/4"
+    },
+    {
+      "type": "text",
+      "id": "aspect_ratio_mobile_custom",
+      "label": "Custom Aspect Ratio - Mobile",
+      "info": "Format: width/height e.g. 195/260",
+      "visible_if": "{{ block.settings.aspect_ratio_mobile == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio_desktop",
+      "label": "Aspect Ratio - Desktop",
+      "options": [
+        { "value": "9/16", "label": "9:16 (Portrait)" },
+        { "value": "1/1", "label": "1:1 (Square)" },
+        { "value": "4/3", "label": "4:3" },
+        { "value": "3/2", "label": "3:2" },
+        { "value": "16/9", "label": "16:9 (Landscape)" },
+        { "value": "21/9", "label": "21:9 (Ultrawide)" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "custom"
+    },
+    {
+      "type": "text",
+      "id": "aspect_ratio_desktop_custom",
+      "label": "Custom Aspect Ratio - Desktop",
+      "default": "345/420",
+      "info": "Format: width/height e.g. 345/420",
+      "visible_if": "{{ block.settings.aspect_ratio_desktop == 'custom' }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Card"
+    }
+  ]
+}
+{% endschema %}
