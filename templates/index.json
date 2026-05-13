@@ -9,6 +9,22 @@
  */
 {
   "sections": {
+    "mfr_core_featured_product_Px4wNz": {
+      "type": "mfr-core__featured-product",
+      "blocks": {},
+      "block_order": [],
+      "settings": {
+        "product": "",
+        "heading": "Two Products. One system.",
+        "image": "shopify://shop_images/hero-image-desktop.webp",
+        "product_subtitle": "Powder + Clay",
+        "best_value_tag": "Best Value",
+        "benefits_metafield_namespace": "custom",
+        "benefits_metafield_key": "benefits",
+        "custom_class": "",
+        "custom_id": ""
+      }
+    },
     "mfr_core_hero_banner_jRfmBn": {
       "type": "mfr-core__hero-banner",
       "blocks": {
@@ -371,6 +387,7 @@
     }
   },
   "order": [
-    "mfr_core_hero_banner_jRfmBn"
+    "mfr_core_hero_banner_jRfmBn",
+    "mfr_core_featured_product_Px4wNz"
   ]
 }
