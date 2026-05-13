@@ -3,13 +3,7 @@
 @import "../tools/mixins";
 
 .mfr-core__text-icon-card-grid {
-  .text-icon-card-grid {
-  }
-
   .text-icon-card-grid__card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     border: 1px solid var(--section-heading, #c4bfb3);
     padding: rem-calc(18) rem-calc(15);
 

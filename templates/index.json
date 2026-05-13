@@ -651,51 +651,90 @@
     "mfr_core_text_icon_card_grid_Xp7vKa": {
       "type": "mfr-core__text-icon-card-grid",
       "blocks": {
-        "card_1_Xp7vKa": {
-          "type": "_mfr-core__text-icon-card-grid__card",
+        "section_content_Xp7vKa": {
+          "type": "_section-content",
           "settings": {
-            "title": "No-Rinse Formula",
-            "description": "Cleans without stripping. Balances without drying. Works in 60 seconds."
-          }
+            "mobile_alignment": "left",
+            "desktop_alignment": "left",
+            "enable_margin_settings": true,
+            "margin_y_mobile": true,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 87,
+            "margin_y_desktop": true,
+            "margin_top_desktop": 0,
+            "margin_bottom_desktop": 90
+          },
+          "blocks": {
+            "title_Xp7vKa": {
+              "type": "_section-content__title",
+              "settings": {
+                "heading": "Formulated to earn its place in your routine.",
+                "header_style": "h1",
+                "header_tag": "h2"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "title_Xp7vKa"
+          ]
         },
-        "card_2_Xp7vKa": {
-          "type": "_mfr-core__text-icon-card-grid__card",
-          "settings": {
-            "title": "All-Day Hold",
-            "description": "Sets clean, holds strong, and brushes out at the end of the day."
-          }
-        },
-        "card_3_Xp7vKa": {
-          "type": "_mfr-core__text-icon-card-grid__card",
-          "settings": {
-            "title": "Dermatologist Tested",
-            "description": "Formulated for daily use. Safe for sensitive skin and all hair types."
-          }
-        },
-        "card_4_Xp7vKa": {
-          "type": "_mfr-core__text-icon-card-grid__card",
-          "settings": {
-            "title": "Made In USA",
-            "description": "Crafted in small batches at our facility in Los Angeles, California."
-          }
+        "cards_Xp7vKa": {
+          "type": "_mfr-core__text-icon-card-grid__cards",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "card_1_Xp7vKa": {
+              "type": "_mfr-core__text-icon-card-grid__card",
+              "settings": {
+                "title": "Performance First",
+                "description": "Every ingredient earns its place through performance."
+              }
+            },
+            "card_2_Xp7vKa": {
+              "type": "_mfr-core__text-icon-card-grid__card",
+              "settings": {
+                "title": "Endocrine Conscious",
+                "description": "No parabens, no sulfates, no synthetic fragrance, no disruption."
+              }
+            },
+            "card_3_Xp7vKa": {
+              "type": "_mfr-core__text-icon-card-grid__card",
+              "settings": {
+                "title": "No Buildup",
+                "description": "Works all day. Washes out clean."
+              }
+            },
+            "card_4_Xp7vKa": {
+              "type": "_mfr-core__text-icon-card-grid__card",
+              "settings": {
+                "title": "Made in the USA",
+                "description": "Made in America. Where the standards are held."
+              }
+            }
+          },
+          "block_order": [
+            "card_1_Xp7vKa",
+            "card_2_Xp7vKa",
+            "card_3_Xp7vKa",
+            "card_4_Xp7vKa"
+          ]
         }
       },
       "block_order": [
-        "card_1_Xp7vKa",
-        "card_2_Xp7vKa",
-        "card_3_Xp7vKa",
-        "card_4_Xp7vKa"
+        "section_content_Xp7vKa",
+        "cards_Xp7vKa"
       ],
       "settings": {
-        "heading": "Formulated to earn its place in your routine.",
-        "description": "Good product disappears into the day. No second guessing at the sink, no touching up at noon, no swap-out after a week. Just a routine that works, and a man with one less thing to think about.",
-        "grid_gutter": "grid-gutter-mobile grid-gutter-desktop",
-        "color_scheme": "scheme_1",
+        "container_width": "full",
+        "max_width": 0,
+        "grid_gutter": "",
+        "color_scheme": "scheme-e7a2b49c-36ae-4b1f-b31f-f3ec31db1023",
         "top_spacing_mobile": 30,
         "bottom_spacing_mobile": 30,
         "top_spacing_desktop": 50,
         "bottom_spacing_desktop": 50,
-        "bg_color": "",
+        "bg_color": "#51482b",
         "section_divider_top": "",
         "section_divider_bottom": "",
         "custom_class": "",

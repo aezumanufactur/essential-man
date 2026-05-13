@@ -5,11 +5,19 @@ assign section settings to variables
 {%- endcomment -%}
 
 {% render 'style-tags__section', asset_file_name: "mfr-core__text-icon-card-grid.css" %}
+{%- assign container_width = section.settings.container_width -%}
+{%- assign max_width = section.settings.max_width -%}
 {%- assign grid_gutter = section.settings.grid_gutter -%}
 {%- assign custom_class = section.settings.custom_class -%}
 
 {%- assign section_id = section.settings.custom_id | default: section.id -%}
 {% render 'renderer__color-scheme', name: "section", color_scheme: section.settings.color_scheme, selector: ".shopify-section", section_id: section_id %}
+
+{%- if max_width != 0 and container_width == "" -%}
+  {%- capture max_width_style -%}
+    style="max-width: {{ max_width }}rem;"
+  {%- endcapture -%}
+{%- endif -%}
 
 {% capture spacer %}
   --top-spacing-mobile: {{ section.settings.top_spacing_mobile | default: 30 }}px;
@@ -17,34 +25,20 @@ assign section settings to variables
   --top-spacing-desktop: {{ section.settings.top_spacing_desktop | default: 50 }}px;
   --bottom-spacing-desktop: {{ section.settings.bottom_spacing_desktop | default: 50 }}px;
 {% endcapture %}
-
+{% render 'section__settings-styles' %}
 <section class="mfr-core__text-icon-card-grid {{ custom_class }}" id="{{ section_id }}">
   <div class="section-spacer background {{ grid_gutter }}" style="{{ spacer }}">
-    <div class="text-icon-card-grid__inner px-[20px] large:px-[30px] flex flex-col gap-[87px] large:gap-[90px]">
-
-      <div class="text-icon-card-grid__header flex flex-col gap-[20px] large:gap-[30px]">
-        {%- if section.settings.heading != blank -%}
-          <h2 class="text-icon-card-grid__heading [font-family:var(--font-heading-h1)] text-[60px] large:text-[90px] font-[400] leading-none tracking-[-0.6px] large:tracking-[-0.9px] uppercase [color:var(--section-heading)]">
-            {{ section.settings.heading }}
-          </h2>
-        {%- endif -%}
-
-        {%- if section.settings.description != blank -%}
-          <p class="text-icon-card-grid__description [font-family:var(--custom-font-name-2)] text-[14px] font-[700] leading-[1.4] uppercase [color:var(--section-heading)]">
-            {{ section.settings.description }}
-          </p>
-        {%- endif -%}
-      </div>
-
-      <div class="text-icon-card-grid__grid border border-[color:var(--section-heading)] grid grid-cols-2 large:grid-cols-4">
+    <div class="{{ container_width }} relative px-5 z-[1] mx-auto {% if container_width == 'full' %}large:px-[30px]{% else %}large:px-[3.75rem]{% endif %}" {{ max_width_style }}>
+      <div class="section-content w-full min-w-0">
         {%- content_for "blocks" -%}
+        {%- content_for "block", type: "_mfr-core__text-icon-card-grid__cards", id: "cards" -%}
       </div>
-
     </div>
 
     {%- render 'component__gradient-bg-styles' -%}
   </div>
-  {%- render 'component__section-dividers' -%}
+  {%- render 'component__section-dividers', is_video_background: true -%}
+  {%- content_for "block", type: "_accent-graphics", id: "accent-graphics" -%}
 </section>
 
 
@@ -62,23 +56,33 @@ assign section settings to variables
   "settings": [
     {
       "type": "header",
-      "content": "Content"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Formulated to earn its place in your routine."
-    },
-    {
-      "type": "textarea",
-      "id": "description",
-      "label": "Description",
-      "default": "Good product disappears into the day. No second guessing at the sink, no touching up at noon, no swap-out after a week. Just a routine that works, and a man with one less thing to think about."
-    },
-    {
-      "type": "header",
       "content": "Section Settings"
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "options": [
+        {
+          "value": "full",
+          "label": "Full"
+        },
+        {
+          "value": "",
+          "label": "Contain"
+        }
+      ],
+      "label": "Width",
+      "default": "full"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "rem",
+      "label": "Max Content Width",
+      "default": 0
     },
     {
       "type": "select",
@@ -234,17 +238,35 @@ assign section settings to variables
   ],
   "blocks": [
     {
-      "type": "_mfr-core__text-icon-card-grid__card"
+      "type": "_section-content"
+    },
+    {
+      "type": "_mfr-core__text-icon-card-grid__cards"
     }
   ],
   "presets": [
     {
       "name": "Text Icon Card Grid",
       "blocks": [
-        { "type": "_mfr-core__text-icon-card-grid__card" },
-        { "type": "_mfr-core__text-icon-card-grid__card" },
-        { "type": "_mfr-core__text-icon-card-grid__card" },
-        { "type": "_mfr-core__text-icon-card-grid__card" }
+        {
+          "type": "_section-content",
+          "id": "section-content",
+          "blocks": [
+            { "type": "_section-content__title" },
+            { "type": "_section-content__text" }
+          ]
+        },
+        {
+          "type": "_mfr-core__text-icon-card-grid__cards",
+          "id": "cards",
+          "static": true,
+          "blocks": [
+            { "type": "_mfr-core__text-icon-card-grid__card" },
+            { "type": "_mfr-core__text-icon-card-grid__card" },
+            { "type": "_mfr-core__text-icon-card-grid__card" },
+            { "type": "_mfr-core__text-icon-card-grid__card" }
+          ]
+        }
       ]
     }
   ]
