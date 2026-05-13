@@ -1,7 +1,7 @@
 {%- assign ar_mobile = block.settings.aspect_ratio_mobile_custom | default: block.settings.aspect_ratio_mobile -%}
 {%- assign ar_desktop = block.settings.aspect_ratio_desktop_custom | default: block.settings.aspect_ratio_desktop -%}
 
-<div class="text-icon-card-grid__card__inner aspect-[{{ ar_mobile }}] large:aspect-[{{ ar_desktop }}] border border-[color:var(--section-heading)] flex flex-col justify-between px-[15px] py-[18px] large:p-[30px]">
+<div class="text-icon-card-grid__card__inner aspect-[{{ ar_mobile }}] large:aspect-[{{ ar_desktop }}] flex flex-col justify-between">
 
   {%- if block.settings.title != blank -%}
     <p class="text-icon-card-grid__card__title [font-family:var(--font-heading-h4)] text-[20px] large:text-[26px] font-[500] leading-[1.1] uppercase [color:var(--section-heading)]">
@@ -91,13 +91,14 @@
         { "value": "21/9", "label": "21:9 (Ultrawide)" },
         { "value": "custom", "label": "Custom" }
       ],
-      "default": "9/16"
+      "default": "custom"
     },
     {
       "type": "text",
       "id": "aspect_ratio_desktop_custom",
       "label": "Custom Aspect Ratio - Desktop",
-      "info": "Format: width/height e.g. 260/420",
+      "default": "345/420",
+      "info": "Format: width/height e.g. 345/420",
       "visible_if": "{{ block.settings.aspect_ratio_desktop == 'custom' }}"
     }
   ],
