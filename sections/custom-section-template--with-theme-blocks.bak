@@ -28,7 +28,7 @@ assign section settings to variables
 {% endcapture %}
 {% render 'section__settings-styles' %}
 <section class="mfr-custom__section {{ custom_class }} {{ grid_gutter }}" id="{{ section_id }}">
-  <div class="section-spacer background {{ grid_gutter }}" style="{{ spacer }}">
+  <div class="section-spacer background {{ grid_gutter }} pt-[var(--top-spacing-mobile)] pb-[var(--bottom-spacing-mobile)] large:pt-[var(--top-spacing-desktop)] large:pb-[var(--bottom-spacing-desktop)]" style="{{ spacer }}">
     <div class="{{ container_width }} relative px-5 z-[1] mx-auto{% unless container_width == 'full' %} large:px-[3.75rem]{% endunless %}" {{ max_width_style }}>
       <div class="alignment-helper {{ color_theme }} flex flex-row flex-wrap [justify-content:var(--justify-content-mobile)] [text-align:var(--text-align-mobile)] large:[justify-content:var(--justify-content-desktop)] large:[text-align:var(--text-align-desktop)]">
         <div class="section-content w-full min-w-0"

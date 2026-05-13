@@ -4,9 +4,11 @@
 <div class="text-icon-card-grid__card__inner flex flex-col justify-between">
 
   {%- if block.settings.title != blank -%}
-    <p class="text-icon-card-grid__card__title [font-family:var(--font-heading-h4)] text-[20px] large:text-[26px] font-[500] leading-[1.1] uppercase [color:var(--section-heading)]">
-      {{ block.settings.title }}
-    </p>
+    <div class="text-icon-card-grid__card__title [font-family:var(--font-heading-h4)] text-[20px] large:text-[26px] font-[500] leading-[1.1] uppercase [color:var(--section-heading)]">
+      <p>
+        {{ block.settings.title }}
+      </p>
+    </div>
   {%- endif -%}
 
   <div class="text-icon-card-grid__card__footer flex flex-col gap-[8px]">
@@ -20,9 +22,11 @@
     {%- endif -%}
 
     {%- if block.settings.description != blank -%}
-      <p class="text-icon-card-grid__card__description [font-family:var(--custom-font-name-2)] text-[12px] large:text-[14px] font-[700] leading-[1.4] large:leading-[20px] uppercase opacity-70 [color:var(--section-heading)]">
-        {{ block.settings.description }}
-      </p>
+      <div class="text-icon-card-grid__card__description [font-family:var(--custom-font-name-2)] text-[12px] large:text-[14px] font-[700] leading-[1.4] large:leading-[20px] uppercase opacity-70 [color:var(--section-heading)]">
+        <p>
+          {{ block.settings.description }}
+        </p>
+      </div>
     {%- endif -%}
   </div>
 
