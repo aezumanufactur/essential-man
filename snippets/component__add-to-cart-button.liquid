@@ -1,5 +1,6 @@
 {% assign product = product %}
 {% assign product_id = product.selected_or_first_available_variant.id %}
+{%- assign form_id = 'product-form-' | append: product_id -%}
 
 {% if product.available %}
   {%- assign open_off_canvas = ' x-data x-on:click="$store[`offCanvasCart`].openOffcanvas()" ' -%}
@@ -25,8 +26,15 @@
   {% assign selling_plan_input = "" %}
 {% endif %}
 
-<div data-product-id="{{ product_id }}" @submit.prevent.debounce.300ms="$store.cart.addToCart({{- product_id -}})">
-  {%- form 'product', product, id: "product-form-" | append: product_id, class: form_class -%}
+<div
+  data-product-id="{{ product_id }}"
+  x-data
+  x-init="$el.querySelector('#{{ form_id }}').addEventListener('submit', Alpine.debounce(function(e) {
+    e.preventDefault();
+    $store.cart.addToCart({{ product_id }});
+  }, 300))"
+>
+  {%- form 'product', product, id: form_id, class: form_class -%}
     {% render 'product-form__hidden-input', product: product %}
 
     {{ selling_plan_input }}
