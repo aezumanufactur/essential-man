@@ -656,6 +656,11 @@
           "settings": {
             "mobile_alignment": "left",
             "desktop_alignment": "left",
+            "enable_width_settings": true,
+            "width_mobile": false,
+            "width_desktop": true,
+            "width_desktop_value": 71,
+            "width_desktop_unit": "%",
             "enable_margin_settings": true,
             "margin_y_mobile": true,
             "margin_top_mobile": 0,
