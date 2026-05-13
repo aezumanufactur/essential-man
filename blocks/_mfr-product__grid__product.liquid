@@ -1,10 +1,6 @@
 {%- render "settings__block-layout-controls" -%}
 {%- render "settings__aspect-ratio" -%}
 
-<style>
-  #shopify-block-{{ block.id }} { max-height: 90vh; overflow: hidden; }
-</style>
-
 {%- if block.settings.product != blank -%}
   {%- render "partial__product-card",
     product: block.settings.product,

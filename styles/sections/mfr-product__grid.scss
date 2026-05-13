@@ -1,0 +1,22 @@
+@import "../variables";
+@import "../tools/util/util";
+@import "../tools/mixins";
+
+.mfr-product__grid {
+  .product-grid__item {
+    max-height: 90vh;
+    overflow: hidden;
+
+    @include breakpoint(large up) {
+      flex: 1 0 0;
+      min-width: 0;
+    }
+  }
+
+  .product-card__cta {
+    form,
+    button {
+      width: 100%;
+    }
+  }
+}
