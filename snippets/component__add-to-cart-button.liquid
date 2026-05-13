@@ -25,33 +25,35 @@
   {% assign selling_plan_input = "" %}
 {% endif %}
 
-<form data-product-id="{{ product_id }}" id="product-form-{{- product_id -}}" @submit.prevent.debounce.300ms="$store.cart.addToCart({{- product_id -}})">
-  {% render 'product-form__hidden-input', product: product %}
+<div data-product-id="{{ product_id }}" @submit.prevent.debounce.300ms="$store.cart.addToCart({{- product_id -}})">
+  {%- form 'product', product, id: "product-form-" | append: product_id, class: form_class -%}
+    {% render 'product-form__hidden-input', product: product %}
 
-  {{ selling_plan_input }}
+    {{ selling_plan_input }}
 
-  <button class="button {{ button_class }} {{ has_price_class }} add-to-cart " {% unless product.available -%} disabled {%- endunless %} {{ open_off_canvas }} data-inview>
-    <div class="button-text">
-      {% if product.available %}
-        {% if button_label != blank %}
-          {{ button_label }}
+    <button class="button {{ button_class }} {{ has_price_class }} add-to-cart " {% unless product.available -%} disabled {%- endunless %} {{ open_off_canvas }} data-inview>
+      <div class="button-text">
+        {% if product.available %}
+          {% if button_label != blank %}
+            {{ button_label }}
+          {% else %}
+            {{ 'products.product.add_to_cart' | t }}
+          {% endif %}
         {% else %}
-          {{ 'products.product.add_to_cart' | t }}
+          {{ 'products.product.sold_out' | t }}
         {% endif %}
-      {% else %} 
-        {{ 'products.product.sold_out' | t }}
-      {% endif %}
-    </div>
-    {%- if product.available -%}
-      {%- if show_price == true or show_price == "true" -%}
-        <span class="separator">—</span>
-        {% if for_subscription %}
-          <span class="price">{{ first_selling_plan.price | money }}</span>
-          <span class="price old">{{ first_selling_plan.compare_at_price | money }}</span>
-        {% else %}
-          {%- render 'price', product: product -%}
-        {% endif %}
+      </div>
+      {%- if product.available -%}
+        {%- if show_price == true or show_price == "true" -%}
+          <span class="separator">—</span>
+          {% if for_subscription %}
+            <span class="price">{{ first_selling_plan.price | money }}</span>
+            <span class="price old">{{ first_selling_plan.compare_at_price | money }}</span>
+          {% else %}
+            {%- render 'price', product: product -%}
+          {% endif %}
+        {%- endif -%}
       {%- endif -%}
-    {%- endif -%}
-  </button>
-</form>
+    </button>
+  {%- endform -%}
+</div>
