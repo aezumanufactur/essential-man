@@ -82,7 +82,6 @@ assign section settings to variables
           {%- if section.settings.text_side_desktop == 'text-left' %} large:order-1{%- else %} large:order-2{%- endif %}
           {%- if section.settings.text_side_mobile == 'text-top' %} order-1{%- unless sc_margin_y_mobile %} mb-[3.75rem]{%- endunless %}{%- else %} order-2{%- endif %}"
           data-stagger-inview=".section-icon__wrapper, .section-content__small-text, .section-content__text, .section-content__button, .accordion__wrapper, .mfr-list__wrapper li">
-          {%- content_for "block", type: "_section-content", id: "section-content" -%}
           {%- content_for "blocks" -%}
         </div>
       </div>
@@ -424,8 +423,6 @@ assign section settings to variables
       "blocks": [
         {
           "type": "_section-content",
-          "id": "section-content",
-          "static": true,
           "blocks": [
             {
               "type": "_section-content__title"

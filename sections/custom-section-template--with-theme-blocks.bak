@@ -33,7 +33,6 @@ assign section settings to variables
       <div class="alignment-helper {{ color_theme }} flex flex-row flex-wrap [justify-content:var(--justify-content-mobile)] [text-align:var(--text-align-mobile)] large:[justify-content:var(--justify-content-desktop)] large:[text-align:var(--text-align-desktop)]">
         <div class="section-content w-full min-w-0"
           data-stagger-inview=".section-icon__wrapper, .section-content__small-text, .section-content__text, .section-content__button">
-          {%- content_for "block", type: "_section-content", id: "section-content" -%}
           {%- content_for "blocks" -%}
         </div>
       </div>

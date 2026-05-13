@@ -31,7 +31,7 @@ assign section settings to variables
     <div class="{{ container_width }} relative px-5 z-[1] mx-auto {% if container_width == 'full' %}large:px-[30px]{% else %}large:px-[3.75rem]{% endif %}" {{ max_width_style }}>
       <div class="section-content w-full min-w-0">
         {%- content_for "blocks" -%}
-        {%- content_for "block", type: "_mfr-core__text-icon-card-grid__cards", id: "cards" -%}
+        {%- content_for "block", type: "_text-icon-card-grid__cards", id: "cards" -%}
       </div>
     </div>
 
@@ -241,7 +241,7 @@ assign section settings to variables
       "type": "_section-content"
     },
     {
-      "type": "_mfr-core__text-icon-card-grid__cards"
+      "type": "_text-icon-card-grid__cards"
     }
   ],
   "presets": [
@@ -250,14 +250,13 @@ assign section settings to variables
       "blocks": [
         {
           "type": "_section-content",
-          "id": "section-content",
           "blocks": [
             { "type": "_section-content__title" },
             { "type": "_section-content__text" }
           ]
         },
         {
-          "type": "_mfr-core__text-icon-card-grid__cards",
+          "type": "_text-icon-card-grid__cards",
           "id": "cards",
           "static": true,
           "blocks": [

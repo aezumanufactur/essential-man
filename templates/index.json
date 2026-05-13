@@ -679,37 +679,89 @@
             "title_Xp7vKa"
           ]
         },
-        "cards_Xp7vKa": {
-          "type": "_mfr-core__text-icon-card-grid__cards",
+        "cards": {
+          "type": "_text-icon-card-grid__cards",
           "static": true,
           "settings": {},
           "blocks": {
             "card_1_Xp7vKa": {
-              "type": "_mfr-core__text-icon-card-grid__card",
+              "type": "_text-icon-card-grid__card",
               "settings": {
                 "title": "Performance First",
-                "description": "Every ingredient earns its place through performance."
+                "description": "Every ingredient earns its place through performance.",
+                "enable_padding_settings": true,
+                "padding_x_mobile": true,
+                "padding_left_mobile": 15,
+                "padding_right_mobile": 15,
+                "padding_y_mobile": true,
+                "padding_top_mobile": 18,
+                "padding_bottom_mobile": 18,
+                "padding_x_desktop": true,
+                "padding_left_desktop": 30,
+                "padding_right_desktop": 30,
+                "padding_y_desktop": true,
+                "padding_top_desktop": 30,
+                "padding_bottom_desktop": 30
               }
             },
             "card_2_Xp7vKa": {
-              "type": "_mfr-core__text-icon-card-grid__card",
+              "type": "_text-icon-card-grid__card",
               "settings": {
                 "title": "Endocrine Conscious",
-                "description": "No parabens, no sulfates, no synthetic fragrance, no disruption."
+                "description": "No parabens, no sulfates, no synthetic fragrance, no disruption.",
+                "enable_padding_settings": true,
+                "padding_x_mobile": true,
+                "padding_left_mobile": 15,
+                "padding_right_mobile": 15,
+                "padding_y_mobile": true,
+                "padding_top_mobile": 18,
+                "padding_bottom_mobile": 18,
+                "padding_x_desktop": true,
+                "padding_left_desktop": 30,
+                "padding_right_desktop": 30,
+                "padding_y_desktop": true,
+                "padding_top_desktop": 30,
+                "padding_bottom_desktop": 30
               }
             },
             "card_3_Xp7vKa": {
-              "type": "_mfr-core__text-icon-card-grid__card",
+              "type": "_text-icon-card-grid__card",
               "settings": {
                 "title": "No Buildup",
-                "description": "Works all day. Washes out clean."
+                "description": "Works all day. Washes out clean.",
+                "enable_padding_settings": true,
+                "padding_x_mobile": true,
+                "padding_left_mobile": 15,
+                "padding_right_mobile": 15,
+                "padding_y_mobile": true,
+                "padding_top_mobile": 18,
+                "padding_bottom_mobile": 18,
+                "padding_x_desktop": true,
+                "padding_left_desktop": 30,
+                "padding_right_desktop": 30,
+                "padding_y_desktop": true,
+                "padding_top_desktop": 30,
+                "padding_bottom_desktop": 30
               }
             },
             "card_4_Xp7vKa": {
-              "type": "_mfr-core__text-icon-card-grid__card",
+              "type": "_text-icon-card-grid__card",
               "settings": {
                 "title": "Made in the USA",
-                "description": "Made in America. Where the standards are held."
+                "description": "Made in America. Where the standards are held.",
+                "enable_padding_settings": true,
+                "padding_x_mobile": true,
+                "padding_left_mobile": 15,
+                "padding_right_mobile": 15,
+                "padding_y_mobile": true,
+                "padding_top_mobile": 18,
+                "padding_bottom_mobile": 18,
+                "padding_x_desktop": true,
+                "padding_left_desktop": 30,
+                "padding_right_desktop": 30,
+                "padding_y_desktop": true,
+                "padding_top_desktop": 30,
+                "padding_bottom_desktop": 30
               }
             }
           },
@@ -722,8 +774,7 @@
         }
       },
       "block_order": [
-        "section_content_Xp7vKa",
-        "cards_Xp7vKa"
+        "section_content_Xp7vKa"
       ],
       "settings": {
         "container_width": "full",
