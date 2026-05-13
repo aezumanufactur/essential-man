@@ -1,99 +1,25 @@
+@import "../variables";
+@import "../tools/util/util";
+@import "../tools/mixins";
+
 .product-card {
-  @include border-radius( rem-calc( 8px ) );
-  @include transition( $global-transition );
-  background: rgba(0, 0, 0, 0.03);
-
-  @include hover {
-    @include transform( scale( 0.97 ) );
-
-    .product-card__media img {
-      @include transform( scale( 1.08 ) );
-    }
+  &__info-rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
   }
 
-  &__media {
-    img {
-      height: 100%;
-      width: 100%;
-      max-height: 100%;
-      display: block;
-      object-fit: cover;
-      @include transition( $global-transition );
-    }
-  }
-
-  &__info {
-    &-title {
-      @include large;
-      line-height: 1.083em;
-      font-weight: 700;
-      width: 100%;
-      text-align: left;
-      color: $black;
-
-      &:not(:last-child) {
-        margin-bottom: rem-calc( 15px );
-      }
-    }
-
-    &-description {
-      @include xsmall;
-
-      @include breakpoint(large up) {
-        width: 90%;
-      }
-    }
-
-    &-caption {
-      @include xsmall;
-      @include opacity(0.75);
-      margin-bottom: rem-calc(5px);
-    }
-
-    &-rating {
-      display: flex;
-      align-items: center;
-      margin-bottom: rem-calc(8px);
-
-      span {
-        font-size: rem-calc(12px);
-        margin: rem-calc(2px) 0 0 rem-calc(5px);
-      }
-    }
-
+  &__cta {
     form {
-      width: 100%;
-      margin-top: auto;
-      color: $black;
+      width: auto;
+      margin-top: 0;
+      color: inherit;
+    }
 
-      button.add-to-cart {
-        font-size: rem-calc( 14px );
-        line-height: 1em;
-        font-weight: 600;
-        letter-spacing: rem-calc( -0.22px );
-        width: 100%;
-        min-height: rem-calc( 64px );
-        padding: rem-calc( 10px );
-        min-width: unset;
-
-        @include breakpoint( large up ) {
-          font-size: rem-calc( 16px );
-          letter-spacing: rem-calc( -0.26px );
-        }
-
-        .separator {
-          margin-left: rem-calc( 5px );
-          margin-right: rem-calc( 5px );
-        }
-
-        @include hover {
-          background-color: currentColor;
-          border-color: $white;
-          > * {
-            color: $white;
-          }
-        }
-      }
+    button.add-to-cart {
+      width: rem-calc(124);
+      min-height: unset;
+      padding: rem-calc(10) rem-calc(20);
     }
   }
 }

@@ -1,0 +1,12 @@
+@import "../variables";
+@import "../tools/util/util";
+@import "../tools/mixins";
+
+.mfr-product__grid {
+  .product-grid__item {
+    @include breakpoint(large up) {
+      flex: 1 0 0;
+      min-width: 0;
+    }
+  }
+}

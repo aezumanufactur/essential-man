@@ -1,37 +1,82 @@
-{%- liquid 
-  assign product_options = product.options.first 
-  assign product_variants = product.variants
-  assign product_variants_size = product_variants | size
-
-  assign metafields = product.metafields.mfr_fields
+{%- liquid
   assign media = product.featured_image
-  assign default_alt = product.title | append: "Featured Image"
+  assign default_alt = product.title | append: " Featured Image"
   assign image_alt = media.alt | default: default_alt
+
+  assign compare_at_price = product.compare_at_price
+  assign current_price = product.price
+  assign on_sale = false
+  if compare_at_price > current_price
+    assign on_sale = true
+    assign savings = compare_at_price | minus: current_price
+  endif
+
+  assign rating_value = product.metafields.reviews.rating.value.rating
+  assign rating_count = product.metafields.reviews.rating_count.value
 -%}
 
-<div class="product-card relative w-full min-h-full flex flex-col justify-start items-stretch overflow-hidden" x-data>
-  <div class="product-card__media w-full aspect-[190/200] flex justify-center items-center overflow-hidden [background-color:var(--light-color)] large:aspect-[385/350]">
-    <a href="{{ product.url }}" class="block w-full h-full" aria-label="{{ product.title }}">
-      {% render 'component__lazyload-image', image: media, widths: "480,600,720,900", alt: image_alt, sizes: "calc(50vw * 0.84), (min-width: 1023) 900px" %}
-      <div class="product-card__badges absolute top-[0.625rem] left-[0.625rem] flex flex-wrap gap-[0.3125rem] max-w-full">
-        {% render 'component__product-badges', product: product %}
+<div class="product-card w-full min-h-full flex flex-col border-t border-[var(--carbon,#1e1b22)] large:border bg-[var(--essential-white,#eeece5)] overflow-hidden p-[20px] gap-[22px]">
+
+  <div class="product-card__reviews flex items-center justify-between h-[22px]">
+    <div class="product-card__rating-wrap flex items-center gap-[8px]">
+      {%- render 'component__product-rating',
+        rating: rating_value,
+        color: "#1e1b22" -%}
+      {%- if rating_value != blank or rating_count != blank -%}
+        <div class="[font-family:var(--font-body)] text-[14px] font-[700] leading-[1.4] uppercase [color:var(--carbon,#1e1b22)] whitespace-nowrap">
+          <p>{{ rating_value }} ({{ rating_count }})</p>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <a href="{{ product.url }}" class="product-card__media-link block w-full" aria-label="{{ product.title }}">
+    <div class="product-card__image-wrap w-full overflow-hidden">
+      {%- render 'component__lazyload-image',
+        image: media,
+        widths: "480,600,720,900",
+        alt: image_alt,
+        class: "w-full min-h-full block object-contain" -%}
+    </div>
+  </a>
+
+  <div class="product-card__details flex flex-col gap-[15px]">
+    <a href="{{ product.url }}" class="block">
+      <div class="[font-family:var(--font-heading-h4)] text-[20px] large:text-[26px] font-[500] leading-[1.1] uppercase [color:var(--carbon,#1e1b22)]">
+        <p class="product-card__title">{{ product.title }}</p>
       </div>
     </a>
-  </div>
 
-  <div class="product-card__info flex flex-col items-stretch justify-start grow text-left p-4 large:p-[1.25rem_1.5rem]">
-    <a href="{{ product.url }}" aria-label="{{ product.title }}">
-      {% render 'component__product-rating', rating: 5, total_reviews: 50 %}
-
-      <p class="product-card__info-title">{{ product.title }}</p>
-
-      {%- if product_variants_size > 1 -%}
-        <p class="product-card__info-caption">{{ product_variants_size }} {{ product_options }}</p>
+    <div class="product-card__price-wrap flex items-center gap-[12px]">
+      {%- if on_sale -%}
+        <div class="[font-family:var(--font-body)] text-[14px] font-[700] leading-[1.4] uppercase [color:var(--carbon,#1e1b22)] opacity-30 line-through">
+          <p>{{ compare_at_price | money }}</p>
+        </div>
       {%- endif -%}
-
-      <p class="product-card__info-description">{{ product.content | strip_html | truncatewords: 10 }}</p>
-    </a>
-
-    {% render 'component__add-to-cart-button', product: product, show_price: true %}
+      <div class="[font-family:var(--font-body)] text-[14px] font-[700] leading-[1.4] uppercase [color:var(--carbon,#1e1b22)]">
+        <p class="product-card__price">{{ current_price | money }}</p>
+      </div>
+      {%- if on_sale -%}
+        <div class="product-card__save-badge bg-[var(--red,#d15722)] flex items-center justify-center overflow-hidden px-[8px] py-[6px] rounded-[5px]">
+          <div class="[font-family:var(--font-body)] text-[12px] font-[700] leading-[20px] uppercase [color:var(--essential-white,#eeece5)]">
+            <p>Save {{ savings | money }}</p>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
   </div>
+
+  <div class="product-card__divider border-t border-[var(--carbon,#1e1b22)] w-full"></div>
+
+  <div class="product-card__footer flex items-center gap-[0] w-full">
+    <div class="product-card__description flex-1 min-w-0 [font-family:var(--font-body)] text-[14px] font-[700] leading-[1.4] large:leading-[1.5] uppercase [color:var(--carbon,#1e1b22)]">
+      <p>{{ product.description | strip_html | truncatewords: 15 }}</p>
+    </div>
+    <div class="product-card__cta shrink-0">
+      {%- render 'component__add-to-cart-button',
+        product: product,
+        button_class: "primary" -%}
+    </div>
+  </div>
+
 </div>
