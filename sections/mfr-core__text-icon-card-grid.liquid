@@ -28,19 +28,17 @@ assign section settings to variables
 {% render 'section__settings-styles' %}
 <section class="mfr-core__text-icon-card-grid {{ custom_class }}" id="{{ section_id }}">
   <div class="section-spacer background {{ grid_gutter }}" style="{{ spacer }}">
-    <div class="{{ container_width }} relative px-5 z-[1] mx-auto{% unless container_width == 'full' %} large:px-[3.75rem]{% endunless %}" {{ max_width_style }}>
+    <div class="{{ container_width }} relative px-5 z-[1] mx-auto {% if container_width == 'full' %}large:px-[30px]{% else %}large:px-[3.75rem]{% endif %}" {{ max_width_style }}>
       <div class="section-content w-full min-w-0">
-        {%- content_for "block", type: "_section-content", id: "section-content" -%}
-        <div class="text-icon-card-grid__grid border border-[color:var(--section-heading)] grid grid-cols-2 large:grid-cols-4">
-          {%- content_for "blocks" -%}
-        </div>
+        {%- content_for "blocks" -%}
+        {%- content_for "block", type: "_mfr-core__text-icon-card-grid__cards", id: "cards" -%}
       </div>
     </div>
 
     {%- render 'component__gradient-bg-styles' -%}
   </div>
   {%- render 'component__section-dividers', is_video_background: true -%}
-  {% content_for "block", type: "_accent-graphics", id: "accent-graphics" %}
+  {%- content_for "block", type: "_accent-graphics", id: "accent-graphics" -%}
 </section>
 
 
@@ -243,10 +241,7 @@ assign section settings to variables
       "type": "_section-content"
     },
     {
-      "type": "_mfr-core__text-icon-card-grid__card"
-    },
-    {
-      "type": "_accent-graphics"
+      "type": "_mfr-core__text-icon-card-grid__cards"
     }
   ],
   "presets": [
@@ -256,15 +251,22 @@ assign section settings to variables
         {
           "type": "_section-content",
           "id": "section-content",
-          "static": true,
           "blocks": [
-            { "type": "_section-content__title" }
+            { "type": "_section-content__title" },
+            { "type": "_section-content__text" }
           ]
         },
-        { "type": "_mfr-core__text-icon-card-grid__card" },
-        { "type": "_mfr-core__text-icon-card-grid__card" },
-        { "type": "_mfr-core__text-icon-card-grid__card" },
-        { "type": "_mfr-core__text-icon-card-grid__card" }
+        {
+          "type": "_mfr-core__text-icon-card-grid__cards",
+          "id": "cards",
+          "static": true,
+          "blocks": [
+            { "type": "_mfr-core__text-icon-card-grid__card" },
+            { "type": "_mfr-core__text-icon-card-grid__card" },
+            { "type": "_mfr-core__text-icon-card-grid__card" },
+            { "type": "_mfr-core__text-icon-card-grid__card" }
+          ]
+        }
       ]
     }
   ]

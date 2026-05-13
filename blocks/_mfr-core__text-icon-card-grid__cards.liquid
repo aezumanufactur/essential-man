@@ -1,0 +1,21 @@
+<div class="text-icon-card-grid__grid border border-[color:var(--section-heading)] grid grid-cols-2 large:grid-cols-4">
+  {%- content_for "blocks" -%}
+</div>
+
+{% schema %}
+{
+  "name": "Cards",
+  "class": "text-icon-card-grid__cards",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "_mfr-core__text-icon-card-grid__card"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cards"
+    }
+  ]
+}
+{% endschema %}
