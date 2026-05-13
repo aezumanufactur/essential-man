@@ -20,34 +20,21 @@ assign section settings to variables
 {%- endif -%}
 
 {% capture spacer %}
-  --top-spacing-mobile: {{ section.settings.top_spacing_mobile | default: 100}}px;
-  --bottom-spacing-mobile: {{ section.settings.bottom_spacing_mobile | default: 100 }}px;
-  --top-spacing-desktop: {{ section.settings.top_spacing_desktop | default: 100 }}px;
-  --bottom-spacing-desktop: {{ section.settings.bottom_spacing_desktop | default: 100 }}px;
+  --top-spacing-mobile: {{ section.settings.top_spacing_mobile | default: 30 }}px;
+  --bottom-spacing-mobile: {{ section.settings.bottom_spacing_mobile | default: 30 }}px;
+  --top-spacing-desktop: {{ section.settings.top_spacing_desktop | default: 50 }}px;
+  --bottom-spacing-desktop: {{ section.settings.bottom_spacing_desktop | default: 50 }}px;
 {% endcapture %}
 {% render 'section__settings-styles' %}
-<section class="mfr-core__text-icon-card-grid {{ custom_class }} {{ grid_gutter }}" id="{{ section_id }}">
+<section class="mfr-core__text-icon-card-grid {{ custom_class }}" id="{{ section_id }}">
   <div class="section-spacer background {{ grid_gutter }}" style="{{ spacer }}">
     <div class="{{ container_width }} relative px-5 z-[1] mx-auto{% unless container_width == 'full' %} large:px-[3.75rem]{% endunless %}" {{ max_width_style }}>
-
-      <div class="text-icon-card-grid__header flex flex-col gap-[20px] large:gap-[30px] mb-[87px] large:mb-[90px]">
-        {%- if section.settings.heading != blank -%}
-          <h2 class="text-icon-card-grid__heading [font-family:var(--font-heading-h1)] text-[60px] large:text-[90px] font-[400] leading-none tracking-[-0.6px] large:tracking-[-0.9px] uppercase [color:var(--section-heading)]">
-            {{ section.settings.heading }}
-          </h2>
-        {%- endif -%}
-
-        {%- if section.settings.description != blank -%}
-          <p class="text-icon-card-grid__description [font-family:var(--custom-font-name-2)] text-[14px] font-[700] leading-[1.4] uppercase [color:var(--section-heading)]">
-            {{ section.settings.description }}
-          </p>
-        {%- endif -%}
+      <div class="section-content w-full min-w-0">
+        {%- content_for "block", type: "_section-content", id: "section-content" -%}
+        <div class="text-icon-card-grid__grid border border-[color:var(--section-heading)] grid grid-cols-2 large:grid-cols-4">
+          {%- content_for "blocks" -%}
+        </div>
       </div>
-
-      <div class="text-icon-card-grid__grid border border-[color:var(--section-heading)] grid grid-cols-2 large:grid-cols-4">
-        {%- content_for "blocks" -%}
-      </div>
-
     </div>
 
     {%- render 'component__gradient-bg-styles' -%}
@@ -69,22 +56,6 @@ assign section settings to variables
     ]
   },
   "settings": [
-    {
-      "type": "header",
-      "content": "Content"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Formulated to earn its place in your routine."
-    },
-    {
-      "type": "textarea",
-      "id": "description",
-      "label": "Description",
-      "default": "Good product disappears into the day. No second guessing at the sink, no touching up at noon, no swap-out after a week. Just a routine that works, and a man with one less thing to think about."
-    },
     {
       "type": "header",
       "content": "Section Settings"
@@ -157,15 +128,15 @@ assign section settings to variables
       "type": "number",
       "id": "top_spacing_mobile",
       "label": "Top Spacing",
-      "default": 100,
-      "info": "in pixels. This will use 100px as default value if left empty"
+      "default": 30,
+      "info": "in pixels. This will use 30px as default value if left empty"
     },
     {
       "type": "number",
       "id": "bottom_spacing_mobile",
       "label": "Bottom Spacing",
-      "default": 100,
-      "info": "in pixels. This will use 100px as default value if left empty"
+      "default": 30,
+      "info": "in pixels. This will use 30px as default value if left empty"
     },
     {
       "type": "header",
@@ -175,15 +146,15 @@ assign section settings to variables
       "type": "number",
       "id": "top_spacing_desktop",
       "label": "Top Spacing",
-      "default": 100,
-      "info": "in pixels. This will use 100px as default value if left empty"
+      "default": 50,
+      "info": "in pixels. This will use 50px as default value if left empty"
     },
     {
       "type": "number",
       "id": "bottom_spacing_desktop",
       "label": "Bottom Spacing",
-      "default": 100,
-      "info": "in pixels. This will use 100px as default value if left empty"
+      "default": 50,
+      "info": "in pixels. This will use 50px as default value if left empty"
     },
     {
       "type": "header",
@@ -269,6 +240,9 @@ assign section settings to variables
   ],
   "blocks": [
     {
+      "type": "_section-content"
+    },
+    {
       "type": "_mfr-core__text-icon-card-grid__card"
     },
     {
@@ -279,6 +253,14 @@ assign section settings to variables
     {
       "name": "Text Icon Card Grid",
       "blocks": [
+        {
+          "type": "_section-content",
+          "id": "section-content",
+          "static": true,
+          "blocks": [
+            { "type": "_section-content__title" }
+          ]
+        },
         { "type": "_mfr-core__text-icon-card-grid__card" },
         { "type": "_mfr-core__text-icon-card-grid__card" },
         { "type": "_mfr-core__text-icon-card-grid__card" },
