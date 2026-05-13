@@ -1,0 +1,17 @@
+{%- assign ar_mobile = block.settings.aspect_ratio_mobile_custom | default: block.settings.aspect_ratio_mobile -%}
+{%- assign ar_desktop = block.settings.aspect_ratio_desktop_custom | default: block.settings.aspect_ratio_desktop -%}
+
+{%- if ar_mobile != blank or ar_desktop != blank -%}
+  <style>
+    {%- if ar_mobile != blank -%}
+      @media (max-width: 1023px) {
+        #shopify-block-{{ block.id }} { aspect-ratio: {{ ar_mobile }}; }
+      }
+    {%- endif -%}
+    {%- if ar_desktop != blank -%}
+      @media (min-width: 1024px) {
+        #shopify-block-{{ block.id }} { aspect-ratio: {{ ar_desktop }}; }
+      }
+    {%- endif -%}
+  </style>
+{%- endif -%}

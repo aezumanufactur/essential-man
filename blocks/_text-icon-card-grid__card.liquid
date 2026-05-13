@@ -1,9 +1,7 @@
-{%- assign ar_mobile = block.settings.aspect_ratio_mobile_custom | default: block.settings.aspect_ratio_mobile -%}
-{%- assign ar_desktop = block.settings.aspect_ratio_desktop_custom | default: block.settings.aspect_ratio_desktop -%}
-
+{%- render "settings__aspect-ratio" -%}
 {%- render "settings__block-layout-controls" -%}
 
-<div class="text-icon-card-grid__card__inner aspect-[{{ ar_mobile }}] large:aspect-[{{ ar_desktop }}] flex flex-col justify-between">
+<div class="text-icon-card-grid__card__inner flex flex-col justify-between">
 
   {%- if block.settings.title != blank -%}
     <p class="text-icon-card-grid__card__title [font-family:var(--font-heading-h4)] text-[20px] large:text-[26px] font-[500] leading-[1.1] uppercase [color:var(--section-heading)]">
