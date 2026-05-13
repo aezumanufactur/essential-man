@@ -1,5 +1,5 @@
 {%- liquid
-  assign media = product.featured_image
+  assign media = override_image | default: product.featured_image
   assign default_alt = product.title | append: " Featured Image"
   assign image_alt = media.alt | default: default_alt
 
@@ -66,13 +66,13 @@
     </div>
   </div>
 
-  <div class="product-card__divider border-t border-[var(--carbon,#1e1b22)] w-full"></div>
+  <div class="product-card__divider border-t border-[var(--carbon,#1e1b22)] w-full opacity-30"></div>
 
   <div class="product-card__footer flex items-center gap-[0] w-full">
     <div class="product-card__description flex-1 min-w-0 [font-family:var(--font-body)] text-[14px] font-[700] leading-[1.4] large:leading-[1.5] uppercase [color:var(--carbon,#1e1b22)]">
       <p>{{ product.description | strip_html | truncatewords: 15 }}</p>
     </div>
-    <div class="product-card__cta shrink-0">
+    <div class="product-card__cta shrink-0 w-[124px]">
       {%- render 'component__add-to-cart-button',
         product: product,
         button_class: "primary" -%}

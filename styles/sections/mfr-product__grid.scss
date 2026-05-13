@@ -9,4 +9,11 @@
       min-width: 0;
     }
   }
+
+  .product-card__cta {
+    form,
+    button {
+      width: 100%;
+    }
+  }
 }
