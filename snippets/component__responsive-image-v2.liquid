@@ -1,72 +1,112 @@
-{% assign widths_mobile = widths_mobile | default: "480,600,720,900,1080" %}
-{% assign width_mobile = width_mobile | default: 1023 %}
-{% assign sizes_mobile = sizes_mobile | default: "100vw" %}
+{%- comment -%}
+  Params:
+    image_mobile    – mobile image object (falls back to image_desktop if blank)
+    image_desktop   – desktop image object (falls back to image_mobile if blank)
+    lazyload        – true/false (default: false)
+    width_mobile    – max render width for mobile, px (default: 1080)
+    width_desktop   – max render width for desktop, px (default: 1920)
+    widths_mobile   – srcset width candidates, comma-separated (default: "375,480,640,750,828,1080,1200")
+    widths_desktop  – srcset width candidates, comma-separated (default: "1080,1280,1440,1600,1920,2560")
+    sizes_mobile    – sizes attribute for mobile source (default: "100vw")
+    sizes_desktop   – sizes attribute for desktop img (default: "100vw")
+    height_mobile   – explicit height override for mobile
+    height_desktop  – explicit height override for desktop
+    alt             – alt text (falls back to image alt)
+    class           – extra classes on <img>
+{%- endcomment -%}
 
-{% assign widths_desktop = widths_desktop | default: "1260,1440,1800,2160,2520,2880,3240,3600,3960,4320,4680,5120" %}
-{% assign width_desktop = width_desktop | default: 2560 %}
-{% assign sizes_desktop = sizes_desktop | default: "100vw" %}
+{%- assign _mobile_img = image_mobile | default: image_desktop -%}
+{%- assign _desktop_img = image_desktop | default: image_mobile -%}
 
-{% assign render_width_mobile = width_mobile | times: 1.25 %}
-{% assign render_width_desktop = width_desktop | times: 1.25 %}
+{%- if _mobile_img == blank and _desktop_img == blank -%}
+  {%- break -%}
+{%- endif -%}
 
+{%- assign width_mobile = width_mobile | default: 1080 -%}
+{%- assign width_desktop = width_desktop | default: 1920 -%}
+{%- assign widths_mobile = widths_mobile | default: "375,480,640,750,828,1080,1200" -%}
+{%- assign widths_desktop = widths_desktop | default: "1080,1280,1440,1600,1920,2560" -%}
+{%- assign sizes_mobile = sizes_mobile | default: "100vw" -%}
+{%- assign sizes_desktop = sizes_desktop | default: "100vw" -%}
+{%- assign alt = alt | default: _desktop_img.alt | default: _mobile_img.alt -%}
+
+{%- comment -%} Derive heights from image aspect ratio {%- endcomment -%}
 {%- if height_mobile != blank -%}
-  {% assign height_mobile = height_mobile %}
-{%- elsif image_mobile.height == blank -%}
-  {%- assign height_mobile = width_mobile -%}
+  {%- assign _h_mobile = height_mobile -%}
+{%- elsif _mobile_img != blank -%}
+  {%- assign _mobile_ar = _mobile_img.width | times: 1.0 | divided_by: _mobile_img.height -%}
+  {%- assign _h_mobile = width_mobile | divided_by: _mobile_ar | round -%}
 {%- else -%}
-  {%- assign height_mobile = image_mobile.height -%}
+  {%- assign _h_mobile = width_mobile -%}
 {%- endif -%}
 
 {%- if height_desktop != blank -%}
-  {% assign height_desktop = height_desktop %}
-{%- elsif image_desktop.height == blank -%}
-  {%- assign height_desktop = width_desktop -%}
+  {%- assign _h_desktop = height_desktop -%}
+{%- elsif _desktop_img != blank -%}
+  {%- assign _desktop_ar = _desktop_img.width | times: 1.0 | divided_by: _desktop_img.height -%}
+  {%- assign _h_desktop = width_desktop | divided_by: _desktop_ar | round -%}
 {%- else -%}
-  {%- assign height_desktop = image_desktop.height -%}
+  {%- assign _h_desktop = width_desktop -%}
 {%- endif -%}
 
-{%- assign height_mobile = height_mobile | times: 1.00 -%}
-{%- assign height_desktop = height_desktop | times: 1.00 -%}
+{%- comment -%} Build mobile srcset string {%- endcomment -%}
+{%- assign _widths_mobile_arr = widths_mobile | split: "," -%}
+{%- assign _mobile_srcset = "" -%}
+{%- for _w in _widths_mobile_arr -%}
+  {%- assign _wv = _w | strip -%}
+  {%- assign _entry = _mobile_img | image_url: width: _wv | append: " " | append: _wv | append: "w" -%}
+  {%- unless forloop.last -%}{%- assign _entry = _entry | append: ", " -%}{%- endunless -%}
+  {%- assign _mobile_srcset = _mobile_srcset | append: _entry -%}
+{%- endfor -%}
 
-<template
-  x-if='$store.methods.isMobile'>
-  {% if lazyload %}
-    {% render 'component__lazyload-image',
-      image: image_mobile,
-      width: render_width_mobile,
-      widths: widths_mobile,
-      height: height_mobile 
-      %}
-  {% else %}
-    {{ image_mobile
-      | image_url: width: render_width_mobile 
-      | image_tag: width: render_width_mobile,
-        widths: widths_mobile,
-        alt: image_mobile.alt,
-        preload: true,
-        fetchpriority: "high",
-        sizes: sizes_mobile,
-        height: height_mobile }}
-  {% endif %}
-</template>
-<template
-  x-if='!$store.methods.isMobile'>
-  {% if lazyload %}
-    {% render 'component__lazyload-image',
-      image: image_desktop,
-      width: render_width_desktop,
-      widths: widths_desktop,
-      height: height_desktop
-      %}
-  {% else %}
-    {{ image_desktop
-      | image_url: width: render_width_desktop 
-      | image_tag: width: render_width_desktop,
-        widths: widths_desktop,
-        alt: image_desktop.alt,
-        preload: true,
-        fetchpriority: "high",
-        sizes: sizes_desktop,
-        height: height_desktop }}
-  {% endif %}
-</template>
+{%- comment -%} Build desktop srcset string {%- endcomment -%}
+{%- assign _widths_desktop_arr = widths_desktop | split: "," -%}
+{%- assign _desktop_srcset = "" -%}
+{%- for _w in _widths_desktop_arr -%}
+  {%- assign _wv = _w | strip -%}
+  {%- assign _entry = _desktop_img | image_url: width: _wv | append: " " | append: _wv | append: "w" -%}
+  {%- unless forloop.last -%}{%- assign _entry = _entry | append: ", " -%}{%- endunless -%}
+  {%- assign _desktop_srcset = _desktop_srcset | append: _entry -%}
+{%- endfor -%}
+
+{%- if lazyload -%}
+  {%- assign _lowres = _desktop_img | image_url: width: 20 -%}
+  <picture>
+    {%- if _mobile_img != blank -%}
+      <source
+        media="(max-width: 1023px)"
+        data-srcset="{{ _mobile_srcset }}"
+        sizes="{{ sizes_mobile }}">
+    {%- endif -%}
+    <img
+      src="{{ _lowres }}"
+      data-src="{{ _desktop_img | image_url: width: width_desktop }}"
+      data-srcset="{{ _desktop_srcset }}"
+      sizes="{{ sizes_desktop }}"
+      width="{{ width_desktop }}"
+      height="{{ _h_desktop }}"
+      alt="{{ alt | escape }}"
+      loading="lazy"
+      class="lozad{% if class != blank %} {{ class }}{% endif %}"
+      x-effect="if (window.loadLozadImages) window.loadLozadImages();">
+  </picture>
+{%- else -%}
+  <picture>
+    {%- if _mobile_img != blank -%}
+      <source
+        media="(max-width: 1023px)"
+        srcset="{{ _mobile_srcset }}"
+        sizes="{{ sizes_mobile }}">
+    {%- endif -%}
+    <img
+      src="{{ _desktop_img | image_url: width: width_desktop }}"
+      srcset="{{ _desktop_srcset }}"
+      sizes="{{ sizes_desktop }}"
+      width="{{ width_desktop }}"
+      height="{{ _h_desktop }}"
+      alt="{{ alt | escape }}"
+      loading="eager"
+      fetchpriority="high"{% if class != blank %}
+      class="{{ class }}"{% endif %}>
+  </picture>
+{%- endif -%}
