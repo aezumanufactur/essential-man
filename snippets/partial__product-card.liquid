@@ -11,24 +11,11 @@
     assign savings = compare_at_price | minus: current_price
   endif
 
-  assign rating_value = product.metafields.reviews.rating.value.rating
-  assign rating_count = product.metafields.reviews.rating_count.value
 -%}
 
 <div class="product-card w-full min-h-full flex flex-col border-t border-[var(--carbon,#1e1b22)] large:border bg-[var(--essential-white,#eeece5)] overflow-hidden p-[20px] gap-[22px]">
 
-  <div class="product-card__reviews flex items-center justify-between h-[22px]">
-    <div class="product-card__rating-wrap flex items-center gap-[8px]">
-      {%- render 'component__product-rating',
-        rating: rating_value,
-        color: "#1e1b22" -%}
-      {%- if rating_value != blank or rating_count != blank -%}
-        <div class="[font-family:var(--font-body)] text-[14px] font-[700] leading-[1.4] uppercase [color:var(--carbon,#1e1b22)] whitespace-nowrap">
-          <p>{{ rating_value }} ({{ rating_count }})</p>
-        </div>
-      {%- endif -%}
-    </div>
-  </div>
+  {%- comment -%} product-card__rating-wrap — pending Shopify reviews app integration {%- endcomment -%}
 
   <a href="{{ product.url }}" class="product-card__media-link block w-full" aria-label="{{ product.title }}">
     <div class="product-card__image-wrap w-full overflow-hidden">
