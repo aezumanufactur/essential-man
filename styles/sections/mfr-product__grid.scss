@@ -4,6 +4,9 @@
 
 .mfr-product__grid {
   .product-grid__item {
+    max-height: 90vh;
+    overflow: hidden;
+
     @include breakpoint(large up) {
       flex: 1 0 0;
       min-width: 0;
