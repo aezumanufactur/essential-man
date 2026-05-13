@@ -103,7 +103,7 @@ assign section settings to variables
                         </svg>
                       </span>
                       <p class="featured-product__benefit-text [font-family:var(--custom-font-name-2)] text-[14px] font-[700] leading-[18px] uppercase text-[#1e1b22] flex-1 min-w-0">
-                        {{ benefit.label }}
+                        {{ benefit }}
                       </p>
                     </div>
                     {%- unless forloop.last -%}
@@ -193,7 +193,7 @@ assign section settings to variables
       "id": "benefits_metafield_key",
       "label": "Key",
       "default": "benefits",
-      "info": "The metafield key. Must be a list.metaobject_reference with a 'label' field."
+      "info": "The metafield key. Must be a list.single_line_text_field type."
     },
     {
       "type": "header",
