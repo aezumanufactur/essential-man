@@ -5,24 +5,32 @@ assign section settings to variables
 {%- endcomment -%}
 
 {% render 'style-tags__section', asset_file_name: "mfr-core__text-icon-card-grid.css" %}
+{%- assign container_width = section.settings.container_width -%}
+{%- assign max_width = section.settings.max_width -%}
 {%- assign grid_gutter = section.settings.grid_gutter -%}
 {%- assign custom_class = section.settings.custom_class -%}
 
 {%- assign section_id = section.settings.custom_id | default: section.id -%}
 {% render 'renderer__color-scheme', name: "section", color_scheme: section.settings.color_scheme, selector: ".shopify-section", section_id: section_id %}
 
+{%- if max_width != 0 and container_width == "" -%}
+  {%- capture max_width_style -%}
+    style="max-width: {{ max_width }}rem;"
+  {%- endcapture -%}
+{%- endif -%}
+
 {% capture spacer %}
-  --top-spacing-mobile: {{ section.settings.top_spacing_mobile | default: 30 }}px;
-  --bottom-spacing-mobile: {{ section.settings.bottom_spacing_mobile | default: 30 }}px;
-  --top-spacing-desktop: {{ section.settings.top_spacing_desktop | default: 50 }}px;
-  --bottom-spacing-desktop: {{ section.settings.bottom_spacing_desktop | default: 50 }}px;
+  --top-spacing-mobile: {{ section.settings.top_spacing_mobile | default: 100}}px;
+  --bottom-spacing-mobile: {{ section.settings.bottom_spacing_mobile | default: 100 }}px;
+  --top-spacing-desktop: {{ section.settings.top_spacing_desktop | default: 100 }}px;
+  --bottom-spacing-desktop: {{ section.settings.bottom_spacing_desktop | default: 100 }}px;
 {% endcapture %}
-
-<section class="mfr-core__text-icon-card-grid {{ custom_class }}" id="{{ section_id }}">
+{% render 'section__settings-styles' %}
+<section class="mfr-core__text-icon-card-grid {{ custom_class }} {{ grid_gutter }}" id="{{ section_id }}">
   <div class="section-spacer background {{ grid_gutter }}" style="{{ spacer }}">
-    <div class="text-icon-card-grid__inner px-[20px] large:px-[30px] flex flex-col gap-[87px] large:gap-[90px]">
+    <div class="{{ container_width }} relative px-5 z-[1] mx-auto{% unless container_width == 'full' %} large:px-[3.75rem]{% endunless %}" {{ max_width_style }}>
 
-      <div class="text-icon-card-grid__header flex flex-col gap-[20px] large:gap-[30px]">
+      <div class="text-icon-card-grid__header flex flex-col gap-[20px] large:gap-[30px] mb-[87px] large:mb-[90px]">
         {%- if section.settings.heading != blank -%}
           <h2 class="text-icon-card-grid__heading [font-family:var(--font-heading-h1)] text-[60px] large:text-[90px] font-[400] leading-none tracking-[-0.6px] large:tracking-[-0.9px] uppercase [color:var(--section-heading)]">
             {{ section.settings.heading }}
@@ -44,7 +52,8 @@ assign section settings to variables
 
     {%- render 'component__gradient-bg-styles' -%}
   </div>
-  {%- render 'component__section-dividers' -%}
+  {%- render 'component__section-dividers', is_video_background: true -%}
+  {% content_for "block", type: "_accent-graphics", id: "accent-graphics" %}
 </section>
 
 
@@ -79,6 +88,32 @@ assign section settings to variables
     {
       "type": "header",
       "content": "Section Settings"
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "options": [
+        {
+          "value": "full",
+          "label": "Full"
+        },
+        {
+          "value": "",
+          "label": "Contain"
+        }
+      ],
+      "label": "Width",
+      "default": "full"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "rem",
+      "label": "Max Content Width",
+      "default": 0
     },
     {
       "type": "select",
@@ -122,15 +157,15 @@ assign section settings to variables
       "type": "number",
       "id": "top_spacing_mobile",
       "label": "Top Spacing",
-      "default": 30,
-      "info": "in pixels. This will use 30px as default value if left empty"
+      "default": 100,
+      "info": "in pixels. This will use 100px as default value if left empty"
     },
     {
       "type": "number",
       "id": "bottom_spacing_mobile",
       "label": "Bottom Spacing",
-      "default": 30,
-      "info": "in pixels. This will use 30px as default value if left empty"
+      "default": 100,
+      "info": "in pixels. This will use 100px as default value if left empty"
     },
     {
       "type": "header",
@@ -140,15 +175,15 @@ assign section settings to variables
       "type": "number",
       "id": "top_spacing_desktop",
       "label": "Top Spacing",
-      "default": 50,
-      "info": "in pixels. This will use 50px as default value if left empty"
+      "default": 100,
+      "info": "in pixels. This will use 100px as default value if left empty"
     },
     {
       "type": "number",
       "id": "bottom_spacing_desktop",
       "label": "Bottom Spacing",
-      "default": 50,
-      "info": "in pixels. This will use 50px as default value if left empty"
+      "default": 100,
+      "info": "in pixels. This will use 100px as default value if left empty"
     },
     {
       "type": "header",
@@ -235,6 +270,9 @@ assign section settings to variables
   "blocks": [
     {
       "type": "_mfr-core__text-icon-card-grid__card"
+    },
+    {
+      "type": "_accent-graphics"
     }
   ],
   "presets": [
