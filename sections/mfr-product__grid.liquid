@@ -1,0 +1,242 @@
+{%- comment -%}
+--------------------------------------
+assign section settings to variables
+--------------------------------------
+{%- endcomment -%}
+
+{% render 'style-tags__section', asset_file_name: "mfr-product__grid.css" %}
+{%- assign grid_gutter = section.settings.grid_gutter -%}
+{%- assign custom_class = section.settings.custom_class -%}
+
+{%- assign section_id = section.settings.custom_id | default: section.id -%}
+{% render 'renderer__color-scheme', name: "section", color_scheme: section.settings.color_scheme, selector: ".shopify-section", section_id: section_id %}
+
+{% capture spacer %}
+  --top-spacing-mobile: {{ section.settings.top_spacing_mobile | default: 55 }}px;
+  --bottom-spacing-mobile: {{ section.settings.bottom_spacing_mobile | default: 0 }}px;
+  --top-spacing-desktop: {{ section.settings.top_spacing_desktop | default: 60 }}px;
+  --bottom-spacing-desktop: {{ section.settings.bottom_spacing_desktop | default: 0 }}px;
+{% endcapture %}
+{% render 'section__settings-styles' %}
+
+<section class="mfr-product__grid {{ custom_class }} {{ grid_gutter }}" id="{{ section_id }}">
+  <div class="section-spacer background pt-[var(--top-spacing-mobile)] pb-[var(--bottom-spacing-mobile)] large:pt-[var(--top-spacing-desktop)] large:pb-[var(--bottom-spacing-desktop)]" style="{{ spacer }}">
+
+    <div class="mfr-product__grid__header">
+      {%- content_for "blocks" -%}
+    </div>
+
+    {%- content_for "block", type: "_mfr-product__grid__products", id: "products" -%}
+
+    {%- render 'component__gradient-bg-styles' -%}
+  </div>
+  {%- render 'component__section-dividers', is_video_background: true -%}
+  {%- content_for "block", type: "_accent-graphics", id: "accent-graphics" -%}
+</section>
+
+
+{% schema %}
+{
+  "name": "Product Grid",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer",
+      "custom.offcanvas",
+      "custom.modals"
+    ]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "select",
+      "id": "grid_gutter",
+      "options": [
+        {
+          "value": "",
+          "label": "No Margin"
+        },
+        {
+          "value": "grid-gutter-mobile",
+          "label": "On Mobile"
+        },
+        {
+          "value": "grid-gutter-desktop",
+          "label": "On Desktop"
+        },
+        {
+          "value": "grid-gutter-mobile grid-gutter-desktop",
+          "label": "On Both"
+        }
+      ],
+      "label": "Section Margin"
+    },
+    {
+      "type": "header",
+      "content": "Color Schemes Settings"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "scheme_1",
+      "label": "Color Scheme",
+      "info": "This will be the color scheme of the section."
+    },
+    {
+      "type": "header",
+      "content": "Mobile Section Spacing"
+    },
+    {
+      "type": "number",
+      "id": "top_spacing_mobile",
+      "label": "Top Spacing",
+      "default": 55,
+      "info": "in pixels. This will use 55px as default value if left empty"
+    },
+    {
+      "type": "number",
+      "id": "bottom_spacing_mobile",
+      "label": "Bottom Spacing",
+      "default": 0,
+      "info": "in pixels. This will use 0px as default value if left empty"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Section Spacing"
+    },
+    {
+      "type": "number",
+      "id": "top_spacing_desktop",
+      "label": "Top Spacing",
+      "default": 60,
+      "info": "in pixels. This will use 60px as default value if left empty"
+    },
+    {
+      "type": "number",
+      "id": "bottom_spacing_desktop",
+      "label": "Bottom Spacing",
+      "default": 0,
+      "info": "in pixels. This will use 0px as default value if left empty"
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "bg_color",
+      "label": "Background Color/Gradient"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_mobile",
+      "label": "Background Image - Mobile"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image - Desktop"
+    },
+    {
+      "type": "header",
+      "content": "Divider Settings"
+    },
+    {
+      "type": "select",
+      "id": "section_divider_top",
+      "label": "Section Divider - Top",
+      "options": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "line",
+          "label": "Line"
+        },
+        {
+          "value": "rounded",
+          "label": "Rounded"
+        },
+        {
+          "value": "scale",
+          "label": "Scale"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "section_divider_bottom",
+      "label": "Section Divider - Bottom",
+      "options": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "line",
+          "label": "Line"
+        },
+        {
+          "value": "rounded",
+          "label": "Rounded"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "header",
+      "content": "Attribute Settings"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom class"
+    },
+    {
+      "type": "text",
+      "id": "custom_id",
+      "label": "Custom ID"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_section-content"
+    },
+    {
+      "type": "_mfr-product__grid__products"
+    },
+    {
+      "type": "_accent-graphics"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Grid",
+      "blocks": [
+        {
+          "type": "_section-content",
+          "id": "section-content",
+          "blocks": [
+            {
+              "type": "_section-content__title"
+            },
+            {
+              "type": "_section-content__text"
+            }
+          ]
+        },
+        {
+          "type": "_mfr-product__grid__products",
+          "id": "products",
+          "static": true
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
