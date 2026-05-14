@@ -44,15 +44,17 @@
     <div class="customer-testimonials__entry-v4-footer bg-[#d5d1c8] flex items-center justify-between gap-[12px] px-[12px] py-[9px]">
       <div class="customer-testimonials__entry-v4-info flex flex-col gap-[4px]">
         {%- if product != blank -%}
-          <p class="customer-testimonials__entry-v4-title [font-family:var(--font-heading-h5)] text-[15px] large:text-[16px] font-[500] uppercase leading-none [color:var(--section-heading)]">{{ product.title }}</p>
+          <div class="customer-testimonials__entry-v4-title [font-family:var(--font-heading-h5)] text-[15px] large:text-[16px] font-[500] uppercase leading-none [color:var(--section-heading)]">
+            <p>{{ product.title }}</p>
+          </div>
         {%- endif -%}
-        <div class="customer-testimonials__entry-v4-stars w-[68px]">
+        <div class="customer-testimonials__entry-v4-stars w-[68px] [&>svg]:w-full">
           {%- render 'icon__stars', count: star_rating -%}
         </div>
       </div>
 
       {%- if product != blank -%}
-        <a href="{{ product.url }}" class="customer-testimonials__entry-v4-button button secondary shrink-0 w-[72px] max-h-[34px]">Shop</a>
+        <a href="{{ product.url }}" class="customer-testimonials__entry-v4-button button tertiary shrink-0 w-[72px] max-h-[34px]">Shop</a>
       {%- endif -%}
     </div>
   </div>

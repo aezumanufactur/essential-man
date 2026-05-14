@@ -1361,236 +1361,6 @@
         "custom_id": ""
       }
     },
-    "mfr_core_customer_testimonials_Qs8tRv": {
-      "type": "mfr-core__customer-testimonials",
-      "blocks": {
-        "section-content": {
-          "type": "_section-content",
-          "static": true,
-          "settings": {
-            "mobile_alignment": "left",
-            "desktop_alignment": "left",
-            "vertical_alignment": "flex-start",
-            "text_color": "",
-            "background_color": "",
-            "enable_animated_bg": false,
-            "border_radius_mobile": 0,
-            "border_radius_desktop": 0,
-            "enable_width_settings": false,
-            "width_mobile": false,
-            "width_mobile_value": 0,
-            "width_mobile_custom": "",
-            "width_mobile_unit": "px",
-            "width_desktop": false,
-            "width_desktop_value": 0,
-            "width_desktop_custom": "",
-            "width_desktop_unit": "px",
-            "max_width_mobile": false,
-            "max_width_mobile_value": 0,
-            "max_width_mobile_custom": "",
-            "max_width_mobile_unit": "px",
-            "max_width_desktop": false,
-            "max_width_desktop_value": 0,
-            "max_width_desktop_custom": "",
-            "max_width_desktop_unit": "px",
-            "enable_padding_settings": true,
-            "padding_x_mobile": true,
-            "padding_left_mobile": 20,
-            "padding_right_mobile": 20,
-            "padding_y_mobile": false,
-            "padding_top_mobile": 0,
-            "padding_bottom_mobile": 0,
-            "padding_x_desktop": true,
-            "padding_left_desktop": 30,
-            "padding_right_desktop": 30,
-            "padding_y_desktop": false,
-            "padding_top_desktop": 0,
-            "padding_bottom_desktop": 0,
-            "enable_margin_settings": false,
-            "margin_x_mobile": false,
-            "margin_left_mobile": 0,
-            "margin_right_mobile": 0,
-            "margin_y_mobile": false,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 0,
-            "margin_x_desktop": false,
-            "margin_left_desktop": 0,
-            "margin_right_desktop": 0,
-            "margin_y_desktop": false,
-            "margin_top_desktop": 0,
-            "margin_bottom_desktop": 0
-          },
-          "blocks": {
-            "icon_Qs8tRv": {
-              "type": "_section-content__icon",
-              "settings": {
-                "max_width_mobile": 81,
-                "max_width_desktop": 81,
-                "enable_width_settings": false,
-                "width_mobile": false,
-                "width_mobile_value": 0,
-                "width_mobile_custom": "",
-                "width_mobile_unit": "px",
-                "width_desktop": false,
-                "width_desktop_value": 0,
-                "width_desktop_custom": "",
-                "width_desktop_unit": "px",
-                "enable_padding_settings": false,
-                "padding_x_mobile": false,
-                "padding_left_mobile": 0,
-                "padding_right_mobile": 0,
-                "padding_y_mobile": false,
-                "padding_top_mobile": 0,
-                "padding_bottom_mobile": 0,
-                "padding_x_desktop": false,
-                "padding_left_desktop": 0,
-                "padding_right_desktop": 0,
-                "padding_y_desktop": false,
-                "padding_top_desktop": 0,
-                "padding_bottom_desktop": 0,
-                "enable_margin_settings": true,
-                "margin_x_mobile": false,
-                "margin_left_mobile": 0,
-                "margin_right_mobile": 0,
-                "margin_y_mobile": true,
-                "margin_top_mobile": 0,
-                "margin_bottom_mobile": 12,
-                "margin_x_desktop": false,
-                "margin_left_desktop": 0,
-                "margin_right_desktop": 0,
-                "margin_y_desktop": true,
-                "margin_top_desktop": 0,
-                "margin_bottom_desktop": 12
-              },
-              "blocks": {}
-            },
-            "title_Qs8tRv": {
-              "type": "_section-content__title",
-              "settings": {
-                "heading": "From the men using it everyday.",
-                "disable_animation": false,
-                "header_style": "h1",
-                "header_tag": "h2",
-                "font_family": "",
-                "highlight_color": "",
-                "underline_color": "",
-                "max_width_mobile": 0,
-                "max_width_desktop": 0,
-                "enable_width_settings": false,
-                "width_mobile": false,
-                "width_mobile_value": 0,
-                "width_mobile_custom": "",
-                "width_mobile_unit": "px",
-                "width_desktop": false,
-                "width_desktop_value": 0,
-                "width_desktop_custom": "",
-                "width_desktop_unit": "px",
-                "enable_padding_settings": false,
-                "padding_x_mobile": false,
-                "padding_left_mobile": 0,
-                "padding_right_mobile": 0,
-                "padding_y_mobile": false,
-                "padding_top_mobile": 0,
-                "padding_bottom_mobile": 0,
-                "padding_x_desktop": false,
-                "padding_left_desktop": 0,
-                "padding_right_desktop": 0,
-                "padding_y_desktop": false,
-                "padding_top_desktop": 0,
-                "padding_bottom_desktop": 0,
-                "enable_margin_settings": false,
-                "margin_x_mobile": false,
-                "margin_left_mobile": 0,
-                "margin_right_mobile": 0,
-                "margin_y_mobile": false,
-                "margin_top_mobile": 0,
-                "margin_bottom_mobile": 0,
-                "margin_x_desktop": false,
-                "margin_left_desktop": 0,
-                "margin_right_desktop": 0,
-                "margin_y_desktop": false,
-                "margin_top_desktop": 0,
-                "margin_bottom_desktop": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "icon_Qs8tRv",
-            "title_Qs8tRv"
-          ]
-        },
-        "customer-testimonials-carousel": {
-          "type": "_customer-testimonials__carousel",
-          "static": true,
-          "settings": {
-            "render_carousel_on": "",
-            "page_dots": true,
-            "custom_page_dots": false,
-            "carousel_caption": "",
-            "gap_mobile": 20,
-            "gap_desktop": 20
-          },
-          "blocks": {
-            "card_1_Qs8tRv": {
-              "type": "_customer-testimonials__item-v4",
-              "settings": {
-                "reviewer_name": "Marcus.l",
-                "hair_type": "Medium wavy hair",
-                "product": "texture-powder",
-                "star_rating": 5,
-                "width_mobile": 300,
-                "width_desktop": 300
-              }
-            },
-            "card_2_Qs8tRv": {
-              "type": "_customer-testimonials__item-v4",
-              "settings": {
-                "reviewer_name": "Christian.m",
-                "hair_type": "Fine curly hair",
-                "product": "matte-clay",
-                "star_rating": 5,
-                "width_mobile": 300,
-                "width_desktop": 300
-              }
-            },
-            "card_3_Qs8tRv": {
-              "type": "_customer-testimonials__item-v4",
-              "settings": {
-                "reviewer_name": "Jeremiah.n",
-                "hair_type": "Thick straight hair",
-                "product": "texture-powder",
-                "star_rating": 5,
-                "width_mobile": 300,
-                "width_desktop": 300
-              }
-            }
-          },
-          "block_order": [
-            "card_1_Qs8tRv",
-            "card_2_Qs8tRv",
-            "card_3_Qs8tRv"
-          ]
-        }
-      },
-      "settings": {
-        "container_width": "full",
-        "max_width": 0,
-        "grid_gutter": "",
-        "mobile_alignment": "left",
-        "desktop_alignment": "left",
-        "color_scheme": "scheme-1",
-        "top_spacing_mobile": 42,
-        "bottom_spacing_mobile": 50,
-        "top_spacing_desktop": 50,
-        "bottom_spacing_desktop": 50,
-        "bg_color": "#eeece5",
-        "section_divider_top": "",
-        "section_divider_bottom": "",
-        "custom_class": "",
-        "custom_id": ""
-      }
-    },
     "mfr_core_image_video_banner_Hk3mNp": {
       "type": "mfr-core__image-video-banner",
       "blocks": {
@@ -1760,6 +1530,272 @@
         "custom_class": "",
         "custom_id": ""
       }
+    },
+    "mfr_core_customer_testimonials_Qs8tRv": {
+      "type": "mfr-core__customer-testimonials",
+      "blocks": {
+        "section-content": {
+          "type": "_section-content",
+          "static": true,
+          "settings": {
+            "mobile_alignment": "left",
+            "desktop_alignment": "left",
+            "vertical_alignment": "flex-start",
+            "text_color": "",
+            "background_color": "",
+            "enable_animated_bg": false,
+            "border_radius_mobile": 0,
+            "border_radius_desktop": 0,
+            "enable_width_settings": false,
+            "width_mobile": false,
+            "width_mobile_value": 0,
+            "width_mobile_custom": "",
+            "width_mobile_unit": "px",
+            "width_desktop": false,
+            "width_desktop_value": 0,
+            "width_desktop_custom": "",
+            "width_desktop_unit": "px",
+            "max_width_mobile": false,
+            "max_width_mobile_value": 0,
+            "max_width_mobile_custom": "",
+            "max_width_mobile_unit": "px",
+            "max_width_desktop": false,
+            "max_width_desktop_value": 0,
+            "max_width_desktop_custom": "",
+            "max_width_desktop_unit": "px",
+            "enable_padding_settings": true,
+            "padding_x_mobile": true,
+            "padding_left_mobile": 20,
+            "padding_right_mobile": 20,
+            "padding_y_mobile": false,
+            "padding_top_mobile": 0,
+            "padding_bottom_mobile": 0,
+            "padding_x_desktop": true,
+            "padding_left_desktop": 30,
+            "padding_right_desktop": 30,
+            "padding_y_desktop": false,
+            "padding_top_desktop": 0,
+            "padding_bottom_desktop": 0,
+            "enable_margin_settings": false,
+            "margin_x_mobile": false,
+            "margin_left_mobile": 0,
+            "margin_right_mobile": 0,
+            "margin_y_mobile": false,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "margin_x_desktop": false,
+            "margin_left_desktop": 0,
+            "margin_right_desktop": 0,
+            "margin_y_desktop": false,
+            "margin_top_desktop": 0,
+            "margin_bottom_desktop": 0
+          },
+          "blocks": {
+            "icon_Qs8tRv": {
+              "type": "_section-content__icon",
+              "settings": {
+                "file_lottie_url": "",
+                "max_width_mobile": 81,
+                "max_width_desktop": 81,
+                "enable_width_settings": false,
+                "width_mobile": false,
+                "width_mobile_value": 0,
+                "width_mobile_custom": "",
+                "width_mobile_unit": "px",
+                "width_desktop": false,
+                "width_desktop_value": 0,
+                "width_desktop_custom": "",
+                "width_desktop_unit": "px",
+                "enable_padding_settings": false,
+                "padding_x_mobile": false,
+                "padding_left_mobile": 0,
+                "padding_right_mobile": 0,
+                "padding_y_mobile": false,
+                "padding_top_mobile": 0,
+                "padding_bottom_mobile": 0,
+                "padding_x_desktop": false,
+                "padding_left_desktop": 0,
+                "padding_right_desktop": 0,
+                "padding_y_desktop": false,
+                "padding_top_desktop": 0,
+                "padding_bottom_desktop": 0,
+                "enable_margin_settings": true,
+                "margin_x_mobile": false,
+                "margin_left_mobile": 0,
+                "margin_right_mobile": 0,
+                "margin_y_mobile": true,
+                "margin_top_mobile": 0,
+                "margin_bottom_mobile": 12,
+                "margin_x_desktop": false,
+                "margin_left_desktop": 0,
+                "margin_right_desktop": 0,
+                "margin_y_desktop": true,
+                "margin_top_desktop": 0,
+                "margin_bottom_desktop": 12
+              },
+              "blocks": {}
+            },
+            "title_Qs8tRv": {
+              "type": "_section-content__title",
+              "settings": {
+                "heading": "From the men using it everyday.",
+                "disable_animation": false,
+                "header_style": "h1",
+                "header_tag": "h2",
+                "font_family": "",
+                "highlight_color": "",
+                "underline_color": "",
+                "max_width_mobile": 0,
+                "max_width_desktop": 741,
+                "enable_width_settings": true,
+                "width_mobile": true,
+                "width_mobile_value": 80,
+                "width_mobile_custom": "",
+                "width_mobile_unit": "%",
+                "width_desktop": false,
+                "width_desktop_value": 0,
+                "width_desktop_custom": "",
+                "width_desktop_unit": "px",
+                "enable_padding_settings": false,
+                "padding_x_mobile": false,
+                "padding_left_mobile": 0,
+                "padding_right_mobile": 0,
+                "padding_y_mobile": false,
+                "padding_top_mobile": 0,
+                "padding_bottom_mobile": 0,
+                "padding_x_desktop": false,
+                "padding_left_desktop": 0,
+                "padding_right_desktop": 0,
+                "padding_y_desktop": false,
+                "padding_top_desktop": 0,
+                "padding_bottom_desktop": 0,
+                "enable_margin_settings": false,
+                "margin_x_mobile": false,
+                "margin_left_mobile": 0,
+                "margin_right_mobile": 0,
+                "margin_y_mobile": false,
+                "margin_top_mobile": 0,
+                "margin_bottom_mobile": 0,
+                "margin_x_desktop": false,
+                "margin_left_desktop": 0,
+                "margin_right_desktop": 0,
+                "margin_y_desktop": false,
+                "margin_top_desktop": 0,
+                "margin_bottom_desktop": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "icon_Qs8tRv",
+            "title_Qs8tRv"
+          ]
+        },
+        "customer-testimonials-carousel": {
+          "type": "_customer-testimonials__carousel",
+          "static": true,
+          "settings": {
+            "render_carousel_on": "",
+            "page_dots": false,
+            "custom_page_dots": false,
+            "carousel_caption": "",
+            "gap_mobile": 20,
+            "gap_desktop": 20
+          },
+          "blocks": {
+            "card_1_Qs8tRv": {
+              "type": "_customer-testimonials__item-v4",
+              "settings": {
+                "product": "texture-powder",
+                "star_rating": 5,
+                "reviewer_name": "Marcus.l",
+                "hair_type": "Medium wavy hair",
+                "width_mobile": 300,
+                "width_desktop": 300
+              },
+              "blocks": {}
+            },
+            "card_2_Qs8tRv": {
+              "type": "_customer-testimonials__item-v4",
+              "settings": {
+                "product": "matte-clay",
+                "star_rating": 5,
+                "reviewer_name": "Christian.m",
+                "hair_type": "Fine curly hair",
+                "width_mobile": 300,
+                "width_desktop": 300
+              },
+              "blocks": {}
+            },
+            "card_3_Qs8tRv": {
+              "type": "_customer-testimonials__item-v4",
+              "settings": {
+                "product": "texture-powder",
+                "star_rating": 5,
+                "reviewer_name": "Jeremiah.n",
+                "hair_type": "Thick straight hair",
+                "width_mobile": 300,
+                "width_desktop": 300
+              },
+              "blocks": {}
+            },
+            "card_4_Qs8tRv": {
+              "type": "_customer-testimonials__item-v4",
+              "settings": {
+                "reviewer_name": "Neil.r",
+                "hair_type": "Medium thin hair",
+                "product": "matte-clay",
+                "star_rating": 5,
+                "width_mobile": 300,
+                "width_desktop": 300
+              },
+              "blocks": {}
+            },
+            "card_5_Qs8tRv": {
+              "type": "_customer-testimonials__item-v4",
+              "settings": {
+                "reviewer_name": "Harrison.v",
+                "hair_type": "Thick straight hair",
+                "product": "texture-powder",
+                "star_rating": 5,
+                "width_mobile": 300,
+                "width_desktop": 300
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "card_1_Qs8tRv",
+            "card_2_Qs8tRv",
+            "card_3_Qs8tRv",
+            "card_4_Qs8tRv",
+            "card_5_Qs8tRv"
+          ]
+        },
+        "accent-graphics": {
+          "type": "_accent-graphics",
+          "static": true,
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "settings": {
+        "container_width": "full",
+        "max_width": 0,
+        "grid_gutter": "",
+        "mobile_alignment": "left",
+        "desktop_alignment": "left",
+        "color_scheme": "scheme-1",
+        "top_spacing_mobile": 42,
+        "bottom_spacing_mobile": 50,
+        "top_spacing_desktop": 50,
+        "bottom_spacing_desktop": 50,
+        "bg_color": "#eeece5",
+        "section_divider_top": "",
+        "section_divider_bottom": "",
+        "custom_class": "",
+        "custom_id": ""
+      }
     }
   },
   "order": [
@@ -1767,7 +1803,7 @@
     "mfr_core_image_video_text_K9xPmQ",
     "mfr_core_text_icon_card_grid_Xp7vKa",
     "mfr_product_grid_Pk9mRt",
-    "mfr_core_customer_testimonials_Qs8tRv",
-    "mfr_core_image_video_banner_Hk3mNp"
+    "mfr_core_image_video_banner_Hk3mNp",
+    "mfr_core_customer_testimonials_Qs8tRv"
   ]
 }
