@@ -16,7 +16,7 @@
 
 <div class="customer-testimonials__entry-v4-inner flex flex-col [width:var(--width-mobile)] large:[width:var(--width-desktop)]">
   <div class="customer-testimonials__entry-v4-card flex flex-col overflow-hidden border border-solid border-[color:var(--section-heading)] bg-white mb-[18px]">
-    <div class="customer-testimonials__entry-v4-media relative aspect-[300/525] [&_.mfr-video-with-controls]:w-full [&_.mfr-video-with-controls]:h-full [&_video]:w-full [&_video]:h-full [&_video]:object-cover [&_img]:w-full [&_img]:h-full [&_img]:object-cover">
+    <div class="customer-testimonials__entry-v4-media relative aspect-[300/525] [&_.mfr-video-with-controls]:w-full [&_.mfr-video-with-controls]:h-full [&_video]:w-full [&_video]:h-full [&_video]:object-cover [&_img]:w-full [&_img]:h-full [&_img]:object-cover [&>.mfr-video-with-controls]:absolute">
       {%- if media_video != blank -%}
         {%- render 'component__video-with-controls',
           block_id: block.id,
@@ -29,6 +29,7 @@
           poster: media_image,
           show_play_button: true,
           show_speaker_button: true,
+          show_indicator: true,
           without_wrapper: false -%}
       {%- else -%}
         {%- render 'component__lazyload-image',
@@ -54,7 +55,7 @@
       </div>
 
       {%- if product != blank -%}
-        <a href="{{ product.url }}" class="customer-testimonials__entry-v4-button button tertiary shrink-0 w-[72px] max-h-[34px]">Shop</a>
+        <a href="{{ product.url }}" class="customer-testimonials__entry-v4-button button tertiary shrink-0 w-[72px] !min-h-[34px] !py-[11px] !px-[20px] !text-[13px]">Shop</a>
       {%- endif -%}
     </div>
   </div>

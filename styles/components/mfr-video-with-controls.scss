@@ -1,8 +1,5 @@
 .mfr-video-with-controls {
-  position: relative;
-  justify-content: stretch;
-  align-items: stretch;
-  flex-direction: column;
+  
   &__inner {
     position: relative;
     width: 100%;
@@ -10,14 +7,6 @@
     contain: paint;
     display: flex;
     @include border-radius( rem-calc( 30px ) );
-  }
-
-  video {
-    width: 100%;
-    height: auto;
-    min-height: 100%;
-    display: block;
-    object-fit: cover;
   }
 
   &__title {
@@ -62,14 +51,14 @@
   .play-pause-button {
     position: absolute;
     top: rem-calc( 18px );
-    left: rem-calc( 18px );
+    right: rem-calc( 18px );
     width: rem-calc( 38px );
     height: rem-calc( 38px );
     z-index: 1;
 
     @include breakpoint( large up ) {
       top: rem-calc( 20px );
-      left: rem-calc( 20px );
+      right: rem-calc( 20px );
       width: rem-calc( 46px );
       height: rem-calc( 46px );
     }
@@ -84,12 +73,28 @@
   .speaker-button {
     position: absolute;
     top: rem-calc( 23px );
-    right: rem-calc( 23px );
+    left: rem-calc( 23px );
     z-index: 1;
 
     @include breakpoint( large up ) {
       top: rem-calc( 27px );
-      right: rem-calc( 27px );
+      left: rem-calc( 27px );
     }
+  }
+
+  &__progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: rem-calc( 3px );
+    background-color: rgba(255, 255, 255, 0.2);
+    z-index: 2;
+  }
+
+  &__progress-fill {
+    height: 100%;
+    background-color: #fff;
+    transition: width 0.1s linear;
   }
 }

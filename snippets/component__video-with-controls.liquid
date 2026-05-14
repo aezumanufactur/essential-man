@@ -129,6 +129,21 @@
         </span>
       </button>
     {% endif %}
+
+    {%- if show_indicator -%}
+      <div class="mfr-video-with-controls__progress"
+        x-data='{ progress: 0 }'
+        x-init='
+          const video = $refs["{{- video_ref -}}"];
+          const update = () => {
+            progress = video.duration ? (video.currentTime / video.duration) * 100 : 0;
+          };
+          video.addEventListener("timeupdate", update);
+          video.addEventListener("loadedmetadata", update);
+        '>
+        <div class="mfr-video-with-controls__progress-fill" :style='"width: " + progress + "%"'></div>
+      </div>
+    {%- endif -%}
   </div>
 {% unless without_wrapper %}
 </div>
