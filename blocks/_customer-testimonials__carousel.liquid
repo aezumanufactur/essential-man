@@ -28,7 +28,7 @@
         wrapAround: false,
         groupCells: true,
         cellAlign: "left",
-        pageDots: false,
+        pageDots: {{ block.settings.page_dots }},
         prevNextButtons: false,
         renderCarouselOn: "{{ block.settings.render_carousel_on }}",
         customPageDots: {{ block.settings.custom_page_dots }},
@@ -113,8 +113,14 @@
       },
       {
         "type": "checkbox",
+        "id": "page_dots",
+        "label": "Page Dots",
+        "default": false
+      },
+      {
+        "type": "checkbox",
         "id": "custom_page_dots",
-        "label": "Custom Page Dots",
+        "label": "Custom Page Dots (progress bar)",
         "default": false
       },
       {

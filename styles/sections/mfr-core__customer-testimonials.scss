@@ -158,4 +158,21 @@
       }
     }
   }
+
+  .flickity-page-dots {
+    gap: rem-calc(8px);
+
+    .dot {
+      flex-grow: 0;
+      width: rem-calc(40px);
+      max-width: rem-calc(40px);
+      height: rem-calc(2px) !important;
+      @include border-radius(rem-calc(1px));
+      @include opacity(0.2);
+
+      &.is-selected {
+        @include opacity(1);
+      }
+    }
+  }
 }
