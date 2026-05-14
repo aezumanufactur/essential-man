@@ -376,7 +376,11 @@
           "type": "_image-video-banner__carousel",
           "static": true,
           "settings": {
-            "autoplay_timing": 0
+            "autoplay_timing": 0,
+            "height_value_mobile": 100,
+            "height_unit_mobile": "svh",
+            "height_value_desktop": 100,
+            "height_unit_desktop": "svh"
           },
           "blocks": {
             "image_slide_Hk3mNp": {
@@ -521,8 +525,6 @@
         "container_width": "full",
         "max_width": 0,
         "grid_gutter": "",
-        "height_mobile": 100,
-        "height_desktop": 100,
         "mobile_alignment": "left",
         "desktop_alignment": "left",
         "color_scheme": "scheme-1",

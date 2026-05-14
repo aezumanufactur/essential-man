@@ -24,13 +24,11 @@ assign section settings to variables
   --bottom-spacing-mobile: {{ section.settings.bottom_spacing_mobile | default: 0 }}px;
   --top-spacing-desktop: {{ section.settings.top_spacing_desktop | default: 0 }}px;
   --bottom-spacing-desktop: {{ section.settings.bottom_spacing_desktop | default: 0 }}px;
-  --banner-height-mobile: {{ section.settings.height_mobile | default: 100 }}svh;
-  --banner-height-desktop: {{ section.settings.height_desktop | default: 100 }}svh;
 {% endcapture %}
 
 {% render 'section__settings-styles' %}
 <section class="mfr-core__image-video-banner {{ custom_class }} {{ grid_gutter }}" id="{{ section_id }}">
-  <div class="section-spacer background relative z-[3] pt-0 pb-0 {{ grid_gutter }} min-h-[var(--banner-height-mobile)] large:min-h-[var(--banner-height-desktop)]" style="{{ spacer }}">
+  <div class="section-spacer background relative z-[3] pt-0 pb-0 {{ grid_gutter }}" style="{{ spacer }}">
     {%- content_for "block", type: "_image-video-banner__carousel", id: "image-video-banner" -%}
 
     {%- render 'component__gradient-bg-styles' -%}
@@ -104,24 +102,6 @@ assign section settings to variables
         }
       ],
       "label": "Section Margin"
-    },
-    {
-      "type": "header",
-      "content": "Banner Height"
-    },
-    {
-      "type": "number",
-      "id": "height_mobile",
-      "label": "Height - Mobile",
-      "default": 100,
-      "info": "in svh (small viewport height). 100 = full screen height."
-    },
-    {
-      "type": "number",
-      "id": "height_desktop",
-      "label": "Height - Desktop",
-      "default": 100,
-      "info": "in svh (small viewport height). 100 = full screen height."
     },
     {
       "type": "header",
