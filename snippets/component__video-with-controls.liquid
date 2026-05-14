@@ -27,7 +27,7 @@
 
   <div class="mfr-video-with-controls__controls">
 
-    <div class="mfr-video-with-controls__indicator absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50px] h-[50px] pointer-events-none large:w-[70px] large:h-[70px]"
+    <div class="mfr-video-with-controls__indicator absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[58px] h-[58px] pointer-events-none"
       x-data='{
         paused: $refs["{{- video_ref -}}"].paused
       }'
@@ -54,7 +54,7 @@
     </div>
 
     {% if show_play_button != blank %}
-      <button class="play-pause-button absolute top-[18px] right-[18px] w-[38px] h-[38px] z-[1] large:top-[20px] large:right-[20px] large:w-[46px] large:h-[46px] [&_svg]:w-full [&_svg]:h-auto [&_svg]:block"
+      <button class="play-pause-button absolute top-[12px] right-[12px] w-[30px] h-[30px] z-[1] [&_svg]:w-full [&_svg]:h-auto [&_svg]:block"
         x-data='{
           paused: $refs["{{- video_ref -}}"].paused
         }'
@@ -93,7 +93,7 @@
     {% endif %}
     
     {% if show_speaker_button %}
-      <button class="speaker-button absolute top-[23px] left-[23px] z-[1] large:top-[27px] large:left-[27px]" 
+      <button class="speaker-button absolute top-[11px] left-[15px] w-[30px] h-[30px] z-[1]" 
         x-data='{
           muted: $refs["{{- video_ref -}}"].muted
         }'
