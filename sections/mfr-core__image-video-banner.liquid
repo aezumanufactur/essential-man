@@ -4,10 +4,10 @@ assign section settings to variables
 --------------------------------------
 {%- endcomment -%}
 
+{% render 'style-tags__section', asset_file_name: "mfr-core__image-video-banner.css" %}
 {%- assign container_width = section.settings.container_width -%}
 {%- assign max_width = section.settings.max_width -%}
 {%- assign grid_gutter = section.settings.grid_gutter -%}
-{%- assign color_theme = section.settings.color_theme -%}
 {%- assign custom_class = section.settings.custom_class -%}
 
 {%- assign section_id = section.settings.custom_id | default: section.id -%}
@@ -15,23 +15,24 @@ assign section settings to variables
 
 {%- if max_width != 0 and container_width == "" -%}
   {%- capture max_width_style -%}
-    style="max-width: {{ max_width }}rem;" 
+    style="max-width: {{ max_width }}rem;"
   {%- endcapture -%}
 {%- endif -%}
 
 {% capture spacer %}
-  --top-spacing-mobile: {{ section.settings.top_spacing_mobile | default: 100}}px;
-  --bottom-spacing-mobile: {{ section.settings.bottom_spacing_mobile | default: 100 }}px;
-  --top-spacing-desktop: {{ section.settings.top_spacing_desktop | default: 100 }}px;
-  --bottom-spacing-desktop: {{ section.settings.bottom_spacing_desktop | default: 100 }}px;
+  --top-spacing-mobile: {{ section.settings.top_spacing_mobile | default: 0 }}px;
+  --bottom-spacing-mobile: {{ section.settings.bottom_spacing_mobile | default: 0 }}px;
+  --top-spacing-desktop: {{ section.settings.top_spacing_desktop | default: 0 }}px;
+  --bottom-spacing-desktop: {{ section.settings.bottom_spacing_desktop | default: 0 }}px;
+  --banner-height-mobile: {{ section.settings.height_mobile | default: 100 }}svh;
+  --banner-height-desktop: {{ section.settings.height_desktop | default: 100 }}svh;
 {% endcapture %}
 
 {% render 'section__settings-styles' %}
-
 <section class="mfr-core__image-video-banner {{ custom_class }} {{ grid_gutter }}" id="{{ section_id }}">
-  <div class="section-spacer background relative z-[3] pt-0 pb-0 {{ grid_gutter }}" style="{{ spacer }}">
+  <div class="section-spacer background relative z-[3] pt-0 pb-0 {{ grid_gutter }} min-h-[var(--banner-height-mobile)] large:min-h-[var(--banner-height-desktop)]" style="{{ spacer }}">
     {%- content_for "block", type: "_image-video-banner__carousel", id: "image-video-banner" -%}
-  
+
     {%- render 'component__gradient-bg-styles' -%}
   </div>
   {%- render 'component__section-dividers', is_video_background: true -%}
@@ -41,7 +42,7 @@ assign section settings to variables
 
 {% schema %}
 {
-      "name": "Image/Video Banner",
+  "name": "Image/Video Banner",
   "disabled_on": {
     "groups": [
       "header",
@@ -100,9 +101,27 @@ assign section settings to variables
         {
           "value": "grid-gutter-mobile grid-gutter-desktop",
           "label": "On Both"
-        },
+        }
       ],
-      "label": "Section Margin",
+      "label": "Section Margin"
+    },
+    {
+      "type": "header",
+      "content": "Banner Height"
+    },
+    {
+      "type": "number",
+      "id": "height_mobile",
+      "label": "Height - Mobile",
+      "default": 100,
+      "info": "in svh (small viewport height). 100 = full screen height."
+    },
+    {
+      "type": "number",
+      "id": "height_desktop",
+      "label": "Height - Desktop",
+      "default": 100,
+      "info": "in svh (small viewport height). 100 = full screen height."
     },
     {
       "type": "header",
@@ -126,7 +145,7 @@ assign section settings to variables
           "label": "Right"
         }
       ],
-      "default": "center"
+      "default": "left"
     },
     {
       "type": "select",
@@ -146,7 +165,7 @@ assign section settings to variables
           "label": "Right"
         }
       ],
-      "default": "center"
+      "default": "left"
     },
     {
       "type": "header",
@@ -167,15 +186,15 @@ assign section settings to variables
       "type": "number",
       "id": "top_spacing_mobile",
       "label": "Top Spacing",
-      "default": 100,
-      "info": "in pixels. This will use 100px as default value if left empty"
+      "default": 0,
+      "info": "in pixels. Padding above content inside the banner."
     },
     {
       "type": "number",
       "id": "bottom_spacing_mobile",
       "label": "Bottom Spacing",
-      "default": 100,
-      "info": "in pixels. This will use 100px as default value if left empty"
+      "default": 0,
+      "info": "in pixels. Padding below content inside the banner."
     },
     {
       "type": "header",
@@ -185,15 +204,15 @@ assign section settings to variables
       "type": "number",
       "id": "top_spacing_desktop",
       "label": "Top Spacing",
-      "default": 100,
-      "info": "in pixels. This will use 100px as default value if left empty"
+      "default": 0,
+      "info": "in pixels. Padding above content inside the banner."
     },
     {
       "type": "number",
       "id": "bottom_spacing_desktop",
       "label": "Bottom Spacing",
-      "default": 100,
-      "info": "in pixels. This will use 100px as default value if left empty"
+      "default": 0,
+      "info": "in pixels. Padding below content inside the banner."
     },
     {
       "type": "header",
@@ -277,8 +296,7 @@ assign section settings to variables
       "label": "Custom ID"
     }
   ],
-  "blocks": [
-  ],
+  "blocks": [],
   "presets": [
     {
       "name": "Image/Video Banner",
@@ -291,7 +309,6 @@ assign section settings to variables
           "blocks": [
             {
               "type": "_image-video-banner__image-slide",
-      "name": "Image Slide",
               "blocks": [
                 {
                   "type": "_section-content",
@@ -300,12 +317,6 @@ assign section settings to variables
                   "blocks": [
                     {
                       "type": "_section-content__title"
-                    },
-                    {
-                      "type": "_section-content__text"
-                    },
-                    {
-                      "type": "_section-content__button"
                     }
                   ]
                 }
