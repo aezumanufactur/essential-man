@@ -36,11 +36,18 @@
 }
 {%- endcapture -%}
 
-{%- capture height_style -%}
-  --banner-height-mobile: {{ block.settings.height_value_mobile | default: 100 }}{{ block.settings.height_unit_mobile | default: 'svh' }};
-  --banner-height-desktop: {{ block.settings.height_value_desktop | default: 100 }}{{ block.settings.height_unit_desktop | default: 'svh' }};
-{%- endcapture -%}
-<div class="image-video-banner__height-container min-h-[var(--banner-height-mobile)] large:min-h-[var(--banner-height-desktop)]" style="{{ height_style }}">
+<style>
+  #shopify-block-{{ block.id }} .mfr-carousel__item {
+    min-height: {{ block.settings.height_value_mobile | default: 100 }}{{ block.settings.height_unit_mobile | default: 'svh' }};
+  }
+
+  @media screen and (min-height: 1024px) {
+    #shopify-block-{{ block.id }} .mfr-carousel__item {
+      min-height: {{ block.settings.height_value_desktop | default: 100 }}{{ block.settings.height_unit_desktop | default: 'svh' }};
+    }
+  }
+</style>
+<div class="image-video-banner__height-container min-h-[var(--banner-height-mobile)] large:min-h-[var(--banner-height-desktop)]">
   {% render 'mfr-component__carousel',
     settings: settings,
     class: "image-video-banner__carousel [&_.flickity-page-dots]:m-0 [&_.flickity-page-dots]:absolute [&_.flickity-page-dots]:bottom-[0.9375rem] [&_.flickity-page-dots]:w-full [&_.flickity-button]:top-1/2",
