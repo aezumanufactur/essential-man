@@ -48,13 +48,13 @@
       x-transition:leave-start="opacity-1"
       x-transition:leave-end="opacity-0"
       x-show="paused">
-      <svg width="31px" height="31px">
-        <use href="#play-icon-v2">
+      <svg width="58px" height="58px">
+        <use href="#icon-play-big-v2">
       </svg>
     </div>
 
     {% if show_play_button != blank %}
-      <button class="play-pause-button absolute top-[12px] right-[12px] w-[30px] h-[30px] z-[1] [&_svg]:w-full [&_svg]:h-auto [&_svg]:block"
+      <button class="play-pause-button !absolute top-[12px] right-[12px] !w-[30px] !h-[30px] z-[1] [&_svg]:w-full [&_svg]:h-auto [&_svg]:block"
         x-data='{
           paused: $refs["{{- video_ref -}}"].paused
         }'
@@ -86,14 +86,14 @@
         </span>
         <span class="play-pause-button__icon pause">
           <svg width="31px" height="31px">
-            <use href="#pause-icon-v2">
+            <use href="#icon-pause-v2">
           </svg>
         </span>
       </button>
     {% endif %}
     
     {% if show_speaker_button %}
-      <button class="speaker-button absolute top-[11px] left-[15px] w-[30px] h-[30px] z-[1]" 
+      <button class="speaker-button !absolute top-[11px] left-[15px] w-[30px] h-[30px] z-[1]" 
         x-data='{
           muted: $refs["{{- video_ref -}}"].muted
         }'

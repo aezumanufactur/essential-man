@@ -21,6 +21,7 @@
   
       {%- render 'css-variables' -%}
       {%- render "style-tags" -%}
+      {%- render "icon__global" -%}
   
       {%- if settings.favicon != blank -%}
         <link rel="icon" type="image/png" href="{{ settings.favicon | img_url: '32x32' }}">

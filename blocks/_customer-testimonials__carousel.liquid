@@ -1,13 +1,7 @@
 <style>
   #shopify-block-{{ block.id }} .mfr-carousel__item {
-    padding-left: {{ block.settings.gap_mobile | divided_by: 2.00 }}px;
-    padding-right: {{ block.settings.gap_mobile | divided_by: 2.00 }}px;
-  }
-  @media (min-width: 1024px) {
-    #shopify-block-{{ block.id }} .mfr-carousel__item {
-      padding-left: {{ block.settings.gap_desktop | divided_by: 2.00 }}px;
-      padding-right: {{ block.settings.gap_desktop | divided_by: 2.00 }}px;
-    }
+    --gap-mobile: {{ block.settings.gap_mobile | divided_by: 2.00 }}px;
+    --gap-desktop: {{ block.settings.gap_mobile | divided_by: 2.00 }}px;
   }
 </style>
 <div class="customer-testimonials {% if block.settings.carousel_caption != blank %}has-caption{% endif %} w-full [justify-content:inherit]">

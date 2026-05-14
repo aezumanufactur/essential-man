@@ -131,6 +131,27 @@
     }
 
     .customer-testimonials__entry-v4 {
+      padding: 0 rem-calc(--gap-mobile);
+
+      @include breakpoint(large up) {
+        padding: 0 rem-calc(--gap-desktop)
+      }
+
+      &:first-child {
+        padding-left: rem-calc(20);
+
+        @include breakpoint(large up) {
+          padding-left: rem-calc(30);
+        }
+      }
+
+      &:last-child {
+        padding-right: rem-calc(20);
+
+        @include breakpoint(large up) {
+          padding-right: rem-calc(30);
+        }
+      }
       p {
         margin-bottom: 0;
       }

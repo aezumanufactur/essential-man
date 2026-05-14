@@ -1696,7 +1696,7 @@
           "static": true,
           "settings": {
             "render_carousel_on": "",
-            "page_dots": false,
+            "page_dots": true,
             "custom_page_dots": false,
             "carousel_caption": "",
             "gap_mobile": 20,
@@ -1706,6 +1706,8 @@
             "card_1_Qs8tRv": {
               "type": "_customer-testimonials__item-v4",
               "settings": {
+                "video": "shopify://files/videos/file_example_MP4_480_1_5MG.mp4",
+                "image": "shopify://shop_images/Generated_with_Kive.ai_-_create_a_realistic_action_image_of_a_man_using_this_hair_texture_powder_spray._the_image_should_feel_minimal_and_be_in_a_minimal__modern_bathroom._it_should_f.jpg",
                 "product": "texture-powder",
                 "star_rating": 5,
                 "reviewer_name": "Marcus.l",
@@ -1718,6 +1720,8 @@
             "card_2_Qs8tRv": {
               "type": "_customer-testimonials__item-v4",
               "settings": {
+                "video": "shopify://files/videos/file_example_MP4_480_1_5MG.mp4",
+                "image": "shopify://shop_images/Generated_with_Kive.ai_-_kive-image_19_1.webp",
                 "product": "matte-clay",
                 "star_rating": 5,
                 "reviewer_name": "Christian.m",
@@ -1730,6 +1734,8 @@
             "card_3_Qs8tRv": {
               "type": "_customer-testimonials__item-v4",
               "settings": {
+                "video": "shopify://files/videos/file_example_MP4_480_1_5MG.mp4",
+                "image": "shopify://shop_images/Generated_with_Kive.ai_-_generate_an_image_of_these_products_in_a_bathroom._the_image_should_be_taken_on_an_iPhone_14_like_it_is_a_UGC_shot_for_the_products._the_quality_should_look_l.webp",
                 "product": "texture-powder",
                 "star_rating": 5,
                 "reviewer_name": "Jeremiah.n",
@@ -1742,10 +1748,12 @@
             "card_4_Qs8tRv": {
               "type": "_customer-testimonials__item-v4",
               "settings": {
-                "reviewer_name": "Neil.r",
-                "hair_type": "Medium thin hair",
+                "video": "shopify://files/videos/file_example_MP4_480_1_5MG.mp4",
+                "image": "shopify://shop_images/Generated_with_Kive.ai_-_kive-image_7_2.webp",
                 "product": "matte-clay",
                 "star_rating": 5,
+                "reviewer_name": "Neil.r",
+                "hair_type": "Medium thin hair",
                 "width_mobile": 300,
                 "width_desktop": 300
               },
@@ -1754,10 +1762,12 @@
             "card_5_Qs8tRv": {
               "type": "_customer-testimonials__item-v4",
               "settings": {
-                "reviewer_name": "Harrison.v",
-                "hair_type": "Thick straight hair",
+                "video": "shopify://files/videos/file_example_MP4_480_1_5MG.mp4",
+                "image": "shopify://shop_images/em-image-mobile.webp",
                 "product": "texture-powder",
                 "star_rating": 5,
+                "reviewer_name": "Harrison.v",
+                "hair_type": "Thick straight hair",
                 "width_mobile": 300,
                 "width_desktop": 300
               },
