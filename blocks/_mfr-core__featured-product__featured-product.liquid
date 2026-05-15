@@ -1,0 +1,91 @@
+<div class="featured-product">
+  <div class="featured-product__inner flex flex-col large:flex-row border-b border-[var(--carbon,#1e1b22)]">
+
+    <div class="featured-product__media aspect-[430/411] large:aspect-[932/710] w-full large:w-[68%] overflow-hidden bg-[#c4bfb3] relative shrink-0">
+      {%- if block.settings.image != blank -%}
+        {%- render "component__lazyload-image",
+          image: block.settings.image,
+          width: 1400,
+          class: "w-full min-h-full block object-cover" -%}
+      {%- else -%}
+        <div class="w-full h-full bg-[#c4bfb3]"></div>
+      {%- endif -%}
+    </div>
+
+    <div class="featured-product__content px-[20px] pt-[20px] pb-[30px] large:px-[30px] large:py-[30px] large:w-[32%] flex flex-col gap-[61px] large:gap-[123px]">
+
+      <div class="featured-product__text relative">
+        {%- content_for "block", type: "_mfr-core__featured-product__product-info", id: "product-info" -%}
+      </div>
+
+      <div class="featured-product__benefits flex flex-col gap-[30px] large:gap-[33px]">
+        {%- content_for "blocks" -%}
+        {%- content_for "block", type: "_mfr-core__featured-product__add-to-cart-button", id: "add-to-cart-button" -%}
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Featured Product",
+  "class": "featured-product",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product Settings"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Product Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_mfr-core__featured-product__product-info"
+    },
+    {
+      "type": "_mfr-core__featured-product__text-list"
+    },
+    {
+      "type": "_mfr-core__featured-product__add-to-cart-button"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Product",
+      "blocks": [
+        {
+          "type": "_mfr-core__featured-product__product-info",
+          "id": "product-info",
+          "static": true
+        },
+        {
+          "type": "_mfr-core__featured-product__text-list"
+        },
+        {
+          "type": "_mfr-core__featured-product__text-list"
+        },
+        {
+          "type": "_mfr-core__featured-product__add-to-cart-button",
+          "id": "add-to-cart-button",
+          "static": true
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
