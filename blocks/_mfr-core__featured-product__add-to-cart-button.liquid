@@ -1,0 +1,59 @@
+<div class="add-to-cart-button">
+  <div class="add-to-cart-button__inner">
+
+    {%- if block.settings.product != blank -%}
+      {%- assign atc_product = block.settings.product -%}
+      {%- assign atc_variant = atc_product.first_available_variant -%}
+      <form class="add-to-cart-button__form" action="/cart/add" method="post">
+        <input type="hidden" name="id" value="{{ atc_variant.id }}">
+        <button
+          type="submit"
+          class="add-to-cart-button__btn button primary w-full"
+          {% unless atc_variant.available %}disabled{% endunless %}>
+          {{- block.settings.button_label | default: 'Add to Cart' -}}
+        </button>
+      </form>
+    {%- else -%}
+      <button type="button" class="add-to-cart-button__btn button primary w-full">
+        {{- block.settings.button_label | default: 'Add to Cart' -}}
+      </button>
+    {%- endif -%}
+
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Add to Cart Button",
+  "class": "add-to-cart-button",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Button Settings"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "header",
+      "content": "Product Settings"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product",
+      "info": "Assign the product to enable add-to-cart functionality. Use dynamic source to pull from the parent Featured Product block."
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Add to Cart Button"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,141 @@
+<div class="product-info">
+  <div class="product-info__inner flex flex-col gap-[27px] large:gap-[32px]">
+
+    {%- if block.settings.pilled_text != blank -%}
+      <div class="product-info__badge absolute top-0 right-0 inline-flex items-center justify-center overflow-hidden px-[8px] py-[7px] rounded-[5px] bg-[#647949]">
+        <span class="product-info__badge-text [font-family:var(--font-body)] text-[12px] font-[700] leading-[20px] uppercase text-[#eeece5] whitespace-nowrap">
+          {{- block.settings.pilled_text -}}
+        </span>
+      </div>
+    {%- endif -%}
+
+    {%- if block.settings.small_text != blank -%}
+      <p class="product-info__label [font-family:var(--font-heading-h4)] text-[16px] font-[700] leading-[1.4] uppercase [color:var(--section-heading)]">
+        {{- block.settings.small_text -}}
+      </p>
+    {%- endif -%}
+
+    <div class="product-info__title-wrap flex flex-col gap-[10px] large:gap-[20px]">
+      {%- if block.settings.title != blank -%}
+        <p class="product-info__title [font-family:var(--font-heading-h4)] text-[34px] large:text-[46px] font-[500] leading-[1.1] uppercase [color:var(--section-heading)]">
+          {{- block.settings.title -}}
+        </p>
+      {%- endif -%}
+
+      {%- if block.settings.show_price -%}
+        <div class="product-info__price flex items-center gap-[12px]">
+          {%- if block.settings.price_compare != blank -%}
+            <span class="product-info__price-compare [font-family:var(--font-body)] text-[14px] font-[700] leading-[1.4] uppercase line-through opacity-30 [color:var(--section-heading)] whitespace-nowrap">
+              {{- block.settings.price_compare -}}
+            </span>
+          {%- endif -%}
+          {%- if block.settings.price_current != blank -%}
+            <span class="product-info__price-current [font-family:var(--font-body)] text-[14px] font-[700] leading-[1.4] uppercase [color:var(--section-heading)] whitespace-nowrap">
+              {{- block.settings.price_current -}}
+            </span>
+          {%- endif -%}
+          {%- if block.settings.price_save_text != blank -%}
+            <span class="product-info__price-save inline-flex items-center justify-center overflow-hidden px-[8px] py-[6px] rounded-[5px] bg-[#d15722] [font-family:var(--font-body)] text-[12px] font-[700] leading-[20px] uppercase text-[#eeece5] whitespace-nowrap">
+              {{- block.settings.price_save_text -}}
+            </span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if block.settings.description != blank -%}
+      <div class="product-info__description [font-family:var(--font-body)] text-[14px] font-[700] leading-[1.4] large:leading-[1.5] uppercase [color:var(--section-heading)]">
+        {{- block.settings.description -}}
+      </div>
+    {%- endif -%}
+
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Product Info",
+  "class": "product-info",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Label Settings"
+    },
+    {
+      "type": "text",
+      "id": "small_text",
+      "label": "Small Label Text",
+      "default": "Powder + Clay",
+      "info": "Short label above the title (e.g. product line name)."
+    },
+    {
+      "type": "header",
+      "content": "Title Settings"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "The Essential System"
+    },
+    {
+      "type": "text",
+      "id": "pilled_text",
+      "label": "Pilled Badge Text",
+      "default": "Best Value",
+      "info": "Displayed as a small pill badge (top-right). Leave blank to hide."
+    },
+    {
+      "type": "header",
+      "content": "Price Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Show Price",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "price_compare",
+      "label": "Compare At Price",
+      "default": "$65.00",
+      "info": "Displayed with strikethrough. Use dynamic source to pull from product.",
+      "visible_if": "{{ block.settings.show_price }}"
+    },
+    {
+      "type": "text",
+      "id": "price_current",
+      "label": "Current Price",
+      "default": "$55.00",
+      "info": "Use dynamic source to pull from product.",
+      "visible_if": "{{ block.settings.show_price }}"
+    },
+    {
+      "type": "text",
+      "id": "price_save_text",
+      "label": "Save Badge Text",
+      "default": "Save $10",
+      "info": "Shown as an orange badge next to price. Leave blank to hide.",
+      "visible_if": "{{ block.settings.show_price }}"
+    },
+    {
+      "type": "header",
+      "content": "Description Settings"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Texture Powder and Matte Clay, designed from the start to work together. One lifts at the root, with volume that holds. The other shapes through the lengths.</p>"
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Product Info"
+    }
+  ]
+}
+{% endschema %}

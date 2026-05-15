@@ -1,0 +1,11 @@
+@import "../variables";
+@import "../tools/util/util";
+@import "../tools/mixins";
+
+.mfr-core__featured-product {
+  .featured-product {
+    .product-info {
+      p { margin-bottom: 0; }
+    }
+  }
+}

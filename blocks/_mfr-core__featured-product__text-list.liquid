@@ -1,0 +1,66 @@
+<div class="text-list">
+  <div class="text-list__inner flex flex-col gap-[12px]">
+
+    <div class="text-list__item flex items-center gap-[12px]">
+      <div class="text-list__icon relative shrink-0 size-[19px]">
+        <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="9.5" cy="9.5" r="9" stroke="currentColor" stroke-width="1"/>
+          <path d="M6.5 9.5L8.5 11.5L12.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <p class="text-list__text [font-family:var(--font-body)] text-[14px] font-[700] leading-[18px] uppercase [color:var(--section-heading)] min-w-0 flex-1">
+        {{- block.settings.value -}}
+      </p>
+    </div>
+
+    {%- if block.settings.show_divider -%}
+      <div class="text-list__divider w-full border-t border-[var(--carbon,#1e1b22)] opacity-20"></div>
+    {%- endif -%}
+
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Text List",
+  "class": "text-list",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "text",
+      "id": "handle",
+      "label": "Metafield Handle",
+      "default": "mfr_fields.benefit_1",
+      "info": "Namespace and key of the product metafield (e.g. mfr_fields.benefit_1). Use dynamic source to pull value from the product."
+    },
+    {
+      "type": "text",
+      "id": "value",
+      "label": "Display Text",
+      "default": "Lorem ipsum dolor sit amet consectetur",
+      "info": "Text shown for this list item. Replace with dynamic source after assigning product."
+    },
+    {
+      "type": "header",
+      "content": "Display Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider",
+      "label": "Show Divider Line",
+      "default": true,
+      "info": "Disable on the last item in the list."
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Text List"
+    }
+  ]
+}
+{% endschema %}

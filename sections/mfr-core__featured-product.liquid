@@ -1,0 +1,283 @@
+{%- comment -%}
+--------------------------------------
+assign section settings to variables
+--------------------------------------
+{%- endcomment -%}
+
+{% render 'style-tags__section', asset_file_name: "mfr-core__featured-product.css" %}
+{%- assign container_width = section.settings.container_width -%}
+{%- assign max_width = section.settings.max_width -%}
+{%- assign grid_gutter = section.settings.grid_gutter -%}
+{%- assign custom_class = section.settings.custom_class -%}
+
+{%- assign section_id = section.settings.custom_id | default: section.id -%}
+{% render 'renderer__color-scheme', name: "section", color_scheme: section.settings.color_scheme, selector: ".shopify-section", section_id: section_id %}
+
+{% capture spacer %}
+  --top-spacing-mobile: {{ section.settings.top_spacing_mobile | default: 0 }}px;
+  --bottom-spacing-mobile: {{ section.settings.bottom_spacing_mobile | default: 0 }}px;
+  --top-spacing-desktop: {{ section.settings.top_spacing_desktop | default: 0 }}px;
+  --bottom-spacing-desktop: {{ section.settings.bottom_spacing_desktop | default: 0 }}px;
+{% endcapture %}
+{% render 'section__settings-styles' %}
+
+<section class="mfr-core__featured-product {{ custom_class }}" id="{{ section_id }}">
+  <div class="featured-product__wrapper section-spacer background {{ grid_gutter }} pt-[var(--top-spacing-mobile)] pb-[var(--bottom-spacing-mobile)] large:pt-[var(--top-spacing-desktop)] large:pb-[var(--bottom-spacing-desktop)]" style="{{ spacer }}">
+
+    <div class="featured-product__title-bar border-t border-b border-[var(--carbon,#1e1b22)] px-[20px] py-[30px] large:px-[30px]">
+      {%- content_for "block", type: "_section-content", id: "section-content" -%}
+    </div>
+
+    <div class="featured-product__cards">
+      {%- content_for "blocks" -%}
+    </div>
+
+    {%- render 'component__gradient-bg-styles' -%}
+  </div>
+  {%- render 'component__section-dividers', is_video_background: true -%}
+  {%- content_for "block", type: "_accent-graphics", id: "accent-graphics" -%}
+</section>
+
+
+{% schema %}
+{
+  "name": "Featured Product",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer",
+      "custom.offcanvas",
+      "custom.modals"
+    ]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "options": [
+        {
+          "value": "full",
+          "label": "Full"
+        },
+        {
+          "value": "",
+          "label": "Contain"
+        }
+      ],
+      "label": "Width",
+      "default": "full"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "rem",
+      "label": "Max Content Width",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "grid_gutter",
+      "options": [
+        {
+          "value": "",
+          "label": "No Margin"
+        },
+        {
+          "value": "grid-gutter-mobile",
+          "label": "On Mobile"
+        },
+        {
+          "value": "grid-gutter-desktop",
+          "label": "On Desktop"
+        },
+        {
+          "value": "grid-gutter-mobile grid-gutter-desktop",
+          "label": "On Both"
+        }
+      ],
+      "label": "Section Margin"
+    },
+    {
+      "type": "header",
+      "content": "Color Schemes Settings"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "scheme_1",
+      "label": "Color Scheme",
+      "info": "This will be the color scheme of the header initially."
+    },
+    {
+      "type": "header",
+      "content": "Mobile Section Spacing"
+    },
+    {
+      "type": "number",
+      "id": "top_spacing_mobile",
+      "label": "Top Spacing",
+      "default": 0,
+      "info": "in pixels. This will use 0px as default value if left empty"
+    },
+    {
+      "type": "number",
+      "id": "bottom_spacing_mobile",
+      "label": "Bottom Spacing",
+      "default": 0,
+      "info": "in pixels. This will use 0px as default value if left empty"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Section Spacing"
+    },
+    {
+      "type": "number",
+      "id": "top_spacing_desktop",
+      "label": "Top Spacing",
+      "default": 0,
+      "info": "in pixels. This will use 0px as default value if left empty"
+    },
+    {
+      "type": "number",
+      "id": "bottom_spacing_desktop",
+      "label": "Bottom Spacing",
+      "default": 0,
+      "info": "in pixels. This will use 0px as default value if left empty"
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "bg_color",
+      "label": "Background Color/Gradient"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_mobile",
+      "label": "Background Image - Mobile"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image - Desktop"
+    },
+    {
+      "type": "header",
+      "content": "Divider Settings"
+    },
+    {
+      "type": "select",
+      "id": "section_divider_top",
+      "label": "Section Divider - Top",
+      "options": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "line",
+          "label": "Line"
+        },
+        {
+          "value": "rounded",
+          "label": "Rounded"
+        },
+        {
+          "value": "scale",
+          "label": "Scale"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "section_divider_bottom",
+      "label": "Section Divider - Bottom",
+      "options": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "line",
+          "label": "Line"
+        },
+        {
+          "value": "rounded",
+          "label": "Rounded"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "header",
+      "content": "Attribute Settings"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom class"
+    },
+    {
+      "type": "text",
+      "id": "custom_id",
+      "label": "Custom ID"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_section-content"
+    },
+    {
+      "type": "_mfr-core__featured-product__featured-product"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Product",
+      "blocks": [
+        {
+          "type": "_section-content",
+          "id": "section-content",
+          "static": true,
+          "blocks": [
+            {
+              "type": "_section-content__title"
+            }
+          ]
+        },
+        {
+          "type": "_mfr-core__featured-product__featured-product",
+          "blocks": [
+            {
+              "type": "_mfr-core__featured-product__product-info",
+              "id": "product-info",
+              "static": true
+            },
+            {
+              "type": "_mfr-core__featured-product__text-list"
+            },
+            {
+              "type": "_mfr-core__featured-product__text-list"
+            },
+            {
+              "type": "_mfr-core__featured-product__add-to-cart-button",
+              "id": "add-to-cart-button",
+              "static": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
