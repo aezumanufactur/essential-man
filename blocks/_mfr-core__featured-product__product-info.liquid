@@ -10,16 +10,12 @@
     {%- endif -%}
 
     {%- if block.settings.small_text != blank -%}
-      <p class="product-info__label [font-family:var(--font-heading-h4)] text-[16px] font-[700] leading-[1.4] uppercase [color:var(--section-heading)]">
-        {{- block.settings.small_text -}}
-      </p>
+      <div class="product-info__label [font-family:var(--font-heading-h4)] text-[16px] font-[700] leading-[1.4] uppercase [color:var(--section-heading)]"><p>{{- block.settings.small_text -}}</p></div>
     {%- endif -%}
 
     <div class="product-info__title-wrap flex flex-col gap-[10px] large:gap-[20px]">
       {%- if block.settings.title != blank -%}
-        <p class="product-info__title [font-family:var(--font-heading-h4)] text-[34px] large:text-[46px] font-[500] leading-[1.1] uppercase [color:var(--section-heading)]">
-          {{- block.settings.title -}}
-        </p>
+        <div class="product-info__title [font-family:var(--font-heading-h4)] text-[34px] large:text-[46px] font-[500] leading-[1.1] uppercase [color:var(--section-heading)]"><p>{{- block.settings.title -}}</p></div>
       {%- endif -%}
 
       {%- if block.settings.show_price -%}

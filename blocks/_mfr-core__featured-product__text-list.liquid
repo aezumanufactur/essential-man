@@ -8,9 +8,7 @@
           <path d="M6.5 9.5L8.5 11.5L12.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
-      <p class="text-list__text [font-family:var(--font-body)] text-[14px] font-[700] leading-[18px] uppercase [color:var(--section-heading)] min-w-0 flex-1">
-        {{- block.settings.value -}}
-      </p>
+      <div class="text-list__text [font-family:var(--font-body)] text-[14px] font-[700] leading-[18px] uppercase [color:var(--section-heading)] min-w-0 flex-1"><p>{{- block.settings.value -}}</p></div>
     </div>
 
     {%- if block.settings.show_divider -%}

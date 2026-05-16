@@ -54,6 +54,20 @@ Every child element inside a block must have a BEM class name — not just the o
 </div>
 ```
 
+## Styled Text — `<div>` Wrapper Pattern
+
+Never put font, size, color, or spacing Tailwind classes directly on a `<p>` tag. Instead, wrap it in a `<div>` and move all styling classes to the wrapper. The `<p>` inside stays bare:
+
+```liquid
+{{/* Wrong */}}
+<p class="my-block__title [font-family:var(--font-heading-h4)] text-[34px] font-[500] uppercase [color:var(--section-heading)]">Text</p>
+
+{{/* Correct */}}
+<div class="my-block__title [font-family:var(--font-heading-h4)] text-[34px] font-[500] uppercase [color:var(--section-heading)]"><p>Text</p></div>
+```
+
+This applies to any text element that carries Tailwind utility classes. The BEM class belongs on the `<div>`; the `<p>` is purely semantic.
+
 ## Schema Settings Grouping
 
 Group settings under `"header"` inputs. All settings for a group follow until the next header:
