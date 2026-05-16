@@ -8,13 +8,13 @@
         <input type="hidden" name="id" value="{{ atc_variant.id }}">
         <button
           type="submit"
-          class="add-to-cart-button__btn button primary w-full"
+          class="add-to-cart-button__btn button {{ block.settings.button_style }} w-full"
           {% unless atc_variant.available %}disabled{% endunless %}>
           {{- block.settings.button_label | default: 'Add to Cart' -}}
         </button>
       </form>
     {%- else -%}
-      <button type="button" class="add-to-cart-button__btn button primary w-full">
+      <button type="button" class="add-to-cart-button__btn button {{ block.settings.button_style }} w-full">
         {{- block.settings.button_label | default: 'Add to Cart' -}}
       </button>
     {%- endif -%}
@@ -37,6 +37,17 @@
       "id": "button_label",
       "label": "Button Label",
       "default": "Add to Cart"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "options": [
+        { "value": "primary", "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" },
+        { "value": "tertiary", "label": "Tertiary" }
+      ],
+      "default": "tertiary"
     },
     {
       "type": "header",
