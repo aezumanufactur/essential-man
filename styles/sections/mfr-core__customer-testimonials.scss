@@ -131,25 +131,25 @@
     }
 
     .customer-testimonials__entry-v4 {
-      padding: 0 rem-calc(--gap-mobile);
+      padding: 0 var(--gap-mobile);
 
       @include breakpoint(large up) {
-        padding: 0 rem-calc(--gap-desktop)
+        padding: 0 var(--gap-desktop);
       }
 
       &:first-child {
-        padding-left: rem-calc(20);
+        padding-left: var(--gap-mobile-full);
 
         @include breakpoint(large up) {
-          padding-left: rem-calc(30);
+          padding-left: var(--gap-desktop-full);
         }
       }
 
       &:last-child {
-        padding-right: rem-calc(20);
+        padding-right: var(--gap-mobile-full);
 
         @include breakpoint(large up) {
-          padding-right: rem-calc(30);
+          padding-right: var(--gap-desktop-full);
         }
       }
       p {
