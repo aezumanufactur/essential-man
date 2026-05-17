@@ -2,8 +2,8 @@
   <div class="product-info__inner flex flex-col gap-[27px] large:gap-[32px]">
 
     {%- if block.settings.pilled_text != blank -%}
-      <div class="product-info__badge absolute top-0 right-0 inline-flex items-center justify-center overflow-hidden px-[8px] py-[7px] rounded-[5px] bg-[#647949]">
-        <span class="product-info__badge-text [font-family:var(--font-body)] text-[12px] font-[700] leading-[20px] uppercase text-[#eeece5] whitespace-nowrap">
+      <div class="product-info__badge absolute top-0 right-0 large:right-[30px] inline-flex items-center justify-center overflow-hidden px-[8px] py-[7px] rounded-[5px] bg-[#647949]">
+        <span class="product-info__badge-text [font-family:var(--font-body)] text-[12px] font-[700] leading-[1em] uppercase text-[#eeece5] whitespace-nowrap">
           {{- block.settings.pilled_text -}}
         </span>
       </div>
@@ -13,7 +13,7 @@
       <div class="product-info__label [font-family:var(--font-heading-h4)] text-[16px] font-[700] leading-[1.4] uppercase [color:var(--section-heading)]"><p>{{- block.settings.small_text -}}</p></div>
     {%- endif -%}
 
-    <div class="product-info__title-wrap flex flex-col gap-[10px] large:gap-[20px]">
+    <div class="product-info__title-wrap flex flex-col gap-[10px] large:gap-[20px] large:pr-[30px]">
       {%- if block.settings.title != blank -%}
         <div class="product-info__title [font-family:var(--font-heading-h4)] text-[34px] large:text-[46px] font-[500] leading-[1.1] uppercase [color:var(--section-heading)]"><p>{{- block.settings.title -}}</p></div>
       {%- endif -%}
@@ -31,7 +31,7 @@
             </span>
           {%- endif -%}
           {%- if block.settings.price_save_text != blank -%}
-            <span class="product-info__price-save inline-flex items-center justify-center overflow-hidden px-[8px] py-[6px] rounded-[5px] bg-[#d15722] [font-family:var(--font-body)] text-[12px] font-[700] leading-[20px] uppercase text-[#eeece5] whitespace-nowrap">
+            <span class="product-info__price-save inline-flex items-center justify-center overflow-hidden px-[8px] py-[6px] rounded-[5px] bg-[#d15722] [font-family:var(--font-body)] text-[12px] font-[700] leading-[1em] uppercase text-[#eeece5] whitespace-nowrap">
               {{- block.settings.price_save_text -}}
             </span>
           {%- endif -%}
