@@ -13,12 +13,154 @@
   "sections": {
     "footer_WFB43J": {
       "type": "footer",
-      "disabled": true,
       "settings": {
         "color_scheme": "scheme-e7a2b49c-36ae-4b1f-b31f-f3ec31db1021",
         "grid_container_width": "contain",
         "appear_on": ""
-      }
+      },
+      "blocks": {
+        "col_embed_Rk9mXz": {
+          "type": "_footer__column",
+          "blocks": {
+            "embed_Lp3qWn": {
+              "type": "_footer__embed",
+              "settings": {
+                "heading": "Stay close to the standard",
+                "caption": "Early access to new products, formulation thinking, and what we are building next.",
+                "embed_code": ""
+              }
+            }
+          },
+          "block_order": [
+            "embed_Lp3qWn"
+          ],
+          "settings": {
+            "enable_width_settings": true,
+            "width_mobile": true,
+            "width_mobile_value": 100,
+            "width_mobile_unit": "%",
+            "width_desktop": true,
+            "width_desktop_unit": "custom",
+            "width_desktop_custom": "510px"
+          }
+        },
+        "col_social_Yt7vBm": {
+          "type": "_footer__column",
+          "blocks": {
+            "social_Dq2jKr": {
+              "type": "_footer__social-links",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "social_Dq2jKr"
+          ],
+          "settings": {
+            "align_horizontal_desktop": "flex-end",
+            "enable_width_settings": true,
+            "width_mobile": true,
+            "width_mobile_value": 100,
+            "width_mobile_unit": "%",
+            "width_desktop": true,
+            "width_desktop_unit": "custom",
+            "width_desktop_custom": "calc(100% - 510px)"
+          }
+        },
+        "col_prod_Gh5nAs": {
+          "type": "_footer__column",
+          "blocks": {
+            "menu_prod_Xc8pEt": {
+              "type": "_footer__menu",
+              "settings": {
+                "heading": "Products",
+                "menu": "footer-products"
+              }
+            }
+          },
+          "block_order": [
+            "menu_prod_Xc8pEt"
+          ],
+          "settings": {
+            "enable_border_mobile": true,
+            "border_top_mobile": true,
+            "enable_border_desktop": true,
+            "border_top_desktop": true,
+            "border_right_desktop": true,
+            "enable_width_settings": true,
+            "width_mobile": true,
+            "width_mobile_value": 100,
+            "width_mobile_unit": "%",
+            "width_desktop": true,
+            "width_desktop_unit": "custom",
+            "width_desktop_custom": "calc(100% / 3)"
+          }
+        },
+        "col_expl_Nf6wCv": {
+          "type": "_footer__column",
+          "blocks": {
+            "menu_expl_Jh4kUq": {
+              "type": "_footer__menu",
+              "settings": {
+                "heading": "Explore",
+                "menu": "footer-explore"
+              }
+            }
+          },
+          "block_order": [
+            "menu_expl_Jh4kUq"
+          ],
+          "settings": {
+            "enable_border_mobile": true,
+            "border_top_mobile": true,
+            "border_right_mobile": true,
+            "enable_border_desktop": true,
+            "border_top_desktop": true,
+            "border_right_desktop": true,
+            "enable_width_settings": true,
+            "width_mobile": true,
+            "width_mobile_value": 50,
+            "width_mobile_unit": "%",
+            "width_desktop": true,
+            "width_desktop_unit": "custom",
+            "width_desktop_custom": "calc(100% / 3)"
+          }
+        },
+        "col_supp_Mv1zPb": {
+          "type": "_footer__column",
+          "blocks": {
+            "menu_supp_Bw9yLs": {
+              "type": "_footer__menu",
+              "settings": {
+                "heading": "Support",
+                "menu": "footer-support"
+              }
+            }
+          },
+          "block_order": [
+            "menu_supp_Bw9yLs"
+          ],
+          "settings": {
+            "enable_border_mobile": true,
+            "border_top_mobile": true,
+            "enable_border_desktop": true,
+            "border_top_desktop": true,
+            "enable_width_settings": true,
+            "width_mobile": true,
+            "width_mobile_value": 50,
+            "width_mobile_unit": "%",
+            "width_desktop": true,
+            "width_desktop_unit": "custom",
+            "width_desktop_custom": "calc(100% / 3)"
+          }
+        }
+      },
+      "block_order": [
+        "col_embed_Rk9mXz",
+        "col_social_Yt7vBm",
+        "col_prod_Gh5nAs",
+        "col_expl_Nf6wCv",
+        "col_supp_Mv1zPb"
+      ]
     },
     "footer_socket_c6MXBr": {
       "type": "footer__socket",
