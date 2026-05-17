@@ -1,0 +1,64 @@
+<style>
+  #shopify-block-{{ block.id }} {
+    --height-mobile: {{ block.settings.height_mobile }}px;
+    --height-desktop: {{ block.settings.height_desktop }}px;
+  }
+</style>
+
+<div class="scrolling-bar__logo-item__inner" {{ block.shopify_attributes }}>
+  {%- if block.settings.link != blank -%}
+    <a class="scrolling-bar__logo-item__link" href="{{ block.settings.link }}">
+  {%- endif -%}
+  {%- if block.settings.image != blank -%}
+    {% render 'component__lazyload-image',
+      image: block.settings.image,
+      width: 400,
+      class: "scrolling-bar__logo-item__img" %}
+  {%- endif -%}
+  {%- if block.settings.link != blank -%}
+    </a>
+  {%- endif -%}
+</div>
+
+{%- schema -%}
+  {
+    "name": "Logo Item",
+    "class": "scrolling-bar__logo-item scrolling-bar__item",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Logo Settings"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Logo Image"
+      },
+      {
+        "type": "number",
+        "id": "height_mobile",
+        "label": "Height - Mobile",
+        "default": 25,
+        "info": "in pixels"
+      },
+      {
+        "type": "number",
+        "id": "height_desktop",
+        "label": "Height - Desktop",
+        "default": 30,
+        "info": "in pixels"
+      },
+      {
+        "type": "url",
+        "id": "link",
+        "label": "Link (optional)"
+      }
+    ],
+    "blocks": [],
+    "presets": [
+      {
+        "name": "Logo Item"
+      }
+    ]
+  }
+{%- endschema -%}

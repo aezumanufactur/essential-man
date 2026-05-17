@@ -42,3 +42,25 @@
     height: rem-calc(30);
   }
 }
+
+.scrolling-bar__logo-item {
+  opacity: 0.5;
+
+  img {
+    height: var(--height-mobile);
+    width: auto;
+    object-fit: contain;
+
+    @include breakpoint(large up) {
+      height: var(--height-desktop);
+    }
+  }
+}
+
+.mfr-core__scrolling-bar {
+  .scrolling-bar__inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

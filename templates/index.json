@@ -2234,10 +2234,103 @@
         "custom_class": "",
         "custom_id": ""
       }
+    },
+    "mfr_core_scrolling_bar_Lm5qWz": {
+      "type": "mfr-core__scrolling-bar",
+      "blocks": {
+        "scrolling_bar_carousel_Lm5qWz": {
+          "type": "_scrolling-bar__carousel",
+          "settings": {
+            "pause_on_drag": true,
+            "render_autoscroll_on": "mobile",
+            "direction": "left",
+            "spacing_mobile": 30,
+            "spacing_desktop": 50
+          },
+          "blocks": {
+            "logo_item_aA1bB2": {
+              "type": "_scrolling-bar__logo-item",
+              "settings": {
+                "height_mobile": 22,
+                "height_desktop": 23,
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "logo_item_cC3dD4": {
+              "type": "_scrolling-bar__logo-item",
+              "settings": {
+                "height_mobile": 20,
+                "height_desktop": 21,
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "logo_item_eE5fF6": {
+              "type": "_scrolling-bar__logo-item",
+              "settings": {
+                "height_mobile": 26,
+                "height_desktop": 26,
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "logo_item_gG7hH8": {
+              "type": "_scrolling-bar__logo-item",
+              "settings": {
+                "height_mobile": 21,
+                "height_desktop": 21,
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "logo_item_iI9jJ0": {
+              "type": "_scrolling-bar__logo-item",
+              "settings": {
+                "height_mobile": 20,
+                "height_desktop": 20,
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "logo_item_kK1lL2": {
+              "type": "_scrolling-bar__logo-item",
+              "settings": {
+                "height_mobile": 30,
+                "height_desktop": 38,
+                "link": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "logo_item_aA1bB2",
+            "logo_item_cC3dD4",
+            "logo_item_eE5fF6",
+            "logo_item_gG7hH8",
+            "logo_item_iI9jJ0",
+            "logo_item_kK1lL2"
+          ]
+        }
+      },
+      "block_order": [
+        "scrolling_bar_carousel_Lm5qWz"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "top_spacing_mobile": 30,
+        "bottom_spacing_mobile": 30,
+        "top_spacing_desktop": 38,
+        "bottom_spacing_desktop": 38,
+        "bg_color": "#c4bfb3",
+        "custom_class": "",
+        "custom_id": ""
+      }
     }
   },
   "order": [
     "mfr_core_hero_banner_jRfmBn",
+    "mfr_core_scrolling_bar_Lm5qWz",
     "mfr_core_image_video_text_K9xPmQ",
     "mfr_core_featured_product_Yq3nZx",
     "mfr_core_text_icon_card_grid_Xp7vKa",
