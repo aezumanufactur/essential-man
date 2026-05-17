@@ -44,7 +44,7 @@
 }
 
 .scrolling-bar__logo-item {
-  opacity: 0.5;
+  opacity: var(--opacity, 0.5);
 
   img {
     height: var(--height-mobile);

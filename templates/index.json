@@ -2251,54 +2251,66 @@
             "logo_item_aA1bB2": {
               "type": "_scrolling-bar__logo-item",
               "settings": {
+                "image": "shopify://shop_images/men-health.svg",
                 "height_mobile": 22,
                 "height_desktop": 23,
-                "link": ""
+                "link": "",
+                "opacity": 50
               },
               "blocks": {}
             },
             "logo_item_cC3dD4": {
               "type": "_scrolling-bar__logo-item",
               "settings": {
+                "image": "shopify://shop_images/forbes.svg",
                 "height_mobile": 20,
                 "height_desktop": 21,
-                "link": ""
+                "link": "",
+                "opacity": 50
               },
               "blocks": {}
             },
             "logo_item_eE5fF6": {
               "type": "_scrolling-bar__logo-item",
               "settings": {
+                "image": "shopify://shop_images/gq.svg",
                 "height_mobile": 26,
                 "height_desktop": 26,
-                "link": ""
+                "link": "",
+                "opacity": 50
               },
               "blocks": {}
             },
             "logo_item_gG7hH8": {
               "type": "_scrolling-bar__logo-item",
               "settings": {
+                "image": "shopify://shop_images/esquire.svg",
                 "height_mobile": 21,
                 "height_desktop": 21,
-                "link": ""
+                "link": "",
+                "opacity": 50
               },
               "blocks": {}
             },
             "logo_item_iI9jJ0": {
               "type": "_scrolling-bar__logo-item",
               "settings": {
+                "image": "shopify://shop_images/buzzfeed.svg",
                 "height_mobile": 20,
                 "height_desktop": 20,
-                "link": ""
+                "link": "",
+                "opacity": 50
               },
               "blocks": {}
             },
             "logo_item_kK1lL2": {
               "type": "_scrolling-bar__logo-item",
               "settings": {
+                "image": "shopify://shop_images/refinery.svg",
                 "height_mobile": 30,
                 "height_desktop": 38,
-                "link": ""
+                "link": "",
+                "opacity": 50
               },
               "blocks": {}
             }
@@ -2311,18 +2323,31 @@
             "logo_item_iI9jJ0",
             "logo_item_kK1lL2"
           ]
+        },
+        "accent-graphics": {
+          "type": "_accent-graphics",
+          "static": true,
+          "settings": {},
+          "blocks": {}
         }
       },
       "block_order": [
         "scrolling_bar_carousel_Lm5qWz"
       ],
       "settings": {
+        "container_width": "full",
+        "max_width": 0,
+        "grid_gutter": "",
+        "mobile_alignment": "center",
+        "desktop_alignment": "center",
         "color_scheme": "scheme-1",
         "top_spacing_mobile": 30,
         "bottom_spacing_mobile": 30,
         "top_spacing_desktop": 38,
         "bottom_spacing_desktop": 38,
         "bg_color": "#c4bfb3",
+        "section_divider_top": "line",
+        "section_divider_bottom": "line",
         "custom_class": "",
         "custom_id": ""
       }
@@ -2330,12 +2355,12 @@
   },
   "order": [
     "mfr_core_hero_banner_jRfmBn",
-    "mfr_core_scrolling_bar_Lm5qWz",
     "mfr_core_image_video_text_K9xPmQ",
     "mfr_core_featured_product_Yq3nZx",
     "mfr_core_text_icon_card_grid_Xp7vKa",
     "mfr_product_grid_Pk9mRt",
     "mfr_core_image_video_banner_Hk3mNp",
-    "mfr_core_customer_testimonials_Qs8tRv"
+    "mfr_core_customer_testimonials_Qs8tRv",
+    "mfr_core_scrolling_bar_Lm5qWz"
   ]
 }

@@ -1384,6 +1384,9 @@
     --tw-border-style: solid;
     border-style: solid;
   }
+  .\[border-color\:\#1e1b22\] {
+    border-color: #1e1b22;
+  }
   .\[border-color\:var\(--color-black\)\]\! {
     border-color: var(--color-black) !important;
   }
@@ -3645,6 +3648,12 @@
     @media (width >= 1024px) {
       border-style: var(--tw-border-style);
       border-width: 1px;
+    }
+  }
+  .large\:border-y {
+    @media (width >= 1024px) {
+      border-block-style: var(--tw-border-style);
+      border-block-width: 1px;
     }
   }
   .large\:border-r {

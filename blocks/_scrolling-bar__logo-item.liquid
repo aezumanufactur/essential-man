@@ -2,6 +2,7 @@
   #shopify-block-{{ block.id }} {
     --height-mobile: {{ block.settings.height_mobile }}px;
     --height-desktop: {{ block.settings.height_desktop }}px;
+    --opacity: {{ block.settings.opacity | divided_by: 100.0 }};
   }
 </style>
 
@@ -33,6 +34,16 @@
         "type": "image_picker",
         "id": "image",
         "label": "Logo Image"
+      },
+      {
+        "type": "range",
+        "id": "opacity",
+        "label": "Opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 50
       },
       {
         "type": "number",
