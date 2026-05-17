@@ -6,7 +6,7 @@
 
 {% if appear_on == blank or appear_on contains template %}
   {%- if section.settings.grid_container_width == "full" -%}
-    {%- assign grid_container_class = "grid-container full max-w-none px-0" -%}
+    {%- assign grid_container_class = "grid-container full max-w-none px-[var(--grid-container-padding-mobile)] large:px-[var(--grid-container-padding-desktop)]" -%}
   {%- else -%}
     {%- assign grid_container_class = "grid-container mx-auto max-w-[var(--grid-container-max-width)] px-[var(--grid-container-padding-mobile)] large:px-[var(--grid-container-padding-desktop)]" -%}
   {%- endif -%}

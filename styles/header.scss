@@ -344,13 +344,6 @@ header.header {
             gap: rem-calc( 53px );
           }
 
-          &.full {
-            padding-inline: var(--grid-container-padding-mobile);
-
-            @include breakpoint( large up ) {
-              padding-inline: var(--grid-container-padding-desktop);
-            }
-          }
         }
 
         .header__left {

@@ -57,13 +57,6 @@ $footer-socket-padding-desktop: rem-calc(28px) 0;
       padding: $footer-inner-padding-desktop;
     }
 
-    .grid-container.full {
-      padding-inline: var(--grid-container-padding-mobile);
-
-      @include breakpoint(large up) {
-        padding-inline: var(--grid-container-padding-desktop);
-      }
-    }
 
     [data-inview] {
       width: 100%;
@@ -283,13 +276,6 @@ $footer-socket-padding-desktop: rem-calc(28px) 0;
       flex-wrap: wrap;
     }
 
-    .grid-container.full {
-      padding-inline: var(--grid-container-padding-mobile);
-
-      @include breakpoint(large up) {
-        padding-inline: var(--grid-container-padding-desktop);
-      }
-    }
 
     nav {
       margin-bottom: auto;
