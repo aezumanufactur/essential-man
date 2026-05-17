@@ -31,7 +31,7 @@ assign section settings to variables
 
 <section class="main-page mfr-core__main-page {{ custom_class }} {{ grid_gutter }}" id="{{ section_id }}">
   <div class="section-spacer background relative z-[3] pt-[var(--top-spacing-mobile)] pb-[var(--bottom-spacing-mobile)] large:pt-[var(--top-spacing-desktop)] large:pb-[var(--bottom-spacing-desktop)] {{ grid_gutter }}" style="{{ spacer }}">
-    <div class="w-full relative z-[1]{% if container_width != 'full' %} mx-auto px-5 large:px-[3.75rem]{% endif %}" {{ max_width_style }}>
+    <div class="w-full relative z-[1]{% if container_width != 'full' %} mx-auto px-[var(--grid-container-padding-mobile)] large:px-[var(--grid-container-padding-desktop)]{% endif %}" {{ max_width_style }}>
       <div class="flex flex-row flex-wrap justify-center">
         <div class="section-content w-full min-w-0 {{ text_alignment }}">
           <div class="inner">
