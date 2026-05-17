@@ -760,23 +760,7 @@ $container-max-width-5: rem-calc( 2560px );
 
 @mixin set-content-max-width($percent: 1) {
   @media (min-width: 1024px) {
-    max-width: calc( #{$container-max-width-1} * #{$percent});
-  }
-  
-  @media (min-width: 1600px) {
-    max-width: calc( #{$container-max-width-2} * #{$percent});
-  }
-  
-  @media (min-width: 1920px) {
-    max-width: calc( #{$container-max-width-3} * #{$percent});
-  }
-  
-  @media (min-width: 2560px) {
-    max-width: calc( #{$container-max-width-4} * #{$percent});
-  }
-  
-  @media (min-width: 3840px) {
-    max-width: calc( #{$container-max-width-5} * #{$percent});
+    max-width: calc(var(--grid-container-max-width) * #{$percent});
   }
 }
 
