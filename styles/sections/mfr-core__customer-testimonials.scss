@@ -37,7 +37,6 @@
         justify-content: stretch;
         align-items: flex-start;
         gap: rem-calc(50px);
-        @include left-carousel-entry-spacing(0, 50px);
       }
 
       .customer-testimonials__carousel {
@@ -48,62 +47,9 @@
         }
 
       }
-
-      .customer-testimonials__entry {
-        &:first-child {
-          @include breakpoint(large up) {
-            padding-left: 0;
-          }
-        }
-
-        &:last-child {
-          @include breakpoint(large up) {
-            @include right-carousel-entry-spacing(0, 50);
-          }
-        }
-      }
     }
 
     &__carousel {
-      &.mobile--carousel {
-        .mfr-carousel__item {
-          &:first-child {
-            @include breakpoint(medium down) {
-              padding-left: rem-calc(20px);
-            }
-
-            @include breakpoint(large up) {
-              @include left-carousel-entry-spacing(0, 50px);
-            }
-          }
-
-          &:last-child {
-            @include breakpoint(medium down) {
-              padding-right: rem-calc(20px);
-            }
-
-            @include breakpoint(large up) {
-              @include right-carousel-entry-spacing(0, 50px);
-            }
-          }
-        }
-      }
-
-      &.desktop--carousel {
-        .mfr-carousel__item {
-          &:first-child {
-            @include breakpoint(large up) {
-              @include left-carousel-entry-spacing(0, 50px);
-            }
-          }
-
-          &:last-child {
-            @include breakpoint(large up) {
-              @include right-carousel-entry-spacing(0, 50px);
-            }
-          }
-        }
-      }
 
       &-caption {
         width: 100%;
@@ -175,6 +121,19 @@
         @include enter-animation {
           @include transform(translateY($enter-transform-value));
           @include opacity(0);
+        }
+      }
+
+
+      &:first-child {
+        @include breakpoint(large up) {
+          @include left-carousel-entry-spacing(calc(var(--grid-container-padding-mobile) * -1));
+        }
+      }
+
+      &:last-child {
+        @include breakpoint(large up) {
+          @include right-carousel-entry-spacing(calc(var(--grid-container-padding-desktop) * -1));
         }
       }
     }

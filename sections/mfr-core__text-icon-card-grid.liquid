@@ -28,7 +28,7 @@ assign section settings to variables
 {% render 'section__settings-styles' %}
 <section class="mfr-core__text-icon-card-grid {{ custom_class }}" id="{{ section_id }}">
   <div class="section-spacer background {{ grid_gutter }} pt-[var(--top-spacing-mobile)] pb-[var(--bottom-spacing-mobile)] large:pt-[var(--top-spacing-desktop)] large:pb-[var(--bottom-spacing-desktop)]" style="{{ spacer }}">
-    <div class="{{ container_width }} relative z-[1] mx-auto {% if container_width == 'full' %}px-0{% else %}px-[var(--grid-container-padding-mobile)] large:px-[var(--grid-container-padding-desktop)]{% endif %}" {{ max_width_style }}>
+    <div class="grid-container{% if container_width == 'full' %} full max-w-none px-0{% else %} mx-auto max-w-[var(--grid-container-max-width)] px-[var(--grid-container-padding-mobile)] large:px-[var(--grid-container-padding-desktop)]{% endif %} w-full relative z-[1]" {{ max_width_style }}>
       <div class="section-content w-full min-w-0">
         {%- content_for "blocks" -%}
         {%- content_for "block", type: "_text-icon-card-grid__cards", id: "cards" -%}

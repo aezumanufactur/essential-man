@@ -18,12 +18,12 @@
   {%- comment -%} product-card__rating-wrap — pending Shopify reviews app integration {%- endcomment -%}
 
   <a href="{{ product.url }}" class="product-card__media-link block w-full grow flex flex-col justify-center items-center" aria-label="{{ product.title }}">
-    <div class="product-card__image-wrap w-full flex overflow-hidden">
+    <div class="product-card__image-wrap grow relative w-full flex overflow-hidden">
       {%- render 'component__lazyload-image',
         image: media,
         widths: "480,600,720,900",
         alt: image_alt,
-        class: "w-full min-h-full block object-contain" -%}
+        class: "absolute top-0 left-0 w-full h-full block object-contain" -%}
     </div>
   </a>
 

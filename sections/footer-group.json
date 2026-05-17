@@ -16,7 +16,7 @@
       "disabled": true,
       "settings": {
         "color_scheme": "scheme-e7a2b49c-36ae-4b1f-b31f-f3ec31db1021",
-        "grid_container_width": "full",
+        "grid_container_width": "contain",
         "appear_on": ""
       }
     },
@@ -33,7 +33,7 @@
       ],
       "disabled": true,
       "settings": {
-        "grid_container_width": "full",
+        "grid_container_width": "contain",
         "appear_on": ""
       }
     }

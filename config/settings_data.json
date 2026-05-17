@@ -14,7 +14,6 @@
     "global_border_width": 1.5,
     "global_border_radius": 30,
     "enable_entrance_animations": true,
-    "grid_container_max_width": 1380,
     "top_offset_element": "first_section",
     "top_offset_mobile": 120,
     "top_offset": 120,
@@ -70,7 +69,7 @@
     "h1_xl_font_size_mobile": 80,
     "h1_xl_font_size": 150,
     "h2_font_family_custom_name": "Midnight Sans RD",
-    "h2_font_case": "none",
+    "h2_font_case": "uppercase",
     "h2_font_weight": "500",
     "h2_font_size_mobile": 34,
     "h2_line_height_mobile": 39,
@@ -180,6 +179,7 @@
     "favicon": "shopify://shop_images/manufactur-white.svg",
     "currency_code_enabled": false,
     "cart_notes_enabled": false,
+    "grid_container_max_width": 1380,
     "enable_special_promotion": true,
     "promo_discount_name": "Buy Two Chairs Get One Clip",
     "product_main": [
@@ -372,8 +372,8 @@
                 "settings": {
                   "icon": "shopify://shop_images/manufactur-black.svg",
                   "file_lottie_url": "",
-                  "max_width_mobile": 150,
-                  "max_width_desktop": 150
+                  "max_width_mobile": false,
+                  "max_width_desktop": false
                 },
                 "blocks": {}
               },
@@ -388,8 +388,8 @@
                   "font_family": "",
                   "highlight_color": "",
                   "underline_color": "",
-                  "max_width_mobile": 0,
-                  "max_width_desktop": 0
+                  "max_width_mobile": false,
+                  "max_width_desktop": false
                 },
                 "blocks": {}
               },
@@ -404,8 +404,8 @@
                   "color": "",
                   "highlight_color": "",
                   "underline_color": "",
-                  "max_width_mobile": 0,
-                  "max_width_desktop": 0
+                  "max_width_mobile": false,
+                  "max_width_desktop": false
                 },
                 "blocks": {}
               }

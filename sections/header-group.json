@@ -161,7 +161,7 @@
       "settings": {
         "layout_mobile": "logo-center",
         "layout_desktop": "logo-left-contained",
-        "grid_container_width": "full",
+        "grid_container_width": "contain",
         "color_scheme": "scheme-e7a2b49c-36ae-4b1f-b31f-f3ec31db1022",
         "color_scheme_sticky": "scheme-1",
         "bg_color_override": "",
