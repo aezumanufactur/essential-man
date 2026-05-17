@@ -1,5 +1,5 @@
 <div class="featured-product">
-  <div class="featured-product__inner flex flex-col large:flex-row large:items-center large:gap-[30px] border-b border-[var(--carbon,#1e1b22)]">
+  <div class="featured-product__inner flex flex-col items-stretch large:flex-row large:gap-[30px] border-b border-[var(--carbon,#1e1b22)]">
 
     <div class="featured-product__media aspect-[430/411] large:aspect-[932/710] w-full large:w-[68%] overflow-hidden bg-[#c4bfb3] relative shrink-0 large:border-r large:border-current">
       {%- if block.settings.image != blank -%}
@@ -12,13 +12,13 @@
       {%- endif -%}
     </div>
 
-    <div class="featured-product__content px-[20px] pt-[20px] pb-[30px] large:px-[30px] large:py-[30px] large:w-[32%] flex flex-col gap-[61px] large:gap-[123px]">
+    <div class="featured-product__content px-[20px] pt-[20px] pb-[30px] large:pl-[30px] large:pr-[60px] large:py-[30px] large:w-[32%] flex flex-col gap-[61px] large:gap-[123px]">
 
       <div class="featured-product__text relative">
         {%- content_for "block", type: "_mfr-core__featured-product__product-info", id: "product-info" -%}
       </div>
 
-      <div class="featured-product__benefits flex flex-col gap-[30px] large:gap-[33px]">
+      <div class="featured-product__benefits flex flex-col gap-[13px] large:gap-[13px] large:pr-[30px]">
         {%- content_for "blocks" -%}
         {%- content_for "block", type: "_mfr-core__featured-product__add-to-cart-button", id: "add-to-cart-button" -%}
       </div>
