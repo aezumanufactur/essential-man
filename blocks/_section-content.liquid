@@ -47,6 +47,14 @@
         max-width: var(--grid-container-max-width);
         margin-left: auto;
         margin-right: auto;
+        padding-left: var(--grid-container-padding-mobile);
+        padding-right: var(--grid-container-padding-mobile);
+      }
+      @media (min-width: 1024px) {
+        #shopify-block-{{ block.id }} {
+          padding-left: var(--grid-container-padding-desktop);
+          padding-right: var(--grid-container-padding-desktop);
+        }
       }
     {%- endif -%}
 
