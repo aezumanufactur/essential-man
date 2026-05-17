@@ -59,7 +59,7 @@
     "body_paragraph_letter_spacing": 0,
     "body_paragraph_font_weight": "700",
     "h1_font_family_custom_name": "Midnight Sans RD",
-    "h1_font_case": "none",
+    "h1_font_case": "uppercase",
     "h1_font_weight": "400",
     "h1_font_size_mobile": 60,
     "h1_line_height_mobile": 60,

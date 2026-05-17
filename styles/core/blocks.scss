@@ -4,14 +4,6 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-
-  &:not(:last-child) {
-    margin-bottom: rem-calc(32px);
-
-    @include breakpoint(large up) {
-      margin-bottom: rem-calc(67px);
-    }
-  }
 }
 
 .star-rating-text {

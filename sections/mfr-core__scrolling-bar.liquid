@@ -36,8 +36,6 @@ assign section settings to variables
       <div class="alignment-helper {{ color_theme }} flex flex-row flex-wrap [justify-content:var(--justify-content-mobile)] [text-align:var(--text-align-mobile)] large:[justify-content:var(--justify-content-desktop)] large:[text-align:var(--text-align-desktop)]">
         <div class="section-content relative z-[2] w-full min-w-0 flex [align-items:inherit] [justify-content:inherit] flex-wrap gap-x-[1.875rem] empty:hidden [&>.shopify-block:not(:last-child)]:mb-[0.9375rem] large:[&>.shopify-block:not(:last-child)]:mb-[1.875rem]"
           data-stagger-inview=".section-icon__wrapper, .section-content__small-text, .section-content__text, .section-content__button">
-          {%- content_for "block", type: "_section-content", id: "section-content" -%}
-          {%- content_for "block", type: "_scrolling-bar__carousel", id: "scrolling-bar-carousel" -%}
           {%- content_for "blocks" -%}
         </div>
       </div>
@@ -305,33 +303,7 @@ assign section settings to variables
   "presets": [
     {
       "name": "Scrolling Bar",
-      "category": "Manufactur Core Sections",
-      "blocks": [
-        {
-          "type": "_section-content",
-          "id": "section-content",
-          "static": true,
-          "blocks": [
-            {
-              "type": "_section-content__title"
-            },
-            {
-              "type": "_section-content__text"
-            },
-            {
-              "type": "_section-content__button"
-            }
-          ]
-        },
-        {
-          "type": "_scrolling-bar__carousel",
-          "id": "scrolling-bar-carousel",
-          "static": true,
-          "blocks": [
-            { "type": "_scrolling-bar__icon-text-item" }
-          ]
-        }
-      ]
+      "category": "Manufactur Core Sections"
     }
   ]
 }
