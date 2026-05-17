@@ -47,29 +47,66 @@
         "id": "enable_entrance_animations",
         "label": "Enable Entrance Animations"
       },
+    ]
+  },
+  {
+    "name": "Grid Container",
+    "settings": [
       {
         "type": "header",
-        "content": "Grid Container"
-      },
-      {
-        "type": "number",
-        "id": "grid_container_max_width",
-        "label": "Grid Container Max Width",
-        "default": 1200,
-        "info": "in pixels. Controls the max-width of the main content container across all sections."
+        "content": "Padding"
       },
       {
         "type": "number",
         "id": "grid_container_padding_mobile",
-        "label": "Grid Container Horizontal Padding - Mobile",
+        "label": "Horizontal Padding - Mobile",
         "default": 20,
         "info": "in pixels."
       },
       {
         "type": "number",
         "id": "grid_container_padding_desktop",
-        "label": "Grid Container Horizontal Padding - Desktop",
+        "label": "Horizontal Padding - Desktop",
         "default": 30,
+        "info": "in pixels."
+      },
+      {
+        "type": "header",
+        "content": "Grid Container Max Widths"
+      },
+      {
+        "type": "number",
+        "id": "grid_container_max_width_1024",
+        "label": "Max Width — 1024px and above",
+        "default": 1440,
+        "info": "in pixels."
+      },
+      {
+        "type": "number",
+        "id": "grid_container_max_width_1600",
+        "label": "Max Width — 1600px and above",
+        "default": 1600,
+        "info": "in pixels."
+      },
+      {
+        "type": "number",
+        "id": "grid_container_max_width_1920",
+        "label": "Max Width — 1920px and above",
+        "default": 1920,
+        "info": "in pixels."
+      },
+      {
+        "type": "number",
+        "id": "grid_container_max_width_2560",
+        "label": "Max Width — 2560px and above",
+        "default": 2400,
+        "info": "in pixels."
+      },
+      {
+        "type": "number",
+        "id": "grid_container_max_width_3840",
+        "label": "Max Width — 3840px and above",
+        "default": 2560,
         "info": "in pixels."
       }
     ]

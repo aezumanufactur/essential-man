@@ -175,9 +175,9 @@ output font-face for custom fonts if they exist
     --color-black: {{ settings.black_color }};
 
     /* Grid Container */
-    --grid-container-max-width: {{ settings.grid_container_max_width | default: 1200 }}px;
     --grid-container-padding-mobile: {{ settings.grid_container_padding_mobile | default: 20 }}px;
     --grid-container-padding-desktop: {{ settings.grid_container_padding_desktop | default: 30 }}px;
+    --grid-container-max-width: {{ settings.grid_container_max_width_1024 | default: 1440 }}px;
 
     /* Color Themes */
     --color-theme-dark: {{ settings.color_theme_dark }};
@@ -498,6 +498,20 @@ output font-face for custom fonts if they exist
     --tertiary-button-hover-bg-color: {{ settings.tertiary_button_hover_bg }};
     --tertiary-button-hover-text-color: {{ settings.tertiary_button_hover_text }};
     --tertiary-button-border-color-hover: {{ settings.tertiary_border_color_hover }};
+  }
+
+  /* Grid Container — max-width per viewport */
+  @media (min-width: 1600px) {
+    :root { --grid-container-max-width: {{ settings.grid_container_max_width_1600 | default: 1600 }}px; }
+  }
+  @media (min-width: 1920px) {
+    :root { --grid-container-max-width: {{ settings.grid_container_max_width_1920 | default: 1920 }}px; }
+  }
+  @media (min-width: 2560px) {
+    :root { --grid-container-max-width: {{ settings.grid_container_max_width_2560 | default: 2400 }}px; }
+  }
+  @media (min-width: 3840px) {
+    :root { --grid-container-max-width: {{ settings.grid_container_max_width_3840 | default: 2560 }}px; }
   }
 
 
