@@ -1,20 +1,12 @@
 {%- render "settings__block-layout-controls" -%}
 
 {%- if block.blocks.size > 0 -%}
-  {% assign max_width_mobile = block.settings.max_width_mobile %}
-  {% assign max_width_desktop = block.settings.max_width_desktop %}
   {% assign rows_mobile = block.settings.rows_mobile %}
   {% assign rows_tablet = block.settings.rows_tablet %}
   {% assign rows_desktop = block.settings.rows_desktop %}
 
   <style>
     #shopify-block-{{ block.id }} {
-      {% if max_width_mobile != blank and max_width_mobile != 0 %}
-        --max-width-mobile: {{ max_width_mobile }}px;
-      {% endif %}
-      {% if max_width_desktop != blank and max_width_desktop != 0 %}
-        --max-width-desktop: {{ max_width_desktop }}px;
-      {% endif %}
       --gap-mobile: {{ block.settings.gap_mobile | default: 7 }}px;
       --gap-desktop: {{ block.settings.gap_desktop | default: 15 }}px;
       --wrapper-gap-mobile: {{ block.settings.gap_mobile | default: 7 }}px;
@@ -31,7 +23,7 @@
     }
   </style>
 
-  <div class="section-icon-text__inner flex [justify-content:inherit] items-start flex-wrap w-full max-w-[var(--max-width-mobile)] gap-[var(--gap-mobile)] large:max-w-[var(--max-width-desktop)] large:gap-[var(--gap-desktop)]{% if block.settings.use_dynamic_sizing_mobile %} dynamic--mobile{% endif %}{% if block.settings.use_dynamic_sizing_tablet %} dynamic--tablet{% endif %}{% if block.settings.use_dynamic_sizing_desktop %} dynamic--desktop{% endif %}"
+  <div class="section-icon-text__inner flex [justify-content:inherit] items-start flex-wrap w-full gap-[var(--gap-mobile)] large:gap-[var(--gap-desktop)]{% if block.settings.use_dynamic_sizing_mobile %} dynamic--mobile{% endif %}{% if block.settings.use_dynamic_sizing_tablet %} dynamic--tablet{% endif %}{% if block.settings.use_dynamic_sizing_desktop %} dynamic--desktop{% endif %}"
     data-stagger-inview=".section-icon-text__item">
     {%- content_for "blocks" -%}
   </div>
@@ -58,24 +50,6 @@
         "id": "gap_desktop",
         "label": "Gap - Desktop",
         "default": 15,
-        "info": "in pixels"
-      },
-      {
-        "type": "header",
-        "content": "Width Settings"
-      },
-      {
-        "type": "number",
-        "id": "max_width_mobile",
-        "label": "Max Width - Mobile",
-        "default": 0,
-        "info": "in pixels"
-      },
-      {
-        "type": "number",
-        "id": "max_width_desktop",
-        "label": "Max Width - Desktop",
-        "default": 0,
         "info": "in pixels"
       },
       {
@@ -199,6 +173,74 @@
         ],
         "default": "px",
         "visible_if": "{{ block.settings.width_desktop }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "max_width_mobile",
+        "label": "Max Width - Mobile",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_width_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "max_width_mobile_value",
+        "label": "Max Width Value - Mobile",
+        "default": 0,
+        "visible_if": "{{ block.settings.max_width_mobile and block.settings.max_width_mobile_unit != 'custom' }}"
+      },
+      {
+        "type": "text",
+        "id": "max_width_mobile_custom",
+        "label": "Max Width Custom - Mobile",
+        "info": "Use this for custom values or calculations like calc(100% / 3).",
+        "visible_if": "{{ block.settings.max_width_mobile and block.settings.max_width_mobile_unit == 'custom' }}"
+      },
+      {
+        "type": "select",
+        "id": "max_width_mobile_unit",
+        "label": "Max Width Unit - Mobile",
+        "options": [
+          { "value": "px", "label": "Pixels (px)" },
+          { "value": "%", "label": "Percent (%)" },
+          { "value": "vw", "label": "Viewport Width (vw)" },
+          { "value": "custom", "label": "Custom" }
+        ],
+        "default": "px",
+        "visible_if": "{{ block.settings.max_width_mobile }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "max_width_desktop",
+        "label": "Max Width - Desktop",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_width_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "max_width_desktop_value",
+        "label": "Max Width Value - Desktop",
+        "default": 0,
+        "visible_if": "{{ block.settings.max_width_desktop and block.settings.max_width_desktop_unit != 'custom' }}"
+      },
+      {
+        "type": "text",
+        "id": "max_width_desktop_custom",
+        "label": "Max Width Custom - Desktop",
+        "info": "Use this for custom values or calculations like calc(100% / 3).",
+        "visible_if": "{{ block.settings.max_width_desktop and block.settings.max_width_desktop_unit == 'custom' }}"
+      },
+      {
+        "type": "select",
+        "id": "max_width_desktop_unit",
+        "label": "Max Width Unit - Desktop",
+        "options": [
+          { "value": "px", "label": "Pixels (px)" },
+          { "value": "%", "label": "Percent (%)" },
+          { "value": "vw", "label": "Viewport Width (vw)" },
+          { "value": "custom", "label": "Custom" }
+        ],
+        "default": "px",
+        "visible_if": "{{ block.settings.max_width_desktop }}"
       },
       {
         "type": "paragraph",
