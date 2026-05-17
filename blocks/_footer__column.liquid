@@ -1,0 +1,540 @@
+{%- render 'settings__block-layout-controls' -%}
+<style>
+  {%- if block.settings.enable_border_mobile -%}
+    @media (max-width: 1023px) {
+      #shopify-block-{{ block.id }} {
+        {%- if block.settings.border_top_mobile -%}border-top: 1px solid currentColor;{%- endif -%}
+        {%- if block.settings.border_right_mobile -%}border-right: 1px solid currentColor;{%- endif -%}
+        {%- if block.settings.border_bottom_mobile -%}border-bottom: 1px solid currentColor;{%- endif -%}
+        {%- if block.settings.border_left_mobile -%}border-left: 1px solid currentColor;{%- endif -%}
+      }
+    }
+  {%- endif -%}
+
+  {%- if block.settings.enable_border_desktop -%}
+    @media (min-width: 1024px) {
+      #shopify-block-{{ block.id }} {
+        {%- if block.settings.border_top_desktop -%}border-top: 1px solid currentColor;{%- endif -%}
+        {%- if block.settings.border_right_desktop -%}border-right: 1px solid currentColor;{%- endif -%}
+        {%- if block.settings.border_bottom_desktop -%}border-bottom: 1px solid currentColor;{%- endif -%}
+        {%- if block.settings.border_left_desktop -%}border-left: 1px solid currentColor;{%- endif -%}
+      }
+    }
+  {%- endif -%}
+
+  {%- if block.settings.align_horizontal_mobile != blank or block.settings.align_vertical_mobile != blank -%}
+    @media (max-width: 1023px) {
+      #shopify-block-{{ block.id }} .footer__column__inner {
+        {%- if block.settings.align_horizontal_mobile != blank -%}
+          align-items: {{ block.settings.align_horizontal_mobile }};
+        {%- endif -%}
+        {%- if block.settings.align_vertical_mobile != blank -%}
+          justify-content: {{ block.settings.align_vertical_mobile }};
+        {%- endif -%}
+      }
+    }
+  {%- endif -%}
+
+  {%- if block.settings.align_horizontal_desktop != blank or block.settings.align_vertical_desktop != blank -%}
+    @media (min-width: 1024px) {
+      #shopify-block-{{ block.id }} .footer__column__inner {
+        {%- if block.settings.align_horizontal_desktop != blank -%}
+          align-items: {{ block.settings.align_horizontal_desktop }};
+        {%- endif -%}
+        {%- if block.settings.align_vertical_desktop != blank -%}
+          justify-content: {{ block.settings.align_vertical_desktop }};
+        {%- endif -%}
+      }
+    }
+  {%- endif -%}
+</style>
+<div class="footer__column__inner flex flex-col w-full">
+  {%- content_for "blocks" -%}
+</div>
+
+{%- schema -%}
+  {
+    "name": "Column",
+    "class": "footer__column",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Border Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_border_mobile",
+        "label": "Enable Border - Mobile",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_border_desktop",
+        "label": "Enable Border - Desktop",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "border_top_mobile",
+        "label": "Border Top - Mobile",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_border_mobile }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "border_right_mobile",
+        "label": "Border Right - Mobile",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_border_mobile }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "border_bottom_mobile",
+        "label": "Border Bottom - Mobile",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_border_mobile }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "border_left_mobile",
+        "label": "Border Left - Mobile",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_border_mobile }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "border_top_desktop",
+        "label": "Border Top - Desktop",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_border_desktop }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "border_right_desktop",
+        "label": "Border Right - Desktop",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_border_desktop }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "border_bottom_desktop",
+        "label": "Border Bottom - Desktop",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_border_desktop }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "border_left_desktop",
+        "label": "Border Left - Desktop",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_border_desktop }}"
+      },
+      {
+        "type": "header",
+        "content": "Alignment Settings"
+      },
+      {
+        "type": "select",
+        "id": "align_horizontal_mobile",
+        "label": "Horizontal Alignment - Mobile",
+        "options": [
+          { "value": "", "label": "Default" },
+          { "value": "flex-start", "label": "Left" },
+          { "value": "center", "label": "Center" },
+          { "value": "flex-end", "label": "Right" },
+          { "value": "stretch", "label": "Stretch" }
+        ],
+        "default": ""
+      },
+      {
+        "type": "select",
+        "id": "align_horizontal_desktop",
+        "label": "Horizontal Alignment - Desktop",
+        "options": [
+          { "value": "", "label": "Default" },
+          { "value": "flex-start", "label": "Left" },
+          { "value": "center", "label": "Center" },
+          { "value": "flex-end", "label": "Right" },
+          { "value": "stretch", "label": "Stretch" }
+        ],
+        "default": ""
+      },
+      {
+        "type": "select",
+        "id": "align_vertical_mobile",
+        "label": "Vertical Alignment - Mobile",
+        "options": [
+          { "value": "", "label": "Default" },
+          { "value": "flex-start", "label": "Top" },
+          { "value": "center", "label": "Center" },
+          { "value": "flex-end", "label": "Bottom" },
+          { "value": "space-between", "label": "Space Between" },
+          { "value": "space-around", "label": "Space Around" }
+        ],
+        "default": ""
+      },
+      {
+        "type": "select",
+        "id": "align_vertical_desktop",
+        "label": "Vertical Alignment - Desktop",
+        "options": [
+          { "value": "", "label": "Default" },
+          { "value": "flex-start", "label": "Top" },
+          { "value": "center", "label": "Center" },
+          { "value": "flex-end", "label": "Bottom" },
+          { "value": "space-between", "label": "Space Between" },
+          { "value": "space-around", "label": "Space Around" }
+        ],
+        "default": ""
+      },
+      {
+        "type": "header",
+        "content": "Block Layout Controls"
+      },
+      {
+        "type": "paragraph",
+        "content": "Width Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_width_settings",
+        "label": "Enable Width Settings",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "width_mobile",
+        "label": "Width - Mobile",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_width_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "width_mobile_value",
+        "label": "Width Value - Mobile",
+        "default": 0,
+        "visible_if": "{{ block.settings.width_mobile and block.settings.width_mobile_unit != 'custom' }}"
+      },
+      {
+        "type": "text",
+        "id": "width_mobile_custom",
+        "label": "Width Custom - Mobile",
+        "info": "Use this for custom values or calculations like calc(100% / 3).",
+        "visible_if": "{{ block.settings.width_mobile and block.settings.width_mobile_unit == 'custom' }}"
+      },
+      {
+        "type": "select",
+        "id": "width_mobile_unit",
+        "label": "Width Unit - Mobile",
+        "options": [
+          { "value": "px", "label": "Pixels (px)" },
+          { "value": "%", "label": "Percent (%)" },
+          { "value": "vw", "label": "Viewport Width (vw)" },
+          { "value": "custom", "label": "Custom" }
+        ],
+        "default": "px",
+        "visible_if": "{{ block.settings.width_mobile }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "width_desktop",
+        "label": "Width - Desktop",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_width_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "width_desktop_value",
+        "label": "Width Value - Desktop",
+        "default": 0,
+        "visible_if": "{{ block.settings.width_desktop and block.settings.width_desktop_unit != 'custom' }}"
+      },
+      {
+        "type": "text",
+        "id": "width_desktop_custom",
+        "label": "Width Custom - Desktop",
+        "info": "Use this for custom values or calculations like calc(100% / 3).",
+        "visible_if": "{{ block.settings.width_desktop and block.settings.width_desktop_unit == 'custom' }}"
+      },
+      {
+        "type": "select",
+        "id": "width_desktop_unit",
+        "label": "Width Unit - Desktop",
+        "options": [
+          { "value": "px", "label": "Pixels (px)" },
+          { "value": "%", "label": "Percent (%)" },
+          { "value": "vw", "label": "Viewport Width (vw)" },
+          { "value": "custom", "label": "Custom" }
+        ],
+        "default": "px",
+        "visible_if": "{{ block.settings.width_desktop }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "max_width_mobile",
+        "label": "Max Width - Mobile",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_width_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "max_width_mobile_value",
+        "label": "Max Width Value - Mobile",
+        "default": 0,
+        "visible_if": "{{ block.settings.max_width_mobile and block.settings.max_width_mobile_unit != 'custom' }}"
+      },
+      {
+        "type": "text",
+        "id": "max_width_mobile_custom",
+        "label": "Max Width Custom - Mobile",
+        "info": "Use this for custom values or calculations like calc(100% / 3).",
+        "visible_if": "{{ block.settings.max_width_mobile and block.settings.max_width_mobile_unit == 'custom' }}"
+      },
+      {
+        "type": "select",
+        "id": "max_width_mobile_unit",
+        "label": "Max Width Unit - Mobile",
+        "options": [
+          { "value": "px", "label": "Pixels (px)" },
+          { "value": "%", "label": "Percent (%)" },
+          { "value": "vw", "label": "Viewport Width (vw)" },
+          { "value": "custom", "label": "Custom" }
+        ],
+        "default": "px",
+        "visible_if": "{{ block.settings.max_width_mobile }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "max_width_desktop",
+        "label": "Max Width - Desktop",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_width_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "max_width_desktop_value",
+        "label": "Max Width Value - Desktop",
+        "default": 0,
+        "visible_if": "{{ block.settings.max_width_desktop and block.settings.max_width_desktop_unit != 'custom' }}"
+      },
+      {
+        "type": "text",
+        "id": "max_width_desktop_custom",
+        "label": "Max Width Custom - Desktop",
+        "info": "Use this for custom values or calculations like calc(100% / 3).",
+        "visible_if": "{{ block.settings.max_width_desktop and block.settings.max_width_desktop_unit == 'custom' }}"
+      },
+      {
+        "type": "select",
+        "id": "max_width_desktop_unit",
+        "label": "Max Width Unit - Desktop",
+        "options": [
+          { "value": "px", "label": "Pixels (px)" },
+          { "value": "%", "label": "Percent (%)" },
+          { "value": "vw", "label": "Viewport Width (vw)" },
+          { "value": "custom", "label": "Custom" }
+        ],
+        "default": "px",
+        "visible_if": "{{ block.settings.max_width_desktop }}"
+      },
+      {
+        "type": "paragraph",
+        "content": "Padding Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_padding_settings",
+        "label": "Enable Padding Settings",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "padding_x_mobile",
+        "label": "Padding X - Mobile",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_padding_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "padding_left_mobile",
+        "label": "Padding Left - Mobile",
+        "default": 0,
+        "visible_if": "{{ block.settings.padding_x_mobile }}"
+      },
+      {
+        "type": "number",
+        "id": "padding_right_mobile",
+        "label": "Padding Right - Mobile",
+        "default": 0,
+        "visible_if": "{{ block.settings.padding_x_mobile }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "padding_y_mobile",
+        "label": "Padding Y - Mobile",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_padding_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "padding_top_mobile",
+        "label": "Padding Top - Mobile",
+        "default": 0,
+        "visible_if": "{{ block.settings.padding_y_mobile }}"
+      },
+      {
+        "type": "number",
+        "id": "padding_bottom_mobile",
+        "label": "Padding Bottom - Mobile",
+        "default": 0,
+        "visible_if": "{{ block.settings.padding_y_mobile }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "padding_x_desktop",
+        "label": "Padding X - Desktop",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_padding_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "padding_left_desktop",
+        "label": "Padding Left - Desktop",
+        "default": 0,
+        "visible_if": "{{ block.settings.padding_x_desktop }}"
+      },
+      {
+        "type": "number",
+        "id": "padding_right_desktop",
+        "label": "Padding Right - Desktop",
+        "default": 0,
+        "visible_if": "{{ block.settings.padding_x_desktop }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "padding_y_desktop",
+        "label": "Padding Y - Desktop",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_padding_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "padding_top_desktop",
+        "label": "Padding Top - Desktop",
+        "default": 0,
+        "visible_if": "{{ block.settings.padding_y_desktop }}"
+      },
+      {
+        "type": "number",
+        "id": "padding_bottom_desktop",
+        "label": "Padding Bottom - Desktop",
+        "default": 0,
+        "visible_if": "{{ block.settings.padding_y_desktop }}"
+      },
+      {
+        "type": "paragraph",
+        "content": "Margin Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_margin_settings",
+        "label": "Enable Margin Settings",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "margin_x_mobile",
+        "label": "Margin X - Mobile",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_margin_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "margin_left_mobile",
+        "label": "Margin Left - Mobile",
+        "default": 0,
+        "visible_if": "{{ block.settings.margin_x_mobile }}"
+      },
+      {
+        "type": "number",
+        "id": "margin_right_mobile",
+        "label": "Margin Right - Mobile",
+        "default": 0,
+        "visible_if": "{{ block.settings.margin_x_mobile }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "margin_y_mobile",
+        "label": "Margin Y - Mobile",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_margin_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "margin_top_mobile",
+        "label": "Margin Top - Mobile",
+        "default": 0,
+        "visible_if": "{{ block.settings.margin_y_mobile }}"
+      },
+      {
+        "type": "number",
+        "id": "margin_bottom_mobile",
+        "label": "Margin Bottom - Mobile",
+        "default": 0,
+        "visible_if": "{{ block.settings.margin_y_mobile }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "margin_x_desktop",
+        "label": "Margin X - Desktop",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_margin_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "margin_left_desktop",
+        "label": "Margin Left - Desktop",
+        "default": 0,
+        "visible_if": "{{ block.settings.margin_x_desktop }}"
+      },
+      {
+        "type": "number",
+        "id": "margin_right_desktop",
+        "label": "Margin Right - Desktop",
+        "default": 0,
+        "visible_if": "{{ block.settings.margin_x_desktop }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "margin_y_desktop",
+        "label": "Margin Y - Desktop",
+        "default": false,
+        "visible_if": "{{ block.settings.enable_margin_settings }}"
+      },
+      {
+        "type": "number",
+        "id": "margin_top_desktop",
+        "label": "Margin Top - Desktop",
+        "default": 0,
+        "visible_if": "{{ block.settings.margin_y_desktop }}"
+      },
+      {
+        "type": "number",
+        "id": "margin_bottom_desktop",
+        "label": "Margin Bottom - Desktop",
+        "default": 0,
+        "visible_if": "{{ block.settings.margin_y_desktop }}"
+      }
+    ],
+    "blocks": [
+      { "type": "_footer__embed" },
+      { "type": "_footer__social-links" },
+      { "type": "_footer__menu" }
+    ],
+    "presets": [
+      {
+        "name": "Column"
+      }
+    ]
+  }
+{%- endschema -%}

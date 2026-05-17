@@ -16,6 +16,7 @@
   {%- endif -%}
   <div class="{{ grid_container_class }} w-full flex flex-row flex-wrap" data-inview>
     <div class="footer__contents flex flex-col justify-stretch transition-all large:flex-row large:justify-between large:flex-wrap w-full min-w-0">
+      {%- content_for "blocks" -%}
     </div>
   </div>
 {% else %}
@@ -72,7 +73,9 @@
     }
   ],
 
-  "blocks": [],
+  "blocks": [
+    { "type": "_footer__column" }
+  ],
   "presets": [
     {
       "name": "Footer"
