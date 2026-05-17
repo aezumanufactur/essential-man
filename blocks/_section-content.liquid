@@ -42,6 +42,14 @@
       --section-heading: {{ block.settings.text_color | default: section.settings.color_scheme.settings.text }};
     }
 
+    {%- if block.settings.use_grid_container_max_width -%}
+      #shopify-block-{{ block.id }} {
+        max-width: var(--grid-container-max-width);
+        margin-left: auto;
+        margin-right: auto;
+      }
+    {%- endif -%}
+
     {%- if block.settings.mobile_alignment != blank -%}
       @media (max-width: 1023px) {
         #shopify-block-{{ block.id }} {
@@ -76,6 +84,16 @@
     "name": "Section Content",
     "class": "section-content__inner",
     "settings": [
+      {
+        "type": "header",
+        "content": "Grid Container Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_grid_container_max_width",
+        "label": "Use Grid Container Max Width",
+        "default": false
+      },
       {
         "type": "header",
         "content": "Alignment Settings"
