@@ -764,107 +764,26 @@ $container-max-width-5: rem-calc( 2560px );
   }
 }
 
-@mixin left-carousel-entry-spacing($offset: 0, $min: 50px) {
-  $min-rem: if(unit($min) == "%", $min, rem-calc($min));
-  $offset: rem-calc($offset);
-  $standard-container-gutter: $min-rem;
-  $standard-container-gutters: if(unit($min) == "%", 0, $standard-container-gutter * 2);
+@mixin left-carousel-entry-spacing($offset: 0) {
+  $offset-rem: rem-calc($offset);
 
   @media (min-width: 1023px) {
-    @if $min != 0 {
-      padding-left: max(#{ $standard-container-gutter }, calc((100vw - #{$container-max-width-1} #{ if($standard-container-gutters != 0, ' + ' + $standard-container-gutters, '' ) }) / 2 #{ if($offset != 0, ' + ' + $offset, '' ) }) );
-    }
-    @else {
-      padding-left: calc((100vw - #{$container-max-width-1} #{ if($standard-container-gutters != 0, ' + ' + $standard-container-gutters, '' ) }) / 2 #{ if($offset != 0, ' + ' + $offset, '' ) });
-    }
-  }
-  
-  @media (min-width: 1600px) {
-    @if $min != 0 {
-      padding-left: max(#{ $standard-container-gutter }, calc((100vw - #{$container-max-width-2} #{ if($standard-container-gutters != 0, ' + ' + $standard-container-gutters, '' ) }) / 2 #{ if($offset != 0, ' + ' + $offset, '' ) }) );
-    }
-    @else {
-      padding-left: calc((100vw - #{$container-max-width-2} #{ if($standard-container-gutters != 0, ' + ' + $standard-container-gutters, '' ) }) / 2 #{ if($offset != 0, ' + ' + $offset, '' ) });
-    }
-  }
-  
-  @media (min-width: 1920px) {
-    @if $min != 0 {
-      padding-left: max(#{ $standard-container-gutter }, calc((100vw - #{$container-max-width-3} #{ if($standard-container-gutters != 0, ' + ' + $standard-container-gutters, '' ) }) / 2 #{ if($offset != 0, ' + ' + $offset, '' ) }) );
-    }
-    @else {
-      padding-left: calc((100vw - #{$container-max-width-3} #{ if($standard-container-gutters != 0, ' + ' + $standard-container-gutters, '' ) }) / 2 #{ if($offset != 0, ' + ' + $offset, '' ) });
-    }
-  }
-  
-  @media (min-width: 2560px) {
-    @if $min != 0 {
-      padding-left: max(#{ $standard-container-gutter }, calc((100vw - #{$container-max-width-4} #{ if($standard-container-gutters != 0, ' + ' + $standard-container-gutters, '' ) }) / 2 #{ if($offset != 0, ' + ' + $offset, '' ) }) );
-    }
-    @else {
-      padding-left: calc((100vw - #{$container-max-width-4} #{ if($standard-container-gutters != 0, ' + ' + $standard-container-gutters, '' ) }) / 2 #{ if($offset != 0, ' + ' + $offset, '' ) });
-    }
-  }
-  
-  @media (min-width: 3840px) {
-    @if $min != 0 {
-      padding-left: max(#{ $standard-container-gutter }, calc((100vw - #{$container-max-width-5} #{ if($standard-container-gutters != 0, ' + ' + $standard-container-gutters, '' ) }) / 2 #{ if($offset != 0, ' + ' + $offset, '' ) }) );
-    }
-    @else {
-      padding-left: calc((100vw - #{$container-max-width-5} #{ if($standard-container-gutters != 0, ' + ' + $standard-container-gutters, '' ) }) / 2 #{ if($offset != 0, ' + ' + $offset, '' ) });
+    @if $offset != 0 {
+      margin-left: max(var(--grid-container-padding-desktop), calc((100vw - var(--grid-container-max-width) + 2 * var(--grid-container-padding-desktop)) / 2 + #{$offset-rem}));
+    } @else {
+      margin-left: max(var(--grid-container-padding-desktop), calc((100vw - var(--grid-container-max-width) + 2 * var(--grid-container-padding-desktop)) / 2));
     }
   }
 }
 
-@mixin right-carousel-entry-spacing($offset: 0, $min: 60px) {
-  $min-rem: if(unit($min) == "%", $min, rem-calc($min));
-  $offset: rem-calc($offset);
-  $standard-container-gutter: $min-rem;
-  $standard-container-gutters: $standard-container-gutter * 2;
+@mixin right-carousel-entry-spacing($offset: 0) {
+  $offset-rem: rem-calc($offset);
 
-  //Carousel right entry spacing
   @media (min-width: 1023px) {
-    @if $min != 0 {
-      padding-right: max(#{ $standard-container-gutter }, calc((100vw - #{$container-max-width-1} #{ if($standard-container-gutters != 0, ' + ' + $standard-container-gutters, '' ) }) / 2 #{ if($offset != 0, ' + ' + $offset, '' ) }) );
-    }
-    @else {
-      padding-right: calc((100vw - #{$container-max-width-1} #{ if($standard-container-gutters != 0, ' + ' + $standard-container-gutters, '' ) }) / 2 #{ if($offset != 0, ' + ' + $offset, '' ) });
-    }
-  }
-  
-  @media (min-width: 1600px) {
-    @if $min != 0 {
-      padding-right: max(#{ $standard-container-gutter }, calc((100vw - #{$container-max-width-2} #{ if($standard-container-gutters != 0, ' + ' + $standard-container-gutters, '' ) }) / 2 #{ if($offset != 0, ' + ' + $offset, '' ) }) );
-    }
-    @else {
-      padding-right: calc((100vw - #{$container-max-width-2} #{ if($standard-container-gutters != 0, ' + ' + $standard-container-gutters, '' ) }) / 2 #{ if($offset != 0, ' + ' + $offset, '' ) });
-    }
-  }
-  
-  @media (min-width: 1920px) {
-    @if $min != 0 {
-      padding-right: max(#{ $standard-container-gutter }, calc((100vw - #{$container-max-width-3} #{ if($standard-container-gutters != 0, ' + ' + $standard-container-gutters, '' ) }) / 2 #{ if($offset != 0, ' + ' + $offset, '' ) }) );
-    }
-    @else {
-      padding-right: calc((100vw - #{$container-max-width-3} #{ if($standard-container-gutters != 0, ' + ' + $standard-container-gutters, '' ) }) / 2 #{ if($offset != 0, ' + ' + $offset, '' ) });
-    }
-  }
-  
-  @media (min-width: 2560px) {
-    @if $min != 0 {
-      padding-right: max(#{ $standard-container-gutter }, calc((100vw - #{$container-max-width-4} #{ if($standard-container-gutters != 0, ' + ' + $standard-container-gutters, '' ) }) / 2 #{ if($offset != 0, ' + ' + $offset, '' ) }) );
-    }
-    @else {
-      padding-right: calc((100vw - #{$container-max-width-4} #{ if($standard-container-gutters != 0, ' + ' + $standard-container-gutters, '' ) }) / 2 #{ if($offset != 0, ' + ' + $offset, '' ) });
-    }
-  }
-  
-  @media (min-width: 3840px) {
-    @if $min != 0 {
-      padding-right: max(#{ $standard-container-gutter }, calc((100vw - #{$container-max-width-5} #{ if($standard-container-gutters != 0, ' + ' + $standard-container-gutters, '' ) }) / 2 #{ if($offset != 0, ' + ' + $offset, '' ) }) );
-    }
-    @else {
-      padding-right: calc((100vw - #{$container-max-width-5} #{ if($standard-container-gutters != 0, ' + ' + $standard-container-gutters, '' ) }) / 2 #{ if($offset != 0, ' + ' + $offset, '' ) });
+    @if $offset != 0 {
+      margin-right: max(var(--grid-container-padding-desktop), calc((100vw - var(--grid-container-max-width) + 2 * var(--grid-container-padding-desktop)) / 2 + #{$offset-rem}));
+    } @else {
+      margin-right: max(var(--grid-container-padding-desktop), calc((100vw - var(--grid-container-max-width) + 2 * var(--grid-container-padding-desktop)) / 2));
     }
   }
 }
