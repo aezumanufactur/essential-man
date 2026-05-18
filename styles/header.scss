@@ -567,7 +567,8 @@ header.header {
 
   &__title {
     @include nav-styling;
-  
+    @include hover-underline-animation($child: 'span');
+
     svg {
       position: relative;
       z-index: 2;

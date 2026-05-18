@@ -1,7 +1,10 @@
 {%- render 'settings__block-layout-controls' -%}
 <div class="footer__image" {{ block.shopify_attributes }}>
-  <div class="footer__image__inner w-full">
+  <div class="footer__image__inner">
     {%- if block.settings.image_mobile != blank or block.settings.image_desktop != blank -%}
+      {%- if block.settings.url != blank -%}
+        <a class="footer__image__link" href="{{ block.settings.url }}">
+      {%- endif -%}
       {%- render "component__responsive-image-v2",
         image_mobile: block.settings.image_mobile,
         image_desktop: block.settings.image_desktop,
@@ -9,6 +12,9 @@
         width_mobile: 1080,
         width_desktop: 1920,
         class: "w-full block object-contain" -%}
+      {%- if block.settings.url != blank -%}
+        </a>
+      {%- endif -%}
     {%- endif -%}
   </div>
 </div>
@@ -16,7 +22,7 @@
 {%- schema -%}
   {
     "name": "Image",
-    "class": "footer__image w-full",
+    "class": "footer__image",
     "settings": [
       {
         "type": "image_picker",
@@ -27,6 +33,11 @@
         "type": "image_picker",
         "id": "image_desktop",
         "label": "Image - Desktop"
+      },
+      {
+        "type": "url",
+        "id": "url",
+        "label": "Link URL"
       },
       {
         "type": "header",
