@@ -27,11 +27,12 @@
   {%- if block.settings.align_horizontal_mobile != blank or block.settings.align_vertical_mobile != blank -%}
     @media (max-width: 1023px) {
       #shopify-block-{{ block.id }} .footer__column__inner {
-        {%- if block.settings.align_horizontal_mobile != blank -%}
-          align-items: {{ block.settings.align_horizontal_mobile }};
-        {%- endif -%}
-        {%- if block.settings.align_vertical_mobile != blank -%}
-          justify-content: {{ block.settings.align_vertical_mobile }};
+        {%- if block.settings.direction_mobile == "row" -%}
+          {%- if block.settings.align_horizontal_mobile != blank -%}justify-content: {{ block.settings.align_horizontal_mobile }};{%- endif -%}
+          {%- if block.settings.align_vertical_mobile != blank -%}align-items: {{ block.settings.align_vertical_mobile }};{%- endif -%}
+        {%- else -%}
+          {%- if block.settings.align_horizontal_mobile != blank -%}align-items: {{ block.settings.align_horizontal_mobile }};{%- endif -%}
+          {%- if block.settings.align_vertical_mobile != blank -%}justify-content: {{ block.settings.align_vertical_mobile }};{%- endif -%}
         {%- endif -%}
       }
     }
@@ -40,11 +41,12 @@
   {%- if block.settings.align_horizontal_desktop != blank or block.settings.align_vertical_desktop != blank -%}
     @media (min-width: 1024px) {
       #shopify-block-{{ block.id }} .footer__column__inner {
-        {%- if block.settings.align_horizontal_desktop != blank -%}
-          align-items: {{ block.settings.align_horizontal_desktop }};
-        {%- endif -%}
-        {%- if block.settings.align_vertical_desktop != blank -%}
-          justify-content: {{ block.settings.align_vertical_desktop }};
+        {%- if block.settings.direction_desktop == "row" -%}
+          {%- if block.settings.align_horizontal_desktop != blank -%}justify-content: {{ block.settings.align_horizontal_desktop }};{%- endif -%}
+          {%- if block.settings.align_vertical_desktop != blank -%}align-items: {{ block.settings.align_vertical_desktop }};{%- endif -%}
+        {%- else -%}
+          {%- if block.settings.align_horizontal_desktop != blank -%}align-items: {{ block.settings.align_horizontal_desktop }};{%- endif -%}
+          {%- if block.settings.align_vertical_desktop != blank -%}justify-content: {{ block.settings.align_vertical_desktop }};{%- endif -%}
         {%- endif -%}
       }
     }
