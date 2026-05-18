@@ -15,7 +15,7 @@
       "type": "footer",
       "settings": {
         "color_scheme": "scheme-e7a2b49c-36ae-4b1f-b31f-f3ec31db1021",
-        "bg_color": "#362b26",
+        "bg_color": "#362B26",
         "grid_container_width": "contain",
         "appear_on": ""
       },
@@ -103,7 +103,9 @@
             "padding_y_mobile": true,
             "padding_top_mobile": 16,
             "padding_y_desktop": true,
-            "padding_top_desktop": 25
+            "padding_top_desktop": 25,
+            "padding_x_desktop": true,
+            "padding_left_desktop": 30
           }
         },
         "col_expl_Nf6wCv": {
@@ -140,7 +142,9 @@
             "padding_y_mobile": true,
             "padding_top_mobile": 16,
             "padding_y_desktop": true,
-            "padding_top_desktop": 25
+            "padding_top_desktop": 25,
+            "padding_x_desktop": true,
+            "padding_left_desktop": 30
           }
         },
         "col_supp_Mv1zPb": {
@@ -175,7 +179,9 @@
             "padding_y_mobile": true,
             "padding_top_mobile": 16,
             "padding_y_desktop": true,
-            "padding_top_desktop": 25
+            "padding_top_desktop": 25,
+            "padding_x_desktop": true,
+            "padding_left_desktop": 30
           }
         }
       },
