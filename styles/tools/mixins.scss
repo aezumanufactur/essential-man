@@ -820,3 +820,38 @@ $container-max-width-5: rem-calc( 2560px );
   outline: dashed rem-calc(1px) hsl(from currentColor h s l / 0.5) !important;
 	outline-offset: rem-calc(2px);
 }
+
+/**
+ * Hover underline animation — line animates from left to right at the bottom of the element.
+ * Applies position: relative to the host element.
+ *
+ * @param {Color}  $color     - Line color (default: currentColor)
+ * @param {Number} $thickness - Line height in px (default: 1px)
+ * @param {Number} $duration  - Transition duration (default: 0.35s)
+ * @param {Number} $offset    - Bottom offset from element edge (default: 0px)
+ */
+@mixin hover-underline-animation(
+  $color: currentColor,
+  $thickness: 1px,
+  $duration: 0.35s,
+  $offset: 0px
+) {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: $offset;
+    left: 0;
+    width: 100%;
+    height: $thickness;
+    background-color: $color;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform $duration ease;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
+}

@@ -245,6 +245,10 @@ $footer-socket-padding-desktop: rem-calc(28px) 0;
         }
       }
     }
+
+    &__link {
+      @include hover-underline-animation();
+    }
   }
 
   /* Socket */
