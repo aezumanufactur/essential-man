@@ -9,108 +9,215 @@
  */
 {
   "sections": {
-    "mfr_product_top_EX4DKN": {
+    "mfr_product_top_R7mK2x": {
       "type": "mfr-product__top",
       "blocks": {
-        "product_rating_YkTcpi": {
-          "type": "product_rating",
+        "product-top-images": {
+          "type": "_product-top__images",
+          "static": true,
           "settings": {
-            "total_reviews": 100,
-            "ratings": 5,
-            "label": "Reviews"
+            "enable_width_settings": true,
+            "width_mobile": false,
+            "width_mobile_value": 0,
+            "width_mobile_custom": "",
+            "width_mobile_unit": "px",
+            "width_desktop": true,
+            "width_desktop_value": 65,
+            "width_desktop_custom": "",
+            "width_desktop_unit": "%",
+            "max_width_mobile": false,
+            "max_width_mobile_value": 0,
+            "max_width_mobile_custom": "",
+            "max_width_mobile_unit": "px",
+            "max_width_desktop": false,
+            "max_width_desktop_value": 0,
+            "max_width_desktop_custom": "",
+            "max_width_desktop_unit": "px",
+            "enable_padding_settings": false,
+            "padding_x_mobile": false,
+            "padding_left_mobile": 0,
+            "padding_right_mobile": 0,
+            "padding_y_mobile": false,
+            "padding_top_mobile": 0,
+            "padding_bottom_mobile": 0,
+            "padding_x_desktop": false,
+            "padding_left_desktop": 0,
+            "padding_right_desktop": 0,
+            "padding_y_desktop": false,
+            "padding_top_desktop": 0,
+            "padding_bottom_desktop": 0,
+            "enable_margin_settings": false,
+            "margin_x_mobile": false,
+            "margin_left_mobile": 0,
+            "margin_right_mobile": 0,
+            "margin_y_mobile": false,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "margin_x_desktop": false,
+            "margin_left_desktop": 0,
+            "margin_right_desktop": 0,
+            "margin_y_desktop": false,
+            "margin_top_desktop": 0,
+            "margin_bottom_desktop": 0
           }
         },
-        "heading_xXTVpm": {
-          "type": "heading",
+        "product-top-info": {
+          "type": "_product-top__info",
+          "static": true,
           "settings": {
-            "heading": "{{ product.title }}",
-            "disable_animation": false,
-            "header_style": "h3",
-            "make_xl": "",
-            "highlight_color": "",
-            "underline_color": "",
-            "max_width": 0
-          }
-        },
-        "product_description_4aHrkK": {
-          "type": "product_description",
-          "settings": {}
-        },
-        "price_A74a6d": {
-          "type": "price",
-          "settings": {}
-        },
-        "variant_selector_dp4NTG": {
-          "type": "variant_selector",
-          "settings": {}
-        },
-        "subscription_option_HGwajy": {
-          "type": "subscription_option",
-          "settings": {
-            "index": 0,
-            "purchase_type": "one-time",
-            "one_time_label": "One Time Purchase",
-            "subscription_label": "Subscribe & Save",
-            "subscription_sub_label": ""
-          }
-        },
-        "quantity_selector_9LPxAW": {
-          "type": "quantity_selector",
-          "settings": {
-            "beside_add_to_cart": false
-          }
-        },
-        "divider_qxGNB6": {
-          "type": "divider",
-          "settings": {
-            "opacity": 10,
-            "spacing_mobile": 19,
-            "spacing_desktop": 14
-          }
-        },
-        "submit_button_Qxgiyj": {
-          "type": "submit_button",
-          "settings": {
-            "unavailable_label": "Unavailable",
-            "sold_out_label": "Sold Out",
-            "add_to_cart_label": "Add To Cart",
-            "show_price": false,
-            "bottom_caption": "Sit amet consectetur adipisicing elit. Dolorum nulla sit hic soluta in eos rem"
-          }
-        },
-        "product_addon_fxnMbX": {
-          "type": "product_addon",
-          "settings": {
-            "text": "<p>You might also like:</p>",
-            "use_variant_name": false
-          }
+            "enable_width_settings": true,
+            "width_mobile": false,
+            "width_mobile_value": 0,
+            "width_mobile_custom": "",
+            "width_mobile_unit": "px",
+            "width_desktop": true,
+            "width_desktop_value": 35,
+            "width_desktop_custom": "",
+            "width_desktop_unit": "%",
+            "max_width_mobile": false,
+            "max_width_mobile_value": 0,
+            "max_width_mobile_custom": "",
+            "max_width_mobile_unit": "px",
+            "max_width_desktop": false,
+            "max_width_desktop_value": 0,
+            "max_width_desktop_custom": "",
+            "max_width_desktop_unit": "px",
+            "enable_padding_settings": false,
+            "padding_x_mobile": false,
+            "padding_left_mobile": 0,
+            "padding_right_mobile": 0,
+            "padding_y_mobile": false,
+            "padding_top_mobile": 0,
+            "padding_bottom_mobile": 0,
+            "padding_x_desktop": false,
+            "padding_left_desktop": 0,
+            "padding_right_desktop": 0,
+            "padding_y_desktop": false,
+            "padding_top_desktop": 0,
+            "padding_bottom_desktop": 0,
+            "enable_margin_settings": false,
+            "margin_x_mobile": false,
+            "margin_left_mobile": 0,
+            "margin_right_mobile": 0,
+            "margin_y_mobile": false,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "margin_x_desktop": false,
+            "margin_left_desktop": 0,
+            "margin_right_desktop": 0,
+            "margin_y_desktop": false,
+            "margin_top_desktop": 0,
+            "margin_bottom_desktop": 0
+          },
+          "blocks": {
+            "small_text_abc123": {
+              "type": "_product-top__small-text",
+              "settings": {
+                "text": "Lift · Grip · Volume"
+              }
+            },
+            "review_stars_def456": {
+              "type": "_product-top__review-stars",
+              "settings": {
+                "rating": 5,
+                "label": "4.9 (524)"
+              }
+            },
+            "product_title_ghi789": {
+              "type": "_product-top__product-title",
+              "settings": {
+                "title": ""
+              }
+            },
+            "pilled_text_jkl012": {
+              "type": "_product-top__pilled-text",
+              "settings": {
+                "text": "50ml bottle"
+              }
+            },
+            "divider_mno345": {
+              "type": "_product-top__divider",
+              "settings": {}
+            },
+            "price_pqr678": {
+              "type": "_product-top__price",
+              "settings": {}
+            },
+            "description_stu901": {
+              "type": "_product-top__description",
+              "settings": {
+                "description": ""
+              }
+            },
+            "variant_selector_vwx234": {
+              "type": "_product-top__variant-selector",
+              "settings": {}
+            },
+            "subscription_options_yza567": {
+              "type": "_product-top__subscription-options",
+              "settings": {
+                "index": 0,
+                "purchase_type": "one-time",
+                "one_time_label": "One Time Purchase",
+                "subscription_label": "Subscribe & Save",
+                "subscription_sub_label": ""
+              }
+            },
+            "quantity_selector_bcd890": {
+              "type": "_product-top__quantity-selector",
+              "settings": {
+                "beside_add_to_cart": false
+              }
+            },
+            "submit_button_efg123": {
+              "type": "_product-top__submit-button",
+              "settings": {
+                "unavailable_label": "Unavailable",
+                "sold_out_label": "Sold Out",
+                "add_to_cart_label": "Add To Cart",
+                "show_price": false,
+                "bottom_caption": ""
+              }
+            },
+            "quick_add_hij456": {
+              "type": "_product-top__quick-add",
+              "settings": {
+                "bundle_text": "2-pack Bundle",
+                "save_text": "Save $6, Ships Free"
+              }
+            }
+          },
+          "block_order": [
+            "small_text_abc123",
+            "review_stars_def456",
+            "product_title_ghi789",
+            "pilled_text_jkl012",
+            "divider_mno345",
+            "price_pqr678",
+            "description_stu901",
+            "variant_selector_vwx234",
+            "subscription_options_yza567",
+            "quantity_selector_bcd890",
+            "submit_button_efg123",
+            "quick_add_hij456"
+          ]
         }
       },
-      "block_order": [
-        "product_rating_YkTcpi",
-        "heading_xXTVpm",
-        "product_description_4aHrkK",
-        "price_A74a6d",
-        "variant_selector_dp4NTG",
-        "subscription_option_HGwajy",
-        "quantity_selector_9LPxAW",
-        "divider_qxGNB6",
-        "submit_button_Qxgiyj",
-        "product_addon_fxnMbX"
-      ],
       "settings": {
-        "product_benefits": [],
-        "color_scheme": "",
-        "bg_color": "",
+        "container_width": "full",
+        "max_width": 0,
         "grid_gutter": "",
-        "margin_bottom_mobile": 0,
-        "margin_bottom_desktop": 0,
         "mobile_alignment": "left",
         "desktop_alignment": "left",
         "top_spacing_mobile": 0,
-        "bottom_spacing_mobile": 25,
+        "bottom_spacing_mobile": 0,
         "top_spacing_desktop": 0,
-        "bottom_spacing_desktop": 50
+        "bottom_spacing_desktop": 0,
+        "bg_color": "",
+        "section_divider_top": "",
+        "section_divider_bottom": "",
+        "custom_class": "",
+        "custom_id": ""
       }
     },
     "mfr_core_image_video_text_section_FewAbB": {
@@ -378,7 +485,7 @@
     }
   },
   "order": [
-    "mfr_product_top_EX4DKN",
+    "mfr_product_top_R7mK2x",
     "mfr_core_image_video_text_section_FewAbB",
     "mfr_product_reviews_MBqdGw"
   ]
