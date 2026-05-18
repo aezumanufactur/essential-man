@@ -1,5 +1,5 @@
 {%- render 'settings__block-layout-controls' -%}
-<div class="footer__copyright" {{ block.shopify_attributes }}>
+<div class="footer__copyright" {{ block.shopify_attributes }} style="opacity: {{ block.settings.opacity | divided_by: 100.0 }};">
   <div class="footer__copyright__inner">
     <div class="footer__copyright__text text-[10px] uppercase tracking-[1px] [color:var(--color-foreground)]">
       <p>© {{ shop.name }}&nbsp;&nbsp;&nbsp;Site by <a href="https://manufactur.co/" target="_blank" rel="noopener">Manufactur</a></p>
@@ -12,6 +12,20 @@
     "name": "Copyright",
     "class": "footer__copyright",
     "settings": [
+      {
+        "type": "header",
+        "content": "Opacity Settings"
+      },
+      {
+        "type": "range",
+        "id": "opacity",
+        "label": "Opacity",
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "unit": "%",
+        "default": 100
+      },
       {
         "type": "header",
         "content": "Block Layout Controls"
