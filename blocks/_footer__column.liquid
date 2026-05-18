@@ -67,6 +67,16 @@
     }
   {%- endif -%}
 
+  {%- if block.settings.visibility == 'mobile' -%}
+    @media (min-width: 1024px) {
+      #shopify-block-{{ block.id }} { display: none !important; }
+    }
+  {%- elsif block.settings.visibility == 'desktop' -%}
+    @media (max-width: 1023px) {
+      #shopify-block-{{ block.id }} { display: none !important; }
+    }
+  {%- endif -%}
+
   {%- if block.settings.enable_grid_container -%}
     #shopify-block-{{ block.id }} > .footer__column__inner {
       margin-left: auto;
@@ -92,6 +102,21 @@
     "name": "Column",
     "class": "footer__column",
     "settings": [
+      {
+        "type": "header",
+        "content": "Visibility Settings"
+      },
+      {
+        "type": "select",
+        "id": "visibility",
+        "label": "Show On",
+        "options": [
+          { "value": "both", "label": "Mobile & Desktop" },
+          { "value": "mobile", "label": "Mobile Only" },
+          { "value": "desktop", "label": "Desktop Only" }
+        ],
+        "default": "both"
+      },
       {
         "type": "header",
         "content": "Border Settings"
