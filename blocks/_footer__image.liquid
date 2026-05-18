@@ -1,10 +1,13 @@
 {%- render 'settings__block-layout-controls' -%}
 <div class="footer__image" {{ block.shopify_attributes }}>
   <div class="footer__image__inner">
-    {%- if block.settings.image != blank -%}
-      {%- render "component__lazyload-image",
-        image: block.settings.image,
-        width: 1920,
+    {%- if block.settings.image_mobile != blank or block.settings.image_desktop != blank -%}
+      {%- render "component__responsive-image-v2",
+        image_mobile: block.settings.image_mobile,
+        image_desktop: block.settings.image_desktop,
+        lazyload: true,
+        width_mobile: 1080,
+        width_desktop: 1920,
         class: "w-full block object-contain" -%}
     {%- endif -%}
   </div>
@@ -17,8 +20,13 @@
     "settings": [
       {
         "type": "image_picker",
-        "id": "image",
-        "label": "Image"
+        "id": "image_mobile",
+        "label": "Image - Mobile"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_desktop",
+        "label": "Image - Desktop"
       },
       {
         "type": "header",
