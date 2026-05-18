@@ -434,6 +434,7 @@ $footer-socket-padding-desktop: rem-calc(28px) 0;
 
     .list-social {
       margin: 0;
+      gap: rem-calc(17px);
 
       &__item {
         @include transition($global-transition);
@@ -444,14 +445,14 @@ $footer-socket-padding-desktop: rem-calc(28px) 0;
         }
 
         a {
-          background-color: rgba(#fff, 0.2);
-          border: solid rem-calc(1px) rgba(#fff, 0.13);
-          width: rem-calc(48px);
-          height: rem-calc(48px);
+          background-color: transparent;
+          border: dashed rem-calc(1px) currentColor;
+          width: rem-calc(56px);
+          height: rem-calc(56px);
 
           svg {
             color: var(--footer-icons);
-            height: rem-calc(26px);
+            height: rem-calc(22px);
             width: auto;
             display: block;
           }
