@@ -1,23 +1,25 @@
 {%- render 'settings__block-layout-controls' -%}
 <style>
   {%- if block.settings.enable_border_mobile -%}
+    {%- assign border_color_mobile = block.settings.border_opacity_mobile | append: '%, transparent)' | prepend: 'color-mix(in srgb, currentColor ' -%}
     @media (max-width: 1023px) {
       #shopify-block-{{ block.id }} {
-        {%- if block.settings.border_top_mobile -%}border-top: 1px solid currentColor;{%- endif -%}
-        {%- if block.settings.border_right_mobile -%}border-right: 1px solid currentColor;{%- endif -%}
-        {%- if block.settings.border_bottom_mobile -%}border-bottom: 1px solid currentColor;{%- endif -%}
-        {%- if block.settings.border_left_mobile -%}border-left: 1px solid currentColor;{%- endif -%}
+        {%- if block.settings.border_top_mobile -%}border-top: 1px solid {{ border_color_mobile }};{%- endif -%}
+        {%- if block.settings.border_right_mobile -%}border-right: 1px solid {{ border_color_mobile }};{%- endif -%}
+        {%- if block.settings.border_bottom_mobile -%}border-bottom: 1px solid {{ border_color_mobile }};{%- endif -%}
+        {%- if block.settings.border_left_mobile -%}border-left: 1px solid {{ border_color_mobile }};{%- endif -%}
       }
     }
   {%- endif -%}
 
   {%- if block.settings.enable_border_desktop -%}
+    {%- assign border_color_desktop = block.settings.border_opacity_desktop | append: '%, transparent)' | prepend: 'color-mix(in srgb, currentColor ' -%}
     @media (min-width: 1024px) {
       #shopify-block-{{ block.id }} {
-        {%- if block.settings.border_top_desktop -%}border-top: 1px solid currentColor;{%- endif -%}
-        {%- if block.settings.border_right_desktop -%}border-right: 1px solid currentColor;{%- endif -%}
-        {%- if block.settings.border_bottom_desktop -%}border-bottom: 1px solid currentColor;{%- endif -%}
-        {%- if block.settings.border_left_desktop -%}border-left: 1px solid currentColor;{%- endif -%}
+        {%- if block.settings.border_top_desktop -%}border-top: 1px solid {{ border_color_desktop }};{%- endif -%}
+        {%- if block.settings.border_right_desktop -%}border-right: 1px solid {{ border_color_desktop }};{%- endif -%}
+        {%- if block.settings.border_bottom_desktop -%}border-bottom: 1px solid {{ border_color_desktop }};{%- endif -%}
+        {%- if block.settings.border_left_desktop -%}border-left: 1px solid {{ border_color_desktop }};{%- endif -%}
       }
     }
   {%- endif -%}
@@ -127,6 +129,28 @@
         "id": "border_left_desktop",
         "label": "Border Left - Desktop",
         "default": false,
+        "visible_if": "{{ block.settings.enable_border_desktop }}"
+      },
+      {
+        "type": "range",
+        "id": "border_opacity_mobile",
+        "label": "Border Opacity - Mobile",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 100,
+        "visible_if": "{{ block.settings.enable_border_mobile }}"
+      },
+      {
+        "type": "range",
+        "id": "border_opacity_desktop",
+        "label": "Border Opacity - Desktop",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "default": 100,
         "visible_if": "{{ block.settings.enable_border_desktop }}"
       },
       {

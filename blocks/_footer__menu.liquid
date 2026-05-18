@@ -2,14 +2,14 @@
 <div class="footer__menu" {{ block.shopify_attributes }}>
   <div class="footer__menu__inner">
     {%- if block.settings.heading != blank -%}
-      <div class="footer__menu__heading"><p>{{ block.settings.heading }}</p></div>
+      <div class="footer__menu__heading [font-family:var(--font-heading-h5)] [font-size:var(--font-heading-h5-size-mobile)] large:[font-size:var(--font-heading-h5-size)] [line-height:var(--font-heading-h5-line-height-mobile)] large:[line-height:var(--font-heading-h5-line-height)] [font-weight:var(--font-heading-h5-weight)] uppercase [color:var(--essential-white,#eeece5)] mb-[12px] large:mb-[23px]"><p>{{ block.settings.heading }}</p></div>
     {%- endif -%}
 
     {%- if block.settings.menu != blank -%}
       <ul class="footer__menu__links">
         {%- for link in linklists[block.settings.menu].links -%}
           <li class="footer__menu__item">
-            <a class="footer__menu__link" href="{{ link.url }}">{{ link.title }}</a>
+            <a class="footer__menu__link [font-family:var(--font-body)] [font-size:var(--font-body-size-regular-mobile)] large:[font-size:var(--font-body-size-regular)] font-[700] leading-[24px] large:leading-[20px] uppercase [color:var(--essential-white,#eeece5)] opacity-70" href="{{ link.url }}">{{ link.title }}</a>
           </li>
         {%- endfor -%}
       </ul>

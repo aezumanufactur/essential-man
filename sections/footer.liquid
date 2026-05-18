@@ -9,6 +9,11 @@
       --footer-overlay-desktop: url('{{ 'footer__overlay-desktop.png' | asset_img_url: 'master' }}');
     }
   </style>
+  {%- if section.settings.bg_color != blank -%}
+    <style>
+      #shopify-section-{{ section.id }}.footer__main { background: {{ section.settings.bg_color }}; }
+    </style>
+  {%- endif -%}
   {%- if section.settings.grid_container_width == "full" -%}
     {%- assign grid_container_class = "grid-container full max-w-none px-[var(--grid-container-padding-mobile)] large:px-[var(--grid-container-padding-desktop)]" -%}
   {%- else -%}
@@ -46,6 +51,12 @@
       "default": "scheme_1",
       "label": "Color Scheme",
       "info": "This will be the color scheme of the footer initially."
+    },
+    {
+      "type": "color_background",
+      "id": "bg_color",
+      "label": "Background Color Override",
+      "info": "Overrides the color scheme background. Supports gradients."
     },
     {
       "type": "header",

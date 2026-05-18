@@ -2,11 +2,11 @@
 <div class="footer__embed" {{ block.shopify_attributes }}>
   <div class="footer__embed__inner">
     {%- if block.settings.heading != blank -%}
-      <div class="footer__embed__heading"><p>{{ block.settings.heading }}</p></div>
+      <div class="footer__embed__heading [font-family:var(--font-heading-h3)] [font-size:var(--font-heading-h3-size-mobile)] large:[font-size:var(--font-heading-h3-size)] [line-height:var(--font-heading-h3-line-height-mobile)] large:[line-height:var(--font-heading-h3-line-height)] [font-weight:var(--font-heading-h3-weight)] uppercase [color:var(--essential-white,#eeece5)] mb-[48px] large:mb-[23px]"><p>{{ block.settings.heading }}</p></div>
     {%- endif -%}
 
     {%- if block.settings.caption != blank -%}
-      <div class="footer__embed__caption"><p>{{ block.settings.caption }}</p></div>
+      <div class="footer__embed__caption [font-family:var(--font-body)] [font-size:var(--font-body-size-regular-mobile)] large:[font-size:var(--font-body-size-regular)] font-[700] leading-[20px] uppercase [color:var(--essential-white,#eeece5)] opacity-70 mb-[33px] large:mb-[40px]"><p>{{ block.settings.caption }}</p></div>
     {%- endif -%}
 
     {%- if block.settings.embed_code != blank -%}
