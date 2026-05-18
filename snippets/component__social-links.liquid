@@ -8,6 +8,15 @@
     </li>
   {%- endif -%}
 
+  {%- if settings.social_tiktok_link != blank -%}
+    <li class="list-social__item">
+      <a href="{{ settings.social_tiktok_link }}" target="_blank" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+        {%- render 'icon__social-media', icon_name: 'tiktok' -%}
+        <span class="visually-hidden">{{ 'general.social.links.tiktok' | t }}</span>
+      </a>
+    </li>
+  {%- endif -%}
+
   {%- if settings.social_instagram_link != blank -%}
     <li class="list-social__item">
       <a href="{{ settings.social_instagram_link }}" target="_blank" class="link link--text list-social__link" aria-describedby="a11y-external-message">
@@ -49,15 +58,6 @@
       <a href="{{ settings.social_snapchat_link }}" target="_blank" class="link link--text list-social__link" aria-describedby="a11y-external-message">
         {%- render 'icon__social-media', icon_name: 'snapchat' -%}
         <span class="visually-hidden">{{ 'general.social.links.snapchat' | t }}</span>
-      </a>
-    </li>
-  {%- endif -%}
-
-  {%- if settings.social_tiktok_link != blank -%}
-    <li class="list-social__item">
-      <a href="{{ settings.social_tiktok_link }}" target="_blank" class="link link--text list-social__link" aria-describedby="a11y-external-message">
-        {%- render 'icon__social-media', icon_name: 'tiktok' -%}
-        <span class="visually-hidden">{{ 'general.social.links.tiktok' | t }}</span>
       </a>
     </li>
   {%- endif -%}

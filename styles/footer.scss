@@ -353,22 +353,6 @@ $footer-socket-padding-desktop: rem-calc(28px) 0;
     }
   }
 
-  &__copyright {
-    @include xsmall;
-    line-height: 1.625em;
-    font-weight: 500;
-    letter-spacing: rem-calc(-0.17px);
-    margin: 0;
-    color: currentColor;
-    @include opacity(0.8);
-    @include transition($global-transition);
-
-    @include enter-animation {
-      @include opacity(0);
-      @include transform(translateY($enter-transform-value));
-    }
-  }
-
   &-socket {
     &__logo {
       width: 100%;
