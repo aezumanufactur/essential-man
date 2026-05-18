@@ -49,6 +49,37 @@
       }
     }
   {%- endif -%}
+
+  {%- if block.settings.direction_mobile != "column" or block.settings.direction_desktop != "column" -%}
+    @media (max-width: 1023px) {
+      #shopify-block-{{ block.id }} .footer__column__inner {
+        flex-direction: {{ block.settings.direction_mobile | default: "column" }};
+        flex-wrap: wrap;
+      }
+    }
+    @media (min-width: 1024px) {
+      #shopify-block-{{ block.id }} .footer__column__inner {
+        flex-direction: {{ block.settings.direction_desktop | default: "column" }};
+        flex-wrap: wrap;
+      }
+    }
+  {%- endif -%}
+
+  {%- if block.settings.enable_grid_container -%}
+    #shopify-block-{{ block.id }} .footer__column__inner {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: var(--grid-container-max-width);
+      padding-left: var(--grid-container-padding-mobile);
+      padding-right: var(--grid-container-padding-mobile);
+    }
+    @media (min-width: 1024px) {
+      #shopify-block-{{ block.id }} .footer__column__inner {
+        padding-left: var(--grid-container-padding-desktop);
+        padding-right: var(--grid-container-padding-desktop);
+      }
+    }
+  {%- endif -%}
 </style>
 <div class="footer__column__inner flex flex-col w-full">
   {%- content_for "blocks" -%}
@@ -210,6 +241,41 @@
           { "value": "space-around", "label": "Space Around" }
         ],
         "default": ""
+      },
+      {
+        "type": "header",
+        "content": "Direction Settings"
+      },
+      {
+        "type": "select",
+        "id": "direction_mobile",
+        "label": "Direction - Mobile",
+        "options": [
+          { "value": "column", "label": "Column (Stack)" },
+          { "value": "row", "label": "Row (Side by Side)" }
+        ],
+        "default": "column"
+      },
+      {
+        "type": "select",
+        "id": "direction_desktop",
+        "label": "Direction - Desktop",
+        "options": [
+          { "value": "column", "label": "Column (Stack)" },
+          { "value": "row", "label": "Row (Side by Side)" }
+        ],
+        "default": "column"
+      },
+      {
+        "type": "header",
+        "content": "Grid Container Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_grid_container",
+        "label": "Enable Grid Container",
+        "default": false,
+        "info": "Applies the site grid container max-width and padding to this column's inner content."
       },
       {
         "type": "header",
@@ -551,6 +617,8 @@
       }
     ],
     "blocks": [
+      { "type": "_footer__column" },
+      { "type": "_footer__divider" },
       { "type": "_footer__embed" },
       { "type": "_footer__social-links" },
       { "type": "_footer__menu" }

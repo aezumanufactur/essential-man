@@ -16,181 +16,228 @@
       "settings": {
         "color_scheme": "scheme-e7a2b49c-36ae-4b1f-b31f-f3ec31db1021",
         "bg_color": "#362B26",
-        "grid_container_width": "contain",
         "appear_on": ""
       },
       "blocks": {
-        "col_embed_Rk9mXz": {
+        "col_row_top_Aa1bBc": {
           "type": "_footer__column",
           "blocks": {
-            "embed_Lp3qWn": {
-              "type": "_footer__embed",
+            "col_embed_Rk9mXz": {
+              "type": "_footer__column",
+              "blocks": {
+                "embed_Lp3qWn": {
+                  "type": "_footer__embed",
+                  "settings": {
+                    "heading": "Stay close to the standard",
+                    "caption": "Early access to new products, formulation thinking, and what we are building next.",
+                    "embed_code": ""
+                  }
+                }
+              },
+              "block_order": [
+                "embed_Lp3qWn"
+              ],
               "settings": {
-                "heading": "Stay close to the standard",
-                "caption": "Early access to new products, formulation thinking, and what we are building next.",
-                "embed_code": ""
+                "enable_width_settings": true,
+                "width_mobile": true,
+                "width_mobile_value": 100,
+                "width_mobile_unit": "%",
+                "width_desktop": true,
+                "width_desktop_unit": "custom",
+                "width_desktop_custom": "510px"
+              }
+            },
+            "col_social_Yt7vBm": {
+              "type": "_footer__column",
+              "blocks": {
+                "social_Dq2jKr": {
+                  "type": "_footer__social-links",
+                  "settings": {}
+                }
+              },
+              "block_order": [
+                "social_Dq2jKr"
+              ],
+              "settings": {
+                "align_horizontal_desktop": "flex-end",
+                "enable_width_settings": true,
+                "width_mobile": true,
+                "width_mobile_value": 100,
+                "width_mobile_unit": "%",
+                "width_desktop": true,
+                "width_desktop_unit": "custom",
+                "width_desktop_custom": "calc(100% - 510px)",
+                "enable_padding_settings": true,
+                "padding_y_mobile": true,
+                "padding_top_mobile": 33
               }
             }
           },
           "block_order": [
-            "embed_Lp3qWn"
+            "col_embed_Rk9mXz",
+            "col_social_Yt7vBm"
           ],
           "settings": {
+            "enable_grid_container": true,
+            "direction_mobile": "row",
+            "direction_desktop": "row",
             "enable_width_settings": true,
             "width_mobile": true,
             "width_mobile_value": 100,
             "width_mobile_unit": "%",
             "width_desktop": true,
-            "width_desktop_unit": "custom",
-            "width_desktop_custom": "510px"
+            "width_desktop_value": 100,
+            "width_desktop_unit": "%"
           }
         },
-        "col_social_Yt7vBm": {
-          "type": "_footer__column",
-          "blocks": {
-            "social_Dq2jKr": {
-              "type": "_footer__social-links",
-              "settings": {}
-            }
-          },
-          "block_order": [
-            "social_Dq2jKr"
-          ],
+        "divider_Dd2eEf": {
+          "type": "_footer__divider",
           "settings": {
-            "align_horizontal_desktop": "flex-end",
+            "opacity": 70,
+            "height": 1,
             "enable_width_settings": true,
             "width_mobile": true,
             "width_mobile_value": 100,
             "width_mobile_unit": "%",
             "width_desktop": true,
-            "width_desktop_unit": "custom",
-            "width_desktop_custom": "calc(100% - 510px)",
-            "enable_padding_settings": true,
-            "padding_y_mobile": true,
-            "padding_top_mobile": 33
+            "width_desktop_value": 100,
+            "width_desktop_unit": "%"
           }
         },
-        "col_prod_Gh5nAs": {
+        "col_row_btm_Gg3hHi": {
           "type": "_footer__column",
           "blocks": {
-            "menu_prod_Xc8pEt": {
-              "type": "_footer__menu",
+            "col_prod_Gh5nAs": {
+              "type": "_footer__column",
+              "blocks": {
+                "menu_prod_Xc8pEt": {
+                  "type": "_footer__menu",
+                  "settings": {
+                    "heading": "Products",
+                    "menu": "footer-products"
+                  }
+                }
+              },
+              "block_order": [
+                "menu_prod_Xc8pEt"
+              ],
               "settings": {
-                "heading": "Products",
-                "menu": "footer-products"
+                "enable_border_mobile": false,
+                "enable_border_desktop": false,
+                "border_right_desktop": true,
+                "border_opacity_desktop": 70,
+                "enable_width_settings": true,
+                "width_mobile": true,
+                "width_mobile_value": 100,
+                "width_mobile_unit": "%",
+                "width_desktop": true,
+                "width_desktop_unit": "custom",
+                "width_desktop_custom": "calc(100% / 3)",
+                "enable_padding_settings": true,
+                "padding_y_mobile": true,
+                "padding_top_mobile": 16,
+                "padding_y_desktop": true,
+                "padding_top_desktop": 25,
+                "padding_x_desktop": true,
+                "padding_left_desktop": 30
+              }
+            },
+            "col_expl_Nf6wCv": {
+              "type": "_footer__column",
+              "blocks": {
+                "menu_expl_Jh4kUq": {
+                  "type": "_footer__menu",
+                  "settings": {
+                    "heading": "Explore",
+                    "menu": "footer-explore"
+                  }
+                }
+              },
+              "block_order": [
+                "menu_expl_Jh4kUq"
+              ],
+              "settings": {
+                "enable_border_mobile": false,
+                "enable_border_desktop": false,
+                "border_right_mobile": true,
+                "border_opacity_mobile": 70,
+                "border_right_desktop": true,
+                "border_opacity_desktop": 70,
+                "enable_width_settings": true,
+                "width_mobile": true,
+                "width_mobile_value": 50,
+                "width_mobile_unit": "%",
+                "width_desktop": true,
+                "width_desktop_unit": "custom",
+                "width_desktop_custom": "calc(100% / 3)",
+                "enable_padding_settings": true,
+                "padding_y_mobile": true,
+                "padding_top_mobile": 16,
+                "padding_y_desktop": true,
+                "padding_top_desktop": 25,
+                "padding_x_desktop": true,
+                "padding_left_desktop": 30
+              }
+            },
+            "col_supp_Mv1zPb": {
+              "type": "_footer__column",
+              "blocks": {
+                "menu_supp_Bw9yLs": {
+                  "type": "_footer__menu",
+                  "settings": {
+                    "heading": "Support",
+                    "menu": "footer-support"
+                  }
+                }
+              },
+              "block_order": [
+                "menu_supp_Bw9yLs"
+              ],
+              "settings": {
+                "enable_border_mobile": false,
+                "enable_border_desktop": false,
+                "border_opacity_mobile": 70,
+                "border_opacity_desktop": 70,
+                "enable_width_settings": true,
+                "width_mobile": true,
+                "width_mobile_value": 50,
+                "width_mobile_unit": "%",
+                "width_desktop": true,
+                "width_desktop_unit": "custom",
+                "width_desktop_custom": "calc(100% / 3)",
+                "enable_padding_settings": true,
+                "padding_y_mobile": true,
+                "padding_top_mobile": 16,
+                "padding_y_desktop": true,
+                "padding_top_desktop": 25,
+                "padding_x_desktop": true,
+                "padding_left_desktop": 30
               }
             }
           },
           "block_order": [
-            "menu_prod_Xc8pEt"
+            "col_prod_Gh5nAs",
+            "col_expl_Nf6wCv",
+            "col_supp_Mv1zPb"
           ],
           "settings": {
-            "enable_border_mobile": true,
-            "border_top_mobile": true,
-            "border_opacity_mobile": 70,
-            "enable_border_desktop": true,
-            "border_top_desktop": true,
-            "border_right_desktop": true,
-            "border_opacity_desktop": 70,
+            "enable_grid_container": true,
+            "direction_mobile": "row",
+            "direction_desktop": "row",
             "enable_width_settings": true,
             "width_mobile": true,
             "width_mobile_value": 100,
             "width_mobile_unit": "%",
             "width_desktop": true,
-            "width_desktop_unit": "custom",
-            "width_desktop_custom": "calc(100% / 3)",
-            "enable_padding_settings": true,
-            "padding_y_mobile": true,
-            "padding_top_mobile": 16,
-            "padding_y_desktop": true,
-            "padding_top_desktop": 25,
-            "padding_x_desktop": true,
-            "padding_left_desktop": 30
-          }
-        },
-        "col_expl_Nf6wCv": {
-          "type": "_footer__column",
-          "blocks": {
-            "menu_expl_Jh4kUq": {
-              "type": "_footer__menu",
-              "settings": {
-                "heading": "Explore",
-                "menu": "footer-explore"
-              }
-            }
-          },
-          "block_order": [
-            "menu_expl_Jh4kUq"
-          ],
-          "settings": {
-            "enable_border_mobile": true,
-            "border_top_mobile": true,
-            "border_right_mobile": true,
-            "border_opacity_mobile": 70,
-            "enable_border_desktop": true,
-            "border_top_desktop": true,
-            "border_right_desktop": true,
-            "border_opacity_desktop": 70,
-            "enable_width_settings": true,
-            "width_mobile": true,
-            "width_mobile_value": 50,
-            "width_mobile_unit": "%",
-            "width_desktop": true,
-            "width_desktop_unit": "custom",
-            "width_desktop_custom": "calc(100% / 3)",
-            "enable_padding_settings": true,
-            "padding_y_mobile": true,
-            "padding_top_mobile": 16,
-            "padding_y_desktop": true,
-            "padding_top_desktop": 25,
-            "padding_x_desktop": true,
-            "padding_left_desktop": 30
-          }
-        },
-        "col_supp_Mv1zPb": {
-          "type": "_footer__column",
-          "blocks": {
-            "menu_supp_Bw9yLs": {
-              "type": "_footer__menu",
-              "settings": {
-                "heading": "Support",
-                "menu": "footer-support"
-              }
-            }
-          },
-          "block_order": [
-            "menu_supp_Bw9yLs"
-          ],
-          "settings": {
-            "enable_border_mobile": true,
-            "border_top_mobile": true,
-            "border_opacity_mobile": 70,
-            "enable_border_desktop": true,
-            "border_top_desktop": true,
-            "border_opacity_desktop": 70,
-            "enable_width_settings": true,
-            "width_mobile": true,
-            "width_mobile_value": 50,
-            "width_mobile_unit": "%",
-            "width_desktop": true,
-            "width_desktop_unit": "custom",
-            "width_desktop_custom": "calc(100% / 3)",
-            "enable_padding_settings": true,
-            "padding_y_mobile": true,
-            "padding_top_mobile": 16,
-            "padding_y_desktop": true,
-            "padding_top_desktop": 25,
-            "padding_x_desktop": true,
-            "padding_left_desktop": 30
+            "width_desktop_value": 100,
+            "width_desktop_unit": "%"
           }
         }
       },
       "block_order": [
-        "col_embed_Rk9mXz",
-        "col_social_Yt7vBm",
-        "col_prod_Gh5nAs",
-        "col_expl_Nf6wCv",
-        "col_supp_Mv1zPb"
+        "col_row_top_Aa1bBc",
+        "divider_Dd2eEf",
+        "col_row_btm_Gg3hHi"
       ]
     },
     "footer_socket_c6MXBr": {

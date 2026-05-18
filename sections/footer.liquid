@@ -14,12 +14,7 @@
       #shopify-section-{{ section.id }}.footer__main { background: {{ section.settings.bg_color }}; }
     </style>
   {%- endif -%}
-  {%- if section.settings.grid_container_width == "full" -%}
-    {%- assign grid_container_class = "grid-container full max-w-none px-[var(--grid-container-padding-mobile)] large:px-[var(--grid-container-padding-desktop)]" -%}
-  {%- else -%}
-    {%- assign grid_container_class = "grid-container mx-auto max-w-[var(--grid-container-max-width)] px-[var(--grid-container-padding-mobile)] large:px-[var(--grid-container-padding-desktop)]" -%}
-  {%- endif -%}
-  <div class="{{ grid_container_class }} w-full flex flex-row flex-wrap" data-inview>
+  <div class="w-full flex flex-row flex-wrap" data-inview>
     <div class="footer__contents flex flex-col justify-stretch transition-all large:flex-row large:justify-between large:flex-wrap w-full min-w-0">
       {%- content_for "blocks" -%}
     </div>
@@ -57,20 +52,6 @@
       "id": "bg_color",
       "label": "Background Color Override",
       "info": "Overrides the color scheme background. Supports gradients."
-    },
-    {
-      "type": "header",
-      "content": "Container Settings"
-    },
-    {
-      "type": "select",
-      "id": "grid_container_width",
-      "label": "Grid Container Width",
-      "options": [
-        { "value": "contain", "label": "Contain" },
-        { "value": "full", "label": "Full" }
-      ],
-      "default": "contain"
     },
     {
       "type": "header",
