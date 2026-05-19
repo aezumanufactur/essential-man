@@ -1,3 +1,7 @@
+{%- assign pills_ns = block.settings.pills_metafield_namespace -%}
+{%- assign pills_key = block.settings.pills_metafield_key -%}
+{%- assign carousel_pills = product.metafields[pills_ns][pills_key] -%}
+
 <div class="product-top__media-carousel-inner relative w-full"
   data-mfr-sticky
   style="
@@ -6,21 +10,30 @@
   {%- capture slides -%}
     {% for image in carousel_images %}
       {% if image.settings.image != blank %}
-        <div class="product-top__media-item mf-carousel__item w-full h-full flex flex-col justify-center items-center flex-shrink-0">
-          <div class="product-top__media-item-image relative w-full h-full grow">
+        <div class="product-top__media-item mf-carousel__item w-full flex-shrink-0">
+          <div class="product-top__media-item-image relative w-full">
             {% render 'component__lazyload-image',
               image: image.settings.image,
               width: 900,
               widths: "420,480,600,720,900",
+              class: "w-full h-auto block object-cover",
               alt: image.settings.image.alt %}
           </div>
         </div>
       {% endif %}
     {% endfor %}
     {% for media in product.media %}
-      <div class="product-top__media-item mfr-carousel__item {{ media.media_type }} w-full h-full flex flex-col justify-center items-center flex-shrink-0">
+      {%- assign img_ext = media.preview_image.src | split: '.' | last | split: '?' | first | downcase -%}
+      {%- assign is_png = false -%}
+      {%- if img_ext == 'png' -%}
+        {%- assign is_png = true -%}
+        {%- assign media_img_class = "w-full h-auto block object-contain" -%}
+      {%- else -%}
+        {%- assign media_img_class = "w-full h-auto block object-cover" -%}
+      {%- endif -%}
+      <div class="product-top__media-item mfr-carousel__item {{ media.media_type }} w-full flex-shrink-0{% if forloop.first %} relative{% endif %}">
         {% if media.media_type == "image" %}
-          <div class="product-top__media-item-image relative w-full h-full grow">
+          <div class="product-top__media-item-image relative w-full{% if is_png %} pt-[16.9%] px-[16.9%] pb-[31.4%]{% endif %}">
             {%- assign default_alt = "maybe an image about the product: " | append: product.title -%}
             {%- assign alt = media.alt | default: default_alt -%}
             {% if forloop.first and carousel_images == blank %}
@@ -28,18 +41,19 @@
               {% assign image_height = media.height | times: 1.00 %}
               {% assign aspect_ratio = image_width | divided_by: image_height %}
               {% assign height = 900 | divided_by: aspect_ratio | round: 2 %}
-              {{ media 
+              {{ media
                 | image_url: width: 900
                 | image_tag: width: 900,
-                  width: 900,
                   height: height,
                   widths: "420,480,600,720,900",
+                  class: media_img_class,
                   alt: alt }}
             {% else %}
               {% render 'component__lazyload-image',
                 image: media,
                 width: 900,
                 widths: "420,480,600,720,900",
+                class: media_img_class,
                 alt: alt %}
             {% endif %}
           </div>
@@ -61,6 +75,22 @@
             {{ media | external_video_url: loop: '1', muted: '1' | external_video_tag }}
           {% endif %}
         {% endif %}
+        {% if forloop.first %}
+          {%- if carousel_pills != blank or product.options_with_values.size > 0 -%}
+            <div class="product-top__images-pills absolute">
+              {%- for pill in carousel_pills.value -%}
+                <div class="[font-family:var(--font-body)] text-[12px] font-[700] leading-[1em] uppercase rounded-[5px] px-[8px] py-[7px] bg-[var(--soft-stone,#d5d1c8)] text-[color:var(--carbon,#1e1b22)]">
+                  <span>{{ pill }}</span>
+                </div>
+              {%- endfor -%}
+              {%- for value in product.options_with_values[0].values -%}
+                <div class="[font-family:var(--font-body)] text-[12px] font-[700] leading-[1em] uppercase rounded-[5px] px-[8px] py-[4px] border border-current">
+                  <span>{{ value }}</span>
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        {% endif %}
       </div>
     {% endfor %}
   {%- endcapture -%}
@@ -68,8 +98,9 @@
     settings: '{
       contain: false,
       wrapAround: false,
-      customPageDots: true,
-      pageDots: false
+      customPageDots: false,
+      pageDots: true,
+      adaptiveHeight: true
     }',
     class: "product-top__media-carousel carousel__slides",
     content: slides %}

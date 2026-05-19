@@ -5,6 +5,90 @@
 
 .mfr-product__top {
   .product-top__images {
+    .flickity-viewport {
+      transition: $global-transition;
+    }
+
+    .flickity-page-dots {
+      position: absolute !important;
+      bottom: 16px !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      width: auto !important;
+      display: flex !important;
+      gap: 6px !important;
+      margin: 0 !important;
+
+      .dot {
+        display: block;
+        width: 40px;
+        height: 2px;
+        border-radius: 1px;
+        margin: 0;
+        background: currentColor;
+        opacity: 0.2;
+
+        &.is-selected {
+          opacity: 1;
+        }
+      }
+    }
+
+    .product-top__images-item {
+      border-bottom: 1px solid currentColor;
+
+      &:nth-child(3n+2) {
+        border-right: 1px solid currentColor;
+      }
+
+      &:nth-last-child(-n+3) {
+        border-bottom: none;
+      }
+
+      &:nth-child(3n+1) {
+        padding: 15.25% 16.6% 14.3%;
+      }
+    }
+
+    .flickity-prev-next-button {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: transparent;
+      border: 1.5px solid currentColor;
+      top: 50%;
+      transform: translateY(-50%);
+
+      &.previous {
+        left: 20px;
+      }
+
+      &.next {
+        right: 20px;
+      }
+
+      .flickity-button-icon {
+        width: 40%;
+        height: 40%;
+        left: 30%;
+        top: 30%;
+      }
+    }
+
+    .product-top__images-pills {
+      bottom: 30px;
+      left: 0;
+      right: 0;
+      padding: 0 30px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+
+      @include breakpoint(large up) {
+        bottom: 60px;
+      }
+    }
   }
 
   .product-top__info {

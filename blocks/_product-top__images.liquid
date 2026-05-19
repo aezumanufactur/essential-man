@@ -1,22 +1,39 @@
 {%- render "settings__block-layout-controls" -%}
 
-<div class="product-top__images w-full">
+{%- assign pills_ns = block.settings.pills_metafield_namespace -%}
+{%- assign pills_key = block.settings.pills_metafield_key -%}
+{%- assign pills_metafield = product.metafields[pills_ns][pills_key] -%}
+
+<div class="product-top__images w-full border-b large:border-b-0 large:border-r border-current">
   <div class="product-top__images__inner">
 
     <div class="product-top__images-carousel-wrap large:hidden">
       {%- render 'product-top__images-carousel',
         product: product,
-        section: section -%}
+        section: section,
+        block: block,
+        pills_metafield: pills_metafield -%}
     </div>
 
     <div class="product-top__images-grid hidden large:flex flex-wrap w-full">
       {%- for media in product.media -%}
-        <div class="product-top__images-item w-full [&:nth-child(3n+2)]:w-1/2 [&:nth-child(3n)]:w-1/2 aspect-[4/5] [&:nth-child(3n+2)]:aspect-[1/1] [&:nth-child(3n)]:aspect-[1/1] overflow-hidden">
+        {%- assign img_ext = media.preview_image.src | split: '.' | last | split: '?' | first | downcase -%}
+        {%- if img_ext == 'png' -%}
+          {%- assign img_class = "w-full h-full block object-contain" -%}
+        {%- else -%}
+          {%- assign img_class = "w-full h-full block object-cover" -%}
+        {%- endif -%}
+        {%- if forloop.index | modulo: 3 == 1 -%}
+          {%- assign item_ar = block.settings.desktop_full_aspect_ratio | default: '931/777' -%}
+        {%- else -%}
+          {%- assign item_ar = block.settings.desktop_half_aspect_ratio | default: '466/574' -%}
+        {%- endif -%}
+        <div class="product-top__images-item relative w-full [&:nth-child(3n+2)]:w-1/2 [&:nth-child(3n)]:w-1/2 overflow-hidden" style="aspect-ratio: {{ item_ar }}">
           {%- if media.media_type == 'image' -%}
             {%- render "component__lazyload-image",
               image: media.preview_image,
               width: 1200,
-              class: "w-full min-h-full block object-cover" -%}
+              class: img_class -%}
           {%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}
             <div class="w-full h-full">
               {{- media | media_tag: class: "w-full h-full object-cover", autoplay: false -}}
@@ -25,37 +42,30 @@
             {%- render "component__lazyload-image",
               image: media.preview_image,
               width: 1200,
-              class: "w-full min-h-full block object-cover" -%}
+              class: "w-full h-full block object-cover" -%}
+          {%- endif -%}
+          {%- if forloop.first -%}
+            {%- if pills_metafield != blank or product.options_with_values.size > 0 -%}
+              <div class="product-top__images-pills absolute">
+                {%- for pill in pills_metafield.value -%}
+                  <div class="[font-family:var(--font-body)] text-[12px] font-[700] leading-[1em] uppercase rounded-[5px] px-[8px] py-[7px] bg-[var(--soft-stone,#d5d1c8)] text-[color:var(--carbon,#1e1b22)]">
+                    <span>{{ pill }}</span>
+                  </div>
+                {%- endfor -%}
+                {%- for value in product.options_with_values[0].values -%}
+                  <div class="[font-family:var(--font-body)] text-[12px] font-[700] leading-[1em] uppercase rounded-[5px] px-[8px] py-[4px] border border-current">
+                    <span>{{ value }}</span>
+                  </div>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
           {%- endif -%}
         </div>
       {%- else -%}
-        <div class="product-top__images-item w-full aspect-[4/5] overflow-hidden bg-gray-100">
+        <div class="product-top__images-item w-full overflow-hidden bg-gray-100" style="aspect-ratio: 931/777">
         </div>
       {%- endfor -%}
     </div>
-
-    {%- assign pills_ns = block.settings.pills_metafield_namespace -%}
-    {%- assign pills_key = block.settings.pills_metafield_key -%}
-    {%- assign pills_metafield = product.metafields[pills_ns][pills_key] -%}
-    {%- if pills_metafield != blank -%}
-      <div class="product-top__images-pills-row flex flex-wrap items-center justify-center gap-[10px] py-[12px] px-5 large:px-0">
-        {%- for pill in pills_metafield.value -%}
-          <div class="product-top__images-pills-pill [font-family:var(--font-body)] text-[12px] font-[700] leading-[1em] uppercase rounded-[5px] px-[8px] py-[7px] bg-[var(--soft-stone,#d5d1c8)] text-[color:var(--carbon,#1e1b22)]">
-            <span>{{ pill }}</span>
-          </div>
-        {%- endfor -%}
-      </div>
-    {%- endif -%}
-
-    {%- if product.options_with_values.size > 0 -%}
-      <div class="product-top__images-pills flex flex-wrap gap-[8px] px-5 py-[12px] large:px-0">
-        {%- for value in product.options_with_values[0].values -%}
-          <div class="product-top__images-pill [font-family:var(--font-body)] text-[12px] font-[700] leading-[1em] uppercase rounded-[5px] px-[8px] py-[4px] border border-current">
-            <span>{{ value }}</span>
-          </div>
-        {%- endfor -%}
-      </div>
-    {%- endif -%}
 
   </div>
 </div>
@@ -84,6 +94,24 @@
       "id": "pills_metafield_key",
       "label": "Metafield Key",
       "default": "benefits"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Image Aspect Ratios"
+    },
+    {
+      "type": "text",
+      "id": "desktop_full_aspect_ratio",
+      "label": "Full Width Aspect Ratio",
+      "default": "931/777",
+      "info": "Format: width/height e.g. 931/777"
+    },
+    {
+      "type": "text",
+      "id": "desktop_half_aspect_ratio",
+      "label": "Half Width Aspect Ratio",
+      "default": "466/574",
+      "info": "Format: width/height e.g. 466/574"
     },
     {
       "type": "header",
