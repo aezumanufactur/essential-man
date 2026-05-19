@@ -1,43 +1,74 @@
 {%- render "settings__block-layout-controls" -%}
 
-<div class="product-top__trust-icons">
-  <div class="product-top__trust-icons__inner flex flex-row flex-wrap items-center justify-between gap-[16px] w-full">
-    {%- for trust_item in block.settings.trust_icons -%}
-      <div class="product-top__trust-icons__item flex flex-col items-center gap-[10px] w-[calc(30%)] large:w-[calc((100%-32px)/3)] max-w-[114px]">
+{%- if block.settings.heading != blank and block.settings.caption != blank -%}
 
-        {%- assign item_image = trust_item.image.value -%}
-        {%- if item_image != blank -%}
-          <div class="product-top__trust-icons__image-wrap size-[32px] flex items-center justify-center">
-            {%- render "component__lazyload-image",
-              image: item_image,
-              width: 64,
-              class: "w-full h-full object-contain block" -%}
-          </div>
-        {%- endif -%}
+  <style>
+    #shopify-block-{{ block.id }} .product-top__additional-info {
+      background-color: {{ block.settings.bg_color }};
+    }
+    #shopify-block-{{ block.id }} .product-top__additional-info__heading {
+      color: {{ block.settings.heading_color }};
+    }
+    #shopify-block-{{ block.id }} .product-top__additional-info__caption {
+      color: {{ block.settings.caption_color }};
+    }
+  </style>
 
-        {%- assign item_label = trust_item.label.value -%}
-        {%- if item_label != blank -%}
-          <div class="product-top__trust-icons__label [font-family:var(--font-body)] text-[12px] large:text-[14px] font-[700] leading-[1.4] large:leading-[20px] uppercase text-center">
-            <p>{{ item_label }}</p>
-          </div>
-        {%- endif -%}
-
-      </div>
-    {%- endfor -%}
+  <div class="product-top__additional-info flex flex-col gap-[20px] p-[18px] rounded-[10px] overflow-hidden w-full">
+    <div class="product-top__additional-info__heading [font-family:var(--font-body)] text-[14px] font-[700] leading-[1.5] uppercase w-full">
+      <p>{{ block.settings.heading }}</p>
+    </div>
+    <div class="product-top__additional-info__caption [font-family:var(--font-body)] text-[14px] font-[700] leading-[20px] uppercase opacity-60 w-full">
+      <p>{{ block.settings.caption }}</p>
+    </div>
   </div>
-</div>
+
+{%- else -%}
+  <style>#shopify-block-{{ block.id }} { display: none; }</style>
+{%- endif -%}
 
 {% schema %}
 {
-  "name": "Trust Icons",
-  "class": "product-top__trust-icons-wrapper",
+  "name": "Additional Info",
+  "class": "product-top__additional-info-wrapper",
   "settings": [
     {
-      "type": "metaobject_list",
-      "id": "trust_icons",
-      "label": "Trust Icons",
-      "metaobject_type": "trust_icons",
-      "info": "Accepts 'trust_icons' metaobject type. Uses .image (file) and .label (text) field values from each entry."
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Two products. One scent."
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption",
+      "default": "One intentional scent across the routine. Texture Powder is fragrance-free. Matte Clay carries citrus, coconut, warm musk. Close to the skin, not the room."
+    },
+    {
+      "type": "header",
+      "content": "Color Settings"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#d5d1c8"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1e1b22"
+    },
+    {
+      "type": "color",
+      "id": "caption_color",
+      "label": "Caption Color",
+      "default": "#1e1b22"
     },
     {
       "type": "header",
@@ -378,9 +409,10 @@
       "visible_if": "{{ block.settings.margin_y_desktop }}"
     }
   ],
+  "blocks": [],
   "presets": [
     {
-      "name": "Trust Icons"
+      "name": "Additional Info"
     }
   ]
 }

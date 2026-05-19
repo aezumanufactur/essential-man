@@ -1,27 +1,25 @@
 {%- render "settings__block-layout-controls" -%}
+{%- render "icon__checkmark" -%}
 
-<div class="product-top__trust-icons">
-  <div class="product-top__trust-icons__inner flex flex-row flex-wrap items-center justify-between gap-[16px] w-full">
-    {%- for trust_item in block.settings.trust_icons -%}
-      <div class="product-top__trust-icons__item flex flex-col items-center gap-[10px] w-[calc(30%)] large:w-[calc((100%-32px)/3)] max-w-[114px]">
+{%- assign list_ns = block.settings.metafield_namespace -%}
+{%- assign list_key = block.settings.metafield_key -%}
+{%- assign list_metafield = product.metafields[list_ns][list_key] -%}
 
-        {%- assign item_image = trust_item.image.value -%}
-        {%- if item_image != blank -%}
-          <div class="product-top__trust-icons__image-wrap size-[32px] flex items-center justify-center">
-            {%- render "component__lazyload-image",
-              image: item_image,
-              width: 64,
-              class: "w-full h-full object-contain block" -%}
+<div class="product-top__text-list">
+  <div class="product-top__text-list__inner flex flex-col gap-[13px] w-full">
+    {%- for item in list_metafield.value -%}
+      <div class="product-top__text-list__item flex flex-col gap-[12px] w-full">
+        <div class="product-top__text-list__row flex flex-row gap-[12px] items-center w-full">
+          <svg class="product-top__text-list__icon size-[19px] shrink-0" aria-hidden="true">
+            <use href="#checkmark-icon"></use>
+          </svg>
+          <div class="product-top__text-list__text [font-family:var(--font-body)] text-[14px] font-[700] leading-[1.4] uppercase">
+            <p>{{ item }}</p>
           </div>
-        {%- endif -%}
-
-        {%- assign item_label = trust_item.label.value -%}
-        {%- if item_label != blank -%}
-          <div class="product-top__trust-icons__label [font-family:var(--font-body)] text-[12px] large:text-[14px] font-[700] leading-[1.4] large:leading-[20px] uppercase text-center">
-            <p>{{ item_label }}</p>
-          </div>
-        {%- endif -%}
-
+        </div>
+        {%- unless forloop.last -%}
+          <div class="product-top__text-list__divider w-full h-px bg-current opacity-20"></div>
+        {%- endunless -%}
       </div>
     {%- endfor -%}
   </div>
@@ -29,15 +27,25 @@
 
 {% schema %}
 {
-  "name": "Trust Icons",
-  "class": "product-top__trust-icons-wrapper",
+  "name": "Text List",
+  "class": "product-top__text-list-wrapper",
   "settings": [
     {
-      "type": "metaobject_list",
-      "id": "trust_icons",
-      "label": "Trust Icons",
-      "metaobject_type": "trust_icons",
-      "info": "Accepts 'trust_icons' metaobject type. Uses .image (file) and .label (text) field values from each entry."
+      "type": "header",
+      "content": "Text List Settings"
+    },
+    {
+      "type": "text",
+      "id": "metafield_namespace",
+      "label": "Metafield Namespace",
+      "default": "mfr_fields"
+    },
+    {
+      "type": "text",
+      "id": "metafield_key",
+      "label": "Metafield Key",
+      "default": "text_list",
+      "info": "Renders a list.single_line_text_field product metafield. Each entry in the list becomes one row with a checkmark icon."
     },
     {
       "type": "header",
@@ -378,9 +386,10 @@
       "visible_if": "{{ block.settings.margin_y_desktop }}"
     }
   ],
+  "blocks": [],
   "presets": [
     {
-      "name": "Trust Icons"
+      "name": "Text List"
     }
   ]
 }

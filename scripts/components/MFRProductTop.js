@@ -9,9 +9,11 @@ if (!window._mfrAlpineRegistered["MFRProductTop"]) {
       },
       currentQuantity: 1,
       price: 0,
+      compareAtPrice: 0,
       currentPriceValue: 0,
       currentPriceValueRaw: 0,
-      currentCompareAtPrice: 0,
+      currentCompareAtPrice: null,
+      currentSavingsValue: null,
       discount: 0,
       formLoading: false,
       init() {
@@ -20,7 +22,7 @@ if (!window._mfrAlpineRegistered["MFRProductTop"]) {
         );
         this.setVariables(this.selectedVariantScript);
         this.setCurrentPrice();
-        ["currentQuantity", "price", "discount"].forEach((v) => {
+        ["currentQuantity", "price", "compareAtPrice", "discount"].forEach((v) => {
           this.$watch(v, () => {
             this.setCurrentPrice();
           });
@@ -42,8 +44,22 @@ if (!window._mfrAlpineRegistered["MFRProductTop"]) {
         const finalPrice = price - discountedPrice;
 
         this.currentPriceValue = Alpine.store("cart")?.formatMoney(finalPrice);
+
+        const compareBase =
+          this.discount > 0
+            ? price
+            : this.compareAtPrice > this.price
+              ? this.compareAtPrice * this.currentQuantity
+              : 0;
+
         this.currentCompareAtPrice =
-          this.discount > 0 ? Alpine.store("cart")?.formatMoney(price) : null;
+          compareBase > finalPrice
+            ? Alpine.store("cart")?.formatMoney(compareBase)
+            : null;
+
+        const savings = compareBase - finalPrice;
+        this.currentSavingsValue =
+          savings > 0 ? Alpine.store("cart")?.formatMoney(savings) : null;
       },
       setVariables(script) {
         const jsonData = () => {
@@ -70,6 +86,7 @@ if (!window._mfrAlpineRegistered["MFRProductTop"]) {
         }
 
         this.price = jsonData().price;
+        this.compareAtPrice = jsonData().compare_at_price || 0;
       },
       updateVariables(productFormData) {
         const root = productFormData ?? this;

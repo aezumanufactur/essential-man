@@ -3,23 +3,23 @@
 <div class="product-top__review-stars">
   <div class="product-top__review-stars__inner flex items-center gap-[8px]">
 
-    <div class="product-top__review-stars__stars flex items-center gap-[2px]">
+    <div class="product-top__review-stars__stars flex items-center gap-[2px] text-[var(--section-icons)]">
       {%- assign rating = block.settings.rating -%}
       {%- for i in (1..5) -%}
         {%- if i <= rating -%}
           <svg class="product-top__review-stars__star" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7 1L8.854 4.764L13 5.382L10 8.311L10.708 12.438L7 10.5L3.292 12.438L4 8.311L1 5.382L5.146 4.764L7 1Z" fill="#F2BAFE" stroke="#5E0D54" stroke-width="0.8" stroke-linejoin="round"/>
+            <path d="M7 1L8.854 4.764L13 5.382L10 8.311L10.708 12.438L7 10.5L3.292 12.438L4 8.311L1 5.382L5.146 4.764L7 1Z" fill="currentColor"/>
           </svg>
         {%- else -%}
           <svg class="product-top__review-stars__star product-top__review-stars__star--empty" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7 1L8.854 4.764L13 5.382L10 8.311L10.708 12.438L7 10.5L3.292 12.438L4 8.311L1 5.382L5.146 4.764L7 1Z" fill="transparent" stroke="#5E0D54" stroke-width="0.8" stroke-linejoin="round"/>
+            <path d="M7 1L8.854 4.764L13 5.382L10 8.311L10.708 12.438L7 10.5L3.292 12.438L4 8.311L1 5.382L5.146 4.764L7 1Z" fill="transparent"/>
           </svg>
         {%- endif -%}
       {%- endfor -%}
     </div>
 
     {%- if block.settings.label != blank -%}
-      <div class="product-top__review-stars__label [font-family:var(--font-body)] text-[14px] font-[700] leading-[1.4] uppercase">
+      <div class="product-top__review-stars__label [font-family:var(--font-body)] text-[14px] font-[700] leading-[1em] uppercase">
         <span>{{ block.settings.label }}</span>
       </div>
     {%- endif -%}

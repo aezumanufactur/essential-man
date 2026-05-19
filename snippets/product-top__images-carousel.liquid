@@ -77,15 +77,10 @@
         {% endif %}
         {% if forloop.first %}
           {%- if carousel_pills != blank or product.options_with_values.size > 0 -%}
-            <div class="product-top__images-pills absolute">
+            <div class="product-top__images-pills">
               {%- for pill in carousel_pills.value -%}
                 <div class="[font-family:var(--font-body)] text-[12px] font-[700] leading-[1em] uppercase rounded-[5px] px-[8px] py-[7px] bg-[var(--soft-stone,#d5d1c8)] text-[color:var(--carbon,#1e1b22)]">
                   <span>{{ pill }}</span>
-                </div>
-              {%- endfor -%}
-              {%- for value in product.options_with_values[0].values -%}
-                <div class="[font-family:var(--font-body)] text-[12px] font-[700] leading-[1em] uppercase rounded-[5px] px-[8px] py-[4px] border border-current">
-                  <span>{{ value }}</span>
                 </div>
               {%- endfor -%}
             </div>

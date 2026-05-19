@@ -1,10 +1,10 @@
 {%- render "settings__block-layout-controls" -%}
 
 <div class="product-top__price">
-  <div class="product-top__price__inner flex items-center gap-[8px] [font-family:var(--font-body)] text-[14px] font-[700] leading-[1.4] uppercase">
+  <div class="product-top__price__inner flex items-center gap-[12px] [font-family:var(--font-body)] text-[14px] font-[700] leading-[1.5] uppercase">
 
     <template x-if='currentCompareAtPrice'>
-      <span class="product-top__price__compare line-through opacity-60"
+      <span class="product-top__price__compare line-through opacity-30"
         x-text='currentCompareAtPrice'></span>
     </template>
 
@@ -12,6 +12,14 @@
       x-text='currentPriceValue'>
       {{- product.selected_or_first_available_variant.price | money_without_trailing_zeros -}}
     </span>
+
+    <template x-if='currentSavingsValue'>
+      <div class="product-top__price__save bg-[#d15722] text-[#eeece5] rounded-[5px] px-[8px] py-[6px]">
+        <div class="[font-family:var(--font-body)] text-[12px] font-[700] leading-[20px] uppercase">
+          <p x-text='"Save " + currentSavingsValue'></p>
+        </div>
+      </div>
+    </template>
 
   </div>
 </div>

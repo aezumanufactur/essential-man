@@ -1,43 +1,187 @@
 {%- render "settings__block-layout-controls" -%}
 
-<div class="product-top__trust-icons">
-  <div class="product-top__trust-icons__inner flex flex-row flex-wrap items-center justify-between gap-[16px] w-full">
-    {%- for trust_item in block.settings.trust_icons -%}
-      <div class="product-top__trust-icons__item flex flex-col items-center gap-[10px] w-[calc(30%)] large:w-[calc((100%-32px)/3)] max-w-[114px]">
+{%- assign addon_product = all_products[block.settings.product] -%}
 
-        {%- assign item_image = trust_item.image.value -%}
-        {%- if item_image != blank -%}
-          <div class="product-top__trust-icons__image-wrap size-[32px] flex items-center justify-center">
-            {%- render "component__lazyload-image",
-              image: item_image,
-              width: 64,
-              class: "w-full h-full object-contain block" -%}
+{%- if addon_product != blank and addon_product.id != product.id -%}
+
+  {%- assign addon_variant = addon_product.selected_or_first_available_variant -%}
+  {%- assign addon_image = block.settings.image | default: addon_product.featured_image -%}
+  {%- assign addon_form_id = 'product-add-on-form-' | append: block.id -%}
+  {%- if addon_variant.available -%}
+    {%- assign open_off_canvas = 'x-on:click="$store[`offCanvasCart`].openOffcanvas(); $store[`offCanvasProductForm`].closeOffcanvas()"' -%}
+  {%- else -%}
+    {%- assign open_off_canvas = '' -%}
+  {%- endif -%}
+
+  <style>
+    #shopify-block-{{ block.id }} .product-add-on__card {
+      background-color: {{ block.settings.card_bg_color }};
+    }
+    #shopify-block-{{ block.id }} .product-add-on__image-bg {
+      background-color: {{ block.settings.image_bg_color }};
+    }
+    #shopify-block-{{ block.id }} .product-add-on__title {
+      color: {{ block.settings.title_color }};
+    }
+    #shopify-block-{{ block.id }} .product-add-on__description {
+      color: {{ block.settings.description_color }};
+    }
+  </style>
+
+  <div class="product-add-on w-full">
+    <div class="product-add-on__card flex flex-row overflow-hidden rounded-[10px] border border-[currentColor] w-full">
+
+      <div class="product-add-on__image-section relative w-[145px] shrink-0 self-stretch overflow-hidden">
+        <div class="product-add-on__image-bg absolute inset-0 opacity-[0.56]"></div>
+        {%- if addon_image != blank -%}
+          <img
+            src="{{ addon_image | image_url: width: 290 }}"
+            alt="{{ addon_image.alt | escape }}"
+            width="{{ addon_image.width }}"
+            height="{{ addon_image.height }}"
+            loading="lazy"
+            class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[90%] object-contain">
+        {%- endif -%}
+      </div>
+
+      <div class="product-add-on__divider w-px shrink-0 bg-[currentColor]"></div>
+
+      <div class="product-add-on__content flex flex-col gap-[12px] large:gap-[15px] py-[15px] pl-[20px] pr-[14px] flex-1 min-w-0">
+
+        {%- if block.settings.pilled_text != blank -%}
+          <div class="product-add-on__pill inline-flex items-center self-start rounded-[5px] overflow-hidden px-[8px] py-[7px] bg-[#647949]">
+            <div class="product-add-on__pill-text [font-family:var(--font-body)] text-[12px] font-[700] leading-[20px] uppercase text-[#eeece5] whitespace-nowrap">
+              <p>{{ block.settings.pilled_text }}</p>
+            </div>
           </div>
         {%- endif -%}
 
-        {%- assign item_label = trust_item.label.value -%}
-        {%- if item_label != blank -%}
-          <div class="product-top__trust-icons__label [font-family:var(--font-body)] text-[12px] large:text-[14px] font-[700] leading-[1.4] large:leading-[20px] uppercase text-center">
-            <p>{{ item_label }}</p>
+        {%- if block.settings.title != blank -%}
+          <div class="product-add-on__title [font-family:var(--font-heading-h4)] text-[20px] large:text-[26px] font-[500] leading-[1.1] uppercase w-full">
+            <p>{{ block.settings.title }}</p>
           </div>
         {%- endif -%}
+
+        {%- if block.settings.description != blank -%}
+          <div class="product-add-on__description [font-family:var(--font-body)] text-[12px] large:text-[14px] font-[700] leading-[1.4] large:leading-[20px] uppercase opacity-60 w-full">
+            <p>{{ block.settings.description }}</p>
+          </div>
+        {%- endif -%}
+
+        {%- form 'product',
+          addon_product,
+          id: addon_form_id,
+          class: 'form',
+          novalidate: 'novalidate',
+          data-type: 'add-to-cart-form',
+          x-data: 'MFRProductForm()' -%}
+          {%- render 'product-form__hidden-input', product: addon_product -%}
+          <button
+            type="submit"
+            class="product-add-on__button bg-[#eeece5] border border-[currentColor] rounded-[5px] h-[42px] px-[20px] overflow-hidden flex items-center justify-center w-full"
+            {%- if addon_variant.available == false or addon_variant == null -%}disabled{%- endif -%}
+            {{ open_off_canvas }}>
+            <div class="product-add-on__button-text [font-family:var(--font-heading-h4)] text-[15px] font-[500] leading-[1] uppercase text-center whitespace-nowrap">
+              <p>
+                {{- block.settings.atc_label }} — {{ addon_variant.price | money_without_trailing_zeros -}}
+                {%- if addon_variant.compare_at_price > addon_variant.price -%}
+                  <span class="line-through opacity-50"> {{ addon_variant.compare_at_price | money_without_trailing_zeros }}</span>
+                {%- endif -%}
+              </p>
+            </div>
+          </button>
+        {%- endform -%}
+
+        {%- render 'script__section', file: "MFRProductForm.js" -%}
 
       </div>
-    {%- endfor -%}
+    </div>
   </div>
-</div>
+
+{%- else -%}
+  <style>#shopify-block-{{ block.id }} { display: none; }</style>
+{%- endif -%}
 
 {% schema %}
 {
-  "name": "Trust Icons",
-  "class": "product-top__trust-icons-wrapper",
+  "name": "Product Add On",
+  "class": "product-add-on-wrapper",
   "settings": [
     {
-      "type": "metaobject_list",
-      "id": "trust_icons",
-      "label": "Trust Icons",
-      "metaobject_type": "trust_icons",
-      "info": "Accepts 'trust_icons' metaobject type. Uses .image (file) and .label (text) field values from each entry."
+      "type": "header",
+      "content": "Product Settings"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "text",
+      "id": "pilled_text",
+      "label": "Pilled Text",
+      "default": "Best Value"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "The Essential System"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Texture Powder with Matte Clay. The full routine."
+    },
+    {
+      "type": "text",
+      "id": "atc_label",
+      "label": "Add to Cart Label",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Defaults to product featured image if left empty."
+    },
+    {
+      "type": "header",
+      "content": "Color Settings"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card Background Color",
+      "default": "#9fa7aa"
+    },
+    {
+      "type": "color",
+      "id": "image_bg_color",
+      "label": "Image Background Color",
+      "default": "#eeece5",
+      "info": "Applied at 56% opacity over the card background."
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1e1b22"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#1e1b22"
     },
     {
       "type": "header",
@@ -378,9 +522,10 @@
       "visible_if": "{{ block.settings.margin_y_desktop }}"
     }
   ],
+  "blocks": [],
   "presets": [
     {
-      "name": "Trust Icons"
+      "name": "Product Add On"
     }
   ]
 }

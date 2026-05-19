@@ -58,7 +58,7 @@
               "settings": {
                 "image": "shopify://shop_images/Generated_with_Kive.ai_-_kive-image_16_4_1.webp",
                 "title": "The Essential System",
-                "url": "#",
+                "url": "shopify://products/the-essential-system",
                 "badge_text": "Best Value",
                 "badge_color": "#647949"
               },
@@ -70,7 +70,7 @@
               "settings": {
                 "image": "shopify://shop_images/Generated_with_Kive.ai_-_kive-image_11_1.webp",
                 "title": "Texture powder",
-                "url": "#",
+                "url": "shopify://products/texture-powder",
                 "badge_text": "",
                 "badge_color": "#647949"
               },
@@ -82,7 +82,7 @@
               "settings": {
                 "image": "shopify://shop_images/Generated_with_Kive.ai_-_kive-image_2.webp",
                 "title": "matte clay",
-                "url": "#",
+                "url": "shopify://products/matte-clay",
                 "badge_text": "",
                 "badge_color": "#647949"
               },
@@ -183,12 +183,158 @@
         "mega_menu_header_color_change": true,
         "mega_menu_header_color_scheme": "scheme-1",
         "logo_mega_menu": "shopify://shop_images/essential-man-logo--black.svg",
-        "appear_on": ""
+        "appear_on": "index\npage\nblog\narticle"
+      }
+    },
+    "header_xrxLwD": {
+      "type": "header",
+      "blocks": {
+        "header_mega_menu_67Xgtj": {
+          "type": "_header__mega-menu",
+          "name": "Mega Menu",
+          "settings": {
+            "trigger_label": "Shop",
+            "color_scheme": ""
+          },
+          "blocks": {
+            "header_mega_menu_product_card_Ap3hYB": {
+              "type": "_header__mega-menu__product-card",
+              "name": "Product Card",
+              "settings": {
+                "image": "shopify://shop_images/Generated_with_Kive.ai_-_kive-image_16_4_1.webp",
+                "title": "The Essential System",
+                "url": "shopify://products/the-essential-system",
+                "badge_text": "Best Value",
+                "badge_color": "#647949"
+              },
+              "blocks": {}
+            },
+            "header_mega_menu_product_card_ReLf6V": {
+              "type": "_header__mega-menu__product-card",
+              "name": "Product Card",
+              "settings": {
+                "image": "shopify://shop_images/Generated_with_Kive.ai_-_kive-image_11_1.webp",
+                "title": "Texture powder",
+                "url": "shopify://products/texture-powder",
+                "badge_text": "",
+                "badge_color": "#647949"
+              },
+              "blocks": {}
+            },
+            "header_mega_menu_product_card_kGbM4p": {
+              "type": "_header__mega-menu__product-card",
+              "name": "Product Card",
+              "settings": {
+                "image": "shopify://shop_images/Generated_with_Kive.ai_-_kive-image_2.webp",
+                "title": "matte clay",
+                "url": "shopify://products/matte-clay",
+                "badge_text": "",
+                "badge_color": "#647949"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "header_mega_menu_product_card_Ap3hYB",
+            "header_mega_menu_product_card_ReLf6V",
+            "header_mega_menu_product_card_kGbM4p"
+          ]
+        },
+        "header-left": {
+          "type": "_header__left",
+          "static": true,
+          "settings": {
+            "menu_display": "standard"
+          },
+          "blocks": {
+            "header_nav_menu_ctGkC7": {
+              "type": "_header__nav-menu",
+              "name": "Nav Menu",
+              "settings": {
+                "menu": "mfr-main-menu"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "header_nav_menu_ctGkC7"
+          ]
+        },
+        "header-center": {
+          "type": "_header__center",
+          "static": true,
+          "settings": {
+            "logo": "shopify://shop_images/essential-man-logo--black.svg",
+            "logo_sticky": "shopify://shop_images/essential-man-logo.svg",
+            "logo_width_mobile": 220,
+            "logo_width_desktop": 250
+          },
+          "blocks": {}
+        },
+        "header-right": {
+          "type": "_header__right",
+          "static": true,
+          "settings": {
+            "show_cart_cta": true,
+            "show_cart_icon": true,
+            "show_search_bar": false,
+            "show_account_cta": false,
+            "account_label": "Account",
+            "show_contact_cta": false,
+            "contact_label": "Contact Us"
+          },
+          "blocks": {
+            "header_button_fUw8YW": {
+              "type": "_header__button",
+              "name": "Button",
+              "settings": {
+                "url": "#",
+                "label": "Try The Bundle",
+                "color_theme": "secondary"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "header_button_fUw8YW"
+          ]
+        }
+      },
+      "block_order": [
+        "header_mega_menu_67Xgtj"
+      ],
+      "settings": {
+        "layout_mobile": "logo-center",
+        "layout_desktop": "logo-left-contained",
+        "grid_container_width": "contain",
+        "color_scheme": "scheme-95a2889d-7059-45fe-8670-e5f40e42e850",
+        "color_scheme_sticky": "scheme-95a2889d-7059-45fe-8670-e5f40e42e850",
+        "bg_color_override": "",
+        "bg_color_sticky_override": "",
+        "offset_mobile": 0,
+        "offset_desktop": 0,
+        "offset_sticky_mobile": 0,
+        "offset_sticky_desktop": 0,
+        "border_radius_mobile": 0,
+        "border_radius_desktop": 0,
+        "sticky_border_radius_mobile": 0,
+        "sticky_border_radius_desktop": 0,
+        "show_border_bottom_mobile": true,
+        "border_bottom_color_mobile": "#1e1b22",
+        "border_bottom_opacity_mobile": 100,
+        "show_border_bottom_desktop": true,
+        "border_bottom_color_desktop": "#1e1b22",
+        "border_bottom_opacity_desktop": 100,
+        "mega_menu_header_color_change": true,
+        "mega_menu_header_color_scheme": "scheme-1",
+        "logo_mega_menu": "shopify://shop_images/essential-man-logo--black.svg",
+        "appear_on": "product"
       }
     }
   },
   "order": [
     "header_announcement_bar_XtRbkg",
-    "header"
+    "header",
+    "header_xrxLwD"
   ]
 }

@@ -4,7 +4,7 @@
 {%- assign pills_key = block.settings.pills_metafield_key -%}
 {%- assign pills_metafield = product.metafields[pills_ns][pills_key] -%}
 
-<div class="product-top__images w-full border-b large:border-b-0 large:border-r border-current">
+<div class="product-top__images w-full border-b large:border-b-0 large:border-r border-current"{% if block.settings.bg_color != blank %} style="background: {{ block.settings.bg_color }}"{% endif %}>
   <div class="product-top__images__inner">
 
     <div class="product-top__images-carousel-wrap large:hidden">
@@ -53,11 +53,6 @@
                     <span>{{ pill }}</span>
                   </div>
                 {%- endfor -%}
-                {%- for value in product.options_with_values[0].values -%}
-                  <div class="[font-family:var(--font-body)] text-[12px] font-[700] leading-[1em] uppercase rounded-[5px] px-[8px] py-[4px] border border-current">
-                    <span>{{ value }}</span>
-                  </div>
-                {%- endfor -%}
               </div>
             {%- endif -%}
           {%- endif -%}
@@ -76,6 +71,15 @@
   "name": "Images",
   "class": "product-top__images-wrapper w-full",
   "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "bg_color",
+      "label": "Background Color"
+    },
     {
       "type": "header",
       "content": "Benefit Pills"
