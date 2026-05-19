@@ -1,16 +1,23 @@
 {%- render "settings__block-layout-controls" -%}
 
-{%- assign small_text_color = block.settings.color -%}
-{%- assign small_text_bg = block.settings.color_background -%}
+{%- assign pill_color = block.settings.pill_color -%}
+{%- assign pill_bg = block.settings.pill_color_background -%}
 
-{%- capture small_text_style -%}
-  {%- if small_text_color != blank and small_text_color != 'rgba(0,0,0,0)' -%}color: {{ small_text_color }};{%- endif -%}
-  {%- if small_text_bg != blank and small_text_bg != 'rgba(0,0,0,0)' -%}background-color: {{ small_text_bg }};{%- endif -%}
+{%- capture pill_style -%}
+  {%- if pill_color != blank and pill_color != 'rgba(0,0,0,0)' -%}color: {{ pill_color }};{%- endif -%}
+  {%- if pill_bg != blank and pill_bg != 'rgba(0,0,0,0)' -%}background-color: {{ pill_bg }};{%- endif -%}
 {%- endcapture -%}
 
 <div class="product-top__small-text">
-  <div class="product-top__small-text__inner [font-family:var(--font-heading-h4)] text-[16px] font-[700] leading-[1.4] uppercase" style="{{ small_text_style }}">
-    <span>{{ block.settings.text }}</span>
+  <div class="product-top__small-text__inner flex items-center justify-between w-full [font-family:var(--font-heading-h4)] text-[16px] font-[700] leading-[1.5] uppercase">
+    <span class="product-top__small-text__label">{{ block.settings.text }}</span>
+    {%- if block.settings.pill_text != blank -%}
+      <div
+        class="product-top__small-text__pill [font-family:var(--font-body)] text-[12px] font-[700] leading-[20px] uppercase rounded-[5px] px-[8px] py-[7px]"
+        style="{{ pill_style }}">
+        <span>{{ block.settings.pill_text }}</span>
+      </div>
+    {%- endif -%}
   </div>
 </div>
 
@@ -20,24 +27,31 @@
   "class": "product-top__small-text-wrapper",
   "settings": [
     {
-      "type": "header",
-      "content": "Pilled Text Settings"
-    },
-    {
       "type": "text",
       "id": "text",
       "label": "Text",
       "default": "Lift · Grip · Volume"
     },
     {
-      "type": "color",
-      "id": "color",
-      "label": "Text Color"
+      "type": "header",
+      "content": "Pilled Text Settings"
+    },
+    {
+      "type": "text",
+      "id": "pill_text",
+      "label": "Pill Text"
     },
     {
       "type": "color",
-      "id": "color_background",
-      "label": "Background Color"
+      "id": "pill_color",
+      "label": "Pill Text Color",
+      "default": "#eeece5"
+    },
+    {
+      "type": "color",
+      "id": "pill_color_background",
+      "label": "Pill Background Color",
+      "default": "#647949"
     },
     {
       "type": "header",
