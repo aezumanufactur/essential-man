@@ -23,7 +23,8 @@
         {%- else -%}
           {%- assign img_class = "w-full h-full block object-cover" -%}
         {%- endif -%}
-        {%- if forloop.index | modulo: 3 == 1 -%}
+        {%- assign item_index_mod = forloop.index | modulo: 3 -%}
+        {%- if item_index_mod == 1 -%}
           {%- assign item_ar = block.settings.desktop_full_aspect_ratio | default: '931/777' -%}
         {%- else -%}
           {%- assign item_ar = block.settings.desktop_half_aspect_ratio | default: '466/574' -%}
