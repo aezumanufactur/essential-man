@@ -95,6 +95,12 @@
   }
 
   .product-top__info {
+    position: sticky;
+    top: var(--top-offset-mobile);
+
+    @include breakpoint(large up) {
+      top: var(--top-offset);
+    }
   }
 
   .subscription-selector {
