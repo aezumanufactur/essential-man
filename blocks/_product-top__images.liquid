@@ -3,14 +3,12 @@
 <div class="product-top__images w-full">
   <div class="product-top__images__inner">
 
-    {{- comment -}} Mobile carousel {{- endcomment -}}
     <div class="product-top__images-carousel-wrap large:hidden">
       {%- render 'product-top__images-carousel',
         product: product,
         section: section -%}
     </div>
 
-    {{- comment -}} Desktop image grid {{- endcomment -}}
     <div class="product-top__images-grid hidden large:flex flex-wrap w-full">
       {%- for media in product.media -%}
         <div class="product-top__images-item w-full [&:nth-child(3n+2)]:w-1/2 [&:nth-child(3n)]:w-1/2 aspect-[4/5] [&:nth-child(3n+2)]:aspect-[1/1] [&:nth-child(3n)]:aspect-[1/1] overflow-hidden">
@@ -36,10 +34,23 @@
       {%- endfor -%}
     </div>
 
+    {%- assign pills_ns = block.settings.pills_metafield_namespace -%}
+    {%- assign pills_key = block.settings.pills_metafield_key -%}
+    {%- assign pills_metafield = product.metafields[pills_ns][pills_key] -%}
+    {%- if pills_metafield != blank -%}
+      <div class="product-top__images-pills-row flex flex-wrap items-center justify-center gap-[10px] py-[12px] px-5 large:px-0">
+        {%- for pill in pills_metafield.value -%}
+          <div class="product-top__images-pills-pill [font-family:var(--font-body)] text-[12px] font-[700] leading-[1em] uppercase rounded-[5px] px-[8px] py-[7px] bg-[var(--soft-stone,#d5d1c8)] text-[color:var(--carbon,#1e1b22)]">
+            <span>{{ pill }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
     {%- if product.options_with_values.size > 0 -%}
       <div class="product-top__images-pills flex flex-wrap gap-[8px] px-5 py-[12px] large:px-0">
         {%- for value in product.options_with_values[0].values -%}
-          <div class="product-top__images-pill [font-family:var(--font-body)] text-[12px] font-[700] leading-[20px] uppercase rounded-[5px] px-[8px] py-[4px] border border-current">
+          <div class="product-top__images-pill [font-family:var(--font-body)] text-[12px] font-[700] leading-[1em] uppercase rounded-[5px] px-[8px] py-[4px] border border-current">
             <span>{{ value }}</span>
           </div>
         {%- endfor -%}
@@ -51,9 +62,29 @@
 
 {% schema %}
 {
-  "name": "Product Top: Images",
-  "class": "product-top__images-wrapper",
+  "name": "Images",
+  "class": "product-top__images-wrapper w-full",
   "settings": [
+    {
+      "type": "header",
+      "content": "Benefit Pills"
+    },
+    {
+      "type": "paragraph",
+      "content": "Set the metafield to a list.single_line_text_field type. Each value in the list will render as a pill below the image grid."
+    },
+    {
+      "type": "text",
+      "id": "pills_metafield_namespace",
+      "label": "Metafield Namespace",
+      "default": "mfr_fields"
+    },
+    {
+      "type": "text",
+      "id": "pills_metafield_key",
+      "label": "Metafield Key",
+      "default": "benefits"
+    },
     {
       "type": "header",
       "content": "Block Layout Controls"
@@ -395,7 +426,7 @@
   ],
   "presets": [
     {
-      "name": "Product Top: Images"
+      "name": "Images"
     }
   ]
 }
