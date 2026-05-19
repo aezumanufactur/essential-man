@@ -38,7 +38,7 @@ assign section settings to variables
     class="section-spacer background {{ grid_gutter }} pt-[var(--top-spacing-mobile)] pb-[var(--bottom-spacing-mobile)] large:pt-[var(--top-spacing-desktop)] large:pb-[var(--bottom-spacing-desktop)]"
     style="{{ spacer }}">
     <div
-      class="{{ container_width }} relative px-5 z-[1] mx-auto{% unless container_width == 'full' %} large:px-[3.75rem]{% endunless %}"
+      class="grid-container{% if container_width == 'full' %} full max-w-none px-0{% else %} mx-auto max-w-[var(--grid-container-max-width)] px-[var(--grid-container-padding-mobile)] large:px-[var(--grid-container-padding-desktop)]{% endif %} w-full relative z-[1]"
       {{ max_width_style }}>
       <div class="alignment-helper flex flex-row flex-wrap w-full">
         {%- content_for "block", type: "_product-top__images", id: "product-top-images" -%}

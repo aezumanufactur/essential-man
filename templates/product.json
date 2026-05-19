@@ -82,19 +82,19 @@
             "max_width_desktop_value": 0,
             "max_width_desktop_custom": "",
             "max_width_desktop_unit": "px",
-            "enable_padding_settings": false,
-            "padding_x_mobile": false,
-            "padding_left_mobile": 0,
-            "padding_right_mobile": 0,
-            "padding_y_mobile": false,
-            "padding_top_mobile": 0,
-            "padding_bottom_mobile": 0,
-            "padding_x_desktop": false,
-            "padding_left_desktop": 0,
-            "padding_right_desktop": 0,
-            "padding_y_desktop": false,
-            "padding_top_desktop": 0,
-            "padding_bottom_desktop": 0,
+            "enable_padding_settings": true,
+            "padding_x_mobile": true,
+            "padding_left_mobile": 20,
+            "padding_right_mobile": 20,
+            "padding_y_mobile": true,
+            "padding_top_mobile": 30,
+            "padding_bottom_mobile": 30,
+            "padding_x_desktop": true,
+            "padding_left_desktop": 30,
+            "padding_right_desktop": 30,
+            "padding_y_desktop": true,
+            "padding_top_desktop": 30,
+            "padding_bottom_desktop": 50,
             "enable_margin_settings": false,
             "margin_x_mobile": false,
             "margin_left_mobile": 0,
@@ -113,40 +113,133 @@
             "small_text_abc123": {
               "type": "_product-top__small-text",
               "settings": {
-                "text": "Lift · Grip · Volume"
+                "text": "Lift · Grip · Volume",
+                "enable_margin_settings": true,
+                "margin_x_mobile": false,
+                "margin_left_mobile": 0,
+                "margin_right_mobile": 0,
+                "margin_y_mobile": true,
+                "margin_top_mobile": 0,
+                "margin_bottom_mobile": 12,
+                "margin_x_desktop": false,
+                "margin_left_desktop": 0,
+                "margin_right_desktop": 0,
+                "margin_y_desktop": true,
+                "margin_top_desktop": 0,
+                "margin_bottom_desktop": 12
               }
             },
             "review_stars_def456": {
               "type": "_product-top__review-stars",
               "settings": {
                 "rating": 5,
-                "label": "4.9 (524)"
+                "label": "4.9 (524)",
+                "enable_margin_settings": true,
+                "margin_x_mobile": false,
+                "margin_left_mobile": 0,
+                "margin_right_mobile": 0,
+                "margin_y_mobile": true,
+                "margin_top_mobile": 0,
+                "margin_bottom_mobile": 12,
+                "margin_x_desktop": false,
+                "margin_left_desktop": 0,
+                "margin_right_desktop": 0,
+                "margin_y_desktop": true,
+                "margin_top_desktop": 0,
+                "margin_bottom_desktop": 12
               }
             },
             "product_title_ghi789": {
               "type": "_product-top__product-title",
               "settings": {
-                "title": ""
+                "title": "",
+                "enable_margin_settings": true,
+                "margin_x_mobile": false,
+                "margin_left_mobile": 0,
+                "margin_right_mobile": 0,
+                "margin_y_mobile": true,
+                "margin_top_mobile": 0,
+                "margin_bottom_mobile": 16,
+                "margin_x_desktop": false,
+                "margin_left_desktop": 0,
+                "margin_right_desktop": 0,
+                "margin_y_desktop": true,
+                "margin_top_desktop": 0,
+                "margin_bottom_desktop": 20
               }
             },
             "pilled_text_jkl012": {
               "type": "_product-top__pilled-text",
               "settings": {
-                "text": "50ml bottle"
+                "text": "50ml bottle",
+                "enable_margin_settings": true,
+                "margin_x_mobile": false,
+                "margin_left_mobile": 0,
+                "margin_right_mobile": 0,
+                "margin_y_mobile": true,
+                "margin_top_mobile": 0,
+                "margin_bottom_mobile": 16,
+                "margin_x_desktop": false,
+                "margin_left_desktop": 0,
+                "margin_right_desktop": 0,
+                "margin_y_desktop": true,
+                "margin_top_desktop": 0,
+                "margin_bottom_desktop": 20
               }
             },
             "divider_mno345": {
               "type": "_product-top__divider",
-              "settings": {}
+              "settings": {
+                "enable_margin_settings": true,
+                "margin_x_mobile": false,
+                "margin_left_mobile": 0,
+                "margin_right_mobile": 0,
+                "margin_y_mobile": true,
+                "margin_top_mobile": 0,
+                "margin_bottom_mobile": 16,
+                "margin_x_desktop": false,
+                "margin_left_desktop": 0,
+                "margin_right_desktop": 0,
+                "margin_y_desktop": true,
+                "margin_top_desktop": 0,
+                "margin_bottom_desktop": 16
+              }
             },
             "price_pqr678": {
               "type": "_product-top__price",
-              "settings": {}
+              "settings": {
+                "enable_margin_settings": true,
+                "margin_x_mobile": false,
+                "margin_left_mobile": 0,
+                "margin_right_mobile": 0,
+                "margin_y_mobile": true,
+                "margin_top_mobile": 0,
+                "margin_bottom_mobile": 26,
+                "margin_x_desktop": false,
+                "margin_left_desktop": 0,
+                "margin_right_desktop": 0,
+                "margin_y_desktop": true,
+                "margin_top_desktop": 0,
+                "margin_bottom_desktop": 26
+              }
             },
             "description_stu901": {
               "type": "_product-top__description",
               "settings": {
-                "description": ""
+                "description": "",
+                "enable_margin_settings": true,
+                "margin_x_mobile": false,
+                "margin_left_mobile": 0,
+                "margin_right_mobile": 0,
+                "margin_y_mobile": true,
+                "margin_top_mobile": 0,
+                "margin_bottom_mobile": 26,
+                "margin_x_desktop": false,
+                "margin_left_desktop": 0,
+                "margin_right_desktop": 0,
+                "margin_y_desktop": true,
+                "margin_top_desktop": 0,
+                "margin_bottom_desktop": 26
               }
             },
             "variant_selector_vwx234": {
@@ -176,14 +269,40 @@
                 "sold_out_label": "Sold Out",
                 "add_to_cart_label": "Add To Cart",
                 "show_price": false,
-                "bottom_caption": ""
+                "bottom_caption": "",
+                "enable_margin_settings": true,
+                "margin_x_mobile": false,
+                "margin_left_mobile": 0,
+                "margin_right_mobile": 0,
+                "margin_y_mobile": true,
+                "margin_top_mobile": 0,
+                "margin_bottom_mobile": 30,
+                "margin_x_desktop": false,
+                "margin_left_desktop": 0,
+                "margin_right_desktop": 0,
+                "margin_y_desktop": true,
+                "margin_top_desktop": 0,
+                "margin_bottom_desktop": 30
               }
             },
             "quick_add_hij456": {
               "type": "_product-top__quick-add",
               "settings": {
                 "bundle_text": "2-pack Bundle",
-                "save_text": "Save $6, Ships Free"
+                "save_text": "Save $6, Ships Free",
+                "enable_margin_settings": true,
+                "margin_x_mobile": false,
+                "margin_left_mobile": 0,
+                "margin_right_mobile": 0,
+                "margin_y_mobile": true,
+                "margin_top_mobile": 0,
+                "margin_bottom_mobile": 30,
+                "margin_x_desktop": false,
+                "margin_left_desktop": 0,
+                "margin_right_desktop": 0,
+                "margin_y_desktop": true,
+                "margin_top_desktop": 0,
+                "margin_bottom_desktop": 30
               }
             }
           },
