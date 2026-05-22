@@ -1,0 +1,172 @@
+<style>
+  @media (max-width: 1023px) {
+    #shopify-block-{{ block.id }} .features__product-images {
+      transform: translateY(-50%);
+    }
+    {%- if block.settings.max_width_mobile != blank and block.settings.max_width_mobile != 0 -%}
+      #shopify-block-{{ block.id }} .features__product-image {
+        max-width: {{ block.settings.max_width_mobile }}{{ block.settings.max_width_unit_mobile }};
+      }
+    {%- endif -%}
+    {%- if block.settings.max_height_mobile != blank and block.settings.max_height_mobile != 0 -%}
+      #shopify-block-{{ block.id }} .features__product-image {
+        max-height: {{ block.settings.max_height_mobile }}{{ block.settings.max_height_unit_mobile }};
+      }
+    {%- endif -%}
+  }
+  @media (min-width: 1024px) {
+    {%- if block.settings.max_width_desktop != blank and block.settings.max_width_desktop != 0 -%}
+      #shopify-block-{{ block.id }} .features__product-image {
+        max-width: {{ block.settings.max_width_desktop }}{{ block.settings.max_width_unit_desktop }};
+      }
+    {%- endif -%}
+    {%- if block.settings.max_height_desktop != blank and block.settings.max_height_desktop != 0 -%}
+      #shopify-block-{{ block.id }} .features__product-image {
+        max-height: {{ block.settings.max_height_desktop }}{{ block.settings.max_height_unit_desktop }};
+      }
+    {%- endif -%}
+  }
+</style>
+
+{%- assign metafield_images = product.metafields[block.settings.metafield_namespace][block.settings.metafield_key].value -%}
+
+<div class="features__product-images absolute top-0 left-0 w-full h-full flex justify-center items-center large:justify-start">
+  {%- if request.visual_preview_mode -%}
+    <div class="features__product-image relative flex flex-shrink-0 large:-translate-x-1/2">
+      {{ 'product-1' | placeholder_svg_tag: 'w-full h-auto block' }}
+    </div>
+    <div class="features__product-image relative flex flex-shrink-0">
+      {{ 'product-2' | placeholder_svg_tag: 'w-full h-auto block' }}
+    </div>
+  {%- elsif metafield_images != blank -%}
+    {%- for image in metafield_images -%}
+      <div class="features__product-image relative flex flex-shrink-0 mx-[-25px] large:mx-[0]"
+           style="aspect-ratio: {{ image.width }} / {{ image.height }}"
+           {%- if forloop.first -%}
+             x-data="{
+               updateMargin() {
+                 this.$el.style.marginLeft = window.innerWidth >= 1024
+                   ? '-' + (this.$el.offsetWidth / 2) + 'px'
+                   : '';
+               }
+             }"
+             x-init="updateMargin(); new ResizeObserver(() => updateMargin()).observe($el.querySelector('img'))"
+             @resize.window.debounce.200ms="updateMargin()"
+             @resize.debounce.200ms="updateMargin()"
+           {%- endif -%}>
+        {%- render "component__lazyload-image",
+          image: image,
+          width: 800,
+          class: "w-full h-full max-w-full max-h-full block object-contain" -%}
+      </div>
+    {%- endfor -%}
+  {%- endif -%}
+</div>
+
+{%- schema -%}
+  {
+    "name": "Product Images",
+    "class": "features__product-images-wrapper absolute top-0 left-0 w-full h-full",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Metafield Settings",
+        "info": "The namespace and key below determine which product metafield is used as the source of images rendered by this block."
+      },
+      {
+        "type": "text",
+        "id": "metafield_namespace",
+        "label": "Metafield Namespace",
+        "info": "e.g. custom"
+      },
+      {
+        "type": "text",
+        "id": "metafield_key",
+        "label": "Metafield Key",
+        "info": "e.g. product_images"
+      },
+      {
+        "type": "header",
+        "content": "Max Width Settings"
+      },
+      {
+        "type": "number",
+        "id": "max_width_mobile",
+        "label": "Max Width - Mobile",
+        "default": 50,
+        "info": "Leave at 0 for no max width."
+      },
+      {
+        "type": "select",
+        "id": "max_width_unit_mobile",
+        "label": "Max Width Unit - Mobile",
+        "options": [
+          { "value": "%", "label": "%" },
+          { "value": "px", "label": "px" }
+        ],
+        "default": "%"
+      },
+      {
+        "type": "number",
+        "id": "max_width_desktop",
+        "label": "Max Width - Desktop",
+        "default": 50,
+        "info": "Leave at 0 for no max width."
+      },
+      {
+        "type": "select",
+        "id": "max_width_unit_desktop",
+        "label": "Max Width Unit - Desktop",
+        "options": [
+          { "value": "%", "label": "%" },
+          { "value": "px", "label": "px" }
+        ],
+        "default": "%"
+      },
+      {
+        "type": "header",
+        "content": "Max Height Settings"
+      },
+      {
+        "type": "number",
+        "id": "max_height_mobile",
+        "label": "Max Height - Mobile",
+        "default": 50,
+        "info": "Leave at 0 for no max height."
+      },
+      {
+        "type": "select",
+        "id": "max_height_unit_mobile",
+        "label": "Max Height Unit - Mobile",
+        "options": [
+          { "value": "%", "label": "%" },
+          { "value": "px", "label": "px" }
+        ],
+        "default": "%"
+      },
+      {
+        "type": "number",
+        "id": "max_height_desktop",
+        "label": "Max Height - Desktop",
+        "default": 50,
+        "info": "Leave at 0 for no max height."
+      },
+      {
+        "type": "select",
+        "id": "max_height_unit_desktop",
+        "label": "Max Height Unit - Desktop",
+        "options": [
+          { "value": "%", "label": "%" },
+          { "value": "px", "label": "px" }
+        ],
+        "default": "%"
+      }
+    ],
+    "blocks": [],
+    "presets": [
+      {
+        "name": "Product Images"
+      }
+    ]
+  }
+{%- endschema -%}

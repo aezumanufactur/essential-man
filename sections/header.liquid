@@ -1,8 +1,3 @@
-{%- render "script__section", file: "MFRMegaMenu.js" -%}
-
-{% render 'renderer__color-scheme', name: "header", color_scheme: section.settings.color_scheme, selector: "header.header .header__wrapper" %}
-{% render 'renderer__color-scheme', name: "header", color_scheme: section.settings.color_scheme_sticky, selector: "header.header.header--sticky .header__wrapper" %}
-
 {%- if section.settings.bg_color_override != blank -%}
   <style>
     header.header .header__wrapper { --header-background: {{ section.settings.bg_color_override }}; }
@@ -58,6 +53,10 @@
   {%- assign border_bottom_desktop_classes = "large:border-b-0" -%}
 {%- endif -%}
 {% if appear_on == blank or appear_on contains template %}
+  {%- render "script__section", file: "MFRMegaMenu.js" -%}
+  {% render 'renderer__color-scheme', name: "header", color_scheme: section.settings.color_scheme, selector: "header.header .header__wrapper" %}
+  {% render 'renderer__color-scheme', name: "header", color_scheme: section.settings.color_scheme_sticky, selector: "header.header.header--sticky .header__wrapper" %}
+  
   <div class="header__wrapper {{ design_mode_class }} flex justify-center items-center flex-col transition-all duration-200 relative"
     x-data="{ megaMenuOpen: false }"
     @mega-menu-opened="megaMenuOpen = true; $el.style.setProperty('--active-mega-menu-bg', $event.detail.background)"

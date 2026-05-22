@@ -29,14 +29,14 @@ body {
         height: 2px;
     }
     &::-webkit-scrollbar-thumb {
-        background-color: #D899E1;
+        background-color: $black;
         border-radius: 2px;
-        border: 1px solid #D899E1;
+        border: 1px solid $black;
         
     }
     &::-webkit-scrollbar-track {
         border-radius: 10px;
-        background-color: rgba(#D899E1,0.2);
+        background-color: rgba(#{$black},0.2);
     }
   }
   img {
