@@ -58,22 +58,8 @@
     &__item {
       background-color: var(--bg-color, transparent);
       color: var(--text-color, $black);
-      padding: rem-calc( 13px ) rem-calc( 20px );
-      min-width: rem-calc( 90px );
+      padding: rem-calc(10);
       @include transition( $global-transition );
-
-      @include breakpoint( large up ) {
-        padding: rem-calc( 25px ) rem-calc( 12px );
-        min-width: rem-calc( 162px );
-      }
-
-      &:has(img) {
-        min-width: rem-calc( 114px );
-
-        @include breakpoint( large up ) {
-          min-width: rem-calc( 180px );
-        }
-      }
 
       &:not(:last-child) {
         border-right: 1px solid rgba(133, 133, 133, 1);
@@ -90,49 +76,6 @@
           height: rem-calc( 32px );
         }
       }
-
-      p {
-        display: block;
-        width: 100%;
-        text-align: center;
-        line-height: 1.125em;
-        font-weight: 400;
-        letter-spacing: rem-calc(0.11px);
-
-        @include breakpoint( large up ) {
-          @include large;
-          line-height: 1.167em;
-          font-weight: 400;
-          letter-spacing: rem-calc(-0.48px);
-        }
-      }
-
-      &:first-child {
-        width: 30%;
-        min-width: rem-calc( 133px );
-
-        @include breakpoint( large up ) {
-          width: 39%;
-          padding-left: rem-calc(50);
-        }
-
-        p {
-          @include small;
-          line-height: 1.286em;
-          font-weight: 500;
-          letter-spacing: rem-calc(0.43px);
-          text-transform: uppercase;
-          text-align: left;
-        }
-
-        img {
-          height: rem-calc( 14px );
-
-          @include breakpoint( large up ) {
-            height: rem-calc( 20px );
-          }
-        }
-      }
     }
 
     &__media {
@@ -143,37 +86,6 @@
         width: 37%;
         height: 100%;
         aspect-ratio: unset;
-      }
-    }
-  }
-
-  .section-spacer > :not(.full) {
-    .table-section {
-      margin-left: rem-calc(-20);
-      width: calc(100% + #{rem-calc(40)});
-
-      @include breakpoint( large up ) {
-        margin-left: rem-calc(-50);
-        width: calc(100% + #{rem-calc(100)});
-      }
-
-      &__item {
-        @include breakpoint( large up ) {
-          width: 18%;
-        }
-      }
-
-      &__media {
-        position: relative;
-        width: 100%;
-        padding: 0 rem-calc(20);
-        flex-shrink: 0;
-
-        @include breakpoint( large up ) {
-          width: 37%;
-          height: unset;
-          padding: 0;
-        }
       }
     }
   }

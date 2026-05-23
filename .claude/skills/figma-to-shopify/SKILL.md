@@ -17,11 +17,14 @@ Parse $ARGUMENTS as: `<mobile-url> <desktop-url> [section-name]`
 
 ## Phase 0 — Isolate in Worktree
 
-Before touching any files, call the `EnterWorktree` tool to create an isolated git worktree for this work.
+Before touching any files, create a fresh worktree branched from the **current local HEAD** (not origin/main):
 
-- The worktree will be on a new branch (e.g. `figma/<section-name>` or auto-named by the tool)
-- Record the worktree path — all subsequent file reads and writes happen inside it
-- Do not proceed to Phase 1 until `EnterWorktree` succeeds
+1. Derive a branch name from the section name argument (e.g. `figma/mfr-core__hero`) or use `figma/new-section` if no section name was provided yet.
+2. Run: `git worktree add .claude/worktrees/<branch-name> HEAD`
+   - This starts the worktree from the current local branch state, including any local commits not yet pushed.
+3. Call `EnterWorktree` with `path: ".claude/worktrees/<branch-name>"` to switch the session into it.
+4. Record the worktree path — all subsequent file reads and writes happen inside it.
+5. Do not proceed to Phase 1 until `EnterWorktree` succeeds.
 
 ---
 
