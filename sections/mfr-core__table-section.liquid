@@ -35,12 +35,9 @@ assign section settings to variables
       <div class="alignment-helper {{ color_theme }} flex flex-row flex-wrap [justify-content:var(--justify-content-mobile)] [text-align:var(--text-align-mobile)] large:[justify-content:var(--justify-content-desktop)] large:[text-align:var(--text-align-desktop)]">
         <div class="section-content w-full min-w-0 relative z-[2] flex [align-items:inherit] [justify-content:inherit] flex-wrap gap-x-[1.875rem] mb-[1.5625rem] last:mb-0 large:mb-[2.1875rem] large:gap-x-[3.75rem] [&>.shopify-block:not(:last-child)]:mb-[0.9375rem] empty:hidden"
           data-stagger-inview=".section-icon__wrapper, .section-content__small-text, .section-content__text, .section-content__button">
-          {%- content_for "block", type: "_section-content", id: "section-content" -%}
           {%- content_for "blocks" -%}
         </div>
-        {%- content_for "block", type: "_table", id: "table-section" -%}
       </div>
-      {%- content_for "block", type: "_table-section__media", id: "table-section-media" -%}
     </div>
   {%- render 'component__gradient-bg-styles' -%}
   </div>
@@ -292,7 +289,7 @@ assign section settings to variables
       "type": "_section-content"
     },
     {
-      "type": "_table-section__column"
+      "type": "_table"
     }
   ],
   "presets": [
@@ -302,8 +299,6 @@ assign section settings to variables
       "blocks": [
         {
           "type": "_section-content",
-          "id": "section-content",
-          "static": true,
           "blocks": [
             { "type": "_section-content__title" }
           ]

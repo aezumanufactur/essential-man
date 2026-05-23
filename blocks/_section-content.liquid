@@ -78,11 +78,6 @@
 
   </style>
   {%- render "settings__block-layout-controls" -%}
-  {% if block.settings.enable_animated_bg %}
-    <div class="orbit-container">
-      <div class="orbit-container__inner"></div>
-    </div>
-  {% endif %}
   {%- content_for "blocks" -%}
 {%- else -%}
   
@@ -174,6 +169,14 @@
           {
             "value": "flex-end",
             "label": "Bottom"
+          },
+          {
+            "value": "stretch",
+            "label": "Stretch"
+          },
+          {
+            "value": "space-between",
+            "label": "Space Between"
           }
         ],
         "default": "flex-start"
