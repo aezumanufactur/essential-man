@@ -328,7 +328,7 @@
         "mega_menu_header_color_change": true,
         "mega_menu_header_color_scheme": "scheme-1",
         "logo_mega_menu": "shopify://shop_images/essential-man-logo--black.svg",
-        "appear_on": "product"
+        "appear_on": "product\ncollection"
       }
     }
   },

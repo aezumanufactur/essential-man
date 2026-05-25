@@ -100,9 +100,9 @@
   {% unless has_no_products %}
     {% if source == "collection" %}
       {% paginate collection.products by post_per_page %}
-        <div class="product-grid__inner flex [justify-content:inherit] items-stretch [align-content:flex-start] flex-wrap gap-5 w-full transition-all large:gap-x-[1.125rem] large:gap-y-[1rem] [&.loading]:pointer-events-none [&.loading]:opacity-50">
+        <div class="product-grid__inner flex [justify-content:inherit] items-stretch [align-content:flex-start] flex-wrap gap-0 w-full transition-all [&.loading]:pointer-events-none [&.loading]:opacity-50">
           {% for product in collection.products %}
-            <div class="product-grid__item w-full shrink-0 medium:max-w-[calc((100%_-_1.25rem)_/_2)] large:max-w-[calc((100%_-_2.25rem)_/_3)]"
+            <div class="product-grid__item w-full shrink-0 aspect-[390/416] large:w-[33.333%] large:max-w-[33.333%]"
               data-inview>
               {% render 'partial__product-card',
                 product: product %}
@@ -110,7 +110,7 @@
             {%- assign item_index = forloop.index -%}
             {% for collection_image in collection_images %}
               {% if collection_image.index == item_index%}
-                <div class="product-grid__item w-full shrink-0 medium:max-w-[calc((100%_-_1.25rem)_/_2)] large:max-w-[calc((100%_-_2.25rem)_/_3)]"
+                <div class="product-grid__item w-full shrink-0 large:w-[33.333%] large:max-w-[33.333%]"
                   data-inview>
                   <div class="product-grid__image w-full aspect-[420/650] relative overflow-hidden rounded-[var(--global-border-radius)] [&_img]:w-full [&_img]:h-full [&_img]:object-cover">
                     {% render 'component__lazyload-image',
@@ -139,9 +139,9 @@
         </div>
       {% endpaginate %}
     {% else %}
-      <div class="product-grid__inner flex [justify-content:inherit] items-stretch [align-content:flex-start] flex-wrap gap-5 w-full transition-all large:gap-x-[1.125rem] large:gap-y-[1rem] [&.loading]:pointer-events-none [&.loading]:opacity-50">
+      <div class="product-grid__inner flex [justify-content:inherit] items-stretch [align-content:flex-start] flex-wrap gap-0 w-full transition-all [&.loading]:pointer-events-none [&.loading]:opacity-50">
         {% for product in products %}
-          <div class="product-grid__item w-full shrink-0 medium:max-w-[calc((100%_-_1.25rem)_/_2)] large:max-w-[calc((100%_-_2.25rem)_/_3)]"
+          <div class="product-grid__item w-full shrink-0 aspect-[390/416] medium:w-[50%] medium:max-w-[50%] large:w-[33.333%] large:max-w-[33.333%]"
             data-inview>
             {% render 'partial__product-card',
               product: product %}
@@ -150,9 +150,9 @@
       </div>
     {% endif %}
   {% elsif request.design_mode %}
-    <div class="product-grid__inner flex [justify-content:inherit] items-stretch [align-content:flex-start] flex-wrap gap-5 w-full transition-all large:gap-x-[1.125rem] large:gap-y-[1rem] [&.loading]:pointer-events-none [&.loading]:opacity-50">
+    <div class="product-grid__inner flex [justify-content:inherit] items-stretch [align-content:flex-start] flex-wrap gap-0 w-full transition-all [&.loading]:pointer-events-none [&.loading]:opacity-50">
       {% for i in (1..6) %}
-        <div class="product-grid__item w-full shrink-0 medium:max-w-[calc((100%_-_1.25rem)_/_2)] large:max-w-[calc((100%_-_2.25rem)_/_3)]"
+        <div class="product-grid__item w-full shrink-0 aspect-[390/416] large:w-[33.333%] large:max-w-[33.333%]"
           data-inview>
           {% render 'partial__product-card',
             product: product %}
