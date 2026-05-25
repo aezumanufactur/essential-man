@@ -9,7 +9,7 @@
  */
 {
   "current": {
-    "color_main_bg": "#ffffff",
+    "color_main_bg": "#c4bfb3",
     "overlay_color": "#000000",
     "global_border_width": 1.5,
     "global_border_radius": 30,
