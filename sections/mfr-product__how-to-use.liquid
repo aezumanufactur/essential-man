@@ -4,7 +4,7 @@ assign section settings to variables
 --------------------------------------
 {%- endcomment -%}
 
-{% render 'style-tags__section', asset_file_name: "mfr-core__custom-section.css" %}
+{% render 'style-tags__section', asset_file_name: "mfr-product__how-to-use.css" %}
 {%- assign container_width = section.settings.container_width -%}
 {%- assign max_width = section.settings.max_width -%}
 {%- assign grid_gutter = section.settings.grid_gutter -%}
@@ -16,7 +16,7 @@ assign section settings to variables
 
 {%- if max_width != 0 and container_width == "" -%}
   {%- capture max_width_style -%}
-    style="max-width: {{ max_width }}rem;" 
+    style="max-width: {{ max_width }}rem;"
   {%- endcapture -%}
 {%- endif -%}
 
@@ -27,7 +27,7 @@ assign section settings to variables
   --bottom-spacing-desktop: {{ section.settings.bottom_spacing_desktop | default: 100 }}px;
 {% endcapture %}
 {% render 'section__settings-styles' %}
-<section class="mfr-custom__section {{ custom_class }} {{ grid_gutter }}" id="{{ section_id }}">
+<section class="mfr-product__how-to-use {{ custom_class }} {{ grid_gutter }}" id="{{ section_id }}">
   <div class="section-spacer background {{ grid_gutter }} pt-[var(--top-spacing-mobile)] pb-[var(--bottom-spacing-mobile)] large:pt-[var(--top-spacing-desktop)] large:pb-[var(--bottom-spacing-desktop)]" style="{{ spacer }}">
     <div class="grid-container{% if container_width == 'full' %} full max-w-none px-0{% else %} mx-auto max-w-[var(--grid-container-max-width)] px-[var(--grid-container-padding-mobile)] large:px-[var(--grid-container-padding-desktop)]{% endif %} w-full relative z-[1]" {{ max_width_style }}>
       <div class="alignment-helper {{ color_theme }} flex flex-row flex-wrap [justify-content:var(--justify-content-mobile)] [text-align:var(--text-align-mobile)] large:[justify-content:var(--justify-content-desktop)] large:[text-align:var(--text-align-desktop)]">
@@ -37,7 +37,7 @@ assign section settings to variables
         </div>
       </div>
     </div>
-  
+
   {%- render 'component__gradient-bg-styles' -%}
   </div>
   {%- render 'component__section-dividers', is_video_background: true -%}
@@ -47,7 +47,7 @@ assign section settings to variables
 
 {% schema %}
 {
-  "name": "Custom Section",
+  "name": "How to Use",
   "disabled_on": {
     "groups": [
       "header",
@@ -106,9 +106,9 @@ assign section settings to variables
         {
           "value": "grid-gutter-mobile grid-gutter-desktop",
           "label": "On Both"
-        },
+        }
       ],
-      "label": "Section Margin",
+      "label": "Section Margin"
     },
     {
       "type": "header",
@@ -132,7 +132,7 @@ assign section settings to variables
           "label": "Right"
         }
       ],
-      "default": "center"
+      "default": "left"
     },
     {
       "type": "select",
@@ -152,7 +152,7 @@ assign section settings to variables
           "label": "Right"
         }
       ],
-      "default": "center"
+      "default": "left"
     },
     {
       "type": "header",
@@ -286,19 +286,23 @@ assign section settings to variables
   "blocks": [
     {
       "type": "_section-content"
+    },
+    {
+      "type": "_mfr-product__how-to-use__instruction-grid"
     }
   ],
   "presets": [
     {
-      "name": "Custom Section",
+      "name": "How to Use",
       "blocks": [
         {
           "type": "_section-content",
-          "id": "section-content",
-          "static": true,
           "blocks": [
             { "type": "_section-content__title" }
           ]
+        },
+        {
+          "type": "_mfr-product__how-to-use__instruction-grid"
         }
       ]
     }

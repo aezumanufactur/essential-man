@@ -27,6 +27,12 @@
 {% endfor %}
 {%- capture styles -%}aspect-ratio: {{ width }}/{{ height }};{%- endcapture -%}
 
+{%- comment -%}check if height is a number{%- endcomment -%}
+{%- assign height_check = height | append: '' -%}
+{% if height_check == "NaN" %}
+  {% assign height = "auto" %}
+{% endif %}
+
 {% if image != blank %}
   {{ image 
     | image_url: width: width 

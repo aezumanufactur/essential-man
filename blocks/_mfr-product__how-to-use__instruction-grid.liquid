@@ -1,0 +1,427 @@
+{%- render 'settings__block-layout-controls' -%}
+
+<div class="instruction-grid">
+  <div class="instruction-grid__inner flex flex-col gap-[60px] large:flex-row large:gap-[30px]">
+
+    {%- if block.settings.how_to_use_items != blank -%}
+      {%- assign image_key = block.settings.image_key | default: 'image' -%}
+      {%- assign title_key = block.settings.title_key | default: 'title' -%}
+      {%- assign caption_key = block.settings.caption_key | default: 'caption' -%}
+      {%- for entry in block.settings.how_to_use_items -%}
+        {%- if forloop.index < 10 -%}
+          {%- assign step_number = '0' | append: forloop.index -%}
+        {%- else -%}
+          {%- assign step_number = forloop.index | append: '' -%}
+        {%- endif -%}
+        {%- assign entry_image = entry[image_key] -%}
+        {%- assign entry_title = entry[title_key] -%}
+        {%- assign entry_caption = entry[caption_key] -%}
+        <div class="instruction-grid__item flex flex-col gap-[18px] large:w-[calc((100%_-_90px)/4)]">
+          <div class="instruction-grid__item-image-wrap aspect-[390/340] large:aspect-[322/380] w-full overflow-hidden border border-[var(--color-black)]">
+            {%- if entry_image != blank -%}
+              {%- assign alt = entry_image.alt | default: entry_title -%}
+              {%- assign entry_img = entry_image.image | default: entry_image -%}
+              {%- render 'component__lazyload-image',
+                image: entry_img,
+                width: 800,
+                alt: alt,
+                class: "w-full min-h-full block object-cover" -%}
+            {%- else -%}
+              <div class="w-full h-full bg-[#d9d9d9]"></div>
+            {%- endif -%}
+          </div>
+          <div class="instruction-grid__item-text flex flex-col gap-[16px] uppercase [color:var(--section-heading)]">
+            <div class="instruction-grid__item-header [font-family:var(--font-heading-h4)] text-[20px] large:text-[26px] font-[500] leading-[1.1] flex items-center justify-between">
+              {%- if entry_title != blank -%}
+                <div class="instruction-grid__item-title"><p>{{ entry_title }}</p></div>
+              {%- endif -%}
+              <div class="instruction-grid__item-number"><p>{{ step_number }}</p></div>
+            </div>
+            {%- if entry_caption != blank -%}
+              <div class="instruction-grid__item-caption [font-family:var(--custom-font-name-2)] text-[14px] font-[700] leading-[1.4] large:leading-[1.5]"><p>{{ entry_caption }}</p></div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    {%- else -%}
+      {%- content_for "blocks" -%}
+    {%- endif -%}
+
+  </div>
+</div>
+
+{%- schema -%}
+{
+  "name": "Instruction Grid",
+  "class": "instruction-grid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Metaobject Settings"
+    },
+    {
+      "type": "metaobject_list",
+      "id": "how_to_use_items",
+      "label": "How To Use Items",
+      "metaobject_type": "how_to_use",
+      "info": "Accepts 'how_to_use' metaobject type only."
+    },
+    {
+      "type": "text",
+      "id": "image_key",
+      "label": "Image Field Key",
+      "default": "image",
+      "info": "The metaobject field key for the image.",
+      "visible_if": "{{ block.settings.how_to_use_items != blank }}"
+    },
+    {
+      "type": "text",
+      "id": "title_key",
+      "label": "Title Field Key",
+      "default": "title",
+      "info": "The metaobject field key for the title.",
+      "visible_if": "{{ block.settings.how_to_use_items != blank }}"
+    },
+    {
+      "type": "text",
+      "id": "caption_key",
+      "label": "Caption Field Key",
+      "default": "caption",
+      "info": "The metaobject field key for the caption.",
+      "visible_if": "{{ block.settings.how_to_use_items != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Block Layout Controls"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_width_settings",
+      "label": "Enable Width Settings",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "width_mobile",
+      "label": "Width - Mobile",
+      "default": false,
+      "visible_if": "{{ block.settings.enable_width_settings }}"
+    },
+    {
+      "type": "number",
+      "id": "width_mobile_value",
+      "label": "Width Value - Mobile",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_width_settings and block.settings.width_mobile }}"
+    },
+    {
+      "type": "text",
+      "id": "width_mobile_custom",
+      "label": "Width Custom - Mobile",
+      "visible_if": "{{ block.settings.enable_width_settings and block.settings.width_mobile }}"
+    },
+    {
+      "type": "select",
+      "id": "width_mobile_unit",
+      "label": "Width Unit - Mobile",
+      "options": [
+        { "value": "px", "label": "px" },
+        { "value": "%", "label": "%" },
+        { "value": "vw", "label": "vw" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "px",
+      "visible_if": "{{ block.settings.enable_width_settings and block.settings.width_mobile }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "width_desktop",
+      "label": "Width - Desktop",
+      "default": false,
+      "visible_if": "{{ block.settings.enable_width_settings }}"
+    },
+    {
+      "type": "number",
+      "id": "width_desktop_value",
+      "label": "Width Value - Desktop",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_width_settings and block.settings.width_desktop }}"
+    },
+    {
+      "type": "text",
+      "id": "width_desktop_custom",
+      "label": "Width Custom - Desktop",
+      "visible_if": "{{ block.settings.enable_width_settings and block.settings.width_desktop }}"
+    },
+    {
+      "type": "select",
+      "id": "width_desktop_unit",
+      "label": "Width Unit - Desktop",
+      "options": [
+        { "value": "px", "label": "px" },
+        { "value": "%", "label": "%" },
+        { "value": "vw", "label": "vw" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "px",
+      "visible_if": "{{ block.settings.enable_width_settings and block.settings.width_desktop }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "max_width_mobile",
+      "label": "Max Width - Mobile",
+      "default": false,
+      "visible_if": "{{ block.settings.enable_width_settings }}"
+    },
+    {
+      "type": "number",
+      "id": "max_width_mobile_value",
+      "label": "Max Width Value - Mobile",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_width_settings and block.settings.max_width_mobile }}"
+    },
+    {
+      "type": "text",
+      "id": "max_width_mobile_custom",
+      "label": "Max Width Custom - Mobile",
+      "visible_if": "{{ block.settings.enable_width_settings and block.settings.max_width_mobile }}"
+    },
+    {
+      "type": "select",
+      "id": "max_width_mobile_unit",
+      "label": "Max Width Unit - Mobile",
+      "options": [
+        { "value": "px", "label": "px" },
+        { "value": "%", "label": "%" },
+        { "value": "vw", "label": "vw" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "px",
+      "visible_if": "{{ block.settings.enable_width_settings and block.settings.max_width_mobile }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "max_width_desktop",
+      "label": "Max Width - Desktop",
+      "default": false,
+      "visible_if": "{{ block.settings.enable_width_settings }}"
+    },
+    {
+      "type": "number",
+      "id": "max_width_desktop_value",
+      "label": "Max Width Value - Desktop",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_width_settings and block.settings.max_width_desktop }}"
+    },
+    {
+      "type": "text",
+      "id": "max_width_desktop_custom",
+      "label": "Max Width Custom - Desktop",
+      "visible_if": "{{ block.settings.enable_width_settings and block.settings.max_width_desktop }}"
+    },
+    {
+      "type": "select",
+      "id": "max_width_desktop_unit",
+      "label": "Max Width Unit - Desktop",
+      "options": [
+        { "value": "px", "label": "px" },
+        { "value": "%", "label": "%" },
+        { "value": "vw", "label": "vw" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "px",
+      "visible_if": "{{ block.settings.enable_width_settings and block.settings.max_width_desktop }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_padding_settings",
+      "label": "Enable Padding Settings",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "padding_x_mobile",
+      "label": "Padding X - Mobile",
+      "default": false,
+      "visible_if": "{{ block.settings.enable_padding_settings }}"
+    },
+    {
+      "type": "number",
+      "id": "padding_left_mobile",
+      "label": "Padding Left - Mobile",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_padding_settings and block.settings.padding_x_mobile }}"
+    },
+    {
+      "type": "number",
+      "id": "padding_right_mobile",
+      "label": "Padding Right - Mobile",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_padding_settings and block.settings.padding_x_mobile }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "padding_y_mobile",
+      "label": "Padding Y - Mobile",
+      "default": false,
+      "visible_if": "{{ block.settings.enable_padding_settings }}"
+    },
+    {
+      "type": "number",
+      "id": "padding_top_mobile",
+      "label": "Padding Top - Mobile",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_padding_settings and block.settings.padding_y_mobile }}"
+    },
+    {
+      "type": "number",
+      "id": "padding_bottom_mobile",
+      "label": "Padding Bottom - Mobile",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_padding_settings and block.settings.padding_y_mobile }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "padding_x_desktop",
+      "label": "Padding X - Desktop",
+      "default": false,
+      "visible_if": "{{ block.settings.enable_padding_settings }}"
+    },
+    {
+      "type": "number",
+      "id": "padding_left_desktop",
+      "label": "Padding Left - Desktop",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_padding_settings and block.settings.padding_x_desktop }}"
+    },
+    {
+      "type": "number",
+      "id": "padding_right_desktop",
+      "label": "Padding Right - Desktop",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_padding_settings and block.settings.padding_x_desktop }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "padding_y_desktop",
+      "label": "Padding Y - Desktop",
+      "default": false,
+      "visible_if": "{{ block.settings.enable_padding_settings }}"
+    },
+    {
+      "type": "number",
+      "id": "padding_top_desktop",
+      "label": "Padding Top - Desktop",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_padding_settings and block.settings.padding_y_desktop }}"
+    },
+    {
+      "type": "number",
+      "id": "padding_bottom_desktop",
+      "label": "Padding Bottom - Desktop",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_padding_settings and block.settings.padding_y_desktop }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_margin_settings",
+      "label": "Enable Margin Settings",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "margin_x_mobile",
+      "label": "Margin X - Mobile",
+      "default": false,
+      "visible_if": "{{ block.settings.enable_margin_settings }}"
+    },
+    {
+      "type": "number",
+      "id": "margin_left_mobile",
+      "label": "Margin Left - Mobile",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_margin_settings and block.settings.margin_x_mobile }}"
+    },
+    {
+      "type": "number",
+      "id": "margin_right_mobile",
+      "label": "Margin Right - Mobile",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_margin_settings and block.settings.margin_x_mobile }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "margin_y_mobile",
+      "label": "Margin Y - Mobile",
+      "default": false,
+      "visible_if": "{{ block.settings.enable_margin_settings }}"
+    },
+    {
+      "type": "number",
+      "id": "margin_top_mobile",
+      "label": "Margin Top - Mobile",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_margin_settings and block.settings.margin_y_mobile }}"
+    },
+    {
+      "type": "number",
+      "id": "margin_bottom_mobile",
+      "label": "Margin Bottom - Mobile",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_margin_settings and block.settings.margin_y_mobile }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "margin_x_desktop",
+      "label": "Margin X - Desktop",
+      "default": false,
+      "visible_if": "{{ block.settings.enable_margin_settings }}"
+    },
+    {
+      "type": "number",
+      "id": "margin_left_desktop",
+      "label": "Margin Left - Desktop",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_margin_settings and block.settings.margin_x_desktop }}"
+    },
+    {
+      "type": "number",
+      "id": "margin_right_desktop",
+      "label": "Margin Right - Desktop",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_margin_settings and block.settings.margin_x_desktop }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "margin_y_desktop",
+      "label": "Margin Y - Desktop",
+      "default": false,
+      "visible_if": "{{ block.settings.enable_margin_settings }}"
+    },
+    {
+      "type": "number",
+      "id": "margin_top_desktop",
+      "label": "Margin Top - Desktop",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_margin_settings and block.settings.margin_y_desktop }}"
+    },
+    {
+      "type": "number",
+      "id": "margin_bottom_desktop",
+      "label": "Margin Bottom - Desktop",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_margin_settings and block.settings.margin_y_desktop }}"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_mfr-product__how-to-use__instruction"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instruction Grid"
+    }
+  ]
+}
+{%- endschema -%}
