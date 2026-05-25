@@ -27,7 +27,7 @@ assign section settings to variables
 {% endcapture %}
 
 {% render 'section__settings-styles' %}
-<section class="mfr-core__image-video-banner {{ custom_class }} {{ grid_gutter }}" id="{{ section_id }}">
+<section class="mfr-core__image-video-banner {{ custom_class }}" id="{{ section_id }}">
   <div class="section-spacer background relative z-[3] pt-0 pb-0 {{ grid_gutter }}" style="{{ spacer }}">
     {%- content_for "block", type: "_image-video-banner__carousel", id: "image-video-banner" -%}
 

@@ -24,8 +24,8 @@
   {%- endif -%}
 </div>
 
-<div class="{{ container_width }} relative z-[2]{% if container_width != 'full' %} mx-auto max-w-[var(--grid-container-max-width)] px-[var(--grid-container-padding-mobile)] large:px-[var(--grid-container-padding-desktop)]{% endif %}" {{ max_width_style }}>
-  <div class="alignment-helper flex flex-row flex-wrap [justify-content:var(--justify-content-mobile)] [text-align:var(--text-align-mobile)] large:[justify-content:var(--justify-content-desktop)] large:[text-align:var(--text-align-desktop)]">
+<div class="grid-container {{ container_width }} w-full relative z-[2]{% if container_width != 'full' %} mx-auto max-w-[var(--grid-container-max-width)] px-[var(--grid-container-padding-mobile)] large:px-[var(--grid-container-padding-desktop)]{% endif %}" {{ max_width_style }}>
+  <div class="alignment-helper flex flex-row flex-wrap h-full [justify-content:var(--justify-content-mobile)] [text-align:var(--text-align-mobile)] large:[justify-content:var(--justify-content-desktop)] large:[text-align:var(--text-align-desktop)]">
     <div class="section-content w-full min-w-0 relative z-[2] flex [align-items:inherit] [justify-content:inherit] flex-wrap gap-x-[1.875rem] mb-[5rem] last:mb-0 large:mb-[5.625rem] large:gap-x-[3.75rem] [&>.shopify-block:not(:last-child)]:mb-[0.9375rem] large:[&>.shopify-block:not(:last-child)]:mb-[1.875rem] empty:hidden pt-[var(--top-spacing-mobile)] pb-[var(--bottom-spacing-mobile)] large:pt-[var(--top-spacing-desktop)] large:pb-[var(--bottom-spacing-desktop)]"
       data-stagger-inview=".section-icon__wrapper, .section-content__small-text, .section-content__text, .section-content__button">
       {%- content_for "block", type: "_section-content", id: "section-content" -%}
@@ -36,7 +36,7 @@
 {% schema %}
   {
     "name": "Image Slide",
-    "class": "image-video-banner__image-slide mfr-carousel__item relative w-full",
+    "class": "image-video-banner__image-slide mfr-carousel__item relative w-full flex align-stretch justify-stretch",
     "settings": [
       {
         "type": "image_picker",

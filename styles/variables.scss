@@ -328,10 +328,10 @@ $grid-column-alias: 'columns';
 $block-grid-max: 8;
 
 $grid-max-width: 73.75em;
-$grid-gutter: 0.9375rem;
-$grid-gutter-medium: 0.9375rem;
-$grid-gutter-large: 3.75rem;
-$grid-gutter-xlarge: 3.75rem;
+$grid-gutter: rem-calc(30) rem-calc(20);
+$grid-gutter-medium: rem-calc(30) rem-calc(20);
+$grid-gutter-large: rem-calc(40) rem-calc(30);
+$grid-gutter-xlarge: rem-calc(40) rem-calc(30);
 $inner-padding: 4.1875rem;
 $inner-padding-mobile: 1.0625rem;
 
