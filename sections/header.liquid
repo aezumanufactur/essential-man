@@ -52,7 +52,7 @@
 {%- elsif section.settings.show_border_bottom_mobile -%}
   {%- assign border_bottom_desktop_classes = "large:border-b-0" -%}
 {%- endif -%}
-{% if appear_on == blank or appear_on contains template or appear_on contains template.name or appear_on contains template.suffix %}
+{% if appear_on == blank or appear_on contains template %}
   {%- render "script__section", file: "MFRMegaMenu.js" -%}
   {% render 'renderer__color-scheme', name: "header", color_scheme: section.settings.color_scheme, selector: "header.header .header__wrapper" %}
   {% render 'renderer__color-scheme', name: "header", color_scheme: section.settings.color_scheme_sticky, selector: "header.header.header--sticky .header__wrapper" %}

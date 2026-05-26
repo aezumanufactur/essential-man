@@ -4,9 +4,6 @@
     --slides-vertical-alignment-mobile: {{ block.settings.vertical_alignment_mobile }};
     --slides-text-alignment-mobile: {{ block.settings.text_alignment_mobile }};
     --slides-height-mobile: {{ block.settings.height_mobile }}vh;
-    {% if block.settings.max_height_mobile != 0 and block.settings.max_height_mobile != blank %}
-      --slides-max-height-mobile: {{ block.settings.max_height_mobile }}px;
-    {% endif %}
     {% if block.settings.text_alignment_mobile == "left" %}
       --slides-horizontal-alignment-mobile: flex-start;
     {% elsif block.settings.text_alignment_mobile == "center" %}
@@ -18,9 +15,7 @@
     --slides-vertical-alignment-desktop: {{ block.settings.vertical_alignment_desktop }};
     --slides-text-alignment-desktop: {{ block.settings.text_alignment_desktop }};
     --slides-height-desktop: {{ block.settings.height_desktop }}vh;
-    {% if block.settings.max_height_desktop != 0 and block.settings.max_height_desktop != blank %}
-      --slides-max-height-desktop: {{ block.settings.max_height_desktop }}px;
-    {% endif %}
+    --slides-max-height-desktop: {{ block.settings.max_height_desktop }}px;
   }
 </style>
 {%- capture slides_content -%}
@@ -96,13 +91,6 @@
         "label": "Height",
         "default": 100,
         "info": "in vh (Viewport Height)"
-      },
-      {
-        "type": "number",
-        "id": "max_height_mobile",
-        "label": "Max Height",
-        "default": 550,
-        "info": "in pixels"
       },
       {
         "type": "header",

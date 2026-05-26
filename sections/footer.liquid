@@ -2,7 +2,7 @@
 {% render 'renderer__color-scheme', name: "footer", color_scheme: section.settings.color_scheme, selector: ".footer" %}
 {% assign appear_on = section.settings.appear_on | newline_to_br | strip_newlines | split: '<br />' %}
 
-{% if appear_on == blank or appear_on contains template or appear_on contains template.name or appear_on contains template.suffix %}
+{% if appear_on == blank or appear_on contains template %}
   <style>
     #footer {
       --footer-overlay-mobile: url('{{ 'footer__overlay-mobile.png' | asset_img_url: 'master' }}');
