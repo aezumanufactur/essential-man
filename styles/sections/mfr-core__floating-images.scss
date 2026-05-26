@@ -1,0 +1,9 @@
+@import "../variables";
+@import "../tools/util/util";
+@import "../tools/mixins";
+
+.mfr-core__floating-images {
+  .floating-images {
+    position: relative;
+  }
+}
