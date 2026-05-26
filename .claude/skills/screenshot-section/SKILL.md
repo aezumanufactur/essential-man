@@ -1,24 +1,35 @@
 ---
 name: screenshot-section
 description: QA a Shopify theme section against Figma comps — takes 4 screenshots (mobile + desktop × site + Figma) and reports visual differences in spacing, typography, colors, and layout.
-argument-hint: <page-url> <section-id> <mobile-figma-url> <desktop-figma-url>
+argument-hint: <mobile-figma-url> <desktop-figma-url> <section-name> [page-slug]
 ---
 
 You are performing a visual QA comparison between a live Shopify section and its Figma comps.
 
 Arguments provided: $ARGUMENTS
 
-Parse $ARGUMENTS as:
+## Argument Parsing
+
+Detect format by the first token:
+
+**Figma-first format** (preferred — first token starts with `https://www.figma.com`):
+- `mobile-figma-url` — first token
+- `desktop-figma-url` — second token
+- `section-name` — third token (e.g. `mfr_core_hero_banner_St4ndA` or section filename like `mfr-core__hero-banner`)
+- `page-slug` — fourth token (optional, e.g. `pages/the-standard`). If omitted, ask the user: "What page slug should I screenshot? (e.g. `pages/the-standard`)"
+
+**Legacy format** (first token is a localhost URL):
 - `page-url` — first token (e.g. `http://127.0.0.1:9292/pages/the-standard`)
-- `section-id` — second token (Shopify section element id, e.g. `shopify-section-mfr_core__hero_banner_jRfmBn`, or a CSS selector like `#my-id`)
-- `mobile-figma-url` — third token (Figma node URL for the mobile comp)
-- `desktop-figma-url` — fourth token (Figma node URL for the desktop comp)
+- `section-id` — second token (Shopify DOM id fragment or CSS selector)
+- `mobile-figma-url` — third token
+- `desktop-figma-url` — fourth token
 
 ---
 
 ## Phase 1 — Read Figma Design Context
 
 Call `mcp__figma-desktop__get_design_context` on both the mobile and desktop Figma URLs **in parallel**.
+Call `mcp__figma-desktop__get_screenshot` on both URLs **in parallel** (run alongside get_design_context).
 
 From the responses, extract and note:
 - **Frame width** for each (mobile is typically 430, desktop is typically 1440 — use the actual value from the comp)
@@ -30,11 +41,26 @@ From the responses, extract and note:
 
 ---
 
-## Phase 2 — Screenshot Figma Comps
+## Phase 2 — Discover Section DOM ID and Page URL
 
-Call `mcp__figma-desktop__get_screenshot` on both the mobile and desktop Figma URLs **in parallel**.
+### Page URL
+- If `page-slug` was provided (e.g. `pages/the-standard`): page URL = `http://127.0.0.1:9292/<page-slug>`
+- If legacy format: use the `page-url` token directly
+- If not provided and cannot be inferred: ask the user once before proceeding
 
-Keep both screenshots in context for visual reference in Phase 4.
+### Section DOM ID
+Shopify generates a full DOM id that includes a theme context prefix. Do not guess it — discover it:
+
+```bash
+curl -s http://127.0.0.1:9292/<page-slug> | grep -o 'id="shopify-section-[^"]*"'
+```
+
+Find the entry containing your `section-name` or `section-id` token. Example output:
+```
+id="shopify-section-template--21831569670244__mfr_core_hero_banner_St4ndA"
+```
+
+Pass the portion **after** `shopify-section-` to the screenshot tool (e.g. `template--21831569670244__mfr_core_hero_banner_St4ndA`).
 
 ---
 
@@ -45,7 +71,7 @@ Using the frame widths extracted in Phase 1, run both commands **in parallel** v
 ```bash
 node .claude/tools/screenshot-section/screenshot.js \
   --url <page-url> \
-  --section-id <section-id> \
+  --section-id <discovered-dom-id> \
   --width <mobile-frame-width> \
   --out mobile-site.png
 ```
@@ -53,31 +79,38 @@ node .claude/tools/screenshot-section/screenshot.js \
 ```bash
 node .claude/tools/screenshot-section/screenshot.js \
   --url <page-url> \
-  --section-id <section-id> \
+  --section-id <discovered-dom-id> \
   --width <desktop-frame-width> \
   --out desktop-site.png
 ```
 
-After both commands succeed, read both output files so you can see them:
+After both succeed, `Read` both output files:
+- `.claude/tools/screenshot-section/screenshots/mobile-site.png`
+- `.claude/tools/screenshot-section/screenshots/desktop-site.png`
 
-```
-Read: .claude/tools/screenshot-section/screenshots/mobile-site.png
-Read: .claude/tools/screenshot-section/screenshots/desktop-site.png
+**If the tool times out:** The Shopify dev server keeps a live-reload websocket open that prevents `networkidle`. Patch line ~53 of `.claude/tools/screenshot-section/screenshot.js`:
+```js
+// Change:
+await page.goto(url, { waitUntil: "networkidle", timeout: 30000 });
+// To:
+await page.goto(url, { waitUntil: "load", timeout: 30000 });
 ```
 
-If the script fails with "Element not found", ask the user to provide the correct section element id (visible in the browser's dev tools or in the page HTML as `id="shopify-section-..."`).
+**If "Element not found":** The DOM ID discovery in Phase 2 returned the wrong entry — re-run the curl command and look for a closer match to the section name.
 
 ---
 
 ## Phase 4 — QA Diff Report
 
 You now have 4 visual references:
-- **Figma mobile** (Phase 2)
-- **Figma desktop** (Phase 2)
+- **Figma mobile** (Phase 1)
+- **Figma desktop** (Phase 1)
 - **Site mobile** (Phase 3)
 - **Site desktop** (Phase 3)
 
 Compare them and produce a structured report. **Ignore all image content** — placeholder images vs real images are expected and not a finding.
+
+**Note on invisible elements:** If an element is visible in the browser but invisible in the screenshot, it's likely a GSAP entrance animation that didn't complete in headless mode. Note it as "animation-dependent — visible in live browser, not a code bug" rather than a layout issue.
 
 Use the exact format below:
 

@@ -1,0 +1,260 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "hide_page_title": true,
+        "text_alignment": "",
+        "container_width": "full",
+        "max_width": 0,
+        "grid_gutter": "",
+        "color_scheme": "",
+        "top_spacing_mobile": 0,
+        "bottom_spacing_mobile": 0,
+        "top_spacing_desktop": 0,
+        "bottom_spacing_desktop": 0,
+        "bg_color": "",
+        "custom_class": "",
+        "custom_id": ""
+      }
+    },
+    "mfr_core_hero_banner_St4ndA": {
+      "type": "mfr-core__hero-banner",
+      "blocks": {
+        "slides": {
+          "type": "_hero-section__slides",
+          "static": true,
+          "settings": {
+            "vertical_alignment_mobile": "flex-end",
+            "text_alignment_mobile": "left",
+            "height_mobile": 100,
+            "horizontal_alignment_desktop": "flex-start",
+            "vertical_alignment_desktop": "flex-end",
+            "text_alignment_desktop": "left",
+            "height_desktop": 100,
+            "max_height_desktop": 716
+          },
+          "blocks": {
+            "hero_slide_standard_aQ3xPm": {
+              "type": "_hero-section__slide",
+              "settings": {
+                "image_mobile": "shopify://shop_images/the-standard-hero-image-mobile.webp",
+                "image_desktop": "shopify://shop_images/the-standard-hero-image-desktop.webp",
+                "lazyload_image": false,
+                "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 21%, rgba(0, 0, 0, 0) 76%, rgba(0, 0, 0, 0.5) 100%)"
+              },
+              "blocks": {
+                "section_content_standard_Wr8nKz": {
+                  "type": "_section-content",
+                  "settings": {
+                    "use_grid_container_max_width": true,
+                    "mobile_alignment": "left",
+                    "desktop_alignment": "left",
+                    "vertical_alignment": "flex-end",
+                    "text_color": "#eeece5",
+                    "background_color": "",
+                    "enable_animated_bg": false,
+                    "border_radius_mobile": 0,
+                    "border_radius_desktop": 0,
+                    "enable_width_settings": false,
+                    "width_mobile": false,
+                    "width_mobile_value": 0,
+                    "width_mobile_custom": "",
+                    "width_mobile_unit": "px",
+                    "width_desktop": false,
+                    "width_desktop_value": 0,
+                    "width_desktop_custom": "",
+                    "width_desktop_unit": "px",
+                    "max_width_mobile": false,
+                    "max_width_mobile_value": 160,
+                    "max_width_mobile_custom": "",
+                    "max_width_mobile_unit": "px",
+                    "max_width_desktop": true,
+                    "max_width_desktop_value": 200,
+                    "max_width_desktop_custom": "",
+                    "max_width_desktop_unit": "px",
+                    "enable_padding_settings": false,
+                    "padding_x_mobile": false,
+                    "padding_left_mobile": 0,
+                    "padding_right_mobile": 0,
+                    "padding_y_mobile": false,
+                    "padding_top_mobile": 0,
+                    "padding_bottom_mobile": 0,
+                    "padding_x_desktop": false,
+                    "padding_left_desktop": 30,
+                    "padding_right_desktop": 0,
+                    "padding_y_desktop": false,
+                    "padding_top_desktop": 0,
+                    "padding_bottom_desktop": 0,
+                    "enable_margin_settings": false,
+                    "margin_x_mobile": false,
+                    "margin_left_mobile": 0,
+                    "margin_right_mobile": 0,
+                    "margin_y_mobile": false,
+                    "margin_top_mobile": 0,
+                    "margin_bottom_mobile": 0,
+                    "margin_x_desktop": false,
+                    "margin_left_desktop": 0,
+                    "margin_right_desktop": 0,
+                    "margin_y_desktop": false,
+                    "margin_top_desktop": 0,
+                    "margin_bottom_desktop": 0
+                  },
+                  "blocks": {
+                    "section_content_small_text_4Nk9Ri": {
+                      "type": "_section-content__small-text",
+                      "name": "Section Small Text",
+                      "settings": {
+                        "text": "THE STANDARD",
+                        "small_text_color": "",
+                        "enable_width_settings": false,
+                        "width_mobile": false,
+                        "width_mobile_value": 0,
+                        "width_mobile_custom": "",
+                        "width_mobile_unit": "px",
+                        "width_desktop": false,
+                        "width_desktop_value": 0,
+                        "width_desktop_custom": "",
+                        "width_desktop_unit": "px",
+                        "max_width_mobile": false,
+                        "max_width_mobile_value": 0,
+                        "max_width_mobile_custom": "",
+                        "max_width_mobile_unit": "px",
+                        "max_width_desktop": false,
+                        "max_width_desktop_value": 0,
+                        "max_width_desktop_custom": "",
+                        "max_width_desktop_unit": "px",
+                        "enable_padding_settings": false,
+                        "padding_x_mobile": false,
+                        "padding_left_mobile": 0,
+                        "padding_right_mobile": 0,
+                        "padding_y_mobile": false,
+                        "padding_top_mobile": 0,
+                        "padding_bottom_mobile": 0,
+                        "padding_x_desktop": false,
+                        "padding_left_desktop": 0,
+                        "padding_right_desktop": 0,
+                        "padding_y_desktop": false,
+                        "padding_top_desktop": 0,
+                        "padding_bottom_desktop": 0,
+                        "enable_margin_settings": true,
+                        "margin_x_mobile": false,
+                        "margin_left_mobile": 0,
+                        "margin_right_mobile": 0,
+                        "margin_y_mobile": true,
+                        "margin_top_mobile": 0,
+                        "margin_bottom_mobile": 14,
+                        "margin_x_desktop": false,
+                        "margin_left_desktop": 0,
+                        "margin_right_desktop": 0,
+                        "margin_y_desktop": true,
+                        "margin_top_desktop": 0,
+                        "margin_bottom_desktop": 20
+                      },
+                      "blocks": {}
+                    },
+                    "title_headline_standard_Nv7rYq": {
+                      "type": "_section-content__title",
+                      "settings": {
+                        "heading": "YOU NOTICED. SO DID WE",
+                        "disable_animation": false,
+                        "header_style": "h3",
+                        "header_tag": "h1",
+                        "font_family": "",
+                        "highlight_color": "",
+                        "underline_color": "",
+                        "enable_width_settings": true,
+                        "width_mobile": false,
+                        "width_mobile_value": 0,
+                        "width_mobile_custom": "",
+                        "width_mobile_unit": "px",
+                        "width_desktop": false,
+                        "width_desktop_value": 0,
+                        "width_desktop_custom": "",
+                        "width_desktop_unit": "px",
+                        "max_width_mobile": true,
+                        "max_width_mobile_value": 160,
+                        "max_width_mobile_custom": "",
+                        "max_width_mobile_unit": "px",
+                        "max_width_desktop": true,
+                        "max_width_desktop_value": 200,
+                        "max_width_desktop_custom": "",
+                        "max_width_desktop_unit": "px",
+                        "enable_padding_settings": false,
+                        "padding_x_mobile": false,
+                        "padding_left_mobile": 0,
+                        "padding_right_mobile": 0,
+                        "padding_y_mobile": false,
+                        "padding_top_mobile": 0,
+                        "padding_bottom_mobile": 0,
+                        "padding_x_desktop": false,
+                        "padding_left_desktop": 0,
+                        "padding_right_desktop": 0,
+                        "padding_y_desktop": false,
+                        "padding_top_desktop": 0,
+                        "padding_bottom_desktop": 0,
+                        "enable_margin_settings": true,
+                        "margin_x_mobile": false,
+                        "margin_left_mobile": 0,
+                        "margin_right_mobile": 0,
+                        "margin_y_mobile": true,
+                        "margin_top_mobile": 0,
+                        "margin_bottom_mobile": 20,
+                        "margin_x_desktop": false,
+                        "margin_left_desktop": 0,
+                        "margin_right_desktop": 0,
+                        "margin_y_desktop": true,
+                        "margin_top_desktop": 0,
+                        "margin_bottom_desktop": 37
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "section_content_small_text_4Nk9Ri",
+                    "title_headline_standard_Nv7rYq"
+                  ]
+                }
+              },
+              "block_order": [
+                "section_content_standard_Wr8nKz"
+              ]
+            }
+          },
+          "block_order": [
+            "hero_slide_standard_aQ3xPm"
+          ]
+        }
+      },
+      "settings": {
+        "container_width": "full",
+        "max_width": 0,
+        "grid_gutter": "",
+        "color_scheme": "scheme-e7a2b49c-36ae-4b1f-b31f-f3ec31db1021",
+        "top_spacing_mobile": 0,
+        "bottom_spacing_mobile": 0,
+        "top_spacing_desktop": 0,
+        "bottom_spacing_desktop": 0,
+        "bg_color": "#0e0705",
+        "section_divider_top": "",
+        "section_divider_bottom": "",
+        "custom_class": "",
+        "custom_id": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "mfr_core_hero_banner_St4ndA"
+  ]
+}

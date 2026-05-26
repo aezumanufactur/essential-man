@@ -50,7 +50,7 @@ const outPath = path.join(screenshotsDir, outName);
   const page = await context.newPage();
 
   console.log(`→ ${url} @ ${width}px`);
-  await page.goto(url, { waitUntil: "networkidle", timeout: 30000 });
+  await page.goto(url, { waitUntil: "load", timeout: 30000 });
 
   // Allow GSAP / Alpine entrance animations to finish
   await page.waitForTimeout(1200);

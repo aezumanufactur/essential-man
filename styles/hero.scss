@@ -28,7 +28,7 @@
       padding: 0 rem-calc( 20px );
       padding-top: var( --top-spacing-mobile );
       padding-bottom: var( --bottom-spacing-mobile );
-      min-height: var(--slides-height-mobile);
+      min-height: min(var(--slides-max-height-mobile),var(--slides-height-mobile));
       height: auto;
 
       @include breakpoint( large up ) {
@@ -110,8 +110,8 @@
   .full {
     .hero-section__slide-inner {
       @include breakpoint( large up ) {
-        @include left-carousel-entry-spacing(0, 0);
-        @include right-carousel-entry-spacing(0, 0);
+        @include left-carousel-entry-spacing(0);
+        @include right-carousel-entry-spacing(0);
       }
     }
   }
