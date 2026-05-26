@@ -288,17 +288,289 @@ assign section settings to variables
     }
   ],
   "presets": [
-    {
-      "name": "Ingredients",
-      "blocks": [
-        {
-          "type": "_mfr-product__ingredients__column"
+  {
+    "name": "Ingredients",
+    "category": "Product Sections",
+    "settings": {
+      "container_width": "full",
+      "max_width": 0,
+      "grid_gutter": "",
+      "mobile_alignment": "left",
+      "desktop_alignment": "left",
+      "color_scheme": "scheme-1",
+      "top_spacing_mobile": 0,
+      "bottom_spacing_mobile": 0,
+      "top_spacing_desktop": 0,
+      "bottom_spacing_desktop": 0,
+      "bg_color": "#c4bfb3",
+      "section_divider_top": "line",
+      "section_divider_bottom": ""
+    },
+    "blocks": [
+      {
+        "type": "_mfr-product__ingredients__column",
+        "settings": {
+          "horizontal_alignment_mobile": "flex-start",
+          "horizontal_alignment_desktop": "flex-start",
+          "vertical_alignment_mobile": "flex-start",
+          "vertical_alignment_desktop": "flex-start",
+          "enable_sticky_desktop": true,
+          "sticky_top_desktop": 90,
+          "inner_max_width_mobile": 0,
+          "inner_max_width_desktop": 0,
+          "order_mobile": 0,
+          "order_desktop": 0,
+          "enable_width_settings": true,
+          "width_mobile": true,
+          "width_mobile_value": 100,
+          "width_mobile_custom": "",
+          "width_mobile_unit": "%",
+          "width_desktop": true,
+          "width_desktop_value": 50,
+          "width_desktop_custom": "",
+          "width_desktop_unit": "%",
+          "enable_padding_settings": true,
+          "padding_x_mobile": false,
+          "padding_left_mobile": 20,
+          "padding_right_mobile": 20,
+          "padding_y_mobile": true,
+          "padding_top_mobile": 42,
+          "padding_bottom_mobile": 0,
+          "padding_x_desktop": true,
+          "padding_left_desktop": 0,
+          "padding_right_desktop": 30,
+          "padding_y_desktop": true,
+          "padding_top_desktop": 50,
+          "padding_bottom_desktop": 50,
+          "enable_margin_settings": true,
+          "margin_y_mobile": true,
+          "margin_top_mobile": 0,
+          "margin_bottom_mobile": 80,
+          "margin_y_desktop": false,
+          "margin_top_desktop": 0,
+          "margin_bottom_desktop": 0
         },
-        {
-          "type": "_mfr-product__ingredients__column"
-        }
-      ]
-    }
-  ]
+        "blocks": [
+          {
+            "type": "_section-content",
+            "settings": {
+              "use_grid_container_max_width": false,
+              "mobile_alignment": "",
+              "desktop_alignment": "",
+              "vertical_alignment": "flex-start",
+              "text_color": "",
+              "background_color": "",
+              "enable_animated_bg": false,
+              "border_radius_mobile": 0,
+              "border_radius_desktop": 0,
+              "enable_width_settings": false,
+              "enable_padding_settings": false,
+              "enable_margin_settings": false
+            },
+            "blocks": [
+              {
+                "type": "_section-content__title",
+                "settings": {
+                  "heading": "Key Ingredients",
+                  "disable_animation": false,
+                  "header_style": "h1",
+                  "header_tag": "h2",
+                  "font_family": "",
+                  "highlight_color": "",
+                  "underline_color": "",
+                  "enable_margin_settings": true,
+                  "margin_y_mobile": true,
+                  "margin_top_mobile": 0,
+                  "margin_bottom_mobile": 30,
+                  "margin_y_desktop": true,
+                  "margin_top_desktop": 0,
+                  "margin_bottom_desktop": 30
+                }
+              },
+              {
+                "type": "_section-content__text",
+                "settings": {
+                  "text": "<p>Lorem ipsum. Amet consectetur adipiscing.</p>",
+                  "disable_animation": false,
+                  "text_style": "regular",
+                  "font_family": "custom-font-name-2",
+                  "color": "",
+                  "highlight_color": "",
+                  "underline_color": "",
+                  "enable_width_settings": false,
+                  "enable_margin_settings": false
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "_mfr-product__ingredients__column",
+        "settings": {
+          "horizontal_alignment_mobile": "flex-start",
+          "horizontal_alignment_desktop": "flex-start",
+          "vertical_alignment_mobile": "flex-start",
+          "vertical_alignment_desktop": "flex-start",
+          "enable_sticky_desktop": false,
+          "sticky_top_desktop": 0,
+          "inner_max_width_mobile": 0,
+          "inner_max_width_desktop": 0,
+          "order_mobile": 0,
+          "order_desktop": 0,
+          "enable_width_settings": true,
+          "width_mobile": true,
+          "width_mobile_value": 100,
+          "width_mobile_custom": "",
+          "width_mobile_unit": "%",
+          "width_desktop": true,
+          "width_desktop_value": 50,
+          "width_desktop_custom": "",
+          "width_desktop_unit": "%",
+          "enable_padding_settings": true,
+          "padding_x_mobile": false,
+          "padding_left_mobile": 20,
+          "padding_right_mobile": 20,
+          "padding_y_mobile": true,
+          "padding_top_mobile": 0,
+          "padding_bottom_mobile": 50,
+          "padding_x_desktop": true,
+          "padding_left_desktop": 0,
+          "padding_right_desktop": 30,
+          "padding_y_desktop": true,
+          "padding_top_desktop": 50,
+          "padding_bottom_desktop": 50,
+          "enable_margin_settings": false
+        },
+        "blocks": [
+          {
+            "type": "_mfr-product__ingredients__ingredients-info",
+            "settings": {
+              "heading": "Texture Powder",
+              "caption": "Lorem ipsum. Lorem formula.",
+              "product_ingredients": [],
+              "title_key": "title",
+              "caption_key": "caption",
+              "enable_margin_settings": true,
+              "margin_y_mobile": true,
+              "margin_top_mobile": 0,
+              "margin_bottom_mobile": 80,
+              "margin_y_desktop": true,
+              "margin_top_desktop": 0,
+              "margin_bottom_desktop": 80
+            },
+            "blocks": [
+              {
+                "type": "_mfr-product__ingredients__item",
+                "settings": {
+                  "title": "Lorem Ipsum Silylate",
+                  "caption": "Lorem-fine mineral. Lorem amet lift at the root."
+                }
+              },
+              {
+                "type": "_mfr-product__ingredients__item",
+                "settings": {
+                  "title": "Lorem Carbonate",
+                  "caption": "Absorbs lorem oils on contact. Lorem clean texture between washes."
+                }
+              },
+              {
+                "type": "_mfr-product__ingredients__item",
+                "settings": {
+                  "title": "Lorem Silicate",
+                  "caption": "Lorem mineral. Lorem separation and definition without clumping."
+                }
+              },
+              {
+                "type": "_mfr-product__ingredients__item",
+                "settings": {
+                  "title": "Lorem Starch (Micronized)",
+                  "caption": "Fine-milled lorem starch. Softens the mineral texture, lorem application."
+                }
+              },
+              {
+                "type": "_mfr-product__ingredients__item",
+                "settings": {
+                  "title": "Lorem Starch",
+                  "caption": "Lorem thickener. Lorem the gap between particles for even hold."
+                }
+              },
+              {
+                "type": "_mfr-product__ingredients__item",
+                "settings": {
+                  "title": "Lorem",
+                  "caption": "Lorem mineral. Locks the formula together. Lorem hard or sticky finish."
+                }
+              }
+            ]
+          },
+          {
+            "type": "_mfr-product__ingredients__additional-info",
+            "settings": {
+              "title": "Lorem ipsum dolor sit amet",
+              "caption": "Lorem ipsum, consectetur adipiscing, amet dolor sit. Lorem ipsum dolor amet consectetur lorem ipsum.",
+              "bg_color": "#eeece5",
+              "text_color": "#1e1b22",
+              "enable_margin_settings": true,
+              "margin_y_mobile": true,
+              "margin_top_mobile": 0,
+              "margin_bottom_mobile": 80,
+              "margin_y_desktop": true,
+              "margin_top_desktop": 0,
+              "margin_bottom_desktop": 80
+            }
+          },
+          {
+            "type": "_mfr-product__ingredients__ingredients-info",
+            "settings": {
+              "heading": "Matte Clay",
+              "caption": "Lorem ipsum. Lorem formula.",
+              "product_ingredients": [],
+              "title_key": "title",
+              "caption_key": "caption",
+              "enable_margin_settings": true,
+              "margin_y_mobile": true,
+              "margin_top_mobile": 0,
+              "margin_bottom_mobile": 80,
+              "margin_y_desktop": true,
+              "margin_top_desktop": 0,
+              "margin_bottom_desktop": 80
+            },
+            "blocks": [
+              {
+                "type": "_mfr-product__ingredients__item",
+                "settings": {
+                  "title": "Lorem Mineral Complex (Lorem, Ipsum, Dolor)",
+                  "caption": "Lorem-mineral base. Controls lorem and absorbs oils without over-drying."
+                }
+              },
+              {
+                "type": "_mfr-product__ingredients__item",
+                "settings": {
+                  "title": "Lorem Ipsum",
+                  "caption": "Lorem emollient. Lorem flexibility without buildup. Lorem-dry finish."
+                }
+              },
+              {
+                "type": "_mfr-product__ingredients__item",
+                "settings": {
+                  "title": "Lorem Ipsum Dolor",
+                  "caption": "Lorem-chain lorem. Lorem hold across lorem without flaking."
+                }
+              },
+              {
+                "type": "_mfr-product__ingredients__item",
+                "settings": {
+                  "title": "Lorem Ipsum",
+                  "caption": "Lorem system. Lorem pigment lorem uniformly throughout the formula."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
 }
 {% endschema %}

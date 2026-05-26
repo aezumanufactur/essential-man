@@ -293,16 +293,184 @@ assign section settings to variables
     }
   ],
   "presets": [
-    {
-      "name": "Product Features",
-      "blocks": [
-        {
-          "type": "_accent-graphics",
-          "id": "accent-graphics",
-          "static": true
-        }
-      ]
-    }
-  ]
+  {
+    "name": "Product Features",
+    "category": "Product Sections",
+    "settings": {
+      "container_width": "full",
+      "max_width": 0,
+      "grid_gutter": "",
+      "mobile_alignment": "left",
+      "desktop_alignment": "left",
+      "color_scheme": "scheme-e7a2b49c-36ae-4b1f-b31f-f3ec31db1021",
+      "top_spacing_mobile": 0,
+      "bottom_spacing_mobile": 0,
+      "top_spacing_desktop": 0,
+      "bottom_spacing_desktop": 0,
+      "bg_color": "#51482b",
+      "section_divider_top": "line",
+      "section_divider_bottom": ""
+    },
+    "blocks": [
+      {
+        "type": "_mfr-product__features__column",
+        "settings": {
+          "horizontal_alignment_mobile": "left",
+          "horizontal_alignment_desktop": "left",
+          "vertical_alignment_mobile": "flex-start",
+          "vertical_alignment_desktop": "flex-start",
+          "inner_max_width_mobile": 0,
+          "inner_max_width_desktop": 630,
+          "order_mobile": 0,
+          "order_desktop": 0,
+          "enable_width_settings": true,
+          "width_mobile": true,
+          "width_mobile_value": 100,
+          "width_mobile_custom": "",
+          "width_mobile_unit": "%",
+          "width_desktop": true,
+          "width_desktop_value": 65,
+          "width_desktop_custom": "",
+          "width_desktop_unit": "%",
+          "enable_padding_settings": true,
+          "padding_x_mobile": true,
+          "padding_left_mobile": 20,
+          "padding_right_mobile": 20,
+          "padding_y_mobile": true,
+          "padding_top_mobile": 43,
+          "padding_bottom_mobile": 280,
+          "padding_x_desktop": true,
+          "padding_left_desktop": 30,
+          "padding_right_desktop": 30,
+          "padding_y_desktop": true,
+          "padding_top_desktop": 50,
+          "padding_bottom_desktop": 50,
+          "enable_margin_settings": false
+        },
+        "blocks": [
+          {
+            "type": "_section-content",
+            "settings": {
+              "use_grid_container_max_width": false,
+              "mobile_alignment": "",
+              "desktop_alignment": "",
+              "vertical_alignment": "flex-start",
+              "text_color": "",
+              "background_color": "",
+              "enable_animated_bg": false,
+              "border_radius_mobile": 0,
+              "border_radius_desktop": 0,
+              "enable_width_settings": false,
+              "enable_padding_settings": false,
+              "enable_margin_settings": false
+            },
+            "blocks": [
+              {
+                "type": "_section-content__title",
+                "settings": {
+                  "heading": "Lorem ipsum dolor sit amet",
+                  "disable_animation": false,
+                  "header_style": "h1",
+                  "header_tag": "h2",
+                  "font_family": "",
+                  "highlight_color": "",
+                  "underline_color": "",
+                  "enable_margin_settings": true,
+                  "margin_y_mobile": true,
+                  "margin_top_mobile": 0,
+                  "margin_bottom_mobile": 80,
+                  "margin_y_desktop": true,
+                  "margin_top_desktop": 0,
+                  "margin_bottom_desktop": 177
+                }
+              },
+              {
+                "type": "_section-content__text",
+                "settings": {
+                  "text": "<p><strong>LOREM IPSUM</strong></p><p>Lorem ipsum dolor sit amet. Consectetur adipiscing elit, sed do eiusmod tempor.</p><p><strong>AMET DOLOR</strong></p><p>Lorem ipsum consectetur. Locks the lorem in. Adipiscing through the length, holds matte without dolor.</p>",
+                  "disable_animation": false,
+                  "text_style": "regular",
+                  "font_family": "",
+                  "color": "",
+                  "highlight_color": "",
+                  "underline_color": "",
+                  "enable_width_settings": false,
+                  "enable_margin_settings": false
+                }
+              }
+            ]
+          },
+          {
+            "type": "_mfr-product__features__icon-text",
+            "settings": {
+              "icon_text_list": [],
+              "enable_width_settings": false,
+              "enable_margin_settings": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "_mfr-product__features__column",
+        "settings": {
+          "horizontal_alignment_mobile": "left",
+          "horizontal_alignment_desktop": "left",
+          "vertical_alignment_mobile": "flex-start",
+          "vertical_alignment_desktop": "flex-start",
+          "inner_max_width_mobile": 0,
+          "inner_max_width_desktop": 0,
+          "order_mobile": 0,
+          "order_desktop": 0,
+          "enable_width_settings": true,
+          "width_mobile": true,
+          "width_mobile_value": 100,
+          "width_mobile_custom": "",
+          "width_mobile_unit": "%",
+          "width_desktop": true,
+          "width_desktop_value": 35,
+          "width_desktop_custom": "",
+          "width_desktop_unit": "%",
+          "enable_padding_settings": false,
+          "enable_margin_settings": false
+        },
+        "blocks": [
+          {
+            "type": "_mfr-product__features__image",
+            "settings": {
+              "image_mobile": "",
+              "image": "",
+              "height_value_mobile": 306,
+              "height_unit_mobile": "px",
+              "height_value_desktop": 100,
+              "height_unit_desktop": "%",
+              "enable_width_settings": false,
+              "enable_margin_settings": false
+            }
+          },
+          {
+            "type": "_mfr-product__features__product-image",
+            "settings": {
+              "metafield_namespace": "mfr_fields",
+              "metafield_key": "product_features_images",
+              "max_width_mobile": 236,
+              "max_width_unit_mobile": "px",
+              "max_width_desktop": 55.9,
+              "max_width_unit_desktop": "%",
+              "max_height_mobile": 438.3,
+              "max_height_unit_mobile": "px",
+              "max_height_desktop": 76,
+              "max_height_unit_desktop": "%"
+            }
+          }
+        ]
+      },
+      {
+        "type": "_accent-graphics",
+        "id": "accent-graphics",
+        "static": true
+      }
+    ]
+  }
+]
 }
 {% endschema %}

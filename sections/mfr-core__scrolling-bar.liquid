@@ -301,10 +301,106 @@ assign section settings to variables
     }
   ],
   "presets": [
-    {
-      "name": "Scrolling Bar",
-      "category": "Manufactur Core Sections"
-    }
-  ]
+  {
+    "name": "Scrolling Bar",
+    "category": "Manufactur Core Sections",
+    "settings": {
+      "container_width": "full",
+      "max_width": 0,
+      "grid_gutter": "",
+      "mobile_alignment": "center",
+      "desktop_alignment": "center",
+      "color_scheme": "scheme-1",
+      "top_spacing_mobile": 30,
+      "bottom_spacing_mobile": 30,
+      "top_spacing_desktop": 38,
+      "bottom_spacing_desktop": 38,
+      "bg_color": "#c4bfb3",
+      "section_divider_top": "line",
+      "section_divider_bottom": "line",
+      "custom_class": "",
+      "custom_id": ""
+    },
+    "blocks": [
+      {
+        "type": "_scrolling-bar__carousel",
+        "settings": {
+          "pause_on_drag": true,
+          "render_autoscroll_on": "mobile",
+          "direction": "left",
+          "spacing_mobile": 30,
+          "spacing_desktop": 50
+        },
+        "blocks": [
+          {
+            "type": "_scrolling-bar__logo-item",
+            "settings": {
+              "image": "",
+              "opacity": 50,
+              "height_mobile": 22,
+              "height_desktop": 23,
+              "link": ""
+            }
+          },
+          {
+            "type": "_scrolling-bar__logo-item",
+            "settings": {
+              "image": "",
+              "opacity": 50,
+              "height_mobile": 20,
+              "height_desktop": 21,
+              "link": ""
+            }
+          },
+          {
+            "type": "_scrolling-bar__logo-item",
+            "settings": {
+              "image": "",
+              "opacity": 50,
+              "height_mobile": 26,
+              "height_desktop": 26,
+              "link": ""
+            }
+          },
+          {
+            "type": "_scrolling-bar__logo-item",
+            "settings": {
+              "image": "",
+              "opacity": 50,
+              "height_mobile": 21,
+              "height_desktop": 21,
+              "link": ""
+            }
+          },
+          {
+            "type": "_scrolling-bar__logo-item",
+            "settings": {
+              "image": "",
+              "opacity": 50,
+              "height_mobile": 20,
+              "height_desktop": 20,
+              "link": ""
+            }
+          },
+          {
+            "type": "_scrolling-bar__logo-item",
+            "settings": {
+              "image": "",
+              "opacity": 50,
+              "height_mobile": 30,
+              "height_desktop": 38,
+              "link": ""
+            }
+          }
+        ]
+      },
+      {
+        "type": "_accent-graphics",
+        "id": "accent-graphics",
+        "static": true
+      }
+    ]
+  }
+]
 }
 {% endschema %}

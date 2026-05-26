@@ -292,20 +292,94 @@ assign section settings to variables
     }
   ],
   "presets": [
-    {
-      "name": "How to Use",
-      "blocks": [
-        {
-          "type": "_section-content",
-          "blocks": [
-            { "type": "_section-content__title" }
-          ]
+  {
+    "name": "Product: How To Use",
+    "category": "Product Sections",
+    "settings": {
+      "container_width": "full",
+      "max_width": 0,
+      "grid_gutter": "",
+      "mobile_alignment": "left",
+      "desktop_alignment": "left",
+      "top_spacing_mobile": 0,
+      "bottom_spacing_mobile": 0,
+      "top_spacing_desktop": 0,
+      "bottom_spacing_desktop": 0,
+      "bg_color": "#eeece5",
+      "section_divider_top": "line",
+      "section_divider_bottom": ""
+    },
+    "blocks": [
+      {
+        "type": "_section-content",
+        "blocks": [
+          {
+            "type": "_section-content__title",
+            "settings": {
+              "heading": "HOW TO USE",
+              "enable_margin_settings": true,
+              "margin_y_mobile": true,
+              "margin_bottom_mobile": 30,
+              "margin_y_desktop": true,
+              "margin_bottom_desktop": 50
+            }
+          }
+        ]
+      },
+      {
+        "type": "_mfr-product__how-to-use__instruction-grid",
+        "settings": {
+          "enable_padding_settings": true,
+          "padding_x_mobile": true,
+          "padding_left_mobile": 20,
+          "padding_right_mobile": 20,
+          "padding_x_desktop": true,
+          "padding_left_desktop": 30,
+          "padding_right_desktop": 30,
+          "padding_y_desktop": true,
+          "padding_bottom_desktop": 60
         },
-        {
-          "type": "_mfr-product__how-to-use__instruction-grid"
-        }
-      ]
-    }
-  ]
+        "blocks": [
+          {
+            "type": "_mfr-product__how-to-use__instruction",
+            "settings": {
+              "image": "",
+              "title": "Lorem Ipsum",
+              "number": "01",
+              "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed."
+            }
+          },
+          {
+            "type": "_mfr-product__how-to-use__instruction",
+            "settings": {
+              "image": "",
+              "title": "Dolor Sit Amet",
+              "number": "02",
+              "caption": "Lorem ipsum dolor sit. Consectetur adipiscing elit sed lorem."
+            }
+          },
+          {
+            "type": "_mfr-product__how-to-use__instruction",
+            "settings": {
+              "image": "",
+              "title": "Consectetur Lorem",
+              "number": "03",
+              "caption": "Lorem ipsum dolor amet sit consectetur. Adipiscing elit lorem."
+            }
+          },
+          {
+            "type": "_mfr-product__how-to-use__instruction",
+            "settings": {
+              "image": "",
+              "title": "Adipiscing Elit",
+              "number": "04",
+              "caption": "Lorem ipsum sit dolor amet. Consectetur adipiscing lorem elit."
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
 }
 {% endschema %}
