@@ -3,3 +3,4 @@ node_modules
 package-lock.json
 .shopify
 .claude/worktrees
+.claude/skills/figma-to-shopify/sessions/

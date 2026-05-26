@@ -69,8 +69,9 @@ Read these skill reference files:
 
 Also read:
 11. `templates/index.json` (or `templates/page.test.json` if it exists) — note existing section ID format, image/video URIs, product handles for placeholders
+12. `.claude/skills/figma-to-shopify/learned-patterns.md` — patterns extracted from past sessions (if it exists; skip silently if not)
 
-All rules from these files govern everything you generate. If a file does not exist, stop and tell the user.
+All rules from these files govern everything you generate. If a file does not exist (except #12), stop and tell the user.
 
 ---
 
@@ -128,6 +129,28 @@ After all files are written, report:
 2. **Settings needing real values** — image/video/product pickers that need Shopify admin data
 3. **Unmapped comp values** — any font, color, or spacing that couldn't be mapped to a project token
 4. **Next steps** — what the user should do to see it live
+
+---
+
+## Phase 5.5 — Save Phase 1 Snapshot
+
+After all files are written, save a snapshot so future pattern capture can diff against it.
+
+1. Derive session folder name: `YYYY-MM-DD__<section-name>` (today's date + section filename)
+2. Create the directory: `.claude/skills/figma-to-shopify/sessions/<session-folder>/phase1/`
+3. Copy every file you wrote into the matching subpath under `phase1/`:
+   - `sections/<section-name>.liquid`
+   - Every block file: `blocks/_<section-name>__*.liquid`
+   - `styles/sections/<section-name>.scss`
+4. Write `.claude/skills/figma-to-shopify/sessions/<session-folder>/session.md`:
+   ```
+   section: <section-name>
+   date: YYYY-MM-DD
+   mobile_url: <url>
+   desktop_url: <url>
+   notes: <any user-provided notes from $ARGUMENTS>
+   ```
+5. Mention in the Phase 5 report: "Phase 1 snapshot saved — say 'I'm done with the section' when finished to capture patterns."
 
 ---
 
