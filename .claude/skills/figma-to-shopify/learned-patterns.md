@@ -106,3 +106,35 @@ The `font_family` options available in the block schema are project-specific (ch
 - **Heading blocks** (`_section-content__title`) → `font_family` always `""` — heading level is set via `header_style` (mapped from Figma named style), not font_family
 
 Do not hardcode font names or custom-font-name-N values into this patterns file — look them up from the project's reference files each session.
+
+---
+
+## Absolutely-Positioned Floating Images Block Architecture
+
+When a comp shows images floating freely over a column (no grid, no fixed slots):
+
+**Container block** (`_[section]__floating-images`):
+- Schema `"class"`: `"floating-images relative w-full"` — `relative` must also be declared in section SCSS (`.floating-images { position: relative; }`) because Shopify injects the class on the wrapper and Tailwind can't target schema-injected classes
+- Add `min_height_mobile/desktop` number settings (scoped `<style>` tag, skip when 0) — without this the container collapses to zero height since all children are absolutely positioned
+- Render children with `{%- for block in block.blocks -%}{%- render block -%}{%- endfor -%}`
+
+**Leaf image block** (`_[section]__image`):
+- Positioning CSS goes in a scoped `<style>` tag using `#shopify-block-{{ block.id }}`:
+  ```css
+  position: absolute;
+  left: {{ block.settings.x_position_value_mobile }}%;
+  top: {{ block.settings.y_position_value_mobile }}%;
+  transform: translate(-50%, -50%);
+  ```
+- Use `range` type (0–100, step 1, unit %) for x/y position settings — center-based model, so `50/50` = dead center
+
+**Coordinate math from Figma** (center-based, % of container):
+1. Read the container's pixel width and height from the Figma comp (e.g. 469px × 714px)
+2. For each image, read its center point in px from the container's top-left: `center_x = img_left + img_width/2`, `center_y = img_top + img_height/2`
+3. Convert to %: `x = round(center_x / container_width × 100)`, `y = round(center_y / container_height × 100)`
+4. Image width as % of container: `round(img_width / container_width × 100)` — set as `width_[mobile|desktop]_value` + `%` unit
+5. Image max-width in px: use the actual pixel width from the comp as the `max_width_[mobile|desktop]_value`
+
+**Z-order for overlapping images**: controlled by DOM order (`block_order` in template JSON). Last entry = highest z-index. No z-index setting needed.
+
+**Two-column layout with floating images**: `_section-content` at 66% desktop width (left column), `_[section]__floating-images` container at 34% desktop width (right column). Both have `enable_width_settings: true` and `width_desktop: true`. Mobile: omit width settings so both stack full-width.
