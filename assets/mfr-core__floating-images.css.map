@@ -1,0 +1,1 @@
+{"version":3,"sources":["mfr-core__floating-images.scss"],"names":[],"mappings":"iBAKE,4CACE,SAAA","file":"mfr-core__floating-images.css","sourcesContent":["@import \"../variables\";\n@import \"../tools/util/util\";\n@import \"../tools/mixins\";\n\n.mfr-core__floating-images {\n  .floating-images {\n    position: relative;\n  }\n}\n"]}

@@ -43,20 +43,20 @@ body {
     pointer-events: none;
   }
 
-  &.top-offset-to-main {
-    main {
-      padding-top: $top-offset;
-    }
-  }
+  // &.top-offset-to-main {
+  //   main {
+  //     padding-top: $top-offset;
+  //   }
+  // }
 
-  &.top-offset-to-first-section {
-    main .shopify-section:nth-child(2) > section {
-      padding-top: $top-offset-mobile;
-      @include breakpoint( large up ) {
-        padding-top: $top-offset;
-      }
-    }
-  }
+  // &.top-offset-to-first-section {
+  //   main .shopify-section:nth-child(2) > section {
+  //     padding-top: $top-offset-mobile;
+  //     @include breakpoint( large up ) {
+  //       padding-top: $top-offset;
+  //     }
+  //   }
+  // }
 
   &.offcanvas-opened {
     .header {

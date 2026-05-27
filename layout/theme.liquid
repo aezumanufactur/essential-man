@@ -68,11 +68,11 @@
       {% endunless %}
     </head>
   
-    {% if settings.top_offset_element == "main" %}
+    {% comment %} {% if settings.top_offset_element == "main" %}
       {% assign top_offset_class = "top-offset-to-main" %}
     {% elsif settings.top_offset_element == "first_section" %}
       {% assign top_offset_class = "top-offset-to-first-section" %}
-    {% endif %}
+    {% endif %} {% endcomment %}
     {% assign top_offset = "--top-offset: " | append: settings.top_offset | append: "px;" %}
     {% assign top_offset_mobile = "--top-offset-mobile: " | append: settings.top_offset_mobile | append: "px;" %}
   
