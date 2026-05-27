@@ -8,20 +8,10 @@
 {% render 'renderer__color-scheme', name: "section", color_scheme: section.settings.color_scheme_checkout, selector: ".cart-form__checkout" %}
 
 {%- capture cart_content -%}
-  <div class="offcanvas-cart__content relative flex h-full w-full flex-col [background:var(--section-background)] [color:var(--section-text)] pl-[30px]" id="cart-wrapper" 
-    x-data='{
-      announcementBarHeight: 0
-    }'
-    x-init='
-      $store.cart.cartExclusions.push({{- section.settings.cart_exclusion_strings -}});
-      const bar = document.querySelector(".announcement-bar");
-      if (bar) {
-        announcementBarHeight = bar.offsetHeight;
-        new ResizeObserver(([entry]) => {
-          announcementBarHeight = entry.contentRect.height;
-        }).observe(bar);
-      }
-    ' :style='{ paddingTop: announcementBarHeight + "px" }' data-cart-view>
+  <div class="offcanvas-cart__content relative flex h-full w-full flex-col [background:var(--section-background)] [color:var(--section-text)] pl-[30px]" id="cart-wrapper"
+    x-data
+    x-init='$store.cart.cartExclusions.push({{- section.settings.cart_exclusion_strings -}})'
+    :style='{ paddingTop: $store.offCanvas.announcementBarHeight + "px" }' data-cart-view>
     {%- for block in section.blocks -%}
       {%- case block.type -%}
         {%- when "@app" -%}
@@ -29,8 +19,8 @@
       {%- endcase -%}
     {%- endfor -%}
 
-    <button class="absolute top-[14px] left-[0] w-[42px] h-[42px] z-10"
-      :style='{ top: (announcementBarHeight + 14) + "px" }'
+    <button class="absolute left-[0] w-[42px] h-[42px] z-10"
+      :style='{ top: ($store.offCanvas.announcementBarHeight + 14) + "px" }'
       x-data
       @click='$store["offCanvasCart"].closeOffcanvas()'
       aria-label="Close cart">

@@ -100,20 +100,11 @@
   {% render 'renderer__color-scheme', name: "section", color_scheme: section.settings.color_scheme, selector: ".shopify-section", section_id: "offCanvasContact" %}
 
   <div class="offcanvas-contact__content relative flex h-full w-full flex-col pr-[38px]"
-    x-data='{ announcementBarHeight: 0 }'
-    x-init='
-      const bar = document.querySelector(".announcement-bar");
-      if (bar) {
-        announcementBarHeight = bar.offsetHeight;
-        new ResizeObserver(([entry]) => {
-          announcementBarHeight = entry.contentRect.height;
-        }).observe(bar);
-      }
-    '
-    :style='{ paddingTop: announcementBarHeight + "px" }'>
+    x-data
+    :style='{ paddingTop: $store.offCanvas.announcementBarHeight + "px" }'>
 
     <button class="absolute right-[8px] w-[42px] h-[42px] z-10"
-      :style='{ top: (announcementBarHeight + 14) + "px" }'
+      :style='{ top: ($store.offCanvas.announcementBarHeight + 14) + "px" }'
       x-data
       @click='$store["offCanvasContact"].closeOffcanvas()'
       aria-label="Close contact">
@@ -189,8 +180,7 @@
   class: "offcanvas-contact",
   position: "left",
   content: contact_content,
-  x_init: x_init,
-  initially_open: true
+  x_init: x_init
 %}
 
 {% schema %}

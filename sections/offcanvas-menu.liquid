@@ -7,15 +7,17 @@
     selector: ".shopify-section",
     section_id: "offCanvasMenu" -%}
 
-  <div class="relative w-full min-h-full">
-
+  <div class="relative w-full min-h-full"
+    x-data
+    :style='{ paddingTop: $store.offCanvas.announcementBarHeight + "px" }'>
+    <button class="absolute right-[8px] w-[42px] h-[42px] z-10"
+      :style='{ top: ($store.offCanvas.announcementBarHeight + 14) + "px" }'
+      x-data
+      x-on:click='$store["offCanvasMenu"].closeOffcanvas()'
+      aria-label="Close menu">
+      {%- render 'icon__close-with-circle' -%}
+    </button>
     <div class="offcanvas-menu__wrapper relative flex items-stretch justify-stretch w-[calc(100%_-_38px)] min-h-full [background:var(--section-background)] [color:var(--section-text)]">
-      <button class="absolute top-[14px] right-[0] w-[43px] h-[43px] translate-x-[31px]"
-        x-data
-        x-on:click='$store["offCanvasMenu"].closeOffcanvas()'
-        aria-label="Close menu">
-        {%- render 'icon__close-with-circle' -%}
-      </button>
 
       <div class="offcanvas-menu__inner pt-[33px] px-[20px] pb-[28px] flex flex-col gap-[32px]">
         {%- content_for "blocks" -%}
