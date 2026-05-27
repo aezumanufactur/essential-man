@@ -54,7 +54,8 @@
 {%- assign _mobile_srcset = "" -%}
 {%- for _w in _widths_mobile_arr -%}
   {%- assign _wv = _w | strip -%}
-  {%- assign _entry = _mobile_img | image_url: width: _wv | append: " " | append: _wv | append: "w" -%}
+  {%- assign _render_w = _wv | times: 1.25 | round -%}
+  {%- assign _entry = _mobile_img | image_url: width: _render_w | append: " " | append: _wv | append: "w" -%}
   {%- unless forloop.last -%}{%- assign _entry = _entry | append: ", " -%}{%- endunless -%}
   {%- assign _mobile_srcset = _mobile_srcset | append: _entry -%}
 {%- endfor -%}
@@ -64,7 +65,8 @@
 {%- assign _desktop_srcset = "" -%}
 {%- for _w in _widths_desktop_arr -%}
   {%- assign _wv = _w | strip -%}
-  {%- assign _entry = _desktop_img | image_url: width: _wv | append: " " | append: _wv | append: "w" -%}
+  {%- assign _render_w = _wv | times: 1.25 | round -%}
+  {%- assign _entry = _desktop_img | image_url: width: _render_w | append: " " | append: _wv | append: "w" -%}
   {%- unless forloop.last -%}{%- assign _entry = _entry | append: ", " -%}{%- endunless -%}
   {%- assign _desktop_srcset = _desktop_srcset | append: _entry -%}
 {%- endfor -%}

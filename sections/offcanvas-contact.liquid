@@ -56,14 +56,14 @@
         {%- when 'field' -%}
           {%- assign id = block.id | prepend: 'field' -%}
 
-          <label for="{{ id }}">{{ block.settings.label | escape }}</label>
+          <label for="{{ id }}" class="block [font-size:var(--font-body-size-small)] leading-[1em] font-medium mb-[10px]">{{ block.settings.label | escape }}</label>
           {% if block.settings.type == 'input' %}
             <input type="text"
           {% else %}
-            <textarea 
+            <textarea
           {% endif %}
-              id="{{ id }}" name="contact[{{ block.settings.label | handleize }}]" 
-              placeholder="{{ block.settings.placeholder | escape }}" 
+              id="{{ id }}" name="contact[{{ block.settings.label | handleize }}]"
+              placeholder="{{ block.settings.placeholder | escape }}"
               autocorrect="off" autocapitalize="off" autocomplete="off"
               {% if block.settings.required %} required {% endif %}>
           {%- if block.settings.type == 'textarea' -%}
@@ -75,7 +75,7 @@
           {%- assign id = block.id | prepend: 'dropdown' -%}
           {%- assign options = block.settings.options | newline_to_br | strip_newlines | split: '<br />' -%}
 
-          <label for="{{ id }}">{{ block.settings.label | escape }}</label>
+          <label for="{{ id }}" class="block [font-size:var(--font-body-size-small)] leading-[1em] font-medium mb-[10px]">{{ block.settings.label | escape }}</label>
           <div class="form__select relative">
             <select id="{{ id }}" name="contact[{{ block.settings.label | handleize }}]" {% if block.settings.required %}required{% endif %}>
               <option value="" disabled selected>{{ block.settings.placeholder | default: block.settings.label | escape }}</option>
@@ -88,7 +88,7 @@
 
         {% comment %} Submit field {% endcomment %}
         {%- when 'button' -%}
-          <button type="submit" role="button" class="button {{ block.settings.color_theme }}" aria-label="{{ block.settings.label | escape }}">
+          <button type="submit" role="button" class="button {{ block.settings.color_theme }} w-full" aria-label="{{ block.settings.label | escape }}">
             <span class="text">{{ block.settings.label | escape }}</span>
           </button>
       {%- endcase -%}
@@ -99,72 +99,79 @@
 {%- capture contact_content -%}
   {% render 'renderer__color-scheme', name: "section", color_scheme: section.settings.color_scheme, selector: ".shopify-section", section_id: "offCanvasContact" %}
 
-  <div class="offcanvas-contact__content off-canvas__wrapper offcanvas-contact__wrapper relative">
-    <div class="offcanvas-contact__panel offcanvas-contact-panel flex flex-col justify-start items-stretch h-full">
-      <div class="offcanvas-contact__head flex flex-col items-stretch gap-[0.9375rem] w-full p-[0.9375rem_1rem] large:p-[1.875rem_1.75rem_0.9375rem]">
-        <div class="offcanvas-contact__head-inner section-content w-full flex flex-row justify-between [&:not(:last-child)]:mb-[0.9375rem]">
-          <button class="close-button close [color:inherit] flex justify-center items-center relative inset-auto"
-            aria-label="Close contact form" 
-            type="button" 
-            role="button" 
-            x-data 
-            @click='$store["offCanvasContact"].closeOffcanvas()'>
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="38" height="38">
-              <path fill="none" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" transform="translate(0.530334 0.530209)" d="M35.855339 2.5801583e-13L0.5 35.355339M35.355339 35.855339L-6.5580874e-13 0.5" fill-rule="evenodd"></path>
-            </svg>
-          </button>
+  <div class="offcanvas-contact__content relative flex h-full w-full flex-col pr-[38px]"
+    x-data='{ announcementBarHeight: 0 }'
+    x-init='
+      const bar = document.querySelector(".announcement-bar");
+      if (bar) {
+        announcementBarHeight = bar.offsetHeight;
+        new ResizeObserver(([entry]) => {
+          announcementBarHeight = entry.contentRect.height;
+        }).observe(bar);
+      }
+    '
+    :style='{ paddingTop: announcementBarHeight + "px" }'>
 
-          {%- if section.settings.title != blank -%}
-            {%- assign id = section.id | append: "--contact" -%}
-            <div id="{{ id }}" class="offcanvas-contact__title m-0 [&_.section-title]:text-[3.125rem] [&_.section-title]:leading-[1.1em] [&_.section-title]:font-semibold [&_.section-title]:tracking-[-0.15625rem] [&_.section-title]:m-0">
-              {% render "block__title", block_id: id, text: section.settings.title, header_style: "h4", disable_animation: true %}
-            </div>
-          {%- endif -%}
-        </div>
-      </div>
-      
-      <div class="offcanvas-contact__body grow overflow-auto flex flex-col items-stretch p-[0.625rem_1rem_1.25rem] large:p-[1.875rem_1.5625rem]">
-        {%- assign contact_infos = section.blocks | where: "type", "contact_info" -%}
-    
-        {%- if section.settings.embed_code != blank -%}
-          <div class="offcanvas-contact__form--embed">
-            {{ section.settings.embed_code }}
+    <button class="absolute right-[8px] w-[42px] h-[42px] z-10"
+      :style='{ top: (announcementBarHeight + 14) + "px" }'
+      x-data
+      @click='$store["offCanvasContact"].closeOffcanvas()'
+      aria-label="Close contact">
+      {%- render 'icon__close-with-circle' -%}
+    </button>
+
+    <div class="offcanvas-contact__inner flex flex-1 flex-col overflow-auto px-[21px] pt-[40px] pb-[40px] gap-[25px] [background:var(--section-background)] [color:var(--section-text)]">
+      <div class="offcanvas-contact__header flex flex-col gap-[25px] uppercase [color:var(--section-text)]">
+        {%- if section.settings.title != blank -%}
+          <div class="text-[34px] font-medium leading-[1.1] [font-family:var(--font-heading-h2)]">
+            {{ section.settings.title }}
           </div>
-        {%- else -%}
-          <div class="offcanvas-contact__form flex flex-col items-stretch w-full">
-            {%- assign form_id = section.id | prepend: 'form-' -%}
-            
-            {% form 'contact', id: form_id, class: 'simple-form mfr-contact' %}
-              {% comment %} Notification {% endcomment %}
-              {% if form.posted_successfully? %}
-                {% render "component__notification", 
-                  show: true, 
-                  type: "success", 
-                  title: "Success!", 
-                  description: "Form submission success!",
-                  id: "form-notification" 
-                %}
-              {% elsif form.errors != blank %}
-                {% render "component__notification", 
-                  show: true, 
-                  type: "error", 
-                  title: "Error", 
-                  description: "There are some error(s) after Contact form submission",
-                  errors: form.errors
-                  id: "form-notification" 
-                %}
-              {% endif %}
-    
-              {% comment %} Success message {% endcomment %}
-              {% if form.posted_successfully? %}
-                {{ success_message }}
-              {% else %}
-                {{ contact_form }}
-              {% endif %}
-            {% endform %}
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="text-[14px] leading-[1.4] [font-family:var(--font-body)]">
+            {{ section.settings.description }}
           </div>
         {%- endif -%}
       </div>
+
+      {%- if section.settings.embed_code != blank -%}
+        <div class="offcanvas-contact__form--embed mt-auto">
+          {{ section.settings.embed_code }}
+        </div>
+      {%- else -%}
+        <div class="offcanvas-contact__form flex flex-col items-stretch w-full mt-auto">
+          {%- assign form_id = section.id | prepend: 'form-' -%}
+
+          {% form 'contact', id: form_id, class: 'simple-form mfr-contact' %}
+            {% comment %} Notification {% endcomment %}
+            {% if form.posted_successfully? %}
+              {% render "component__notification",
+                show: true,
+                type: "success",
+                title: "Success!",
+                description: "Form submission success!",
+                id: "form-notification"
+              %}
+            {% elsif form.errors != blank %}
+              {% render "component__notification",
+                show: true,
+                type: "error",
+                title: "Error",
+                description: "There are some error(s) after Contact form submission",
+                errors: form.errors
+                id: "form-notification"
+              %}
+            {% endif %}
+
+            {% comment %} Success message {% endcomment %}
+            {% if form.posted_successfully? %}
+              {{ success_message }}
+            {% else %}
+              {{ contact_form }}
+            {% endif %}
+          {% endform %}
+        </div>
+      {%- endif -%}
     </div>
   </div>
 {%- endcapture -%}
@@ -180,9 +187,10 @@
 {% render 'mfr-component__offcanvas',
   id: "offCanvasContact",
   class: "offcanvas-contact",
-  position: "right",
+  position: "left",
   content: contact_content,
-  x_init: x_init 
+  x_init: x_init,
+  initially_open: true
 %}
 
 {% schema %}
@@ -202,6 +210,12 @@
       "id": "title",
       "label": "Title",
       "default": "Contact"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>We respond within one business day. For press or wholesale, include the relevant context in your message.</p>"
     },
     {
       "type": "textarea",

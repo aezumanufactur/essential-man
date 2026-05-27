@@ -313,23 +313,6 @@
             "email_placeholder": "Email address"
           }
         },
-        "dropdown_jjA7cc": {
-          "type": "dropdown",
-          "settings": {
-            "required": true,
-            "label": "Reason For Inquiry",
-            "options": "Option 1\nOption 2\nOption 2"
-          }
-        },
-        "field_X9CiWe": {
-          "type": "field",
-          "settings": {
-            "required": false,
-            "type": "input",
-            "label": "Subject",
-            "placeholder": "Type your subject"
-          }
-        },
         "field_4NmHLA": {
           "type": "field",
           "settings": {
@@ -343,19 +326,18 @@
           "type": "button",
           "settings": {
             "label": "Submit",
-            "color_theme": "tertiary"
+            "color_theme": "primary"
           }
         }
       },
       "block_order": [
         "email_enVTf7",
-        "dropdown_jjA7cc",
-        "field_X9CiWe",
         "field_4NmHLA",
         "button_JThkmQ"
       ],
       "settings": {
         "title": "Contact",
+        "description": "<p>We respond within one business day. For press or wholesale, include the relevant context in your message.</p>",
         "embed_code": "",
         "success_message": "<h4>Thanks for reaching out!</h4><p>We will get back to you shortly.</p>",
         "color_scheme": "scheme-1"
