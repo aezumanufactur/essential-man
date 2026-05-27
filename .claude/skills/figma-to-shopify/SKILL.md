@@ -69,7 +69,7 @@ Read these skill reference files:
 
 Also read:
 11. `templates/index.json` (or `templates/page.test.json` if it exists) — note existing section ID format, image/video URIs, product handles for placeholders
-12. `.claude/skills/figma-to-shopify/learned-patterns.md` — patterns extracted from past sessions (if it exists; skip silently if not)
+12. `.claude/skills/figma-to-shopify/learned-patterns.md` — this is a category index. Read it first, then read every category file it links to under `.claude/skills/figma-to-shopify/learned-patterns/`. Each entry describes when that file is relevant — use those descriptions to decide whether to read it. When in doubt, read it. Skip silently if the directory does not exist.
 
 All rules from these files govern everything you generate. If a file does not exist (except #12), stop and tell the user.
 

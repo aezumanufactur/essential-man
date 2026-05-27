@@ -1,11 +1,11 @@
 {%- if section.settings.bg_color_override != blank -%}
   <style>
-    header.header .header__wrapper { --header-background: {{ section.settings.bg_color_override }}; }
+    header.header #shopify-section-{{ section.id }} .header__wrapper { --header-background: {{ section.settings.bg_color_override }}; }
   </style>
 {%- endif -%}
 {%- if section.settings.bg_color_sticky_override != blank -%}
   <style>
-    header.header.header--sticky .header__wrapper { --header-background: {{ section.settings.bg_color_sticky_override }}; }
+    header.header.header--sticky #shopify-section-{{ section.id }} .header__wrapper { --header-background: {{ section.settings.bg_color_sticky_override }}; }
   </style>
 {%- endif -%}
 

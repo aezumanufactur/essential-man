@@ -183,7 +183,7 @@
         "mega_menu_header_color_change": true,
         "mega_menu_header_color_scheme": "scheme-1",
         "logo_mega_menu": "shopify://shop_images/essential-man-logo--black.svg",
-        "appear_on": "index\npage\nblog\narticle"
+        "appear_on": "index\npage.the-standard\npage.about\nblog\narticle"
       }
     },
     "header_xrxLwD": {
@@ -328,7 +328,7 @@
         "mega_menu_header_color_change": true,
         "mega_menu_header_color_scheme": "scheme-1",
         "logo_mega_menu": "shopify://shop_images/essential-man-logo--black.svg",
-        "appear_on": "product\ncollection"
+        "appear_on": "product\ncollection\npage.faq"
       }
     }
   },

@@ -20,14 +20,17 @@
 
   NOTES:
     - 'trigger_label' sets the accordion header text.
+    - 'trigger_label_html' sets custom HTML for the trigger label (overrides trigger_label).
     - 'initially_open' (boolean) controls whether the accordion is open by default.
     - 'content' is required and defines the body content of the accordion.
     - Add `class`, `trigger_class`, or `content_class` for optional styling hooks.
+    - Icon symbol (#icon-accordion-plus) must be rendered once per page via
+      the icon__accordion-plus snippet (rotates 45° to form × when open).
 {%- endcomment -%}
 {%- assign block_id = block_id | replace: "-", " " | replace: "_", " " | camelcase -%}
 {%- if content != blank -%}
   <div
-    class="mfr-accordion {{ class }} flex flex-col items-stretch justify-start w-full"
+    class="mfr-accordion {{ class }} flex flex-col items-stretch w-full [border-bottom:1.5px_dashed_currentColor]"
     :class='isOpen ? "is-active" : ""'
     x-data='{
       isOpen: {%- if initially_open -%}true{%- else -%}false{%- endif -%},
@@ -40,7 +43,7 @@
     }'
     data-inview>
     <button
-      class="mfr-accordion__trigger {{ trigger_class }} flex items-center justify-between py-[0.875rem] gap-[0.3125rem] select-none w-full"
+      class="mfr-accordion__trigger {{ trigger_class }} flex items-center justify-between py-[0.875rem] gap-[1rem] select-none w-full"
       @click='
         if(parent && !allowMultiOopenedAccordion) {
           parent.querySelectorAll( ".mfr-accordion" ).forEach( (e) => {
@@ -52,20 +55,25 @@
       '
       :aria-expanded="isOpen"
     >
-      {%- if trigger_label_html != blank -%}
-        {{ trigger_label_html }}
-        <span class="mfr-accordion__indicator custom relative w-[0.75rem] aspect-square rounded-full flex-shrink-0">
-          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14">
-            <path fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-miterlimit="10" transform="translate(0.5 0.5)" d="M12 6L4.5474735e-13 6M6 0L6 12" fill-rule="evenodd"/>
-          </svg>
-        </span>
-      {%- else -%}
-        <span class="mfr-accordion__trigger-label">
+      <div class="mfr-accordion__trigger-label [font-family:var(--custom-font-name-2)] text-[14px] font-[700] uppercase leading-[1.4] [color:var(--section-heading)] text-left">
+        {%- if trigger_label_html != blank -%}
+          {{ trigger_label_html }}
+        {%- else -%}
           {{ trigger_label }}
-        </span>
+        {%- endif -%}
+      </div>
 
-        <span class="mfr-accordion__indicator relative w-[0.75rem] aspect-square rounded-full flex-shrink-0"></span>
-      {%- endif -%}
+      <div class="mfr-accordion__toggle flex items-center justify-center w-[26px] h-[26px] border border-current shrink-0 rounded-full bg-[var(--color-white)]">
+        <svg
+          width="11"
+          height="11"
+          aria-hidden="true"
+          focusable="false"
+          class="transition-transform duration-[400ms] ease-[cubic-bezier(0.5,0,0,1)]"
+          :class="isOpen ? 'rotate-45' : 'rotate-0'">
+          <use href="#icon-accordion-plus"/>
+        </svg>
+      </div>
     </button>
 
     <div
@@ -73,7 +81,7 @@
       x-show="isOpen"
       x-collapse
       x-cloak>
-      <div class="mfr-accordion__content-inner pb-[0.875rem]">
+      <div class="mfr-accordion__content-inner [font-family:var(--custom-font-name-2)] text-[12px] font-[700] uppercase leading-[1.4] opacity-70 [color:var(--section-heading)] pb-[0.875rem]">
         {{ content }}
       </div>
     </div>

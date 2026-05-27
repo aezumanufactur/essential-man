@@ -71,24 +71,32 @@ Write your analysis to `sessions/<session-folder>/phase2-analysis.md`:
 
 ---
 
-## Phase 4 — Update learned-patterns.md
+## Phase 4 — Update Category Pattern Files
 
-Read `.claude/skills/figma-to-shopify/learned-patterns.md`.
+Read `.claude/skills/figma-to-shopify/learned-patterns.md` to see the category index and file list.
 
 For each generalizable finding from Phase 3:
-- Check if an existing rule already covers it. If so, strengthen or clarify the existing rule instead of adding a duplicate.
-- If it's new, add it under the correct category section.
+1. Determine its category using this map:
+   - font family, font size, font weight, line-height, letter-spacing, text-transform → `learned-patterns/typography.md`
+   - border color, text color, background color, overlay color → `learned-patterns/colors-borders.md`
+   - widths, heights, padding, margin, column layout → `learned-patterns/spacing-layout.md`
+   - block schema `"class"`, `"blocks"`, `"settings"` order, preset `"id"` rules → `learned-patterns/schema.md`
+   - template JSON IDs, column widths, spacing values, bg color, font family settings → `learned-patterns/template-json.md`
+   - Liquid trim markers, `section.blocks` loops, static block patterns → `learned-patterns/liquid-patterns.md`
+   - accordion, icon patterns, or other named components → `learned-patterns/components.md`
+2. Read the target category file.
+3. Check if an existing rule already covers it. If so, strengthen or clarify the existing rule instead of adding a duplicate.
+4. If it's new, append it to the category file.
+5. If the finding doesn't fit any existing category, create a new `learned-patterns/<category>.md` file and add a new entry to the `learned-patterns.md` index with a descriptive paragraph (same format as existing entries).
 
-Each rule must be one sentence: "When X, do Y (not Z)."
-
-Write the updated file back to `.claude/skills/figma-to-shopify/learned-patterns.md`.
+Each rule must be concise and generalizable: state the condition, the correct action, and what to avoid.
 
 ---
 
 ## Phase 5 — Cleanup & Report
 
 1. Delete the session folder: `rm -rf sessions/<session-folder>/`
-   — The learning is now in `learned-patterns.md`. The raw session data is no longer needed.
+   — The learning is now in the `learned-patterns/` category files. The raw session data is no longer needed.
 
 2. Report:
    - **Patterns added:** list each new rule

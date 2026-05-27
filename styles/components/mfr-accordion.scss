@@ -1,5 +1,4 @@
 .mfr-accordion {
-  border-bottom: solid rem-calc( 1px ) rgba(#8B93A7,0.4);
   @include transition( $global-transition );
 
   &__trigger {
