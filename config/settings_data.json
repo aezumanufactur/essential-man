@@ -176,7 +176,7 @@
     "social_tiktok_link": "#",
     "social_twitter_link": "",
     "social_youtube_link": "",
-    "favicon": "shopify://shop_images/manufactur-white.svg",
+    "favicon": "shopify://shop_images/web-app-manifest-512x512.png",
     "currency_code_enabled": false,
     "cart_notes_enabled": false,
     "grid_container_max_width": 1380,
@@ -270,11 +270,9 @@
           "price_progress_bar_J8hEk3"
         ],
         "settings": {
-          "cart_title": "",
           "checkout_message": "",
           "general_message": "",
           "button_label": "Checkout",
-          "color_theme": "primary",
           "color_scheme": "scheme-1",
           "color_scheme_checkout": "scheme-2"
         }

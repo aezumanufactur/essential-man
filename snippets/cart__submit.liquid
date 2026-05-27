@@ -1,17 +1,18 @@
-{%- assign cart_button_theme = section.settings.color_theme | default: "primary" -%}
-
-<button class="cart-form__submit cart-submit button {{ cart_button_theme }} w-full gap-2 overflow-hidden disabled:pointer-events-none disabled:opacity-80"
+<button class="cart-form__submit cart-submit flex w-full items-center justify-center gap-2 overflow-hidden rounded-[5px] border border-[var(--essential-white,#eeece5)] px-[20px] py-[10px] disabled:pointer-events-none disabled:opacity-80 [background:var(--carbon,#1e1b22)]"
 	form="cart-form"
 	type="submit" name="checkout" :disabled="$store.cart.checkIsCartEmpty()">
-	<span class="cart-submit__text">{{ section.settings.button_label | default: "checkout" }}</span>
-	<span class="cart-submit__divider" x-show="$store.cart.checkIsCartNotEmpty()">&mdash;</span>
-	<span class="cart-submit__price subtotal-number" x-html="$store.cart.formatMoney($store.cart.cartData.total_price)" x-show="$store.cart.checkIsCartNotEmpty()">
-		{{ cart.total_price | money }}
-	</span>
-
-	{%- if cart.total_price < cart.original_total_price -%} 
-		<span class="originaltotal-number ml-[0.3125rem] text-[0.7em] leading-normal text-white line-through" x-html="$store.cart.formatMoney($store.cart.cartData.original_total_price)" x-show="$store.cart.checkIsCartNotEmpty()">
-			{{ cart.original_total_price | money }}
-		</span>
-	{%- endif -%}
+	<div class="[font-family:var(--font-heading-h5)] text-[15px] font-[500] leading-[1.4] uppercase text-center [color:var(--essential-white,#eeece5)]">
+		<p class="flex items-center gap-2">
+			<span class="cart-submit__text">{{ section.settings.button_label | default: "Checkout" }}</span>
+			<span class="cart-submit__divider" x-show="$store.cart.checkIsCartNotEmpty()">&mdash;</span>
+			<span class="cart-submit__price" x-html="$store.cart.formatMoney($store.cart.cartData.total_price)" x-show="$store.cart.checkIsCartNotEmpty()">
+				{{ cart.total_price | money }}
+			</span>
+			{%- if cart.total_price < cart.original_total_price -%}
+				<span class="cart-submit__original-price text-[0.8em] opacity-60 line-through" x-html="$store.cart.formatMoney($store.cart.cartData.original_total_price)" x-show="$store.cart.checkIsCartNotEmpty()">
+					{{ cart.original_total_price | money }}
+				</span>
+			{%- endif -%}
+		</p>
+	</div>
 </button>

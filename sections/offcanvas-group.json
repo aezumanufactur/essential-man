@@ -250,6 +250,48 @@
             "margin_bottom_desktop": 0
           },
           "blocks": {}
+        },
+        "social-icons": {
+          "type": "_offcanvas-menu__social-icons",
+          "static": true,
+          "settings": {
+            "enable_width_settings": false,
+            "width_mobile": false,
+            "width_mobile_value": 0,
+            "width_mobile_custom": "",
+            "width_mobile_unit": "px",
+            "width_desktop": false,
+            "width_desktop_value": 0,
+            "width_desktop_custom": "",
+            "width_desktop_unit": "px",
+            "enable_padding_settings": false,
+            "padding_x_mobile": false,
+            "padding_left_mobile": 0,
+            "padding_right_mobile": 0,
+            "padding_y_mobile": false,
+            "padding_top_mobile": 0,
+            "padding_bottom_mobile": 0,
+            "padding_x_desktop": false,
+            "padding_left_desktop": 0,
+            "padding_right_desktop": 0,
+            "padding_y_desktop": false,
+            "padding_top_desktop": 0,
+            "padding_bottom_desktop": 0,
+            "enable_margin_settings": false,
+            "margin_x_mobile": false,
+            "margin_left_mobile": 0,
+            "margin_right_mobile": 0,
+            "margin_y_mobile": false,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 0,
+            "margin_x_desktop": false,
+            "margin_left_desktop": 0,
+            "margin_right_desktop": 0,
+            "margin_y_desktop": false,
+            "margin_top_desktop": 0,
+            "margin_bottom_desktop": 0
+          },
+          "blocks": {}
         }
       },
       "block_order": [
@@ -325,23 +367,10 @@
         "price_progress_bar_EepTtF": {
           "type": "price_progress_bar",
           "settings": {
-            "collection": "bracelets",
-            "price": "120",
-            "condition_label": "<p>Spend <strong>$[price]</strong> to get free shipping!</p>",
+            "collection": "all-products",
+            "price": "50",
+            "condition_label": "<p>You are $[price] away from free shipping</p>",
             "success_message": "<p>You have free shipping!</p>",
-            "track_color": "#141723",
-            "track_bg_color": "#a0a1a6",
-            "color_scheme_progress_bar": "scheme_1"
-          }
-        },
-        "quantity_progress_bar_hTeCGw": {
-          "type": "quantity_progress_bar",
-          "disabled": true,
-          "settings": {
-            "collection": "bracelets",
-            "quantity": 3,
-            "condition_label": "<p>Add <strong>[quantity] </strong>more for 20% off</p>",
-            "success_message": "<p>You have 20% off!</p>",
             "track_color": "#141723",
             "track_bg_color": "#a0a1a6",
             "color_scheme_progress_bar": "scheme_1"
@@ -352,35 +381,24 @@
           "settings": {
             "color_scheme_upsell": "scheme-1",
             "title": "You might also like:",
+            "subtitle": "",
             "quantity": 0,
             "products": [
-              "leather-anchor",
-              "chain-bracelet"
+              "matte-clay",
+              "texture-powder"
             ]
-          }
-        },
-        "cart_surcharge_KHWaJr": {
-          "type": "cart_surcharge",
-          "disabled": true,
-          "settings": {
-            "title": "Surcharge of",
-            "type_indicator": "mws_fee_generated"
           }
         }
       },
       "block_order": [
         "price_progress_bar_EepTtF",
-        "quantity_progress_bar_hTeCGw",
-        "product_upsell_4GVm84",
-        "cart_surcharge_KHWaJr"
+        "product_upsell_4GVm84"
       ],
       "settings": {
-        "cart_title": "Cart",
         "checkout_message": "",
         "general_message": "",
         "button_label": "Checkout",
-        "color_theme": "primary",
-        "cart_exclusion_strings": "'mws_fee_generated'",
+        "cart_exclusion_strings": "",
         "color_scheme": "scheme-1",
         "color_scheme_checkout": "scheme-e7a2b49c-36ae-4b1f-b31f-f3ec31db1021"
       }

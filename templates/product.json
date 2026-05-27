@@ -526,6 +526,7 @@
             },
             "quick_add_hij456": {
               "type": "_product-top__quick-add",
+              "disabled": true,
               "settings": {
                 "bundle_text": "2-pack Bundle",
                 "save_text": "Save $6, Ships Free",
@@ -824,9 +825,9 @@
         "mobile_alignment": "left",
         "desktop_alignment": "left",
         "color_scheme": "",
-        "top_spacing_mobile": 0,
+        "top_spacing_mobile": 104,
         "bottom_spacing_mobile": 0,
-        "top_spacing_desktop": 0,
+        "top_spacing_desktop": 104,
         "bottom_spacing_desktop": 0,
         "bg_color": "",
         "section_divider_top": "",

@@ -325,7 +325,7 @@
         "bottom_spacing_desktop": 80,
         "bg_color": "C4BFB3",
         "section_divider_top": "",
-        "section_divider_bottom": "",
+        "section_divider_bottom": "line",
         "custom_class": "",
         "custom_id": ""
       }

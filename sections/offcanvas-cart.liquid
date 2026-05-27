@@ -8,7 +8,20 @@
 {% render 'renderer__color-scheme', name: "section", color_scheme: section.settings.color_scheme_checkout, selector: ".cart-form__checkout" %}
 
 {%- capture cart_content -%}
-  <div class="offcanvas-cart__content flex h-full w-full flex-col items-stretch justify-stretch !bg-transparent" id="cart-wrapper" x-data x-init="$store.cart.cartExclusions.push({{- section.settings.cart_exclusion_strings -}})" data-cart-view>
+  <div class="offcanvas-cart__content relative flex h-full w-full flex-col [background:var(--section-background)] [color:var(--section-text)] pl-[30px]" id="cart-wrapper" 
+    x-data='{
+      announcementBarHeight: 0
+    }'
+    x-init='
+      $store.cart.cartExclusions.push({{- section.settings.cart_exclusion_strings -}});
+      const bar = document.querySelector(".announcement-bar");
+      if (bar) {
+        announcementBarHeight = bar.offsetHeight;
+        new ResizeObserver(([entry]) => {
+          announcementBarHeight = entry.contentRect.height;
+        }).observe(bar);
+      }
+    ' :style='{ paddingTop: announcementBarHeight + "px" }' data-cart-view>
     {%- for block in section.blocks -%}
       {%- case block.type -%}
         {%- when "@app" -%}
@@ -16,47 +29,33 @@
       {%- endcase -%}
     {%- endfor -%}
 
-    <div class="offcanvas-cart__form cart-form relative flex h-full w-full flex-col items-stretch justify-stretch overflow-hidden [background:var(--offcanvas-panel-bg-color)] [border-radius:var(--offcanvas-border-radius-mobile)] [color:var(--offcanvas-panel-menu-color)] large:[border-radius:var(--offcanvas-border-radius-desktop)]" :class="$store.cart.cartState.updating ? 'cart-updating pointer-events-none' : ''">
-      <div class="cart-form__updating-overlay pointer-events-none absolute left-0 top-0 z-[5] h-full w-full bg-current opacity-20" x-show="$store.cart.cartState.updating" x-cloak></div>
+    <button class="absolute top-[14px] left-[0] w-[42px] h-[42px] z-10"
+      :style='{ top: (announcementBarHeight + 14) + "px" }'
+      x-data
+      @click='$store["offCanvasCart"].closeOffcanvas()'
+      aria-label="Close cart">
+      {%- render 'icon__close-with-circle' -%}
+    </button>
 
-      <div class="cart-form__head relative mb-0 text-center medium:static">
-        <div class="cart-form__head-inner flex items-center justify-stretch rounded-b-[1.25rem] bg-black/[0.01] px-[0.8125rem] pb-[0.8125rem] pt-[1.0625rem]">
-          <button class="close relative flex items-center justify-center transition-transform hover:scale-105"
-            aria-label="Close cart" 
-            type="button" 
-            role="button" 
-            x-data 
-            @click='$store["offCanvasCart"].closeOffcanvas()'>
-            <svg class="h-auto w-full" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="38" height="38">
-              <path fill="none" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" transform="translate(0.530334 0.530209)" d="M35.855339 2.5801583e-13L0.5 35.355339M35.355339 35.855339L-6.5580874e-13 0.5" fill-rule="evenodd"></path>
-            </svg>
-          </button>
-          <h5 class="h5 section-text m-0 ml-auto text-[3.125rem] font-semibold leading-[1.1em] tracking-[-0.15625rem]">{{ section.settings.cart_title | default: 'Cart' }}</h5>
-        </div>
+    {%- if price_progress_bar != blank -%}
+      {%- render 'cart__price-progress-bar', block: price_progress_bar -%}
+    {%- endif -%}
 
-        {% if quantity_progress_bar != blank %}
-          {% render 'cart__quantity-progress-bar', block: quantity_progress_bar %}
-        {% endif %}
+    {%- if quantity_progress_bar != blank -%}
+      {%- render 'cart__quantity-progress-bar', block: quantity_progress_bar -%}
+    {%- endif -%}
 
-        {% if price_progress_bar != blank %}
-          {% render 'cart__price-progress-bar', block: price_progress_bar %}
-        {% endif %}
-
-        {%- if section.settings.checkout_message != blank -%}
-          <div class="cart-form__head-message bg-[var(--brand-color)] px-[0.8125rem] py-4 [font-family:var(--custom-font-name-2)] text-xs font-medium uppercase text-white">
-            {{ section.settings.checkout_message }}
-          </div>
-        {%- endif -%}
+    {%- if section.settings.checkout_message != blank -%}
+      <div class="cart-form__head-message [background:var(--brand-color)] px-[13px] py-4 [font-family:var(--font-body)] text-xs font-medium uppercase text-white">
+        {{ section.settings.checkout_message }}
       </div>
+    {%- endif -%}
 
-      {% render "cart__form", product_upsell: product_upsell, cart_surcharge: cart_surcharge %}
+    <div class="offcanvas-cart__form cart-form relative flex grow flex-col overflow-hidden" :class="$store.cart.cartState.updating ? 'cart-updating pointer-events-none' : ''">
+      <div class="cart-form__updating-overlay pointer-events-none absolute left-0 top-0 z-[5] h-full w-full bg-current opacity-20" x-show="$store.cart.cartState.updating" x-cloak></div>
+      {%- render "cart__form", product_upsell: product_upsell, cart_surcharge: cart_surcharge -%}
     </div>
 
-    {% comment %} <script>
-      document.addEventListener('cartReady', event => {
-        console.log(event.detail.cartData)
-      })
-    </script> {% endcomment %}
   </div>
 {%- endcapture -%}
 
@@ -80,12 +79,6 @@
         "content": "Cart Messages"
       },
       {
-        "type": "text",
-        "id": "cart_title",
-        "label": "Main Title",
-        "default": "My Cart"
-      },
-      {
         "type": "richtext",
         "id": "checkout_message",
         "label": "Header Message",
@@ -106,25 +99,6 @@
         "id": "button_label",
         "label": "Button Label",
         "default": "Checkout"
-      },
-      {
-        "type": "select",
-        "id": "color_theme",
-        "label": "Color Theme",
-        "options": [
-          {
-            "value": "primary",
-            "label": "Primary"
-          },
-          {
-            "value": "secondary",
-            "label": "Secondary"
-          },
-          {
-            "value": "tertiary",
-            "label": "Tertiary"
-          }
-        ]
       },
       {
         "type": "header",
@@ -292,13 +266,17 @@
             "label": "Title"
           },
           {
+            "type": "text",
+            "id": "subtitle",
+            "label": "Subtitle"
+          },
+          {
             "type": "number",
             "id": "quantity",
             "label": "Quantity",
             "default": 0,
             "info": "Upsells will only appear if the cart item count is less than the set quantity."
           },
-
           {
             "type": "header",
             "content": "Product Settings"

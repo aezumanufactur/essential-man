@@ -8,14 +8,14 @@
 			if product.available
 				assign upsell_products = upsell_products | append: product.first_available_variant.id
 			endif
-			
+
 			unless forloop.last
 				assign upsell_products = upsell_products | append: ","
 			endunless
 		endfor
 	-%}
 
-	<div class="product-upsell mb-0 flex flex-col items-start justify-center bg-[var(--section-background)] p-4 text-left [font-family:var(--font-body)]" x-show="!upsellsIncludedInCart" x-data="{
+	<div class="product-upsell px-[20px] py-[16px] flex flex-col gap-[10px]" x-show="!upsellsIncludedInCart" x-data="{
 		upsellsIncludedInCart: false,
 		upsellProducts: [{{ upsell_products }}],
 
@@ -33,42 +33,51 @@
 			return $store.cart.cartData.items.some(item => item.id === id)
 		},
 	}">
-		{% if block.settings.title != blank %}
-			<div class="product-upsell__title mb-[0.9375rem] w-full max-w-[15.625rem] text-[var(--font-body-size-xsmall)] font-bold leading-normal text-[var(--section-heading)]">
-				{{ block.settings.title }}
+		{%- if block.settings.title != blank -%}
+			<div class="product-upsell__header flex flex-col gap-[2px]">
+				<div class="product-upsell__title [font-family:var(--font-heading-h5)] text-[16px] font-[700] leading-[1.4] uppercase [color:var(--section-heading)]">
+					<p>{{ block.settings.title }}</p>
+				</div>
+				{%- if block.settings.subtitle != blank -%}
+					<div class="product-upsell__subtitle [font-family:var(--font-body)] text-[12px] font-[700] leading-[1.4] uppercase opacity-60 [color:var(--section-heading)]">
+						<p>{{ block.settings.subtitle }}</p>
+					</div>
+				{%- endif -%}
 			</div>
-		{% endif %}
+		{%- endif -%}
 
-		<div class="product-upsell__inner flex w-full flex-col items-stretch justify-center">
+		<div class="product-upsell__inner flex flex-col gap-[8px]">
 			{%- for product in block.settings.products -%}
 				{% if product.available %}
 					{% assign variant = product.selected_or_first_available_variant %}
 
 					<template x-if="!$data.upsellIncludedInCart({{ variant.id }})">
-						<div class="product-upsell__product mb-2.5 flex flex-row items-center justify-between rounded-[0.9375rem] bg-[#E9F4FC] py-2 pl-2 pr-4 text-[var(--section-text)] last-of-type:mb-0 [&:nth-child(3)~.product-upsell__product]:hidden">
-							<div class="product-upsell__product-left mr-2 flex flex-row items-center justify-start">
-								<div class="product-upsell__product-image mr-2.5 block h-[3.75rem] w-[3.75rem] shrink-0 overflow-hidden rounded-[0.625rem] [&_img]:h-full [&_img]:w-full [&_img]:object-cover">
-									{% assign image = product.media[0] %}
-									{% if image != blank %}
-										{% assign height = 100 | divided_by: image.aspect_ratio %}
-										{{ image | image_url: width: 100 | image_tag: width: 100, alt: product.title, height: height }}
-									{% endif %}
-								</div>
-
-								<div class="product-upsell__product-title mr-5 max-w-[12.5rem] shrink text-left text-[var(--font-body-size-small-mobile)] font-medium leading-none large:text-[var(--font-body-size-small)]">
-									{{ product.title }} - {{ product.first_available_variant.title }}
-								</div>
+						<div class="product-upsell__product relative flex items-stretch overflow-hidden rounded-[10px] border border-[currentColor] [background:var(--soft-stone,#d5d1c8)] [&:nth-child(3)~.product-upsell__product]:hidden">
+							<div class="product-upsell__product-image aspect-[90/83] w-[90px] shrink-0 overflow-hidden border-b border-r border-t border-[currentColor]">
+								{% assign image = product.media[0] %}
+								{% if image != blank %}
+									{% assign height = 100 | divided_by: image.aspect_ratio %}
+									{{ image | image_url: width: 100 | image_tag: width: 100, alt: product.title, height: height, class: "w-full min-h-full block object-cover" }}
+								{% endif %}
 							</div>
 
-							<div class="product-upsell__product-right flex flex-row items-center justify-start">
-								<form class="mt-auto" data-productid="{{ product.id }}" id="upsell-form-{{ forloop.index }}" @submit.prevent.debounce.300ms="$store.cart.addToCart({{- variant.id -}})">
-									{% render 'product-form__hidden-input', product: product %}
-									<input type="hidden" name="id" data-productid="{{ product.id }}" value="{{ variant.id }}">
-								</form>
+							<div class="product-upsell__product-info flex grow items-center justify-between px-[14px] py-[20px]">
+								<div class="product-upsell__product-title [font-family:var(--font-heading-h5)] text-[15px] font-[500] leading-[1.4] uppercase [color:var(--section-heading)]">
+									<p>{{ product.title }}</p>
+								</div>
 
-								<button type="submit" class="product-upsell__product-button min-h-fit min-w-fit whitespace-nowrap rounded-full bg-[var(--section-secondary-button-bg)] px-3 py-[0.4375rem] text-center text-[var(--font-body-size-small-mobile)] font-medium transition-transform hover:scale-110 hover:border hover:border-[var(--section-secondary-button-border-hover)] hover:bg-[var(--section-secondary-button-bg-hover)] hover:text-[var(--section-secondary-button-text-hover)] large:text-[var(--font-body-size-small)]" form="upsell-form-{{ forloop.index }}">
-									<span>Add - {{ variant.price | money }}</span>
-								</button>
+								<div class="product-upsell__product-action">
+									<form data-productid="{{ product.id }}" id="upsell-form-{{ forloop.index }}" @submit.prevent.debounce.300ms="$store.cart.addToCart({{- variant.id -}})">
+										{% render 'product-form__hidden-input', product: product %}
+										<input type="hidden" name="id" data-productid="{{ product.id }}" value="{{ variant.id }}">
+									</form>
+
+									<button type="submit" class="product-upsell__product-button flex h-[42px] w-[100px] items-center justify-center rounded-[5px] border border-[currentColor] px-[20px] [background:var(--essential-white,#eeece5)]" form="upsell-form-{{ forloop.index }}">
+										<div class="[font-family:var(--font-heading-h5)] text-[15px] font-[500] leading-[1.4] uppercase text-center whitespace-nowrap [color:var(--section-heading)]">
+											<p>Add</p>
+										</div>
+									</button>
+								</div>
 							</div>
 						</div>
 					</template>

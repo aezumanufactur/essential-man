@@ -4,8 +4,8 @@
 {% endcomment %}
 
 <form action="/cart" method="post" id="cart-form"></form>
-<div class="cart-form__main flex grow flex-col items-stretch justify-stretch overflow-hidden bg-[var(--section-background)] pt-5">
-  <div class="cart-form__body grow overflow-auto px-5 pb-5">
+<div class="cart-form__main flex grow flex-col items-stretch justify-stretch overflow-hidden bg-[var(--section-background)]">
+  <div class="cart-form__body grow overflow-auto">
     <div class="cart-form__list flex h-full w-full flex-col items-stretch">
       <template x-if="$store.cart.checkIsCartEmpty()">
         <div class="cart-form__empty flex h-full flex-col items-center justify-center">
@@ -46,7 +46,7 @@
         {% render 'cart__footer-message', gen_msg: gen_msg, sub_msg: sub_msg %}
       {% endif %}
 
-      <div class="cart-form__checkout rounded-t-[1.25rem] bg-[var(--section-background)] p-5 text-[var(--section-text)] large:px-5 large:py-[1.5625rem]">
+      <div class="cart-form__checkout flex flex-col gap-[8px] border-t border-[currentColor] [background:var(--soft-stone,#d5d1c8)] px-[20px] pb-[16px] pt-[20px] text-[var(--section-text)]">
         {% render 'cart__submit', section: section %}
         {% render 'cart__tax-note' %}
       </div>
