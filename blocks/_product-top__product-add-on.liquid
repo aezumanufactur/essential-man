@@ -28,7 +28,23 @@
     }
   </style>
 
-  <div class="product-add-on w-full">
+  <div class="product-add-on flex flex-col gap-[20px] w-full">
+
+    {%- if block.settings.heading != blank or block.settings.caption != blank -%}
+      <div class="product-add-on__header flex flex-col gap-[8px]">
+        {%- if block.settings.heading != blank -%}
+          <div class="product-add-on__heading [font-family:var(--font-heading-h4)] text-[16px] font-[700] leading-[1.4] large:leading-[1.5] uppercase">
+            <p>{{ block.settings.heading }}</p>
+          </div>
+        {%- endif -%}
+        {%- if block.settings.caption != blank -%}
+          <div class="product-add-on__caption [font-family:var(--font-body)] text-[12px] large:text-[14px] font-[700] leading-[1.4] large:leading-[20px] uppercase opacity-60">
+            <p>{{ block.settings.caption }}</p>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
     <div class="product-add-on__card flex flex-row overflow-hidden rounded-[10px] border border-[currentColor] w-full">
 
       <div class="product-add-on__image-section relative w-[145px] shrink-0 self-stretch overflow-hidden">
@@ -119,6 +135,18 @@
     {
       "type": "header",
       "content": "Content Settings"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Complete your routine"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption",
+      "default": "Save $10 and get free shipping."
     },
     {
       "type": "text",

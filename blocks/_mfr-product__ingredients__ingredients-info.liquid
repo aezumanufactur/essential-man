@@ -7,18 +7,20 @@
 <div class="ingredients-info">
   <div class="ingredients-info__inner flex flex-col gap-[20px] large:gap-[30px] uppercase [color:var(--section-heading)]">
 
-    <div class="ingredients-info__header flex flex-col gap-[20px]">
-      {%- if block.settings.heading != blank -%}
-        <div class="ingredients-info__heading [font-family:var(--font-heading-h4)] text-[20px] large:text-[26px] font-[500] leading-[1.1]">
-          <p>{{ block.settings.heading }}</p>
-        </div>
-      {%- endif -%}
-      {%- if block.settings.caption != blank -%}
-        <div class="ingredients-info__caption [font-family:var(--custom-font-name-2)] text-[14px] font-[700] leading-[1.4] large:leading-[1.5]">
-          <p>{{ block.settings.caption }}</p>
-        </div>
-      {%- endif -%}
-    </div>
+    {%- if block.settings.heading != blank or block.settings.caption != blank -%}
+      <div class="ingredients-info__header flex flex-col gap-[20px]">
+        {%- if block.settings.heading != blank -%}
+          <div class="ingredients-info__heading [font-family:var(--font-heading-h4)] text-[20px] large:text-[26px] font-[500] leading-[1.1]">
+            <p>{{ block.settings.heading }}</p>
+          </div>
+        {%- endif -%}
+        {%- if block.settings.caption != blank -%}
+          <div class="ingredients-info__caption [font-family:var(--custom-font-name-2)] text-[14px] font-[700] leading-[1.4] large:leading-[1.5]">
+            <p>{{ block.settings.caption }}</p>
+          </div>
+        {%- endif -%}
+      </div>
+    {% endif %}
 
     <div class="ingredients-info__items flex flex-col">
       {%- if ingredients != blank -%}
