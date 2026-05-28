@@ -119,7 +119,7 @@
             "small_text_abc123": {
               "type": "_product-top__small-text",
               "settings": {
-                "text": "Lift · Grip · Volume",
+                "text": "{{ closest.product.metafields.mfr_fields.product_top_small_text.value }}",
                 "pill_text": "",
                 "pill_color": "#eeece5",
                 "pill_color_background": "#647949",

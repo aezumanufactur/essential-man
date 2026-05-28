@@ -4,7 +4,7 @@
   <div class="features__icon-text__inner flex flex-row flex-wrap gap-[26px] large:gap-[35px]">
 
     {%- for item in block.settings.icon_text_list -%}
-      <div class="features__icon-text__item flex flex-col items-center overflow-hidden gap-[21px]">
+      <div class="features__icon-text__item flex flex-col items-center overflow-hidden gap-[21px] w-[calc((100%-78px)/4)] max-w-[82px] large:w-auto max-w-[130px]">
 
         {%- assign item_icon = item.icon.value -%}
         {%- if item_icon != blank -%}

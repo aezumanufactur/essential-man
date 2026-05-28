@@ -905,6 +905,9 @@
   .w-\[Xpx\] {
     width: Xpx;
   }
+  .w-\[calc\(\(100\%-78px\)\/4\)\] {
+    width: calc((100% - 78px) / 4);
+  }
   .w-\[calc\(30\%\)\] {
     width: calc(30%);
   }
@@ -971,8 +974,20 @@
   .max-w-\[76\%\] {
     max-width: 76%;
   }
+  .max-w-\[82px\] {
+    max-width: 82px;
+  }
   .max-w-\[114px\] {
     max-width: 114px;
+  }
+  .max-w-\[130px\] {
+    max-width: 130px;
+  }
+  .max-w-\[138px\] {
+    max-width: 138px;
+  }
+  .max-w-\[160px\] {
+    max-width: 160px;
   }
   .max-w-\[calc\(100\%_-_38px\)\] {
     max-width: calc(100% - 38px);
