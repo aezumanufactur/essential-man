@@ -1,6 +1,6 @@
 <div class="cart-form__product cart-product relative flex items-stretch border border-[currentColor]">
-	<div class="cart-product__image-wrap aspect-[6/7] w-[120px] shrink-0 overflow-hidden">
-		<img class="w-full min-h-full block object-cover" :src="item.featured_image.url" :alt="item.title">
+	<div class="cart-product__image-wrap aspect-[6/7] w-[120px] shrink-0 overflow-hidden flex justify-center items-center border-r border-[currentColor]">
+		<img :class="item.featured_image.url && item.featured_image.url.toLowerCase().includes('.png') ? 'w-full min-h-full block object-contain max-h-[72%] max-w-[75%]' : 'w-full min-h-full block object-cover'" :src="item.featured_image.url" :alt="item.title">
 	</div>
 
 	<div class="cart-product__info flex grow flex-col gap-[14px] overflow-hidden px-[14px] py-[16px]">

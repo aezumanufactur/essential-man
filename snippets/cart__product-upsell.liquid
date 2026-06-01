@@ -53,11 +53,17 @@
 
 					<template x-if="!$data.upsellIncludedInCart({{ variant.id }})">
 						<div class="product-upsell__product relative flex items-stretch overflow-hidden rounded-[10px] border border-[currentColor] [background:var(--soft-stone,#d5d1c8)] [&:nth-child(3)~.product-upsell__product]:hidden">
-							<div class="product-upsell__product-image aspect-[90/83] w-[90px] shrink-0 overflow-hidden border-b border-r border-t border-[currentColor]">
+							<div class="product-upsell__product-image aspect-[90/83] w-[90px] shrink-0 overflow-hidden border-r border-[currentColor] flex justify-center items-center">
 								{% assign image = product.media[0] %}
 								{% if image != blank %}
 									{% assign height = 100 | divided_by: image.aspect_ratio %}
-									{{ image | image_url: width: 100 | image_tag: width: 100, alt: product.title, height: height, class: "w-full min-h-full block object-cover" }}
+									{% assign file_type = image.src | split: "." | last | downcase %}
+									{% if file_type == "png" %}
+										{% assign img_class = "w-full block object-contain max-h-[72%] max-w-[80%]" %}
+									{% else %}
+										{% assign img_class = "w-full min-h-full block object-cover" %}
+									{% endif %}
+									{{ image | image_url: width: 100 | image_tag: width: 100, alt: product.title, height: height, class: img_class }}
 								{% endif %}
 							</div>
 
