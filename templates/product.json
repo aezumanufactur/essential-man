@@ -273,7 +273,7 @@
             "pilled_text_jkl012": {
               "type": "_product-top__pilled-text",
               "settings": {
-                "text": "50ml bottle",
+                "text": "{{ closest.product.metafields.mfr_fields.size.value }}",
                 "color": "",
                 "color_background": "#9fa7aa",
                 "enable_width_settings": false,
@@ -1013,7 +1013,7 @@
                 "features_text_block_Fg2hIj": {
                   "type": "_section-content__text",
                   "settings": {
-                    "text": "<p><strong>TEXTURE POWDER</strong></p><p>The lift. Volume at the roots, no white cast, no buildup. Built to layer with shape.</p><p><strong>MATTE CLAY</strong></p><p>The shape. Locks the lift in. Structure through the length, holds matte without stiffening.</p>",
+                    "text": "<p>{{ closest.product.metafields.mfr_fields.how_it_performs_description | metafield_tag }}</p>",
                     "disable_animation": false,
                     "text_style": "regular",
                     "font_family": "",
@@ -3909,7 +3909,7 @@
               "type": "_mfr-product__ingredients__additional-info",
               "settings": {
                 "title": "What we refused to include",
-                "caption": "Water, Preservatives, Aerosols, Alcohol, Talc, Silicones, PFAS, Synthetic Styling Polymers, Fragrance, Dyes, Parabens, PEGs, Propellants, Formaldehyde Releasers.",
+                "caption": "Parabens, sulfates, synthetic fragrance, dyes, formaldehyde releasers, PEGs, PFAS, talc, silicones, synthetic styling polymers, alcohol, aerosols, propellants, preservatives, water.",
                 "bg_color": "#eeece5",
                 "text_color": "#1e1b22",
                 "enable_width_settings": false,
