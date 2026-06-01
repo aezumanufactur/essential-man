@@ -379,7 +379,7 @@
               "name": "Description",
               "settings": {
                 "description": "<p>Two products. One system. Better than either<br/>alone.</p>",
-                "enable_width_settings": false,
+                "enable_width_settings": true,
                 "width_mobile": false,
                 "width_mobile_value": 0,
                 "width_mobile_custom": "",
