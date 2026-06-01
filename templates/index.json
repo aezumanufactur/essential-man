@@ -1748,6 +1748,54 @@
             "margin_bottom_desktop": 0
           },
           "blocks": {
+            "mfr_product_grid_product_AUAGyq": {
+              "type": "_mfr-product__grid__product",
+              "settings": {
+                "product": "the-essential-system",
+                "image": "{{ closest.product.metafields.mfr_fields.product_card_image.value }}",
+                "description": "{{ closest.product.metafields.mfr_fields.product_card_description.value }}",
+                "aspect_ratio_mobile": "custom",
+                "aspect_ratio_mobile_custom": "390/618",
+                "aspect_ratio_desktop": "custom",
+                "aspect_ratio_desktop_custom": "660/688",
+                "enable_width_settings": true,
+                "width_mobile": true,
+                "width_mobile_value": 100,
+                "width_mobile_custom": "",
+                "width_mobile_unit": "%",
+                "width_desktop": true,
+                "width_desktop_value": 50,
+                "width_desktop_custom": "",
+                "width_desktop_unit": "%",
+                "enable_padding_settings": false,
+                "padding_x_mobile": false,
+                "padding_left_mobile": 0,
+                "padding_right_mobile": 0,
+                "padding_y_mobile": false,
+                "padding_top_mobile": 0,
+                "padding_bottom_mobile": 0,
+                "padding_x_desktop": false,
+                "padding_left_desktop": 0,
+                "padding_right_desktop": 0,
+                "padding_y_desktop": false,
+                "padding_top_desktop": 0,
+                "padding_bottom_desktop": 0,
+                "enable_margin_settings": false,
+                "margin_x_mobile": false,
+                "margin_left_mobile": 0,
+                "margin_right_mobile": 0,
+                "margin_y_mobile": false,
+                "margin_top_mobile": 0,
+                "margin_bottom_mobile": 0,
+                "margin_x_desktop": false,
+                "margin_left_desktop": 0,
+                "margin_right_desktop": 0,
+                "margin_y_desktop": false,
+                "margin_top_desktop": 0,
+                "margin_bottom_desktop": 0
+              },
+              "blocks": {}
+            },
             "product_1_Pk9mRt": {
               "type": "_mfr-product__grid__product",
               "settings": {
@@ -1846,6 +1894,7 @@
             }
           },
           "block_order": [
+            "mfr_product_grid_product_AUAGyq",
             "product_1_Pk9mRt",
             "product_2_Pk9mRt"
           ]
