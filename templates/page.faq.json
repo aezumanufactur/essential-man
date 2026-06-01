@@ -265,7 +265,7 @@
                   "type": "_accordion",
                   "settings": {
                     "title": "Will my hair feel stiff or dry?",
-                    "content": "<p>Neither. Both formulas are designed to move with your hair, not lock it in place. Hold without crunch.</p>",
+                    "content": "<p>No. Texture Powder builds grip from minerals, not polymers, so the hair moves naturally through the day. Matte Clay holds<br/>without locking. Both rework with touch.</p>",
                     "initially_open": false
                   },
                   "blocks": {}
@@ -274,7 +274,7 @@
                   "type": "_accordion",
                   "settings": {
                     "title": "Can I restyle through the day?",
-                    "content": "<p>Yes. Both products remain workable after application. Run your hands through and reshape as needed.</p>",
+                    "content": "<p>Yes. Both formulas reactivate with touch. Run your fingers through, and the hold returns.</p>",
                     "initially_open": false
                   },
                   "blocks": {}
@@ -283,7 +283,34 @@
                   "type": "_accordion",
                   "settings": {
                     "title": "What's in the formula, and what's left out?",
-                    "content": "<p>Clean ingredients. No sulfates, parabens, or artificial fragrance. Full ingredient list available on each product page.</p>",
+                    "content": "<p>Both products are mineral-driven and built<br/>without compromise. No parabens, sulfates, silicones, synthetic fragrance, talc, or PEGs. Texture Powder is fragrance-free. Matte Clay carries citrus, coconut, and warm musk. Every ingredient earns its place. See the standard for how each formula is built.</p>",
+                    "initially_open": false
+                  },
+                  "blocks": {}
+                },
+                "accordion_nngYzj": {
+                  "type": "_accordion",
+                  "settings": {
+                    "title": "Are these safe for daily use?",
+                    "content": "<p>Yes. Both formulas are built for daily use without buildup. They wash out clean and contain no ingredients with known endocrine concerns or scalp irritants. Daily use is the baseline.</p>",
+                    "initially_open": false
+                  },
+                  "blocks": {}
+                },
+                "accordion_hzKFQ3": {
+                  "type": "_accordion",
+                  "settings": {
+                    "title": "What if it doesn't work for me?",
+                    "content": "<p>Use it for 60 days. If it doesn't perform, send it back for a full refund. No conditions, no questions. Contact us and it is handled.</p>",
+                    "initially_open": false
+                  },
+                  "blocks": {}
+                },
+                "accordion_LQHjib": {
+                  "type": "_accordion",
+                  "settings": {
+                    "title": "How long does shipping take?",
+                    "content": "<p>Orders ship within one business day. Free shipping on orders over $50. Tracking is sent the moment your order leaves our facility.</p>",
                     "initially_open": false
                   },
                   "blocks": {}
@@ -293,7 +320,10 @@
                 "q1_faq01a1",
                 "q2_faq01a2",
                 "q3_faq01a3",
-                "q4_faq01a4"
+                "q4_faq01a4",
+                "accordion_nngYzj",
+                "accordion_hzKFQ3",
+                "accordion_LQHjib"
               ]
             }
           },
