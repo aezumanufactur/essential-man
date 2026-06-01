@@ -1,0 +1,44 @@
+<div class="cart-discount" x-data="MFRDiscountCodeOnCart()">
+
+  <template x-if="$store.cart.cartData.discount_codes && $store.cart.cartData.discount_codes.length > 0">
+    <div class="cart-discount__pills flex flex-wrap gap-[6px] pb-[8px]">
+      <template x-for="discount in $store.cart.cartData.discount_codes" :key="discount.code">
+        <div class="cart-discount__pill flex items-center gap-[4px] rounded-[5px] bg-[#9fa7aa] px-[8px] py-[5px] [font-family:var(--font-body)] text-[12px] font-[700] uppercase leading-[1em] [color:#000]">
+          <span x-text="discount.code"></span>
+          <button
+            type="button"
+            class="cart-discount__pill-remove flex h-[24px] w-[24px] shrink-0 items-center justify-center"
+            @click="removeDiscount(discount.code)"
+            :aria-label="'Remove ' + discount.code">
+            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M1 1L9 9M9 1L1 9" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </template>
+    </div>
+  </template>
+
+  <div class="cart-discount__input-row flex gap-[8px]">
+    <input
+      type="text"
+      class="cart-discount__input min-w-0 grow rounded-[5px] border border-[currentColor] bg-transparent px-[12px] py-[8px] [font-family:var(--font-body)] text-[13px] placeholder-current outline-none placeholder:opacity-40"
+      placeholder="Discount code"
+      x-model="discountInput"
+      @keydown.enter.prevent="if (discountInput.trim()) { applyDiscount(discountInput.trim()); discountInput = ''; }">
+    <button
+      type="button"
+      class="cart-discount__apply button primary shrink-0 disabled:pointer-events-none disabled:opacity-40"
+      @click="if (discountInput.trim()) { applyDiscount(discountInput.trim()); discountInput = ''; }"
+      :disabled="!discountInput.trim() || discountState.loading">
+      Apply
+    </button>
+  </div>
+
+  <template x-if="discountState.error">
+    <div class="cart-discount__error mt-[6px] [font-family:var(--font-body)] text-[11px] opacity-70" x-text="discountState.error"></div>
+  </template>
+
+</div>
+
+{% render 'script__section', file: "MFRDiscountCodeOnCart.js" %}

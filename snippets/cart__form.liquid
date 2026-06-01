@@ -47,6 +47,9 @@
       {% endif %}
 
       <div class="cart-form__checkout flex flex-col gap-[8px] border-t border-[currentColor] [background:var(--soft-stone,#d5d1c8)] px-[20px] pb-[16px] pt-[20px] text-[var(--section-text)]">
+        {% if section.settings.show_discount_input %}
+          {% render 'cart__discount' %}
+        {% endif %}
         {% render 'cart__submit', section: section %}
         {% render 'cart__tax-note' %}
       </div>

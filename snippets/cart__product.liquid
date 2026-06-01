@@ -1,4 +1,4 @@
-<div class="cart-form__product cart-product relative flex items-stretch border border-[currentColor]">
+<div class="cart-form__product cart-product relative flex items-stretch border-r border-b border-[currentColor]">
 	<div class="cart-product__image-wrap aspect-[6/7] w-[120px] shrink-0 overflow-hidden flex justify-center items-center border-r border-[currentColor]">
 		<img :class="item.featured_image.url && item.featured_image.url.toLowerCase().includes('.png') ? 'w-full min-h-full block object-contain max-h-[72%] max-w-[75%]' : 'w-full min-h-full block object-cover'" :src="item.featured_image.url" :alt="item.title">
 	</div>
@@ -52,16 +52,13 @@
 				</button>
 			</div>
 
-			<div class="cart-product__price [font-family:var(--font-body)] text-[12px] font-[700] leading-[1.4] uppercase text-right">
-				<p x-html="$store.cart.formatMoney(item.line_price)"></p>
+			<div class="cart-product__price flex flex-row items-center gap-[6px] [font-family:var(--font-body)] text-[12px] font-[700] leading-[1.4] uppercase text-right">
+				<template x-if="item.original_line_price != item.line_price">
+					<p class="!mb-0 line-through opacity-30" x-html="$store.cart.formatMoney(item.original_line_price)"></p>
+				</template>
+				<p class="!mb-0" x-html="$store.cart.formatMoney(item.line_price)"></p>
 			</div>
 		</div>
-
-		<template x-if="item.original_line_price != item.line_price">
-			<div class="cart-product__original-price [font-family:var(--font-body)] text-[12px] font-[700] leading-[1.4] uppercase opacity-50 line-through text-right">
-				<p x-html="$store.cart.formatMoney(item.original_line_price)"></p>
-			</div>
-		</template>
 	</div>
 
 	<button class="cart-product__remove absolute right-[14px] top-[14px] w-4 h-4 [color:var(--section-heading)]" aria-label="Remove line item from cart" @click="$store.cart.removeToCart(item.key)">
