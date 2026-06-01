@@ -469,7 +469,7 @@
                 "margin_left_desktop": 0,
                 "margin_right_desktop": 0,
                 "margin_y_desktop": true,
-                "margin_top_desktop": 0,
+                "margin_top_desktop": 16,
                 "margin_bottom_desktop": 16
               },
               "blocks": {}
