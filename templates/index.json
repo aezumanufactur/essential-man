@@ -1750,6 +1750,7 @@
           "blocks": {
             "mfr_product_grid_product_AUAGyq": {
               "type": "_mfr-product__grid__product",
+              "disabled": true,
               "settings": {
                 "product": "the-essential-system",
                 "image": "{{ closest.product.metafields.mfr_fields.product_card_image.value }}",
