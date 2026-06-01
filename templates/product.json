@@ -273,7 +273,7 @@
             "pilled_text_jkl012": {
               "type": "_product-top__pilled-text",
               "settings": {
-                "text": "50ml bottle",
+                "text": "{{ closest.product.metafields.mfr_fields.size.value }}",
                 "color": "",
                 "color_background": "#9fa7aa",
                 "enable_width_settings": false,
