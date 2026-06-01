@@ -379,7 +379,7 @@
               "name": "Description",
               "settings": {
                 "description": "<p>Two products. One system. Better than either<br/>alone.</p>",
-                "enable_width_settings": true,
+                "enable_width_settings": false,
                 "width_mobile": true,
                 "width_mobile_value": 0,
                 "width_mobile_custom": "",
@@ -409,19 +409,19 @@
                 "padding_y_desktop": false,
                 "padding_top_desktop": 0,
                 "padding_bottom_desktop": 0,
-                "enable_margin_settings": false,
+                "enable_margin_settings": true,
                 "margin_x_mobile": false,
                 "margin_left_mobile": 0,
                 "margin_right_mobile": 0,
-                "margin_y_mobile": false,
+                "margin_y_mobile": true,
                 "margin_top_mobile": 0,
-                "margin_bottom_mobile": 0,
+                "margin_bottom_mobile": 26,
                 "margin_x_desktop": false,
                 "margin_left_desktop": 0,
                 "margin_right_desktop": 0,
-                "margin_y_desktop": false,
+                "margin_y_desktop": true,
                 "margin_top_desktop": 0,
-                "margin_bottom_desktop": 0
+                "margin_bottom_desktop": 26
               },
               "blocks": {}
             },
